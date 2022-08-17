@@ -1,0 +1,43 @@
+@import "../ultilities/devices"
+@import "../ultilities/color"
+@font-face
+    font-family: NavBrand
+    src : url('../../public/second-lesson-font/SecondLessonPersonalUseRegular-eZgX6.otf')
+ 
+
+#MyNavBar 
+    display: flex
+    justify-content: space-between
+    background-color: $background
+    color: white
+    align-items: center
+    position: fixed
+    top: 0
+    width: 100vw
+    z-index: 50
+    
+
+#MyNavBrand
+    font-family: NavBrand
+    font-size: 5em
+    font-weight: 300
+    flex-basis: 50%
+    text-align: center
+
+@media only screen and (max-width: $large) 
+    #MyNavBrand
+        font-size: 4rem
+        flex-basis: 70%
+    #MyNavBar  
+        justify-content: space-around
+@media only screen and (max-width: $medium) 
+    #MyNavBrand
+        font-size: 3rem
+        
+    #MyNavBar  
+        justify-content: space-around
+@media only screen and (max-width: $small) 
+    #MyNavBrand
+        font-size: 2rem
+        justify-content: space-around
+    

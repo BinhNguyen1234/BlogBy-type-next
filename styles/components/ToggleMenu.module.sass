@@ -1,0 +1,41 @@
+@import "../ultilities/color"
+@import "../ultilities/devices"
+#MenuToggle
+    display: flex
+    justify-content: space-evenly
+    flex-direction: row
+    align-items: center
+    padding: 0
+    postion: relative
+    flex-basis: 100%
+    
+    li  
+        text-align: center
+        font-size: 1.8em
+        width: 22%
+        position: relative
+        list-style: none
+        padding: 0.2rem 0.8rem
+        border: 2px solid white
+        border-radius: 0.5rem
+        background-color: white
+        color: $background
+        
+
+@media only screen and (max-width: $large) 
+    #MenuToggle
+        justify-content: flex-start
+        flex-direction: column
+        width: 100%
+        height: 100vh
+        padding-top: 100px
+        background-color: gray
+        li  
+            width: 100%
+            border: 1px solid black
+            border-radius: 0px
+            &:last-child
+                display: none
+        
+        
+       

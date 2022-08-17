@@ -1,0 +1,16 @@
+.hideMenu
+    transform: translate(0%,0%) !important
+    
+.handleMenuButton
+    
+    span 
+        background-color: red  !important
+        transition-timing-function: ease-in-out
+        transition-duration: 0.4s
+        &:nth-child(2)
+            transform: translateX(-100%)
+            opacity: 0
+        &:nth-child(1)
+            transform: rotate(-45deg) translateX(-55%)
+        &:nth-child(3)
+            transform: rotate(45deg) translateX(-55%)
