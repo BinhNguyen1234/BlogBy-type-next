@@ -102,7 +102,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "layout/index.jsx"  ],
+, "layout1/index.jsx"  ],
   "exclude": [
     "node_modules"
   ]

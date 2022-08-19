@@ -1,16 +1,19 @@
 @import "../ultilities/devices"
 @import "../ultilities/color"
+
 @font-face
     font-family: NavBrand
     src : url('../../public/second-lesson-font/SecondLessonPersonalUseRegular-eZgX6.otf')
  
-
+.NavStyle
+    font-size: 4em
+#FakeNav
+    visibility: hidden
 #MyNavBar 
     display: flex
     justify-content: space-between
-    background-color: $background
+    background-image: $themse
     color: white
-    align-items: center
     position: fixed
     top: 0
     width: 100vw
@@ -19,25 +22,31 @@
 
 #MyNavBrand
     font-family: NavBrand
-    font-size: 5em
+    
     font-weight: 300
     flex-basis: 50%
     text-align: center
+    a 
+        color: white
+        text-decoration: none
 
 @media only screen and (max-width: $large) 
-    #MyNavBrand
+    .NavStyle
         font-size: 4rem
+    #MyNavBrand
+        
         flex-basis: 70%
     #MyNavBar  
         justify-content: space-around
 @media only screen and (max-width: $medium) 
-    #MyNavBrand
+    .NavStyle
         font-size: 3rem
         
     #MyNavBar  
         justify-content: space-around
 @media only screen and (max-width: $small) 
     #MyNavBrand
-        font-size: 2rem
+        
         justify-content: space-around
-    
+    .NavStyle
+        font-size: 2em 

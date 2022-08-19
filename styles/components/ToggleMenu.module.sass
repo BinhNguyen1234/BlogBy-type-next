@@ -2,25 +2,64 @@
 @import "../ultilities/devices"
 #MenuToggle
     display: flex
-    justify-content: space-evenly
+    justify-content: space-around
     flex-direction: row
     align-items: center
     padding: 0
     postion: relative
     flex-basis: 100%
-    
+    margin: 0
     li  
         text-align: center
         font-size: 1.8em
         width: 22%
         position: relative
         list-style: none
-        padding: 0.2rem 0.8rem
-        border: 2px solid white
-        border-radius: 0.5rem
-        background-color: white
-        color: $background
+        display: flex
+        justify-content: center
         
+    a   
+        z-index: 2
+        background: $themse
+        background-clip: text
+        color: rgba(0, 0, 0, 0)
+        display: block
+        width: 100%
+        height: 100%
+        text-decoration: none
+               
+@media only screen and (min-width: $large)
+    #MenuToggle
+        a
+            color: white
+        li
+            overflow: hidden
+            padding: 0.25em 0px 0.4em
+            width: 100%
+            height: 100%
+            &:before
+                top: 50%
+                left: 50%
+                position: absolute
+                content: ""
+                width: 0
+                height: 0
+                background-image: url(../../public/image/btn-bg4.png)
+                background-size: contain
+                background-position: center top
+                background-size: 100% 100%
+                transform-origin: left
+                transition: 0.2s
+            &:hover:before
+                left: 0%
+                top: 0%
+                width: 100%
+                height: 100%
+            &:hover a
+                background: $themse
+                background-clip: text
+                color: rgba(0, 0, 0, 0)
+
 
 @media only screen and (max-width: $large) 
     #MenuToggle
@@ -36,6 +75,4 @@
             border-radius: 0px
             &:last-child
                 display: none
-        
-        
-       
+      

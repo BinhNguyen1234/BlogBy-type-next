@@ -1,4 +1,5 @@
 import React from "react"
+import Link from "next/link"
 import style from "../styles/components/ToggleMenu.module.sass"
 
 
@@ -8,9 +9,15 @@ const MenuToggle:React.FC = ()=>{
         <>
         <ul  id={style.MenuToggle}>
             
-            <li>Blog</li>
-            <li>About Me</li>
-            <li>User</li>
+            <li>
+                <Link href="/blog">Blog</Link>
+            </li>
+            <li>
+                <Link href="/aboutme">About Me</Link>
+            </li>
+            <li>
+                <Link href="/user">User</Link>
+            </li>
         </ul>
         </>
     )

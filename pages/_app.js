@@ -1,10 +1,13 @@
 import "../styles/Global.sass"
 import 'bootstrap/dist/css/bootstrap.css'
+
 import Layout from '../layout/Layout'
 function MyApp({ Component, pageProps }) {
   return (
     <Layout>
-      <Component {...pageProps} />
+      
+        <Component  {...pageProps} />
+      
     </Layout>)
 }
 

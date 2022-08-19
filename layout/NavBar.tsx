@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import style from "../styles/Layouts/NavBar.module.sass"
 import ToggleBtn from "../components/ToggleBtn";
 import ToggleMenu from "../components/ToggleMenu";
@@ -14,13 +16,15 @@ const NavBar: React.FC = () =>{
 
   
     return (<>
-    <nav id={style.MyNavBar} >
-        <div  id={style.MyNavBrand} >chỏ's blog</div>
+    <nav  id={style.MyNavBar} >
+        <div className={style.NavStyle} id={style.MyNavBrand} ><Link href="/">chỏ's blog</Link></div>
         <ToggleBtn refProp={refToggleBtn} onClick={handleUiToggleBtn}></ToggleBtn>
         <ToggleContainer refProp={refToggleMenu}>
             <ToggleMenu ></ToggleMenu>
         </ToggleContainer>
-    </nav>   
+        
+    </nav>
+    <div id={style.FakeNav} className={style.NavStyle}>2</div> {/* Fake a div underbath nav to push content bellow nav*/}  
     </>)
 }
 
