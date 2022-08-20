@@ -1,8 +1,10 @@
+import style from "../styles/Layouts/Footer.module.sass"
+
 
 const Footer : React.FC = ()=>{
     return (
         <>
-            <div>Footer</div>
+            <div id={style.Footer}>Footer</div>
         </>
     )
 }

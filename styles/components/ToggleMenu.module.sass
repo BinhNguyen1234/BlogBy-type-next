@@ -27,9 +27,16 @@
         width: 100%
         height: 100%
         text-decoration: none
-               
+    div     
+        z-index: 2  
+        background: $themse
+        background-clip: text
+        color: rgba(0, 0, 0, 0)   
 @media only screen and (min-width: $large)
     #MenuToggle
+        div
+            color: white
+            
         a
             color: white
         li
@@ -56,6 +63,10 @@
                 width: 100%
                 height: 100%
             &:hover a
+                background: $themse
+                background-clip: text
+                color: rgba(0, 0, 0, 0)
+            &:hover div
                 background: $themse
                 background-clip: text
                 color: rgba(0, 0, 0, 0)

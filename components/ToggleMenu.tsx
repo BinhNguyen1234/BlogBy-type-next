@@ -16,7 +16,7 @@ const MenuToggle:React.FC = ()=>{
                 <Link href="/aboutme">About Me</Link>
             </li>
             <li>
-                <Link href="/user">User</Link>
+                <div>Login</div>
             </li>
         </ul>
         </>
