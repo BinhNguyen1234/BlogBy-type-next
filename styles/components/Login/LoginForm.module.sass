@@ -2,10 +2,9 @@
 @import "../../ultilities/devices"
 
 #LoginForm_Container
-    display: none
-    
+    position: relative
     aspect-ratio: 5/3
-    background-color: white
+    border-radius: 2em
    
 
 @media only screen and (min-width: $large) 
@@ -13,19 +12,20 @@
             display: flex
             justify-content: space-around
             margin: 5em
-            border: 1px solid black
             background-color: white
     #LoginForm
         display: flex
         justify-content: center
         flex-direction: column
         align-items: center
-       
+        width: 50%
         aspect-ratio: 3/4
         border-left: 1px solid black
-        div
+        div 
+            
             font-size: 2em
             justify-self: center
+           
         form
             display: flex
             justify-content: center
@@ -36,9 +36,14 @@
                 align-self: flex-start
                 margin-bottoim: 1em
             input
+                position: relative
                 margin-bottom: 2em
+                padding:10px
+                border:0
+                box-shadow:0 0 15px 4px rgba(0,0,0,0.06)
             button
-                padding: 5% 15%
+                padding: 5% 0%
+                width: 100%
     #LoginForm_Animated
         width: 50%
         display: flex

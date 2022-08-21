@@ -4,8 +4,12 @@ import style from "../styles/Layouts/NavBar.module.sass"
 import ToggleBtn from "../components/ToggleBtn";
 import ToggleMenu from "../components/ToggleMenu";
 import ToggleContainer from "../components/ToggleContainer"
-import {useCallback, useRef} from 'react'
-const NavBar: React.FC = () =>{
+import React, {useCallback, useRef} from 'react'
+interface Props {
+    showModal: Function
+}
+
+const NavBar: React.FC<Props> = ({showModal}) =>{
 
     const refToggleMenu = useRef<HTMLDivElement>(null)
     const refToggleBtn = useRef<HTMLDivElement>(null)   
@@ -20,7 +24,7 @@ const NavBar: React.FC = () =>{
         <div className={style.NavStyle} id={style.MyNavBrand} ><Link href="/">chỏ's blog</Link></div>
         <ToggleBtn refProp={refToggleBtn} onClick={handleUiToggleBtn}></ToggleBtn>
         <ToggleContainer refProp={refToggleMenu}>
-            <ToggleMenu ></ToggleMenu>
+            <ToggleMenu showModal={showModal} ></ToggleMenu>
         </ToggleContainer>
         
     </nav>

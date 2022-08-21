@@ -9,6 +9,7 @@
     postion: relative
     flex-basis: 100%
     margin: 0
+    height: 65%
     li  
         text-align: center
         font-size: 1.8em
@@ -17,21 +18,25 @@
         list-style: none
         display: flex
         justify-content: center
-        
+        align-items: center
     a   
         z-index: 2
         background: $themse
         background-clip: text
         color: rgba(0, 0, 0, 0)
-        display: block
+        display: flex
+        align-items: center
+        justify-content: center
         width: 100%
         height: 100%
         text-decoration: none
     div     
+        width: 100%
         z-index: 2  
         background: $themse
         background-clip: text
-        color: rgba(0, 0, 0, 0)   
+        color: rgba(0, 0, 0, 0)
+        cursor: pointer   
 @media only screen and (min-width: $large)
     #MenuToggle
         div
@@ -41,7 +46,7 @@
             color: white
         li
             overflow: hidden
-            padding: 0.25em 0px 0.4em
+            
             width: 100%
             height: 100%
             &:before
@@ -59,7 +64,7 @@
                 transition: 0.2s
             &:hover:before
                 left: 0%
-                top: 0%
+                top: 7%
                 width: 100%
                 height: 100%
             &:hover a

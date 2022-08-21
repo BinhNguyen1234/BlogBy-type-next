@@ -1,0 +1,41 @@
+
+
+#LoginCloseModalBtn
+    z-index: 4
+    position: absolute
+    width: 5%
+    aspect-ratio: 1/1
+    right: 3%
+    top: 3%
+    display: flex
+    justify-content: space-around
+    flex-direction: column
+    cursor: pointer
+    &::before
+        content: ""
+        width: 100%
+        height: 15%
+        background-color: gray
+        position: absolute
+        transform: rotate(45deg)
+    &::after
+        content: ""
+        width: 100%
+        height: 15%
+        background-color: gray
+        position: absolute
+        transform: rotate(-45deg)
+    &:hover
+        animation-name: spin
+        animation-iteration-count: 1
+        animation-duration: 0.5s
+    &:hover::after
+        background-color: rgb(255,50,50)
+    &:hover::before
+        background-color: rgb(255,50,50)
+@keyframes spin 
+    0%
+        transform: rotate(0deg)
+    
+    100%
+        transform: rotate(360deg) 

@@ -1,13 +1,14 @@
 import style from "../styles/components/Login/LoginModal.module.sass"
-
+import {forwardRef, HtmlHTMLAttributes} from "react"
 interface Props{
-    children: JSX.Element
+    children: JSX.Element | Array<JSX.Element>
+    refProp: React.RefObject<HTMLDivElement>
 }
 
-function LoginModal({children}:Props){
+function LoginModal({children, refProp}:Props){
     return (
         <>
-            <div id={style.LoginModal}>
+            <div onClick={(e)=>{console.log(e.currentTarget.style.display ="none")}} ref={refProp} id={style.LoginModal}>
                 {children}
             </div>
         </>

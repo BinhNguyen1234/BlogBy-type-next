@@ -1,10 +1,14 @@
 import React from "react"
 import Link from "next/link"
 import style from "../styles/components/ToggleMenu.module.sass"
+import {useCallback} from "react"
 
+interface Props {
+    showModal: Function
+}
 
-
-const MenuToggle:React.FC = ()=>{
+const MenuToggle:React.FC<Props> = ({showModal})=>{
+    
     return (
         <>
         <ul  id={style.MenuToggle}>
@@ -16,7 +20,7 @@ const MenuToggle:React.FC = ()=>{
                 <Link href="/aboutme">About Me</Link>
             </li>
             <li>
-                <div>Login</div>
+                <div onClick={()=>{showModal("flex")}}>Login</div>
             </li>
         </ul>
         </>
