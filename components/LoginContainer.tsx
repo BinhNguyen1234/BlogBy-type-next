@@ -1,13 +1,45 @@
+import {sha256} from "js-sha256"
+import axios from 'axios';
 import style from "../styles/components/login/LoginForm.module.sass"
 import Image from "next/image"
 import thienImg from "../public/image/thien.png"
 import shadow from "../public/image/shadow.png"
 import LoginCloseModalBtn from "./LoginCloseModalBtn"
+import React, {useCallback} from "react"
 
 interface Props{
     hideModal: Function
 }
+interface UserInfoType {
+    username: any,
+    password: any
+}
 const LoginForm: React.FC<Props> = ({hideModal}:Props)=>{
+
+    const sendRequesLogin = useCallback((e:React.MouseEvent)=>{
+        e.preventDefault()
+        const form = document.getElementById("loginfeature")
+        const formData = new FormData(form as HTMLFormElement|undefined)
+        const UserInfo: UserInfoType = {
+            username : formData.get("username"),
+            password : sha256(formData.get("password") as string)
+        }
+        axios.post("/login/auth",UserInfo,{
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+             auth : UserInfo
+            })
+            
+            .then( (response)=>{
+                console.log(response)
+            })
+            .catch((err=>{
+                console.log(err)               
+            }))
+    },[]) 
+
     return (
         <>
         <div onClick={(e)=>{e.stopPropagation()}} id={style.LoginForm_Container}>
@@ -22,12 +54,12 @@ const LoginForm: React.FC<Props> = ({hideModal}:Props)=>{
             </div>
             <div id={style.LoginForm}>
                 <div>Hello Buddy</div>
-                <form action="/login" method="post">
+                <form action="/login/auth" id="loginfeature" method="post">
                     <label>Username</label>
-                    <input placeholder="Enter Username"></input>
+                    <input form="loginfeature" name="username" placeholder="Enter Username"></input>
                     <label>Password</label>
-                    <input placeholder="Enter password" type="password"></input>
-                    <button className="btn btn-primary">Login</button>
+                    <input form="loginfeature" name="password" placeholder="Enter password" type="password"></input>
+                    <button className="btn btn-primary" onClick={sendRequesLogin} type="submit">Login</button>
                 </form>
             </div>
         </div>
