@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit"
 import {HYDRATE} from "next-redux-wrapper"
 
 
-interface LoginState {
+export interface LoginStateType {
     isAuth: boolean;
 }
 
-const initialState: LoginState = {
+const initialState: LoginStateType = {
     isAuth: false
 }
 const loginSlice = createSlice({

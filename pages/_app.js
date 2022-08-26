@@ -1,5 +1,6 @@
 import "../styles/Global.sass"
 import 'bootstrap/dist/css/bootstrap.css'
+import {wrapper} from "../feature"
 
 import Layout from '../layout/Layout'
 function MyApp({ Component, pageProps }) {
@@ -11,4 +12,4 @@ function MyApp({ Component, pageProps }) {
     </Layout>)
 }
 
-export default MyApp
+export default wrapper.withRedux(MyApp)

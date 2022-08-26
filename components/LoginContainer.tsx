@@ -6,7 +6,8 @@ import thienImg from "../public/image/thien.png"
 import shadow from "../public/image/shadow.png"
 import LoginCloseModalBtn from "./LoginCloseModalBtn"
 import React, {useCallback} from "react"
-
+import {useDispatch, useSelector} from "react-redux"
+import {LOGIN,LOGOUT} from "../feature/login"
 interface Props{
     hideModal: Function
 }
@@ -15,6 +16,8 @@ interface UserInfoType {
     password: any
 }
 const LoginForm: React.FC<Props> = ({hideModal}:Props)=>{
+    const dispatchAuth = useDispatch()
+    const state = useSelector(state=> state)
 
     const sendRequesLogin = useCallback((e:React.MouseEvent)=>{
         e.preventDefault()
@@ -33,7 +36,11 @@ const LoginForm: React.FC<Props> = ({hideModal}:Props)=>{
             })
             
             .then( (response)=>{
-                console.log(response)
+                if(response.status===201){
+                    dispatchAuth(LOGIN(null))
+                    hideModal("none")
+                    console.log(state)
+                }
             })
             .catch((err=>{
                 console.log(err)               
