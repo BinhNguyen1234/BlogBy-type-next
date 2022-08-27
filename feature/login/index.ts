@@ -3,11 +3,13 @@ import {HYDRATE} from "next-redux-wrapper"
 
 
 export interface LoginStateType {
-    isAuth: boolean;
+    isAuth: boolean,
+    infoUser: string
 }
 
 const initialState: LoginStateType = {
-    isAuth: false
+    isAuth: false,
+    infoUser: "Loign"
 }
 const loginSlice = createSlice({
     name: "Login",
@@ -15,12 +17,14 @@ const loginSlice = createSlice({
     reducers: {
         LOGIN : (state, action) =>{
             return {
-                isAuth : true
+                isAuth : true,
+                infoUser: action.payload || "User"
             }
         },
         LOGOUT : (state, action)=>{
             return {
-                isAuth : false
+                isAuth : false,
+                infoUser: "Login"
             }
         }
     },

@@ -8,6 +8,7 @@ import LoginCloseModalBtn from "./LoginCloseModalBtn"
 import React, {useCallback} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import {LOGIN,LOGOUT} from "../feature/login"
+import SubmitBtn from "../components/SubmitBtn"
 interface Props{
     hideModal: Function
 }
@@ -46,7 +47,6 @@ const LoginForm: React.FC<Props> = ({hideModal}:Props)=>{
                 console.log(err)               
             }))
     },[]) 
-
     return (
         <>
         <div onClick={(e)=>{e.stopPropagation()}} id={style.LoginForm_Container}>
@@ -66,7 +66,8 @@ const LoginForm: React.FC<Props> = ({hideModal}:Props)=>{
                     <input form="loginfeature" name="username" placeholder="Enter Username"></input>
                     <label>Password</label>
                     <input form="loginfeature" name="password" placeholder="Enter password" type="password"></input>
-                    <button className="btn btn-primary" onClick={sendRequesLogin} type="submit">Login</button>
+                    <SubmitBtn onClick={sendRequesLogin}></SubmitBtn>
+                    
                 </form>
             </div>
         </div>

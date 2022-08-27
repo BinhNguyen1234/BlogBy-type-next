@@ -1,15 +1,26 @@
 import React from "react"
 import Link from "next/link"
 import style from "../styles/components/ToggleMenu.module.sass"
-import {useSelector} from "react-redux"
-import {LoginStateType} from "../feature/login"
+import {useEffect} from 'react'
+import {useSelector, useDispatch} from "react-redux"
 import {RootStateType} from "../feature"
+import { LOGIN } from "../feature/login"
 import {memo} from 'react'
+import axios from "axios"
 interface Props {
     showModal: Function
+    children: string
 }
 
-const MenuToggle:React.FC<Props> = ({showModal})=>{
+const MenuToggle:React.FC<Props> = ({showModal, children})=>{
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        axios.get("login").then((response=>{
+            if(response.data ==="LOGED-IN"){
+                dispatch(LOGIN(null))
+            }
+        }))
+    },[])
     const isAuth:boolean = useSelector((state : RootStateType) =>{return state.loginSliceReducers.isAuth})
     return (
         <>
@@ -22,7 +33,7 @@ const MenuToggle:React.FC<Props> = ({showModal})=>{
                 <Link href="/aboutme">About Me</Link>
             </li>
             <li>
-                {isAuth? <Link href="/user">User</Link>:
+                {isAuth? <Link href="/user">{children}</Link>:
                          <div onClick={()=>{showModal("flex")}}>Login</div>}
             </li>
         </ul>

@@ -1,5 +1,6 @@
 const passport = require("passport")
 const LocalStrategy = require("passport-local")
+const User = require("../Model/user")
 
 function loginHandler(){
     passport.serializeUser(({username, password}, setToSessionCb)=>{
@@ -7,14 +8,37 @@ function loginHandler(){
     })
    return function(req,res,next){ 
         passport.use(new LocalStrategy((username, password, cb)=>{
-            if (username == "admin" && password == "4fd6c0dfcac719f96423f3de90d0ab72de4534f62c51cccc94cdcb787cec07da"){
-                return cb(null,{username,password, message : "Verify"});
-            }else{
-                return cb(null,false)
-        }
+            console.log(`${username} try to login`)
+            const querryUser = new Promise((resolve, reject)=>{
+                User.findOne({"username":username},(err,sucess)=>{
+                    if(err){
+                        reject(err)
+                    }else{
+                         
+                        resolve(sucess)
+                    }
+                })
+            })
+           return querryUser.then((result)=>{
+                console.log(`Find ${username} success `)
+                if(password == result.password){
+                    console.log(`password verify sucess`)
+                    return cb(null,{username,password, message : "Verify"});
+                }
+                else{
+                    console.log(`password verify failed`)
+                    return cb(null,false)
+                }
+            })
+            .catch((err=>{
+                if(err){
+                    console.log("error when querry user")
+                    return cb(null,false)
+                }
+            }))
     }))
         passport.authenticate('local')(req,res,()=>{
-            return res.status(201).send("Verified and login")
+            res.status(201).send("verifed")
         })
 }
 }

@@ -9,7 +9,7 @@ export default function Home() {
   const state = useSelector((state)=>state)
   useEffect(()=>{
     
-    console.log(state)
+    console.log("render on root",state)
   },null)
   return (
     <>

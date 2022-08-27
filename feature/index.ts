@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import loginSliceReducers from "./login"
+import UISubmitBtn from "./login/UISubmitBtn"
 import { createWrapper } from "next-redux-wrapper"
 const allReducers = combineReducers({
-    loginSliceReducers
+    loginSliceReducers,
+    UISubmitBtn
 })
 
 const store = () =>{

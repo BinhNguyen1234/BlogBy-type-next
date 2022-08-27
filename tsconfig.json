@@ -102,7 +102,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "layout1/index.jsx"  ],
+, "layout1/index.jsx", "feature/login/UISubmitBtn"  ],
   "exclude": [
     "node_modules"
   ]

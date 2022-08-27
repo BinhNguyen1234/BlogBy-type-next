@@ -5,6 +5,7 @@ import { useSelector } from "react-redux"
 import {useEffect} from "react"
 import { RootStateType } from "../../feature"
 import axios, { AxiosResponse } from "axios"
+import {wrapper} from "../../feature"
 interface Post {
     userId: number,
     id: number,
@@ -50,6 +51,8 @@ function MenuUser ({result}:Props){
         
         
     // },undefined)
+    const state = useSelector((state)=>{return state})
+    console.log("render on user", state)
     const isAuth: boolean = useSelector((state:RootStateType)=>{return state.loginSliceReducers.isAuth})
     const router = useRouter()
     useEffect(()=>{

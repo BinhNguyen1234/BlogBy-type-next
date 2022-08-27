@@ -6,7 +6,7 @@ const appendAPIRoute = require("../RouteAPI")
 const Database = require("./Database")
 const session = require("express-session");
 const passport = require("passport")
-const isAuth = require("../Middeware/isAuth")
+const Auth = require("../Middeware/Auth")
  class  App  {
     
     
@@ -27,7 +27,7 @@ const isAuth = require("../Middeware/isAuth")
                 ),
                 passport.session()
             )
-            app.use(isAuth()) 
+            
             app.listen(port,()=>{
                 console.log("server running sucess at port "+ port)
                 Database.connect('binhnguyen','170116Abc','Blog')
