@@ -3,8 +3,8 @@ const passport = require('passport');
 
 function checkReq(req,res,next){
     
-   console.log(req);
-   res.send("ok")
+   
+   next()
    
 }
 function  Auth(){
@@ -23,12 +23,7 @@ function  Auth(){
     
    return function(req, res, next){ 
         
-        passport.initialize()(req, res , ()=>{
-            passport.session()(req,res,()=>{
-                console.log(req.session)
-                res.send("OK")
-            })
-        })
+        passport.initialize()(req, res , ()=>checkReq(req,res,next))
     
         
         

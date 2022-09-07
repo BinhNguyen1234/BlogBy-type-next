@@ -1,34 +1,38 @@
 import LoginContainer from "../../components/LoginContainer"
-import style from "../../styles/components/user/UserContainer.module.sass"
+
 import { useRouter } from "next/router"
 import { useSelector } from "react-redux"
 import {useEffect} from "react"
 import { RootStateType } from "../../feature"
 import axios, { AxiosResponse } from "axios"
 import {wrapper} from "../../feature"
-interface Post {
-    userId: number,
-    id: number,
-    title: string,
-    body: string
+import { GetServerSideProps } from "next"
+
+interface Req{
+    req: any
 }
-interface Props{
-    result: any
+interface Data {
+    data: any
 }
 // "https://jsonplaceholder.typicode.com/posts "
-export const getServerSideProps = async()=>{
-    let Props: object | undefined | void
-    let data:any = await axios.get("https://jsonplaceholder.typicode.com/posts/1")
+export const getServerSideProps:GetServerSideProps= async({req}:Req)=>{
+    
+    console.log(req.user)
+   
+    let data:AxiosResponse|void = await axios.get("https://jsonplaceholder.typicode.com/posts/1")
 
-    .catch((err:any)=>{
+    .catch((err)=>{
        console.log(err)
     })
-    console.log(data.data)
-    const result = data.data
+    console.log(data?.data)
+    const result = data?.data
     return {
         
         props : {result}
     }
+}
+interface Props {
+    result: any
 }
 
 
@@ -49,13 +53,14 @@ function MenuUser ({result}:Props){
     //     console.log(data.data)
     //    })()
         
-        
+    
     // },undefined)
     const state = useSelector((state)=>{return state})
     console.log("render on user", state)
-    const isAuth: boolean = useSelector((state:RootStateType)=>{return state.loginSliceReducers.isAuth})
+    const isAuth = useSelector((state:RootStateType)=>{return state.loginSliceReducers.isAuth})
     const router = useRouter()
     useEffect(()=>{
+        
         if(isAuth==false){
             router.push("/aboutme")
         }

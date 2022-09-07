@@ -6,6 +6,7 @@ class Database { // Singleton
   
   constructor() {
     try {
+      
       this.connection
       .on('open', ()=>{console.log( 'Database connection: open')})
       .on('close', ()=>{console.log( 'Database connection: close')})

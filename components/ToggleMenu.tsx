@@ -9,7 +9,7 @@ import {memo} from 'react'
 import axios from "axios"
 interface Props {
     showModal: Function
-    children: string
+    children?: string
 }
 
 const MenuToggle:React.FC<Props> = ({showModal, children})=>{
@@ -21,7 +21,8 @@ const MenuToggle:React.FC<Props> = ({showModal, children})=>{
             }
         }))
     },[])
-    const isAuth:boolean = useSelector((state : RootStateType) =>{return state.loginSliceReducers.isAuth})
+    const loginSlice = useSelector((state : RootStateType) =>{return state.loginSliceReducers})
+
     return (
         <>
         <ul  id={style.MenuToggle}>
@@ -33,7 +34,7 @@ const MenuToggle:React.FC<Props> = ({showModal, children})=>{
                 <Link href="/aboutme">About Me</Link>
             </li>
             <li>
-                {isAuth? <Link href="/user">{children}</Link>:
+                {loginSlice.isAuth? <Link href="/user">{loginSlice.infoUser}</Link>:
                          <div onClick={()=>{showModal("flex")}}>Login</div>}
             </li>
         </ul>

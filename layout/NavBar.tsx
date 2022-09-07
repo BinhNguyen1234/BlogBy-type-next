@@ -36,7 +36,7 @@ const NavBar: React.FC<Props> = ({showModal}) =>{
         <div className={style.NavStyle} id={style.MyNavBrand} ><Link href="/">chỏ's blog</Link></div>
         <ToggleBtn refProp={refToggleBtn} onClick={handleUiToggleBtn}></ToggleBtn> {/*use in mode non-lap-pc*/}
         <ToggleContainer refProp={refToggleMenu}>
-            <ToggleMenu showModal={showModal} >{infoUser}</ToggleMenu>
+            <ToggleMenu showModal={showModal} ></ToggleMenu>
         </ToggleContainer>
         
     </nav>

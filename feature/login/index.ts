@@ -18,7 +18,7 @@ const loginSlice = createSlice({
         LOGIN : (state, action) =>{
             return {
                 isAuth : true,
-                infoUser: action.payload || "User"
+                infoUser: action.payload 
             }
         },
         LOGOUT : (state, action)=>{

@@ -38,7 +38,7 @@ const LoginForm: React.FC<Props> = ({hideModal}:Props)=>{
             
             .then( (response)=>{
                 if(response.status===201){
-                    dispatchAuth(LOGIN(null))
+                    dispatchAuth(LOGIN(UserInfo.username))
                     hideModal("none")
                     console.log(state)
                 }

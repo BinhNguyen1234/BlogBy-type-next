@@ -7,6 +7,7 @@ const Database = require("./Database")
 const session = require("express-session");
 const passport = require("passport")
 const Auth = require("../Middeware/Auth")
+const MongoStore = require('connect-mongo')
  class  App  {
     
     
@@ -14,24 +15,35 @@ const Auth = require("../Middeware/Auth")
        let appNext = next({ dev })
        let  handle = appNext.getRequestHandler()
         appNext.prepare()
-        .then(()=>{
+        .then(async ()=>{
 
             const app = express()
+            app.listen(port, ()=>{
+                console.log("server running sucess at port "+ port);
+            })
+
+            Database.connect('binhnguyen','170116Abc','Blog');
+
+
             app.use(bodyParser.json())
             app.use(bodyParser.urlencoded({ extended: true }));
             app.use("/",
                 session(
-                    {secret : "secret",
-                    saveUninitialized: true,
-                    resave: true}
+                    {
+                        secret : "secret",
+                        saveUninitialized: true,
+                        resave: true,
+                        store: MongoStore.create({
+                            client: Database.connection.getClient(),
+                            dbName: "Blog"
+                        })
+                        
+                    }
                 ),
                 passport.session()
             )
-            
-            app.listen(port,()=>{
-                console.log("server running sucess at port "+ port)
-                Database.connect('binhnguyen','170116Abc','Blog')
-            })
+            app.use(Auth())
+           
 
 
 
