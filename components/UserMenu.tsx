@@ -5,7 +5,11 @@ import Style from "../styles/components/User/UserMenu.module.sass"
 function MenuUser():ReactElement {
     return (
         <>
-            <div>MenuUser</div>
+            <ul id={Style.UserMenu}>
+                <li>Write Blog</li>
+                <li>Edit Blog</li>
+                <li>Log Out</li>
+            </ul>
         </>
     )
 }

@@ -6,7 +6,9 @@ interface Props {
 export default function MiddleContentLayout({children}: Props):ReactElement{
     return (<>
         <div id={Style.MiddleContent}>
-            {children}
+            <div>
+                {children}
+            </div>
         </div>
     </>)
 }

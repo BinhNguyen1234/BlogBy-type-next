@@ -3,7 +3,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { ReactElement, useEffect} from "react"
 import React from 'react'
-import {LOGINSSR} from "../feature/login"
+import {LOGINSSR, LOGIN} from "../feature/login"
 interface ContextType {
   req: any
 }
@@ -41,7 +41,8 @@ function Home({data}:Propstype):ReactElement {
   const state = useSelector((state)=>state)
   useEffect(()=>{
     console.log("Data", data)
-    dispatch(LOGINSSR(data))
+     // dispatch(LOGINSSR(data)) // on product
+    dispatch(LOGIN("Dev")) // one Dev
   },[])
      return (
         <>
