@@ -18,7 +18,13 @@ const loginSlice = createSlice({
         LOGIN : (state, action) =>{
             return {
                 isAuth : true,
-                infoUser: action.payload 
+                infoUser: action.payload
+            }
+        },
+        LOGINSSR: (state,action)=>{
+            return {
+                isAuth: action.payload.isAuth,
+                infoUser: action.payload.infoUser
             }
         },
         LOGOUT : (state, action)=>{
@@ -39,4 +45,4 @@ const loginSlice = createSlice({
 
 
 export default loginSlice.reducer;
-export const {LOGIN, LOGOUT} = loginSlice.actions
+export const {LOGIN, LOGOUT, LOGINSSR} = loginSlice.actions

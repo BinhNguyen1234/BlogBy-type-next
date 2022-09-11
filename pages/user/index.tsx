@@ -7,7 +7,7 @@ import { RootStateType } from "../../feature"
 import axios, { AxiosResponse } from "axios"
 import {wrapper} from "../../feature"
 import { GetServerSideProps } from "next"
-
+import UserMenu from "../../components/UserMenu"
 interface Req{
     req: any
 }
@@ -36,47 +36,19 @@ interface Props {
 }
 
 
-function MenuUser ({result}:Props){
-    // useEffect(()=>{
-    //     console.log(1)
-    //     let getData = axios.get("https://jsonplaceholder.typicode.com/posts/1")
-               
-    //         .catch((err)=>{
-             
-    //         })
-    //     let result = getData.then((res)=>{return res})
-            
-            
-           
-    //    let test = (async function (){
-    //     let data:any = await result;
-    //     console.log(data.data)
-    //    })()
-        
-    
-    // },undefined)
-    const state = useSelector((state)=>{return state})
-    console.log("render on user", state)
+function User ({result}:Props){
     const isAuth = useSelector((state:RootStateType)=>{return state.loginSliceReducers.isAuth})
     const router = useRouter()
     useEffect(()=>{
-        
-        if(isAuth==false){
+        if(isAuth == false){
             router.push("/aboutme")
         }
     },[])
-        return (<>
-            {console.log(result)}
-            <div>{result.title}</div>
-        
+    return (<>
+        <UserMenu></UserMenu>
     </>) 
-        
-
-
-
-
 }
 
 
 
-export default MenuUser
+export default User

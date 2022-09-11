@@ -1,41 +1,51 @@
 
 
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect} from "react"
+import { ReactElement, useEffect} from "react"
 import React from 'react'
-import {LOGIN} from "../feature/login"
+import {LOGINSSR} from "../feature/login"
 interface ContextType {
   req: any
 }
 export function getServerSideProps ({req}:ContextType){
-  let data: any = "home"
+  interface data {
+    infoUser: string,
+    isAuth: boolean
+  }
+  let data : data = {
+    infoUser: "Login",
+    isAuth: false
+  }
   try{
-    data = req.user.username
+    data  = {
+      infoUser: req.user.username,
+      isAuth: true
+    }
   }
   catch {
-  data = "failed"
+   console.log("failed to login")
   }
   return {
     props: {
-      data
+      data: data
     }
+    
   }
 }
 interface Propstype {
   data: any
 }
 
-function Home({data}:Propstype) {
+function Home({data}:Propstype):ReactElement {
   const dispatch = useDispatch()
-
   const state = useSelector((state)=>state)
   useEffect(()=>{
-    dispatch(LOGIN(data))
-    console.log("data",data)
+    console.log("Data", data)
+    dispatch(LOGINSSR(data))
   },[])
      return (
         <>
-          <div>{data}</div>
+          <div>Home</div>
       
         </>
   )

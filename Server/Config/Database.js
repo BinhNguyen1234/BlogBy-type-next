@@ -22,6 +22,7 @@ class Database { // Singleton
   }
 
   async connect(username, password,database) {
+    console.log("connecting to ", database)
     try {
       await mongoose.connect(
         `mongodb+srv://${username}:${password}@cluster0.nlqniy6.mongodb.net/?retryWrites=true&w=majority`,{"dbName" : database});

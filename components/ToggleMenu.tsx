@@ -13,14 +13,7 @@ interface Props {
 }
 
 const MenuToggle:React.FC<Props> = ({showModal, children})=>{
-    const dispatch = useDispatch()
-    useEffect(()=>{
-        axios.get("login").then((response=>{
-            if(response.data ==="LOGED-IN"){
-                dispatch(LOGIN(null))
-            }
-        }))
-    },[])
+
     const loginSlice = useSelector((state : RootStateType) =>{return state.loginSliceReducers})
 
     return (
@@ -34,8 +27,9 @@ const MenuToggle:React.FC<Props> = ({showModal, children})=>{
                 <Link href="/aboutme">About Me</Link>
             </li>
             <li>
-                {loginSlice.isAuth? <Link href="/user">{loginSlice.infoUser}</Link>:
-                         <div onClick={()=>{showModal("flex")}}>Login</div>}
+                {loginSlice.isAuth? 
+                    <Link href="/user">{"Hi, " + loginSlice.infoUser}</Link>:
+                    <div onClick={()=>{showModal("flex")}}>Login</div>}
             </li>
         </ul>
         </>
