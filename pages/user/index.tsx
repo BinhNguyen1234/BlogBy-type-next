@@ -8,6 +8,7 @@ import axios, { AxiosResponse } from "axios"
 import {wrapper} from "../../feature"
 import { GetServerSideProps } from "next"
 import UserMenu from "../../components/UserMenu"
+import MiddleContentLayout from "../../layout/MiddleContentLayout"
 interface Req{
     req: any
 }
@@ -45,7 +46,9 @@ function User ({result}:Props){
         }
     },[])
     return (<>
-        <UserMenu></UserMenu>
+        <MiddleContentLayout>
+            <UserMenu></UserMenu>
+        </MiddleContentLayout>
     </>) 
 }
 
