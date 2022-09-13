@@ -1,5 +1,6 @@
 import NavBar from "./NavBar"
 import Footer from "./Footer"
+import Content from "./Content"
 import LoginContainer from "../components/LoginContainer"
 import LoginModal from "../components/LoginModal"
 import axios from "axios"
@@ -21,7 +22,7 @@ const Layout:React.FC<Props>  = ({children}:Props) =>{
             <LoginContainer hideModal={handleModal}></LoginContainer>
         </LoginModal>
         <NavBar showModal = {handleModal}></NavBar>
-            {children}
+        <Content>{children} </Content>
         <Footer></Footer>
         </>
     )

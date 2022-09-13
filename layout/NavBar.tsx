@@ -7,22 +7,13 @@ import ToggleContainer from "../components/ToggleContainer"
 import React, {useCallback, useRef} from 'react'
 import axios from "axios"
 import { RootStateType } from "../feature";
-// export async function getServerSideProps(){
-    
-//     const useInfo =  await axios.get("getuser")
-//     return{
-//         props : {
 
-//         }
-//     }
-// }
 interface Props {
     showModal: Function
 }
 
 const NavBar: React.FC<Props> = ({showModal}) =>{
     const infoUser = useSelector((state:RootStateType)=>{return state.loginSliceReducers.infoUser})
-    console.log(infoUser)
     const refToggleMenu = useRef<HTMLDivElement>(null)
     const refToggleBtn = useRef<HTMLDivElement>(null)   
     const handleUiToggleBtn =  useCallback((event: React.MouseEvent)=>{

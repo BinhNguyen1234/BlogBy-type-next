@@ -2,7 +2,7 @@ import LoginContainer from "../../components/LoginContainer"
 
 import { useRouter } from "next/router"
 import { useSelector } from "react-redux"
-import {useEffect} from "react"
+import {ReactElement, useEffect} from "react"
 import { RootStateType } from "../../feature"
 import axios, { AxiosResponse } from "axios"
 import {wrapper} from "../../feature"
@@ -37,7 +37,7 @@ interface Props {
 }
 
 
-function User ({result}:Props){
+function User ({result}:Props):ReactElement{
     const isAuth = useSelector((state:RootStateType)=>{return state.loginSliceReducers.isAuth})
     const router = useRouter()
     useEffect(()=>{
