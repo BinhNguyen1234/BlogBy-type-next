@@ -7,7 +7,7 @@ import shadow from "../public/image/shadow.png"
 import LoginCloseModalBtn from "./LoginCloseModalBtn"
 import React, {useCallback} from "react"
 import {useDispatch, useSelector} from "react-redux"
-import {LOGIN,LOGOUT} from "../feature/login"
+import {LOGIN} from "../feature/login"
 import SubmitBtn from "../components/SubmitBtn"
 interface Props{
     hideModal: Function

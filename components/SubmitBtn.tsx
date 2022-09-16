@@ -1,9 +1,9 @@
-import { Callback } from "next-redux-wrapper";
-import React, { JSXElementConstructor, RefObject } from "react";
+
+import React from "react";
 import style from "../styles/components/Login/SubmitBtn.module.sass"
 import { useSelector, useDispatch } from "react-redux";
 import {RootStateType} from "../feature"
-import {memo, useRef,useEffect} from "react"
+import {memo} from "react"
 interface Props {
     onClick: React.MouseEventHandler
 }

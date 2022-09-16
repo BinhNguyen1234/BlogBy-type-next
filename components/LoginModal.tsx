@@ -1,5 +1,5 @@
 import style from "../styles/components/Login/LoginModal.module.sass"
-import {forwardRef, HtmlHTMLAttributes, ReactElement} from "react"
+import { ReactElement} from "react"
 interface Props{
     children: JSX.Element | Array<JSX.Element>
     refProp: React.RefObject<HTMLDivElement>

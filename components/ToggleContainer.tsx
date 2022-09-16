@@ -1,5 +1,4 @@
 import React from "react"
-import ToggleBtn from "./ToggleBtn"
 import style from "../styles/components/ToggleContainer.module.sass"
 
 interface Props {
