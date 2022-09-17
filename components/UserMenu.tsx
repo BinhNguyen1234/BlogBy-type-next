@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import WriteBlog from "./WriteBlog";
+import WriteBlogBtn from "./WriteBlogBtn";
 import Style from "../styles/components/User/UserMenu.module.sass"
 
 function MenuUser():ReactElement {
@@ -7,7 +7,7 @@ function MenuUser():ReactElement {
         <>
             <ul id={Style.UserMenu}>
                 <li>
-                    <WriteBlog></WriteBlog>
+                    <WriteBlogBtn></WriteBlogBtn>
                 </li>
                 <li>Edit Blog</li>
                 <li>Change Password</li>
