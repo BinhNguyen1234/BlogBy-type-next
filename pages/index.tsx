@@ -23,7 +23,7 @@ export function getServerSideProps ({req}:ContextType){
     }
   }
   catch {
-   console.log("failed to login")
+   console.log("Not in log-in /pages/index.txs line 26 ")
   }
   return {
     props: {
@@ -41,7 +41,7 @@ function Home({data}:Propstype):ReactElement {
   const state = useSelector((state)=>state)
   useEffect(()=>{
     dispatch(LOGINSSR(data)) // on product
-    //dispatch(LOGIN("Dev")) // one Dev
+    // dispatch(LOGIN("Dev")) // one Dev
   },[])
      return (
         <>
