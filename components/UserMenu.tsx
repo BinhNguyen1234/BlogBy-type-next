@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import WriteBlogBtn from "./WriteBlogBtn";
 import Style from "../styles/components/User/UserMenu.module.sass"
-
+import LogOutBtn from "./LogOutBtn";
 function MenuUser():ReactElement {
     return (
         <>
@@ -11,7 +11,9 @@ function MenuUser():ReactElement {
                 </li>
                 <li>Edit Blog</li>
                 <li>Change Password</li>
-                <li>Log Out</li>
+                <li>
+                    <LogOutBtn></LogOutBtn>
+                </li>
             </ul>
         </>
     )

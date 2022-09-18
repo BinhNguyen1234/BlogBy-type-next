@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
-import ReactQuill from "react-quill"
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import Style from "../../styles/components/BlogEditor/ContentEditor.module.sass"
-
+import dynamic from "next/dynamic";
 
 
 
