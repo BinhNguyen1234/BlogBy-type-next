@@ -4,7 +4,10 @@ import Style from "../../styles/components/BlogEditor/SendBlogBtn.module.sass"
 import axios from "axios"
 import { useSelector } from "react-redux"
 import {RootStateType} from "../../feature"
-export default function SendBlogBtn():ReactElement{
+interface Props {
+    refData: any
+}
+export default function SendBlogBtn({refData}:Props):ReactElement{
     const sendNewPost = useCallback(()=>{
         axios.post("writeblog/newpost")
         

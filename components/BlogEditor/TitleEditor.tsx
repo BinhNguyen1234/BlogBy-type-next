@@ -1,7 +1,11 @@
-import { ReactElement } from "react";
+import { HtmlHTMLAttributes, LegacyRef, ReactElement } from "react";
 import Style from "../../styles/components/BlogEditor/TitleEditor.module.sass"
-export default function TitleEditor():ReactElement{
+interface Props {
+    form:string,
+    ref: LegacyRef<HTMLTextAreaElement>
+}
+export default function TitleEditor({form,ref}:Props):ReactElement{
     return (<>
-        <textarea id={Style.TitleEditor}  placeholder="Title"></textarea>
+        <textarea ref={ref} form={form} id={Style.TitleEditor}  placeholder="Title"></textarea>
     </>)
 }
