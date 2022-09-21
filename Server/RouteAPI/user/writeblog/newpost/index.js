@@ -1,8 +1,5 @@
 const newpost = require("express").Router()
+const postBlog = require("../../../../Controller/user/postblog")
 
-
-newpost.post("/",(req,res)=>{
-    res.send("reach to new post")
-    console.log("reach to new post")
-})
+newpost.post("/",postBlog)
 module.exports = newpost
