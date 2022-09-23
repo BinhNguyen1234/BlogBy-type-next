@@ -1,25 +1,28 @@
 import React,{ forwardRef, LegacyRef, ReactElement, useRef } from "react";
+import Style from "../../styles/components/BlogEditor/ContentEditor.module.sass"
+import dynamic from "next/dynamic";
+
+
 const ReactQuill = dynamic(
  async () => {
-  const {default : RQ} = await import("react-quill")
+  const {default: RQ} = await import("react-quill")
   return function displayName({forwardedRef, ...props}:{forwardedRef:any,id : any, modules: any, placeholder: any}){
      return <RQ ref={forwardedRef} {...props}></RQ>
     }
 },
    { ssr: false });
-import Style from "../../styles/components/BlogEditor/ContentEditor.module.sass"
-import dynamic from "next/dynamic";
+
 interface Props {
-  ref: LegacyRef<typeof ReactQuill>
+  ref: LegacyRef<typeof ReactQuill> 
 }
 
+const ContentEditor = forwardRef(function displayName(props, ref):ReactElement{
 
-export default function ContentEditor({ref}:Props):ReactElement{
-
-    return (<>
-        <ReactQuill forwardedRef={ref} id={Style.ContentEditor} modules={modules} placeholder="Write your blog"></ReactQuill>
-    </>)
-}
+  return (<>
+      <ReactQuill forwardedRef={ref} id={Style.ContentEditor} modules={modules} placeholder="Write your blog"></ReactQuill>
+  </>)
+})
+export default ContentEditor
 let toolbarOptions = [
   ['bold', 'italic', 'underline'], 
   ['link', 'image'],
@@ -33,3 +36,4 @@ let toolbarOptions = [
 const modules = {
   toolbar: toolbarOptions
 }
+
