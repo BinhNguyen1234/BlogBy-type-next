@@ -3,30 +3,35 @@ const post = require("../../../Model/post")
 const isTitleDuplicate = require("../../../Middeware/tool/isTitleDuplicate")
 async function postBlog(req,res){
     
-
-
-    try {
-        let writer = new Promise((resolve, reject)=>{ user.findOne({
-            "username": req.user.username})
-        .then((document)=>{
-            return resolve(document)
-        })
-        .catch((e)=>{
-            res.status(401).send("Error when verify user, please logon again")
-            console.log("Have error when verify user")
-            throw reject(new Error("Have error when verify user"))
-        })
-        })
-       let isDuplicate = new Promise((resolve, reject)=>{
+    let writer = new Promise((resolve, reject)=>{ 
+        try{
+            user.findOne({
+                "username": req.user.username
+            })
+            .then((document)=>{
+                return resolve(document)
+            })
+            .catch((e)=>{
+                res.status(401).send("Can't find username, please contact Admin")
+                throw new Error("Can't find username, please contact Admin")
+            })
+        }
+        catch(e){
+            res.status(401).send("Error when verify user, please login again")
+            reject(new Error("Have error when verify user"))
+        }
+    })
+    let isDuplicate = new Promise((resolve, reject)=>{
             isTitleDuplicate(req.body.title).then((isDup)=>{
                 return resolve(isDup)
-            }).catch((e)=>{
+            })
+            .catch((e)=>{
                 reject(e)
             })
-       })
+        })
 
-   
-        await Promise.all([writer, isDuplicate])
+    try {
+        Promise.all([writer, isDuplicate])
         .then(([writer,isDuplicate])=>{
             if (isDuplicate){
                 res.status(402).send("Title is exist or duplicate")
@@ -38,16 +43,18 @@ async function postBlog(req,res){
                     date: new Date()
                  })
                  newPost.save().then((result)=>{
-                    res.status(202).send("New Post was save in Database")
+                    res.status(202).send("New Post was saved in Database")
                  })
                 
             }
         })
         .catch((e)=>{
-            throw e
+            console.log(1)
+            console.log(e)
         })
-}
+    }
     catch(e){
+        console.log(2)
         console.log(e)
        
     }

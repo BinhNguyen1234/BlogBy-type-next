@@ -8,7 +8,6 @@ async function isTitleDuplicate(newPostTitle){
         title: {$regex: new RegExp(newPostTitle,"i")}
     })
     .then((result)=>{
-        console.log("eeeeee")
         if(result){
             console.log("Title is duplicate /Server/Middleware/tool/isTitleDuplicate")
             return true
