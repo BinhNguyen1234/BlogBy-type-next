@@ -40,7 +40,7 @@ function Home({data}:Propstype):ReactElement {
   const dispatch = useDispatch()
   const state = useSelector((state)=>state)
   useEffect(()=>{
-    dispatch(LOGINSSR(data)) // on product
+      dispatch(LOGINSSR(data)) // on product
     //  dispatch(LOGIN("Dev")) // one Dev
   },[])
      return (

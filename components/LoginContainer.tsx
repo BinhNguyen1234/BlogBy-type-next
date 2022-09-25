@@ -5,10 +5,12 @@ import Image from "next/image"
 import thienImg from "../public/image/thien.png"
 import shadow from "../public/image/shadow.png"
 import LoginCloseModalBtn from "./LoginCloseModalBtn"
-import React, {useCallback} from "react"
+import React, {useCallback, memo} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import {LOGIN} from "../feature/login"
+import {handleUI} from "../feature/login/UISubmitBtn"
 import SubmitBtn from "../components/SubmitBtn"
+import {RootStateType} from "../feature"
 interface Props{
     hideModal: Function
 }
@@ -17,8 +19,8 @@ interface UserInfoType {
     password: any
 }
 const LoginForm: React.FC<Props> = ({hideModal}:Props)=>{
-    const dispatchAuth = useDispatch()
-    const state = useSelector(state=> state)
+    const dispatch = useDispatch()
+    const message = useSelector((state:RootStateType)=>{return state.UISubmitBtn.message})
 
     const sendRequesLogin = useCallback((e:React.MouseEvent)=>{
         e.preventDefault()
@@ -38,13 +40,14 @@ const LoginForm: React.FC<Props> = ({hideModal}:Props)=>{
             
             .then( (response)=>{
                 if(response.status===201){
-                    dispatchAuth(LOGIN(UserInfo.username))
+                    dispatch(LOGIN(UserInfo.username))
+                    dispatch(handleUI({type: "SUCCESS"}))
                     hideModal("none")
-                    console.log(state)
                 }
             })
             .catch((err=>{
-                console.log(err)               
+                console.log(err)  
+                dispatch(handleUI({type: "FAILED", message: `${err.response.status}: ${err.response.data}`}))             
             }))
     },[]) 
     return (
@@ -66,6 +69,7 @@ const LoginForm: React.FC<Props> = ({hideModal}:Props)=>{
                     <input form="loginfeature" name="username" placeholder="Enter Username"></input>
                     <label>Password</label>
                     <input form="loginfeature" name="password" placeholder="Enter password" type="password"></input>
+                    <p>{message}</p>
                     <SubmitBtn onClick={sendRequesLogin}></SubmitBtn>
                     
                 </form>
@@ -76,4 +80,4 @@ const LoginForm: React.FC<Props> = ({hideModal}:Props)=>{
 }
 
 
-export default LoginForm
+export default memo(LoginForm)

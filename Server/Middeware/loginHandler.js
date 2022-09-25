@@ -32,14 +32,22 @@ function loginHandler(){
             })
             .catch((err=>{
                 if(err){
-                    console.log("error when querry user")
+                    console.log("error when querry user, user not exist")
                     return cb(null,false)
                 }
             }))
     }))
-        passport.authenticate('local')(req,res,()=>{
-            res.status(201).send("verifed")
-        })
+        passport.authenticate('local',(err,user,info)=>{
+            if (err) {
+                res.status(501).send("Server Error: Login failed") 
+                return next(err); 
+            }
+            if (!user) { 
+                return res.status(401).send("Username or password not exist"); 
+            }else{
+            req.login(user, next)}
+        })(req,res,next)
+        
 }
 }
 module.exports = loginHandler 

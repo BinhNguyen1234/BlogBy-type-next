@@ -4,7 +4,7 @@ const userSchema = mongoose.Schema({
     username : {type: String, require: true},
     password: {type: String, require: true},
     date : Date,
-    _post: [{type: mongoose.Schema.Types.ObjectId, refPath: 'Post'}]
+    _post: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}]
 
 })
-module.exports = mongoose.model('user', userSchema, 'User')
+module.exports = mongoose.model('User', userSchema, 'User')
