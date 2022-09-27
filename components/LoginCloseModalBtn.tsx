@@ -5,7 +5,9 @@ interface Props {
 const LoginCloseModalBtn:React.FC<Props>=({hideModal})=>{
     return(
         <>
-            <div onClick={()=>{hideModal("none")}} id={style.LoginCloseModalBtn}>
+            <div onClick={(e)=>{
+                
+                hideModal("none")}} id={style.LoginCloseModalBtn}>
                 
             </div>
         </>

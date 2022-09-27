@@ -23,6 +23,7 @@ const LoginForm: React.FC<Props> = ({hideModal}:Props)=>{
     const message = useSelector((state:RootStateType)=>{return state.UISubmitBtn.message})
 
     const sendRequesLogin = useCallback((e:React.MouseEvent)=>{
+        dispatch(handleUI({type:"SEND"}))
         e.preventDefault()
         const form = document.getElementById("loginfeature")
         const formData = new FormData(form as HTMLFormElement|undefined)
@@ -62,7 +63,7 @@ const LoginForm: React.FC<Props> = ({hideModal}:Props)=>{
                     <Image src={shadow}></Image>
                 </div>
             </div>
-            <div id={style.LoginForm}>
+            <div  id={style.LoginForm}>
                 <div>Hello Buddy</div>
                 <form action="/login/auth" id="loginfeature" method="post">
                     <label>Username</label>
@@ -73,6 +74,7 @@ const LoginForm: React.FC<Props> = ({hideModal}:Props)=>{
                     <SubmitBtn onClick={sendRequesLogin}></SubmitBtn>
                     
                 </form>
+               
             </div>
         </div>
         </>

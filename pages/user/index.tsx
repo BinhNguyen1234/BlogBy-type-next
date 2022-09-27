@@ -16,7 +16,7 @@ function User ():ReactElement{
     const router = useRouter()
     useEffect(()=>{
         if(isAuth == false){
-            router.push("/aboutme")
+            router.push("/")
         }
     },[])
     return (<>

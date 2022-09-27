@@ -8,7 +8,7 @@ interface Props{
 function LoginModal({children, refProp}:Props): ReactElement{
     return (
         <>
-            <div onClick={(e)=>{console.log(e.currentTarget.style.display ="none")}} ref={refProp} id={style.LoginModal}>
+            <div onClick={(e)=>{(e.currentTarget.style.display ="none")}} ref={refProp} id={style.LoginModal}>
                 {children}
             </div>
         </>

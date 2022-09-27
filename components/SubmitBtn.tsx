@@ -15,9 +15,14 @@ function SubmitBtn ({onClick}:Props):JSX.Element{
     return (
         <>
             <button onClick={(e)=>{
-                onClick(e);
-                dispatch(handleUI({type:"SEND"}))
-                }} id={style.Submitbtn} className="btn btn-primary" type="submit">
+                e.preventDefault()
+                if(stateBtn.status != "Try Again"){
+                    onClick(e);
+                }else{
+                    dispatch(handleUI({type:"SUCCESS"}))
+                }
+                
+                }} id={style.Submitbtn} disabled={stateBtn.disabled} className={`btn ${stateBtn.color}`} type="submit">
                 <div className={stateBtn.spinnerIsHide} >
                     <span className="spinner-border" role="status"></span>
                 </div>

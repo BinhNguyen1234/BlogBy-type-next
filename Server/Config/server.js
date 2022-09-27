@@ -25,7 +25,7 @@ const MongoStore = require('connect-mongo')
             Database.connect('binhnguyen','170116Abc','Blog');
 
 
-            app.use(bodyParser.json())
+            app.use(bodyParser.json({limit: "10mb"}))
             app.use(bodyParser.urlencoded({ extended: true }));
             app.use("/",
                 session(

@@ -3,12 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 interface SubmitBtnStateStype {
     status: string,
     spinnerIsHide: string,
-    message: string
+    message: string,
+    color: string,
+    disabled: boolean
 }
 const initialState: SubmitBtnStateStype ={
     status: "Login",
     spinnerIsHide: "hidden",
-    message: ""
+    message: "",
+    color: "btn-primary",
+    disabled: false
 }
 
 const UISubmitBtnSlice = createSlice({
@@ -18,21 +22,27 @@ const UISubmitBtnSlice = createSlice({
         handleUI: (state,action)=>{
             if(action.payload.type=="SEND"){
                 return {
-                    ...state,
+                    color: "btn-warning",
+                    message: "",
                     spinnerIsHide: "",
-                    status: "Loading.."
+                    status: "Loading..",
+                    disabled: true
                 }
             }else if (action.payload.type=="FAILED"){
                 return {
+                    color: "btn-danger",
                     message: action.payload.message,
                     spinnerIsHide: "hidden",
-                    status: "Login" 
+                    status: "Try Again",
+                    disabled: false
                 }
             }else if (action.payload.type=="SUCCESS"){
                 return {
-                    ...state,
+                    color: "btn-primary",
+                    message: "",
                     status: "Login",
                     spinnerIsHide: "hidden",
+                    disabled: false
                 }                
             }
 

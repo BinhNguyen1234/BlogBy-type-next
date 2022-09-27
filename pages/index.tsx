@@ -17,13 +17,16 @@ export function getServerSideProps ({req}:ContextType){
     isAuth: false
   }
   try{
+    console.log(req.user)
     data  = {
       infoUser: req.user.username,
       isAuth: true
     }
   }
-  catch {
-   console.log("Not in log-in /pages/index.txs line 26 ")
+  catch(e) {
+    if(e){
+    console.log(e)
+   console.log("Not in log-in /pages/index.txs line 26 ")}
   }
   return {
     props: {

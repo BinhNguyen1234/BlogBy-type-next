@@ -2,8 +2,10 @@ const user = require("../../../Model/user")
 const post = require("../../../Model/post")
 const isTitleDuplicate = require("../../../Middeware/tool/isTitleDuplicate")
 async function postBlog(req,res){
-    
+    // const test =  await user.findOne({"username":req.user.username}).populate({path: "_post", match : {"title":"213213214"}})
+    // console.log(test) // Querry post base on user
     let writer = new Promise((resolve, reject)=>{ 
+        
         try{
             user.findOne({
                 "username": req.user.username
@@ -36,14 +38,22 @@ async function postBlog(req,res){
             if (isDuplicate){
                 res.status(402).send("Title is exist or duplicate")
             }else{
+                writer._
                 newPost = new post({
                     _writter: writer._id,
                     title : req.body.title,
                     content: req.body.content,
                     date: new Date()
                  })
-                 newPost.save().then((result)=>{
-                    res.status(202).send("New Post was saved in Database")
+                 newPost.save().then(()=>{
+                    return writer.updateOne({$push: {_post: newPost._id}})
+                 })
+                 .then(()=>{
+                    res.status(202).send("New Post was pushed into user")
+                 })
+                 .catch((e)=>{
+                    res.status(402).send("Cannnot push post into user")
+                    throw e
                  })
                 
             }

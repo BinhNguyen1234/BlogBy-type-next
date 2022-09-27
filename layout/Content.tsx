@@ -6,7 +6,7 @@ interface Props {
 }
 export default function Content({children}: Props):ReactElement{
     return (<>
-        <div id={Style.Content}>
+        <div  id={Style.Content}>
             {children}
         </div>
     </>)

@@ -3,7 +3,6 @@ import Footer from "./Footer"
 import Content from "./Content"
 import LoginContainer from "../components/LoginContainer"
 import LoginModal from "../components/LoginModal"
-import axios from "axios"
 import React, { useRef, useCallback} from "react"
 interface Props{
     children : Array<JSX.Element>
