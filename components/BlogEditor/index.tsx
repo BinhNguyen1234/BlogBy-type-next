@@ -17,7 +17,7 @@ export default function BlogEditor ():ReactElement{
     const sendNewPost = useCallback( ()=>{
             dispatch(handleSendPostBtn({type: "WAITTING"}))
             const editor = contentEditorRef.current?.getEditor()
-
+            editor?.enable(false)
             axios({
                 method: 'post',
                 url:"writeblog/newpost",

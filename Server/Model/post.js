@@ -6,4 +6,4 @@ const postSchema = mongoose.Schema({
     'content': {type: Object, require: true},
     'date': {type: Date}
 })
-module.exports = mongoose.model('Post',postSchema,'Post')
+module.exports = mongoose.models.Post || mongoose.model('Post',postSchema,'Post')
