@@ -1,8 +1,5 @@
 const Auth = require("express").Router()
-const loginHandler = require("../../../Middeware/loginHandler")
+const loginHandler = require("../../../Controller/login/loginHandler")
 
-Auth.post("/",loginHandler(),(req,res)=>{
-    res.status(201).send("Login Success")
-    
-})
+Auth.post("/",loginHandler())
 module.exports = Auth

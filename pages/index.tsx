@@ -17,7 +17,6 @@ export function getServerSideProps ({req}:ContextType){
     isAuth: false
   }
   try{
-    console.log(req.user)
     data  = {
       infoUser: req.user.username,
       isAuth: true
@@ -25,8 +24,8 @@ export function getServerSideProps ({req}:ContextType){
   }
   catch(e) {
     if(e){
-    console.log(e)
-   console.log("Not in log-in /pages/index.txs line 26 ")}
+      console.log("Not in log-in /pages/index.txs line 26 ")}
+      
   }
   return {
     props: {

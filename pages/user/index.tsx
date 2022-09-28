@@ -11,7 +11,7 @@ import MiddleContentLayout from "../../layout/MiddleContentLayout"
 
 
 
-function User ():ReactElement{
+function User ():ReactElement<any>{
     const isAuth = useSelector((state:RootStateType)=>{return state.loginSliceReducers.isAuth})
     const router = useRouter()
     useEffect(()=>{
@@ -19,11 +19,18 @@ function User ():ReactElement{
             router.push("/")
         }
     },[])
-    return (<>
-        <MiddleContentLayout>
-            <UserMenu></UserMenu>
-        </MiddleContentLayout>
-    </>) 
+    if(isAuth ===true){
+        return (<>
+            <MiddleContentLayout>
+                <UserMenu></UserMenu>
+            </MiddleContentLayout>
+        </>) 
+    }else{
+        return (<>
+        <div>please login</div>
+        </>)
+    }
+    
 }
 
 

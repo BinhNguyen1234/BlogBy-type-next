@@ -1,12 +1,12 @@
 const passport = require("passport")
 const LocalStrategy = require("passport-local")
-const User = require("../Model/user")
+const User = require("../../Model/user")
 
 function loginHandler(){
     passport.serializeUser(({username, password}, setToSessionCb)=>{
         return setToSessionCb(null,{username, password});
     })
-   return function(req,res,next){ 
+   return function(req,res){ 
         passport.use(new LocalStrategy((username, password, cb)=>{
             console.log(`${username} try to login`)
             const querryUser = new Promise((resolve, reject)=>{
@@ -32,6 +32,7 @@ function loginHandler(){
             })
             .catch((err=>{
                 if(err){
+                    console.log(err)
                     console.log("error when querry user, user not exist")
                     return cb(null,false)
                 }
@@ -45,8 +46,10 @@ function loginHandler(){
             if (!user) { 
                 return res.status(401).send("Username or password not exist"); 
             }else{
-            req.login(user, next)}
-        })(req,res,next)
+            req.login(user,()=>{
+                return res.status(201).send("Verified success")
+            })}
+        })(req,res)
         
 }
 }
