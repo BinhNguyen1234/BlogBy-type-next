@@ -12,8 +12,9 @@ const blog = require("../../Server/Model/post")
 
 export async function getServerSideProps(context:any){
     const title = context.params.slug
+    console.time("querry Post with title")
     const data = await blog.findOne({
-        "title":title
+        "title":new RegExp(title,"i")
     })
     .then((blog:any)=>{
         console.log(blog)
@@ -26,6 +27,7 @@ export async function getServerSideProps(context:any){
         console.log(e)
         return {error: "404"}
     })
+    console.timeEnd("querry Post with title")
     return {props:{
         data
     }}

@@ -1,5 +1,5 @@
 
-
+import Link from "next/link"
 import { useSelector, useDispatch } from 'react-redux'
 import { ReactElement, useEffect} from "react"
 import React from 'react'
@@ -38,7 +38,7 @@ interface Propstype {
   data: any
 }
 
-function Home({data}:Propstype):ReactElement {
+function Home({data}:Propstype){
   const dispatch = useDispatch()
   const state = useSelector((state)=>state)
   useEffect(()=>{
@@ -47,8 +47,9 @@ function Home({data}:Propstype):ReactElement {
   },[])
      return (
         <>
-          <div>Home</div>
-      
+        <div>
+          <Link  href="/post/binh123">Hello</Link>
+        </div>
         </>
   )
 }

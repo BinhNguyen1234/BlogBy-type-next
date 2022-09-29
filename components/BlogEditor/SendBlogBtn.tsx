@@ -4,9 +4,10 @@ import Message from "./Message"
 import { useSelector } from "react-redux"
 import {RootStateType} from "../../feature"
 interface Props {
-    onClick: MouseEventHandler
+    onClick: MouseEventHandler,
+
 }
-export default function SendBlogBtn({onClick}:Props):ReactElement{
+export default function SendBlogBtn({onClick }:Props):ReactElement{
     
     const stateBtn = useSelector((state:RootStateType)=>{return state.UISendPostBtn})
     return (<>
