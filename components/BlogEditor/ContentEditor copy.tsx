@@ -41,9 +41,8 @@ const modules = {
     container : Module.toolbarOptions,
     handlers: {
     "image" : async function (){
-      const edit:any = this;
-      const editor = edit.quill
-      const range = editor.getSelection()
+      const editor = this
+      console.log("editopr", editor)
       let input = document.createElement("input")
       input.setAttribute('type', 'file');  
       input.setAttribute('accept', 'image/*');
@@ -64,7 +63,6 @@ const modules = {
               data: formData
           }).then((res)=>{
               console.log(res.data)
-              editor.insertEmbed(range,'image',`/external/${res.data}`)
           }).catch((e)=>{
               console.log(e)
           })

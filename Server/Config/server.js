@@ -7,9 +7,8 @@ const Database = require("./Database")
 const session = require("express-session");
 const passport = require("passport")
 const Auth = require("../Middeware/Auth")
-const multer = require("multer")
 const MongoStore = require('connect-mongo')
-const instanceMulter = multer({dest:"../image"})
+
  class  App  {
     
     
@@ -25,11 +24,11 @@ const instanceMulter = multer({dest:"../image"})
             })
 
             Database.connect('binhnguyen','170116Abc','Blog');
-            app.use()
-            app.use("/image",express.static("image"))
+         
+            app.use("/external",express.static("./server/image"))
             app.use(bodyParser.json({limit: "50mb"}))
             app.use(bodyParser.urlencoded({ extended: true }));
-            app.use("/",
+            app.use(
                 session(
                     {
                         secret : "secret",
