@@ -17,7 +17,7 @@ export default function BlogEditor ():ReactElement{
     const sendNewPost = useCallback( ()=>{
             dispatch(handleSendPostBtn({type: "WAITTING"}))
             const editor = contentEditorRef.current?.getEditor()
-            editor?.enable(false)
+            
             axios({
                 method: 'post',
                 url:"writeblog/newpost",
@@ -29,6 +29,7 @@ export default function BlogEditor ():ReactElement{
             })
             .then(()=>{
                 dispatch(handleSendPostBtn({type: "SUCCESS"}))
+                editor?.enable(true)
             })
             .catch((err)=>{
                 dispatch(handleSendPostBtn({type: "FAILED", message: `${err.response.status}: ${err.response.data}`}))
