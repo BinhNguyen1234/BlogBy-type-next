@@ -1,12 +1,6 @@
 const passport = require('passport');
 const user = require("../Model/user")
 
-function checkReq(req,res,next){
-    
-   
-   next()
-   
-}
 function  Auth(){
    
    passport.deserializeUser((userInSession,done)=>{
@@ -26,8 +20,21 @@ function  Auth(){
    //      done(true, false)
    //  }
    })
-   return function(req, res, next){ 
-        passport.initialize()(req, res , next)
+   return function(req, res, next){
+      console.log(req.user)
+        try{
+         if(!req.user){
+            res.status(401).send("please login again")
+         }
+         else{
+            next()
+         }
+        }catch(e){
+         res.status(501).send("Server error when auth")
+         console.log(e)
+         
+        }
+        
     } 
 }
 

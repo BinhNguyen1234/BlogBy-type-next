@@ -2,7 +2,7 @@ import { ReactElement, useRef, useCallback } from "react"
 import ContentEditor from "./ContentEditor"
 import TitleEditor from "./TitleEditor"
 import SendBlogBtn from "./SendBlogBtn"
-
+import LoadingProcess from "./LoadingProcess"
 import Style from "../../styles/components/BlogEditor/BlogEditor.module.sass"
 import axios from "axios"
 import ReactQuill from "react-quill"
@@ -38,7 +38,9 @@ export default function BlogEditor ():ReactElement{
     },[])
     
     return (<>
+       
         <form id={Style.Editor}>
+            <LoadingProcess></LoadingProcess>
             <TitleEditor ref={titleEditorRef} form={Style.Editor.toString()}></TitleEditor>
             <ContentEditor  ref={contentEditorRef}></ContentEditor>
             <SendBlogBtn onClick={()=>{

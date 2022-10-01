@@ -1,4 +1,5 @@
 const multer = require("multer")
+const isAuth = require("../../../../Middeware/Auth")
 const storageEngine = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, 'server/image/')
@@ -12,8 +13,8 @@ const upload = multer({storage: storageEngine})
 
 const fs = require('fs')
 const image = require("express").Router()
-image.post("/",upload.single("upload-name"),(req,res)=>{
-    console.log(req.file)
+image.post("/",isAuth(),upload.single("upload-name"),(req,res)=>{
+    console.log(`${req.file.filename} was be upload to ${req.file.path}` )
     res.status(299).send(req.file.filename)
 })
 

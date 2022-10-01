@@ -43,7 +43,7 @@ const MongoStore = require('connect-mongo')
                 ),
                 passport.session()
             )
-            app.use(Auth())
+            app.use(passport.initialize())
            
 
 
