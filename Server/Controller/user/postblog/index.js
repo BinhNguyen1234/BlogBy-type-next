@@ -43,7 +43,8 @@ async function postBlog(req,res){
                     _writter: writer._id,
                     title : req.body.title,
                     content: req.body.content,
-                    date: new Date()
+                    date: new Date(),
+                    url: req.body.title + "url"
                  })
                  newPost.save().then(()=>{
                     return writer.updateOne({$push: {_post: newPost._id}})

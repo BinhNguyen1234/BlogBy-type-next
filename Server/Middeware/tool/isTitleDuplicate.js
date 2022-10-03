@@ -5,10 +5,12 @@ const post = require("../../Model/post")
 async function isTitleDuplicate(newPostTitle){
     console.log("checking title... /Server/Middleware/tool/isTitleDuplicate")
     let isDuplicate = await post.findOne({
-        title: {$regex: new RegExp(newPostTitle,"i")}
+        title: {$regex: new RegExp(`${newPostTitle}`,"gi")}
+        // title: newPostTitle
     })
     .then((result)=>{
         if(result){
+            console.log(result)
             console.log("Title is duplicate /Server/Middleware/tool/isTitleDuplicate")
             return true
         }else{

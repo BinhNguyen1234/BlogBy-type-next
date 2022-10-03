@@ -17,7 +17,6 @@ export async function getServerSideProps(context:any){
         "title":new RegExp(title,"i")
     })
     .then((blog:any)=>{
-        console.log(blog)
         return {
             title: blog.title,
             content: blog.content
