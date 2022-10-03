@@ -35,7 +35,7 @@ async function postBlog(req,res){
     try {
         Promise.all([writer, isDuplicate])
         .then(([writer,isDuplicate])=>{
-            if (isDuplicate){
+            if (false){
                 res.status(402).send("Title is exist or duplicate")
             }else{
                 writer._
@@ -44,7 +44,11 @@ async function postBlog(req,res){
                     title : req.body.title,
                     content: req.body.content,
                     date: new Date(),
-                    url: req.body.title + "url"
+                    url: req.body.title.toLowerCase().normalize('NFD')// lowercase and  parse Vietnamese code to latin code + sign of Vietnamese code
+                                                    .replace(/\u0111/gm,"d") // replace "đ" by "d"
+                                                    .replace(/[\u0300-\u036f]|[^\w\s]|[\W]+$/gm,"") //remove sign of Vietnamese code, non-word, space end of line
+                                                    .replace(/\s+\s|\s/gm,"-") // replace white spaces by "-"
+
                  })
                  newPost.save().then(()=>{
                     return writer.updateOne({$push: {_post: newPost._id}})

@@ -5,6 +5,6 @@ const postSchema = mongoose.Schema({
     title: {type: String, require: true},
     content: {type: Object, require: true},
     date: {type: Date},
-    url: {type: String, require: true}
+    url: {type: String, require: true, unique: true}
 })
 module.exports = mongoose.models.Post || mongoose.model('Post',postSchema,'Post')

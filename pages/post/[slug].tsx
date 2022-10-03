@@ -11,10 +11,10 @@ const blog = require("../../Server/Model/post")
 // import { type } from "os"
 
 export async function getServerSideProps(context:any){
-    const title = context.params.slug
+    const url = context.params.slug
     console.time("querry Post with title")
     const data = await blog.findOne({
-        "title":new RegExp(title,"i")
+        "url":url
     })
     .then((blog:any)=>{
         return {
