@@ -5,7 +5,16 @@ import DecodeDelta from "../../components/Post/DecodeDelta"
 import dynamic from "next/dynamic"
 const ReactQuill = dynamic( async ()=>{
     return import('react-quill')
-},{ssr:false}
+},{
+    ssr:false,
+    loading : ()=>{
+        return (
+          <div className="spinner-border text-secondary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        )
+      }
+}
 )
 const blog = require("../../Server/Model/post")
 // import { type } from "os"
@@ -14,7 +23,7 @@ export async function getServerSideProps(context:any){
     const url = context.params.slug
     console.time("querry Post with title")
     const data = await blog.findOne({
-        "url":url
+        "url":url.toLowerCase()
     })
     .then((blog:any)=>{
         return {

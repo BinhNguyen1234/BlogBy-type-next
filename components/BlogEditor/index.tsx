@@ -28,7 +28,7 @@ export default function BlogEditor ():ReactElement{
             })
             .then(()=>{
                 dispatch(handleSendPostBtn({type: "SUCCESS"}))
-                editor?.enable(true)
+                editor?.enable(false)
             })
             .catch((err)=>{
                 dispatch(handleSendPostBtn({type: "FAILED", message: `${err.response.status}: ${err.response.data}`}))
