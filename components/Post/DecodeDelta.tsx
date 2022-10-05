@@ -10,7 +10,16 @@ const ReactQuill = dynamic( async()=>{
             </>
         )
     }
-}, {ssr: false})
+}, {ssr: false,
+    loading : ()=>{
+        return (
+          <div className="spinner-border" style={{"width": "3rem", "height": "3rem", alignSelf:"center"}} role="status">
+  
+          </div>
+        )
+      }
+    }
+)
 let toolbar = false
 export default function DecodeDelta ({children}:{children:any}) :ReactElement{
     return (<>

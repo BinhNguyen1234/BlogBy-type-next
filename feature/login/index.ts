@@ -16,19 +16,19 @@ const loginSlice = createSlice({
     initialState,
     reducers: {
         LOGIN : (state, action) =>{
-            return {
+            return state = {
                 isAuth : true,
                 infoUser: action.payload
             }
         },
         LOGINSSR: (state,action)=>{
-            return {
+            return state = {
                 isAuth: action.payload.isAuth,
                 infoUser: action.payload.infoUser
             }
         },
         LOGOUT : (state, action)=>{
-            return {
+            return state = {
                 isAuth : false,
                 infoUser: "Login"
             }
@@ -36,7 +36,7 @@ const loginSlice = createSlice({
     },
     extraReducers: (builder)=>{
         builder.addCase(HYDRATE,(state,action)=>{
-            return {...state, ...action}
+            return  {...state, ...action}
         })
     }
     

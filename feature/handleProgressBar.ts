@@ -16,20 +16,20 @@ const handleProgressBar = createSlice({
     reducers :{
         handleUiProgress: (state, action)=>{
             if(action.payload.type === "50%"){
-                return {
+                return state =  {
                     valueNow: 50,
                     display: "flex"
                     
                 }
             } else if (action.payload.type === "100%"){
-                return {
+                return state =  {
                     valueNow: 100,
                     display: "none"
                     
                 }
             }
             else if (action.payload.type === "RESET"){
-                return {
+                return state =  {
                     valueNow: 0,
                     display: "none"
                     

@@ -2,20 +2,8 @@ import {ReactElement} from "react"
 import { useRouter } from "next/router"
 import LargeContentLayout from "../../layout/LargeContentLayout"
 import DecodeDelta from "../../components/Post/DecodeDelta"
-import dynamic from "next/dynamic"
-const ReactQuill = dynamic( async ()=>{
-    return import('react-quill')
-},{
-    ssr:false,
-    loading : ()=>{
-        return (
-          <div className="spinner-border text-secondary" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        )
-      }
-}
-)
+import Head from "next/head"
+
 const blog = require("../../Server/Model/post")
 // import { type } from "os"
 
@@ -37,17 +25,22 @@ export async function getServerSideProps(context:any){
     })
     console.timeEnd("querry Post with title")
     return {props:{
-        data
+        title: data.title,
+        content: data.content
     }}
     
 }
 type Props = Awaited<ReturnType<typeof getServerSideProps>>
-export default function Post({data}: any):ReactElement {
+export default function Post({title, content}: any):ReactElement {
     const router = useRouter()
     
     return (<>
+    <Head>
+        <title>{title}</title>
+    </Head>
     <LargeContentLayout>
-        <DecodeDelta>{data.content}</DecodeDelta>
+        <div>{title}</div>
+        <DecodeDelta>{content}</DecodeDelta>
 
     </LargeContentLayout>
     

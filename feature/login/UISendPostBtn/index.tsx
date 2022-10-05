@@ -20,7 +20,7 @@ const UISendPostBtnSlice = createSlice({
     reducers:{
         handleSendPostBtn: (state,action)=>{
             if(action.payload.type === "WAITTING"){
-                return {
+                return state = {
                     message: "",
                     content: "Loading",
                     spinnerIsHide: "initial",
@@ -28,7 +28,7 @@ const UISendPostBtnSlice = createSlice({
                     color: "btn-warning"
                 }
             }else if (action.payload.type === "SUCCESS"){
-                return {
+                return state = {
                     message: "",
                     content: "Sucess",
                     spinnerIsHide: "none",
@@ -37,7 +37,7 @@ const UISendPostBtnSlice = createSlice({
                 }
             }
             else if (action.payload.type === "FAILED"){
-                return {
+                return state = {
                     message: action.payload.message,
                     content: "TRY AGAIN",
                     spinnerIsHide: "none",
@@ -46,7 +46,7 @@ const UISendPostBtnSlice = createSlice({
                 }
             }
             else if (action.payload.type === "INITIAL"){
-                return {
+                return state = {
                     content: "Send",
                     spinnerIsHide: "none",
                     isDisable: false,
