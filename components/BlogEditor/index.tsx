@@ -39,7 +39,6 @@ export default function BlogEditor ():ReactElement{
     return (<>
        
         <form id={Style.Editor}>
-            
             <TitleEditor ref={titleEditorRef} form={Style.Editor.toString()}></TitleEditor>
             <ContentEditor  ref={contentEditorRef}></ContentEditor>
             <SendBlogBtn onClick={()=>{

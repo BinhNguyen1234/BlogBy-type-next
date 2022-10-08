@@ -4,14 +4,19 @@ export async function getStaticProps(){
         data: "nguyen vu binh"
     }}
 }
+import PreviewBlogContainer from "../../components/PreviewBlog/PreviewBlogContainer"
+import PreviewBlogChild from "../../components/PreviewBlog/PreviewBlogChild"
 interface AboutMeProps {
     data: string
 }
 function AboutMe({data}:AboutMeProps):ReactElement{
     return (
         <>
-            <div>{data}</div>
-            <div>about </div>
+        <PreviewBlogContainer>
+            <PreviewBlogChild></PreviewBlogChild>
+            <PreviewBlogChild></PreviewBlogChild>
+            <PreviewBlogChild></PreviewBlogChild>
+        </PreviewBlogContainer>
         </>
     )
 }
