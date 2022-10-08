@@ -1,3 +1,6 @@
+@import "bootstrap/scss/functions"
+@import "bootstrap/scss/_variables.scss"
+@import "../../ultilities/devices"
 #BackPostBtn
     cursor: pointer
     position: fixed
@@ -9,12 +12,22 @@
     background-color: white
     display: flex
     flex-direction: row
-    padding-left: 1rem
+    padding: 0 1rem
     white-space: nowrap
     line-height: 2.5rem
     transition: top 1s linear 1s
+    &:hover
+        color: $primary
+
     span 
         display: block
         font-size: 2.5rem
         margin-right: 1rem
-        
+
+
+@media only screen and (max-width: $small )
+    #BackPostBtn
+        line-height: 2rem
+        span
+            font-size: 2rem
+            margin-right: 0

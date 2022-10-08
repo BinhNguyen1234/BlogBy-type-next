@@ -15,12 +15,11 @@ interface Props {
 const MenuToggle:React.FC<Props> = ({showModal, children})=>{
     const router = useRouter()
     const loginSlice = useSelector((state : RootStateType) =>{return state.loginSliceReducers})
-
     return (
         <>
         <ul  id={style.MenuToggle}>
-            
-            <li className={router.pathname == "/blog" ? style.active : ""}>
+        
+            <li className={router.pathname.search("blog")!= -1 ? style.active : ""}>
                 <Link href="/blog">Blog</Link>
             </li>
             <li className={router.pathname == "/aboutme" ? style.active : ""}>
