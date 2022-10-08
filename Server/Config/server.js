@@ -8,7 +8,7 @@ const session = require("express-session");
 const passport = require("passport")
 const Auth = require("../Middeware/Auth")
 const MongoStore = require('connect-mongo')
-
+const {networkInterfaces} = require('os')
  class  App  {
     
     
@@ -20,7 +20,10 @@ const MongoStore = require('connect-mongo')
 
             const app = express()
             app.listen(port, ()=>{
+                
                 console.log("server running sucess at port "+ port);
+
+                console.log(`Address for access from external device ${networkInterfaces().en0[1].cidr}`)
             })
 
             Database.connect('binhnguyen','170116Abc','Blog');

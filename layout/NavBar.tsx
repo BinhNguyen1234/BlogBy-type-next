@@ -16,18 +16,25 @@ const NavBar: React.FC<Props> = ({showModal}) =>{
     
     const dispatch = useDispatch()
     const isReadMode = useSelector((state:RootStateType)=>{return state.readMode.read})
+    
+    const thisRef = useRef<HTMLElement>(null)
+    const refToggleMenu = useRef<HTMLDivElement>(null)
+    const refToggleBtn = useRef<HTMLDivElement>(null)   
+    const handleUiToggleBtn =  useCallback((event: React.MouseEvent)=>{
+        refToggleBtn.current?.classList.toggle("handleMenuButton")
+        refToggleMenu.current?.classList.toggle("hideMenu")
+    },[])
     useEffect(()=>{
-        console.log(":aaaaaaaaaaaaaaaaa")
         let prevScroll = 0
         window.addEventListener('scroll', handleScroll,{passive : true})
         function handleScroll(){
             var currentScrollPos = window.scrollY;
-            if (currentScrollPos - prevScroll > 6 ) {
+            if (currentScrollPos - prevScroll > 10 ) {
                 
                 dispatch(handleReadMode(null))
                
                 
-            } else if (currentScrollPos - prevScroll < -3 || currentScrollPos == 0) {
+            } else if (currentScrollPos - prevScroll < -4 || currentScrollPos == 0) {
                 
                 dispatch(handleReadModeFalse(null))
                 
@@ -38,14 +45,6 @@ const NavBar: React.FC<Props> = ({showModal}) =>{
         }
        
         
-    },[])
-
-    const thisRef = useRef<HTMLElement>(null)
-    const refToggleMenu = useRef<HTMLDivElement>(null)
-    const refToggleBtn = useRef<HTMLDivElement>(null)   
-    const handleUiToggleBtn =  useCallback((event: React.MouseEvent)=>{
-        refToggleBtn.current?.classList.toggle("handleMenuButton")
-        refToggleMenu.current?.classList.toggle("hideMenu")
     },[])
    
   

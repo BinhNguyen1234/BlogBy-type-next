@@ -2,6 +2,8 @@ import {ReactElement} from "react"
 import { useRouter } from "next/router"
 import LargeContentLayout from "../../layout/LargeContentLayout"
 import DecodeDelta from "../../components/Post/DecodeDelta"
+import  BackPostBtn  from "../../components/Post/BackPostBtn"
+
 import Head from "next/head"
 
 const blog = require("../../Server/Model/post")
@@ -39,6 +41,7 @@ export default function Post({title, content}: any):ReactElement {
         <title>{title}</title>
     </Head>
     <LargeContentLayout>
+        <BackPostBtn>{title}</BackPostBtn>
         <h2>{title}</h2>
         <DecodeDelta>{content}</DecodeDelta>
 
