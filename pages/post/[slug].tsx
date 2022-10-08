@@ -39,7 +39,7 @@ export default function Post({title, content}: any):ReactElement {
         <title>{title}</title>
     </Head>
     <LargeContentLayout>
-        <div>{title}</div>
+        <h2>{title}</h2>
         <DecodeDelta>{content}</DecodeDelta>
 
     </LargeContentLayout>

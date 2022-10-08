@@ -1,11 +1,15 @@
 import style from "../styles/Layouts/Footer.module.sass"
-
+import { useRef, useEffect, useState } from "react"
 
 const Footer : React.FC = ()=>{
+    const thisRef = useRef<HTMLDivElement>(null)
+    
+
+    
     return (
         <>
-            <div id={style.Footer}>Footer</div>
-        </>
+            <div ref={thisRef} id={style.Footer}>{}</div>
+        </> 
     )
 }
 
