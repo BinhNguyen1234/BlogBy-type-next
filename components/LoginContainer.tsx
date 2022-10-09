@@ -1,6 +1,6 @@
 import {sha256} from "js-sha256"
 import axios from 'axios';
-import style from "../styles/components/login/LoginForm.module.sass"
+import style from "../styles/components/Login/LoginForm.module.sass"
 import Image from "next/image"
 import thienImg from "../public/image/thien.png"
 import shadow from "../public/image/shadow.png"
