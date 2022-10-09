@@ -28,7 +28,7 @@ const {networkInterfaces} = require('os')
 
             Database.connect('binhnguyen','170116Abc','Blog');
          
-            app.use("/external",express.static("./server/image"))
+            app.use("/external",express.static("./Server/image"))
             app.use(bodyParser.json({limit: "50mb"}))
             app.use(bodyParser.urlencoded({ extended: true }));
             app.use(
