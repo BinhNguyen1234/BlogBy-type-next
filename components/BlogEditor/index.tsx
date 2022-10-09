@@ -23,12 +23,14 @@ export default function BlogEditor ():ReactElement{
                 
                 data: {
                     title: titleEditorRef.current?.value,
-                    content: editor?.getContents().ops
+                    content: editor?.getContents().ops,
+                    contentString: editor?.getText()
                 }
             })
             .then(()=>{
                 dispatch(handleSendPostBtn({type: "SUCCESS"}))
                 editor?.enable(false)
+                editor?.blur()
             })
             .catch((err)=>{
                 dispatch(handleSendPostBtn({type: "FAILED", message: `${err.response.status}: ${err.response.data}`}))

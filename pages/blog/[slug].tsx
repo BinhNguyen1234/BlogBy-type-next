@@ -14,7 +14,7 @@ export async function getServerSideProps(context:any){
     console.time("querry Post with title")
     const data = await blog.findOne({
         "url":url.toLowerCase()
-    })
+    },{"title":1, "content": 1})
     .then((blog:any)=>{
         return {
             title: blog.title,

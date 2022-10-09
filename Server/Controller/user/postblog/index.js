@@ -31,6 +31,7 @@ async function postBlog(req,res){
                     title : req.body.title,
                     content: req.body.content,
                     date: new Date(),
+                    contentString: req.body.contentString,
                     url: req.body.title.toLowerCase().normalize('NFD')// lowercase and  parse Vietnamese code to latin code + sign of Vietnamese code
                                                     .replace(/\u0111/gm,"d") // replace "đ" by "d"
                                                     .replace(/[\u0300-\u036f]|[^\w\s]|[\W]+$/gm,"") //remove sign of Vietnamese code, non-word, space end of string
