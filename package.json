@@ -6,7 +6,8 @@
     "dev": "next",
     "build": "next build",
     "start": "NODE_ENV=production node ./Server/index.js",
-    "lint": "next lint"
+    "lint": "next lint",
+    "start server": "NODE_ENV=production forever node ./Server/index.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
