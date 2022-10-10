@@ -9,6 +9,11 @@
 /coverage
 #ignore
 /server/image
+blog
+blog.pub
+git
+git.pub
+
 # next.js
 /.next/
 /out/

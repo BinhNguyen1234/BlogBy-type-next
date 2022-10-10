@@ -1,4 +1,5 @@
 import { ReactElement } from "react"
+import MainContentLayout from "../../layout/MainContentLayout"
 export async function getStaticProps(){
     return {props :{
         data: "nguyen vu binh"
@@ -12,11 +13,13 @@ interface AboutMeProps {
 function AboutMe({data}:AboutMeProps):ReactElement{
     return (
         <>
-        <PreviewBlogContainer>
-            <PreviewBlogChild></PreviewBlogChild>
-            <PreviewBlogChild></PreviewBlogChild>
-            <PreviewBlogChild></PreviewBlogChild>
-        </PreviewBlogContainer>
+        <MainContentLayout>
+            <PreviewBlogContainer>
+                <PreviewBlogChild></PreviewBlogChild>
+                <PreviewBlogChild></PreviewBlogChild>
+                <PreviewBlogChild></PreviewBlogChild>
+            </PreviewBlogContainer>
+        </MainContentLayout>
         </>
     )
 }

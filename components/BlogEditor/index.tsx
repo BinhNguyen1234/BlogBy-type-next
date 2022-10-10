@@ -2,6 +2,7 @@ import { ReactElement, useRef, useCallback } from "react"
 import ContentEditor from "./ContentEditor"
 import TitleEditor from "./TitleEditor"
 import SendBlogBtn from "./SendBlogBtn"
+import PostThumbnailSelect from "./PostThumbnailSelect"
 import Style from "../../styles/components/BlogEditor/BlogEditor.module.sass"
 import axios from "axios"
 import ReactQuill from "react-quill"
@@ -43,6 +44,7 @@ export default function BlogEditor ():ReactElement{
         <form id={Style.Editor}>
             <TitleEditor ref={titleEditorRef} form={Style.Editor.toString()}></TitleEditor>
             <ContentEditor  ref={contentEditorRef}></ContentEditor>
+            <PostThumbnailSelect></PostThumbnailSelect>
             <SendBlogBtn onClick={()=>{
                 if(statusBtn!="TRY AGAIN"){sendNewPost()}
                 else{
