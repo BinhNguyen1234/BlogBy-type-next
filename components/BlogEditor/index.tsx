@@ -6,7 +6,6 @@ import PostThumbnailSelect from "./PostThumbnailSelect"
 import Style from "../../styles/components/BlogEditor/BlogEditor.module.sass"
 import axios from "axios"
 import ReactQuill from "react-quill"
-import PreviewBlogContainer from "../PreviewBlog/PreviewBlogContainer"
 import { useDispatch, useSelector } from "react-redux"
 import {handleSendPostBtn} from "../../feature/login/UISendPostBtn"
 import { RootStateType } from "../../feature"
@@ -26,7 +25,12 @@ const initialState ={
 }
 export const PreviewContext = createContext(initialState)
 export default function BlogEditor ():ReactElement{
-    
+    const handleUiSendBtn = useCallback(()=>{
+        if(statusBtn!="TRY AGAIN"){sendNewPost()}
+        else{
+            dispatch(handleSendPostBtn({type: "INITIAL"})) 
+        }
+        },[])
     const titleEditorRef = useRef<HTMLTextAreaElement>(null)
     const contentEditorRef = useRef<ReactQuill>(null)
     const dispatch = useDispatch()
@@ -55,31 +59,22 @@ export default function BlogEditor ():ReactElement{
             })
         
     },[])
-   const [title, setTitle] = useState(null)
-    
+    const [previewTitle, setPreviewTitle] = useState(null)
+    const [previewContent, setPreviewContent] = useState(null)
+    const [previewImgUrl,setPreviewImgUrl] = useState(null)
     return (<>
        
         <form id={Style.Editor}>
-            <TitleEditor onChange={setTitle} ref={titleEditorRef} form={Style.Editor.toString()}></TitleEditor>
-            <ContentEditor  ref={contentEditorRef}></ContentEditor>
-            <PostThumbnailSelect></PostThumbnailSelect>
-            <PreviewBlogContainer>
-                <PreviewContext.Provider value={{previewTitle: title, previewContent: null,previewDate:null, previewUrlImg: null}}>
-                    <PreviewBlogChild   style={{"justifySelf": "flex-start", "margin": "2rem 0 0 0"}}>
-                        {{previewTitle: title}}
-                    </PreviewBlogChild>
-                    
-                </PreviewContext.Provider>
+            <TitleEditor onChange={setPreviewTitle} ref={titleEditorRef} form={Style.Editor.toString()}></TitleEditor>
+            <ContentEditor onChange={setPreviewContent} ref={contentEditorRef}></ContentEditor>
+            <PostThumbnailSelect onChange={setPreviewImgUrl}></PostThumbnailSelect>
+        
                 <PreviewBlogChild   style={{"justifySelf": "flex-start", "margin": "2rem 0 0 0"}}>
-
-                    </PreviewBlogChild>
-            </PreviewBlogContainer>
-            <SendBlogBtn onClick={()=>{
-                if(statusBtn!="TRY AGAIN"){sendNewPost()}
-                else{
-                    dispatch(handleSendPostBtn({type: "INITIAL"})) 
-                }
-                }}></SendBlogBtn>
+                    {{previewTitle, previewContent,previewImgUrl}}
+                </PreviewBlogChild>
+            
+            <SendBlogBtn onClick={handleUiSendBtn}></SendBlogBtn>
+                
         </form>
     </>)
 }

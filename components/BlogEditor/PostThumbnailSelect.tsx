@@ -1,7 +1,7 @@
 import { ReactElement, useCallback, useRef } from "react";
 import Style from "../../styles/components/BlogEditor/PostThumbnailSelect.module.sass"
 import axios from "axios"
-export default function PostThumbnailSelect ():ReactElement {
+export default function PostThumbnailSelect ({onChange}:{onChange:any}):ReactElement {
     const inputRef:any= useRef<HTMLInputElement>(null)
     const formRef:any = useRef<HTMLFormElement|undefined>()
     const handleImageThumbnail = useCallback(()=>{
@@ -14,7 +14,7 @@ export default function PostThumbnailSelect ():ReactElement {
             },
             data: formData
         }).then((res=>{
-            console.log(res)
+            onChange(res.data)
         }))
         .catch((e=>{
             console.log(e)

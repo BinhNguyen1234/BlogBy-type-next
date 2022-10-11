@@ -1,4 +1,4 @@
-import { MouseEventHandler, ReactElement, useRef } from "react"
+import { MouseEventHandler, ReactElement, memo } from "react"
 import Style from "../../styles/components/BlogEditor/SendBlogBtn.module.sass"
 import Message from "./Message"
 import { useSelector } from "react-redux"
@@ -7,7 +7,7 @@ interface Props {
     onClick: MouseEventHandler,
 
 }
-export default function SendBlogBtn({onClick }:Props):ReactElement{
+export default memo(function SendBlogBtn({onClick }:Props):ReactElement{
     
     const stateBtn = useSelector((state:RootStateType)=>{return state.UISendPostBtn})
     return (<>
@@ -18,4 +18,4 @@ export default function SendBlogBtn({onClick }:Props):ReactElement{
         </button>
         <Message>{stateBtn.message}</Message>
     </>)
-}
+})

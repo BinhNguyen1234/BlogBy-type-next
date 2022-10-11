@@ -1,7 +1,6 @@
-import React,{ forwardRef, LegacyRef, ReactElement, useEffect, useRef } from "react";
+import React,{ memo,forwardRef, LegacyRef, ReactElement, useEffect, useRef } from "react";
 import Style from "../../styles/components/BlogEditor/ContentEditor.module.sass"
 import dynamic from "next/dynamic";
-import Module from "./Module";
 import axios from "axios"
 
 const ReactQuill = dynamic(
@@ -9,8 +8,10 @@ const ReactQuill = dynamic(
     const {default: RQ} = await import("react-quill")
     
     
-      return function displayName({forwardedRef, ...props}:{forwardedRef:any,id : any, modules: any, placeholder: any}){
-        return <RQ ref={forwardedRef} {...props}></RQ>
+      return function displayName({forwardedRef,onChange ,...props}:{forwardedRef:any,id : any, onChange: any,modules: any, placeholder: any}){
+        
+        return <RQ onChange={(a,b,c,e)=>{
+          onChange(e.getText())}} ref={forwardedRef} {...props}></RQ>
       }
   },
   {
@@ -26,10 +27,11 @@ const ReactQuill = dynamic(
 );
 
 interface Props {
-  ref: LegacyRef<typeof ReactQuill> 
+  ref: LegacyRef<typeof ReactQuill>,
+  onChange: any
 }
 
-const ContentEditor = forwardRef(function useDisplayName(props, ref):ReactElement{
+const ContentEditor = forwardRef(function useDisplayName({onChange, ref}:Props):ReactElement{
 
   let toolbarOptions = useRef([
     ['bold', 'italic', 'underline'], 
@@ -82,11 +84,11 @@ const ContentEditor = forwardRef(function useDisplayName(props, ref):ReactElemen
   }
   }
   )
- 
+  console.log("render content")
   return (<>
-      <ReactQuill forwardedRef={ref} id={Style.ContentEditor} modules={modules.current} placeholder="Write your blog"></ReactQuill>
+      <ReactQuill onChange={onChange} forwardedRef={ref} id={Style.ContentEditor} modules={modules.current} placeholder="Write your blog"></ReactQuill>
   </>)
 })
-export default ContentEditor
+export default memo(ContentEditor)
 
 

@@ -5,20 +5,27 @@
     width: 35vw
     display: flex
     flex-direction: column
+    position: relative
     .img_container
         width: 100%
         height: 75%
     .title
         font-size: 20px
         word-break: break-all
+        overflow: hidden
+        max-height: 3em
     .content
         font-size: 15px
         white-space: nowrap
         overflow: hidden
         text-overflow: ellipsis
     .date
+        position: absolute
+        bottom: 0
+        left: 0
         font-size: 15px
     img
         width: 100%
-        
+    >div
+        margin: 0 !important
         
