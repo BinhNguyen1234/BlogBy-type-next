@@ -1,16 +1,26 @@
-import { ReactElement } from "react";
+import { CSSProperties, HTMLAttributes, ReactElement, useContext } from "react";
 import Style from "../../styles/components/PreviewBlog/PreviewBlogChild.module.sass"
-
-export default function PreviewBlogChild():ReactElement{
+import {PreviewContext} from "../BlogEditor/index"
+interface Props{
+    children? : {
+        previewImgUrl?: string,
+        previewTitle?: string,
+        previewContent?: string,
+        previewDate?: string
+    } | any,
+    style?: CSSProperties
+  }
+export default function PreviewBlogChild({children, style}:Props):ReactElement{
+    const {previewContent,previewDate,previewTitle, previewUrlImg} = useContext(PreviewContext)
     return (
         <>
-            <div className={Style.PreviewBlogChild}>
+            <div style={style}  className={Style.PreviewBlogChild}>
                 <div className={Style.img_container}>
-                    <img src="https://images.spiderum.com/sp-images/db893640463f11eda52eb39a432dcda2.jpeg"></img>
+                    <img src={children?.previewImgUrl||"fsafasfasffsa"}></img>
                 </div>
-                <div className={Style.title}>nglkasmnfasnf,asnfasnf,fnsfsafasfasfasfasfasfasfsafafasfasfasfasfasfasfasfasfnmsa,fnsa,fnas,fns,fnsa,nf,snfsa,nfsa,nfas,nf,snfas,nfas,nf</div>
-                <div className={Style.content}>contensafasfasfsfasfasfsfsafasfasfsafasfasfasfasfasfasfasfafsafasfasfasfsafasfasfsafasfsafsafassasfasfasfasfasfasfasfasfasfasfast</div>
-                <div className={Style.date}>date</div>
+                <div  className={Style.title}>{previewTitle||"Title"}</div>
+                <div className={Style.content}>{children?.previewContent||previewContent||"content"}</div>
+                <div className={Style.date}>{children?.previewDate||"01/01/1991"}</div>
             </div>
         </>
     )

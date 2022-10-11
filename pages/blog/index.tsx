@@ -1,99 +1,28 @@
-import { clear } from "console";
-import { useRef,ReactElement, useEffect, useCallback } from "react";
-import { clearTimeout } from "timers";
-
-function Post():ReactElement{
-    
-    
-    const thisRef = useRef<HTMLDivElement>(null)
-    return (<>
-        <div ref={thisRef}>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div><div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div><div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-        <div >
-            binhg
-        </div>
-
-        
-        </div>
-        
-    </>)
+import { ReactElement } from "react"
+import MainContentLayout from "../../layout/MainContentLayout"
+export async function getStaticProps(){
+    return {props :{
+        data: "nguyen vu binh"
+    }}
 }
-export default Post
+import PreviewBlogContainer from "../../components/PreviewBlog/PreviewBlogContainer"
+import PreviewBlogChild from "../../components/PreviewBlog/PreviewBlogChild"
+interface AboutMeProps {
+    data: string
+}
+function AboutMe({data}:AboutMeProps):ReactElement{
+    return (
+        <>
+        <MainContentLayout>
+            <PreviewBlogContainer>
+                <PreviewBlogChild></PreviewBlogChild>
+                <PreviewBlogChild></PreviewBlogChild>
+                <PreviewBlogChild></PreviewBlogChild>
+            </PreviewBlogContainer>
+        </MainContentLayout>
+        </>
+    )
+}
+
+
+export default AboutMe
