@@ -24,7 +24,7 @@ export default function PostThumbnailSelect ({onChange}:{onChange:any}):ReactEle
         <>
             <form ref={formRef} id={Style.PostThumbnailSelect}>
                 <label htmlFor="inputThumbail">Chose image for thumbnail</label>
-                <input ref={inputRef} name="upload-name" form={Style.PostThumbnailSelect} onChange={handleImageThumbnail} id="inputThumbail" type="file" accept="image/*" ></input>
+                <input  required ref={inputRef} name="upload-name" form={Style.PostThumbnailSelect} onChange={handleImageThumbnail} id="inputThumbail" type="file" accept="image/*" ></input>
             </form>
         </>
     )

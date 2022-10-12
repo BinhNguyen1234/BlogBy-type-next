@@ -28,10 +28,11 @@ const ReactQuill = dynamic(
 
 interface Props {
   ref: LegacyRef<typeof ReactQuill>,
-  onChange: any
+  onChange: any,
+  setDefaultPreviewUrl: any
 }
 
-const ContentEditor = forwardRef(function useDisplayName({onChange, ref}:Props):ReactElement{
+const ContentEditor = forwardRef(function useDisplayName({onChange, setDefaultPreviewUrl ,ref}:Props):ReactElement{
 
   let toolbarOptions = useRef([
     ['bold', 'italic', 'underline'], 
@@ -73,7 +74,7 @@ const ContentEditor = forwardRef(function useDisplayName({onChange, ref}:Props):
             }).then((res)=>{
                 console.log(res.data)
                 editor.insertEmbed(range.index,'image',`/external/${res.data}`)
-                
+                setDefaultPreviewUrl(`/external/${res.data}`)
             }).catch((e)=>{
                 console.log(e)
             })

@@ -7,7 +7,7 @@ const postSchema = mongoose.Schema({
     date: {type: Date},
     url: {type: String, require: true, unique: true},
     contentString: {type: String, require: true},
-    imgThumbnail: {type: String}
+    imgThumbnail: {type: String, require: true}
 })
 postSchema.index({url:1})
 module.exports = mongoose.models.Post || mongoose.model('Post',postSchema,'Post')
