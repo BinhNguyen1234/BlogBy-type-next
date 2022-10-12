@@ -63,7 +63,7 @@ export default function BlogEditor ():ReactElement{
             <TitleEditor onChange={setPreviewTitle} ref={titleEditorRef} form={Style.Editor.toString()}></TitleEditor>
             <ContentEditor setDefaultPreviewUrl={setPreviewImgUrl} onChange={setPreviewContent} ref={contentEditorRef}></ContentEditor>
             <PostThumbnailSelect onChange={setPreviewImgUrl}></PostThumbnailSelect>
-                <PreviewBlogChild   style={{"justifySelf": "flex-start", "margin": "2rem 0 0 0"}}>
+                <PreviewBlogChild alt="Please choose image to display thumbnail"  style={{"justifySelf": "flex-start", "margin": "2rem 0 0 0"}}>
                     {{previewTitle, previewContent,previewImgUrl}}
                 </PreviewBlogChild>
             <SendBlogBtn onClick={handleUiSendBtn}></SendBlogBtn>
