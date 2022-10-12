@@ -14,7 +14,7 @@ export default function PostThumbnailSelect ({onChange}:{onChange:any}):ReactEle
             },
             data: formData
         }).then((res=>{
-            onChange(res.data)
+            onChange(`/external/${res.data}`)
         }))
         .catch((e=>{
             console.log(e)

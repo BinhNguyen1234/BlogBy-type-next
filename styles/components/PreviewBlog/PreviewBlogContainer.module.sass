@@ -1,13 +1,23 @@
+@import "../../ultilities/devices"
 #PreviewBlogContainer
+    border: 1px solid black
     display: flex
     justify-content: space-between
     flex-wrap: wrap
     align-content: space-around
-    margin: 0
+    margin: 20px 0 0 0
     >div:nth-child(even)
         margin-right: 11%
     >div:nth-child(odd)
         margin-left: 11%
     div
         margin-bottom: 1rem
-    
+
+@media only screen and (max-width: $medium)
+    #PreviewBlogContainer
+        justify-content: center
+        align-items: center
+        >div:nth-child(even)
+            margin-right: 0%
+        >div:nth-child(odd)
+            margin-left: 0%

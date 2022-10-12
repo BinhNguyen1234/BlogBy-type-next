@@ -37,15 +37,15 @@ export default function Post({title, content}: any):ReactElement {
     const router = useRouter()
     
     return (<>
-    <Head>
-        <title>{title}</title>
-    </Head>
-    <LargeContentLayout>
-        <BackPostBtn>{title}</BackPostBtn>
-        <h2>{title}</h2>
-        <DecodeDelta>{content}</DecodeDelta>
-
-    </LargeContentLayout>
-    
+        <Head>
+            <title>{title}</title>
+        </Head>
+        <LargeContentLayout>
+            <BackPostBtn>{title}</BackPostBtn>
+            <h2>{title}</h2>
+            <DecodeDelta>{content}</DecodeDelta>
+        </LargeContentLayout>
     </>)
+
+    
 }

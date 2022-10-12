@@ -19,7 +19,8 @@ const MenuToggle:React.FC<Props> = ({showModal, children})=>{
         <>
         <ul  id={style.MenuToggle}>
         
-            <li className={router.pathname.search("blog")!= -1 ? style.active : ""}>
+            <li className={router.pathname.search(/\Wblog/gmi)!= -1 ? style.active : ""}>
+                
                 <Link href="/blog">Blog</Link>
             </li>
             <li className={router.pathname == "/aboutme" ? style.active : ""}>
