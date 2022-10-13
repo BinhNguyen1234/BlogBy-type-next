@@ -1,4 +1,4 @@
-import { ReactElement, useRef, useCallback, useContext, createContext, useState } from "react"
+import { ReactElement, useRef, useCallback, createContext, useState } from "react"
 import ContentEditor from "./ContentEditor"
 import TitleEditor from "./TitleEditor"
 import SendBlogBtn from "./SendBlogBtn"
@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux"
 import {handleSendPostBtn} from "../../feature/login/UISendPostBtn"
 import { RootStateType } from "../../feature"
 import PreviewBlogChild from "../PreviewBlog/PreviewBlogChild"
-import { AppInitialProps } from "next/app"
+
 
 const initialState ={
     previewTitle: null,
@@ -33,7 +33,7 @@ export default function BlogEditor ():ReactElement{
     const contentEditorRef = useRef<ReactQuill>(null)
     const dispatch = useDispatch()
     const statusBtn = useSelector((state:RootStateType)=>{return state.UISendPostBtn.content})
-    const sendNewPost = useCallback( ()=>{
+    const sendNewPost = ()=>{
             dispatch(handleSendPostBtn({type: "WAITTING"}))
             const editor = contentEditorRef.current?.getEditor()
             
@@ -41,7 +41,7 @@ export default function BlogEditor ():ReactElement{
                 method: 'post',
                 url:"writeblog/newpost",
                 
-                data: {
+                data: { 
                     title: titleEditorRef.current?.value,
                     content: editor?.getContents().ops,
                     contentString: previewContent,
@@ -57,7 +57,7 @@ export default function BlogEditor ():ReactElement{
                 dispatch(handleSendPostBtn({type: "FAILED", message: `${err.response.status}: ${err.response.data}`}))
             })
         
-    },[])
+    }
     return (<>
         <form id={Style.Editor}>
             <TitleEditor onChange={setPreviewTitle} ref={titleEditorRef} form={Style.Editor.toString()}></TitleEditor>

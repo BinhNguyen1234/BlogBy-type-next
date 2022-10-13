@@ -7,22 +7,32 @@ export async function getStaticProps(){
 }
 import PreviewBlogContainer from "../../components/PreviewBlog/PreviewBlogContainer"
 import PreviewBlogChild from "../../components/PreviewBlog/PreviewBlogChild"
-interface AboutMeProps {
-    data: string
-}
-function AboutMe({data}:AboutMeProps):ReactElement{
+import Pagination from "../../components/Pagination"
+function Blog():ReactElement{
+    const data = [
+        {
+            previewImgUrl : "test",
+            previewTitle: "titletest1",
+            previewContent: "content test1",
+            previewDate: "10/2/1005"
+        },{
+            previewImgUrl : "test2",
+            previewTitle: "titletest12",
+            previewContent: "content test12",
+            previewDate: "10/2/10052"
+        }
+    ];
     return (
         <>
         <MainContentLayout>
             <PreviewBlogContainer>
-                <PreviewBlogChild></PreviewBlogChild>
-                <PreviewBlogChild></PreviewBlogChild>
-                <PreviewBlogChild></PreviewBlogChild>
+                {{data}}
             </PreviewBlogContainer>
+          
         </MainContentLayout>
         </>
     )
 }
 
 
-export default AboutMe
+export default Blog
