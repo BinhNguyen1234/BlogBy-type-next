@@ -17,7 +17,7 @@ const MenuToggle:React.FC<Props> = ({showModal, children})=>{
     const loginSlice = useSelector((state : RootStateType) =>{return state.loginSliceReducers})
     return (
         <>
-        <ul  id={style.MenuToggle}>
+        <ul id={style.MenuToggle}>
         
             <li className={router.pathname.search(/\Wblog/gmi)!= -1 ? style.active : ""}>
                 

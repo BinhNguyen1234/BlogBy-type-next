@@ -13,7 +13,7 @@ const ReactQuill = dynamic( async()=>{
 }, {ssr: false,
     loading : ()=>{
         return (
-          <div className="spinner-border" style={{"width": "3rem", "height": "3rem", alignSelf:"center"}} role="status">
+          <div className="spinner-border" style={{"width": "3rem", "height": "3rem", "position":"relative","left":"50% ", "transition":"transformY: -50%",alignSelf:"center"}} role="status">
   
           </div>
         )
