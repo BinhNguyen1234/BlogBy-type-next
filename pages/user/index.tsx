@@ -1,4 +1,4 @@
-import LoginContainer from "../../components/LoginContainer"
+import LoginContainer from "../../components/Login/LoginContainer"
 
 import { useRouter } from "next/router"
 import { useSelector } from "react-redux"
@@ -6,7 +6,7 @@ import {ReactElement, useEffect} from "react"
 import { RootStateType } from "../../feature"
 
 
-import UserMenu from "../../components/UserMenu"
+import UserMenu from "../../components/UserMenu/UserMenu"
 import MiddleContentLayout from "../../layout/MiddleContentLayout"
 
 

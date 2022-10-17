@@ -2,7 +2,7 @@
 import React from "react";
 import style from "../../styles/components/Login/SubmitBtn.module.sass"
 import { useSelector, useDispatch } from "react-redux";
-import {RootStateType} from "../feature"
+import {RootStateType} from "../../feature"
 import {memo} from "react"
 interface Props {
     onClick: React.MouseEventHandler
