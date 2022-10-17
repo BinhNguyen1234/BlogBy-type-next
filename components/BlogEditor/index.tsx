@@ -64,7 +64,7 @@ export default function BlogEditor ():ReactElement{
             <ContentEditor setDefaultPreviewUrl={setUrl} onChange={setContentString} ref={contentEditorRef}></ContentEditor>
             <PostThumbnailSelect onChange={setUrl}></PostThumbnailSelect>
                 <PreviewBlogChild  style={{"justifySelf": "flex-start", "margin": "2rem 0 0 0"}}>
-                    {{title, contentString,url}}
+                    {{title, contentString,url, date: new Date().toLocaleDateString(['ban', 'id'])}}
                 </PreviewBlogChild>
             <SendBlogBtn onClick={handleUiSendBtn}></SendBlogBtn>
         </form>

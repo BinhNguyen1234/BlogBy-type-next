@@ -1,8 +1,8 @@
 import NavBar from "./NavBar"
 import Footer from "./Footer"
 import Content from "./Content"
-import LoginContainer from "../components/LoginContainer"
-import LoginModal from "../components/LoginModal"
+import LoginContainer from "../components/Login/LoginContainer"
+import LoginModal from "../components/Login/LoginModal"
 import React, { useRef, useCallback} from "react"
 interface Props{
     children : Array<JSX.Element>

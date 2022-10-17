@@ -1,4 +1,4 @@
-import style from "../styles/components/Login/LoginCloseModalBtn.module.sass"
+import style from "../../styles/components/Login/LoginCloseModalBtn.module.sass"
 interface Props {
     hideModal: Function
 }

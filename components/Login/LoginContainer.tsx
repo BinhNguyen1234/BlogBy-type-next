@@ -1,16 +1,16 @@
 import {sha256} from "js-sha256"
 import axios from 'axios';
-import style from "../styles/components/Login/LoginForm.module.sass"
+import style from "../../styles/components/Login/LoginForm.module.sass"
 import Image from "next/image"
-import thienImg from "../public/image/thien.png"
-import shadow from "../public/image/shadow.png"
+import thienImg from "../../public/image/thien.png"
+import shadow from "../../public/image/shadow.png"
 import LoginCloseModalBtn from "./LoginCloseModalBtn"
 import React, {useCallback, memo} from "react"
 import {useDispatch, useSelector} from "react-redux"
-import {LOGIN} from "../feature/login"
-import {handleUI} from "../feature/login/UISubmitBtn"
-import SubmitBtn from "../components/SubmitBtn"
-import {RootStateType} from "../feature"
+import {LOGIN} from "../../feature/login"
+import {handleUI} from "../../feature/login/UISubmitBtn"
+import SubmitBtn from "../../components/Login/SubmitBtn"
+import {RootStateType} from "../../feature"
 interface Props{
     hideModal: Function
 }

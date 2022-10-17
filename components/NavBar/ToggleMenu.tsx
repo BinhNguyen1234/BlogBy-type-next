@@ -1,9 +1,9 @@
 import React from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import style from "../styles/components/ToggleMenu.module.sass"
+import style from "../../styles/components/ToggleMenu.module.sass"
 import {useSelector} from "react-redux"
-import {RootStateType} from "../feature"
+import {RootStateType} from "../../feature"
 
 import {memo} from 'react'
 
