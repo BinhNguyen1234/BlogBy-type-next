@@ -18,11 +18,13 @@ const initialState ={
     date:null, 
     url:  null
 }
-export const PreviewContext = createContext(initialState)
+
 export default function BlogEditor ():ReactElement{
     const [title, setTitle] = useState(null)
-    const [contentString, setContentString] = useState(null)
+    const [contentString, setContentString] = useState()
     const [url,setUrl] = useState(null)
+    const refState = useRef({contentString,url})
+    refState.current = {contentString,url}
     const handleUiSendBtn = useCallback(()=>{
         if(statusBtn!="TRY AGAIN"){sendNewPost()}
         else{
@@ -33,10 +35,10 @@ export default function BlogEditor ():ReactElement{
     const contentEditorRef = useRef<ReactQuill>(null)
     const dispatch = useDispatch()
     const statusBtn = useSelector((state:RootStateType)=>{return state.UISendPostBtn.content})
-    const sendNewPost = ()=>{
+    const sendNewPost = useCallback(() => {
             dispatch(handleSendPostBtn({type: "WAITTING"}))
             const editor = contentEditorRef.current?.getEditor()
-            
+            console.log;
             axios({
                 method: 'post',
                 url:"writeblog/newpost",
@@ -44,8 +46,8 @@ export default function BlogEditor ():ReactElement{
                 data: {
                     title: titleEditorRef.current?.value,
                     content: editor?.getContents().ops,
-                    contentString: contentString,
-                    imgThumbnail: url
+                    contentString: refState.current.contentString,
+                    imgThumbnail: refState.current.url
                 }
             })
             .then(()=>{
@@ -57,7 +59,7 @@ export default function BlogEditor ():ReactElement{
                 dispatch(handleSendPostBtn({type: "FAILED", message: `${err.response.status}: ${err.response.data}`}))
             })
         
-    }
+    },[undefined])
     return (<>
         <form id={Style.Editor}>
             <TitleEditor onChange={setTitle} ref={titleEditorRef} form={Style.Editor.toString()}></TitleEditor>

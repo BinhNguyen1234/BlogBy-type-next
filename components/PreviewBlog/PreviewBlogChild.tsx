@@ -1,6 +1,6 @@
 import { CSSProperties, HTMLAttributes, ReactElement, useContext } from "react";
 import Style from "../../styles/components/PreviewBlog/PreviewBlogChild.module.sass"
-import {PreviewContext} from "../BlogEditor/index"
+
 interface Props{
     alt? : string,
     children? : {
