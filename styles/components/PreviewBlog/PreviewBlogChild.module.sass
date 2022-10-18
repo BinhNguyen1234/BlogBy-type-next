@@ -1,18 +1,23 @@
 @import "../../ultilities/devices"
 
 .PreviewBlogChild
-   
+    border: 1px solid black
     box-sizing: border-box
     width: 35vw
     display: flex
     flex-direction: column
     position: relative
     overflow: hidden
-    aspect-ratio: 4/5
+    aspect-ratio: 6/5.1
     .img_container
         width: 100%
-        aspect-ratio: 1/1
+        aspect-ratio: 16/9
+        img
+            object-fit: fill
+            width: 100%
+            aspect-ratio: 16/9
     .title
+        font-weight: 600
         font-size: 20px
         word-break: break-all
         overflow: hidden
@@ -28,10 +33,6 @@
         bottom: 0
         left: 0
         font-size: 15px
-    img
-        object-fit: fill
-        width: 100%
-        aspect-ratio: 1/1
     >div
         margin: 2px !important
 @media only screen and (max-width: $medium)

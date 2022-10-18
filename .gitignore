@@ -17,7 +17,7 @@ git.pub
 # next.js
 /.next/
 /out/
-
+/pages/index.tsx
 # production
 /build
 
