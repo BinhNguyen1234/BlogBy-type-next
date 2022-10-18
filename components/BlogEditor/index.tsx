@@ -1,4 +1,4 @@
-import { ReactElement, useRef, useCallback, useContext, createContext, useState } from "react"
+import { ReactElement, useRef, useCallback, createContext, useState } from "react"
 import ContentEditor from "./ContentEditor"
 import TitleEditor from "./TitleEditor"
 import SendBlogBtn from "./SendBlogBtn"
@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux"
 import {handleSendPostBtn} from "../../feature/login/UISendPostBtn"
 import { RootStateType } from "../../feature"
 import PreviewBlogChild from "../PreviewBlog/PreviewBlogChild"
-import { AppInitialProps } from "next/app"
 
 const initialState ={
     previewTitle: null,
