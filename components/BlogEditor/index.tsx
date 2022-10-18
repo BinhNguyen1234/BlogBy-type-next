@@ -59,7 +59,7 @@ export default function BlogEditor ():ReactElement{
                 dispatch(handleSendPostBtn({type: "FAILED", message: `${err.response.status}: ${err.response.data}`}))
             })
         
-    },[undefined])
+    },[])
     return (<>
         <form id={Style.Editor}>
             <TitleEditor onChange={setTitle} ref={titleEditorRef} form={Style.Editor.toString()}></TitleEditor>
