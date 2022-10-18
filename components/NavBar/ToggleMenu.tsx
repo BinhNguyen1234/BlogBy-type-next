@@ -1,9 +1,9 @@
 import React from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import style from "../styles/components/ToggleMenu.module.sass"
+import style from "../../styles/components/ToggleMenu.module.sass"
 import {useSelector} from "react-redux"
-import {RootStateType} from "../feature"
+import {RootStateType} from "../../feature"
 
 import {memo} from 'react'
 
@@ -17,7 +17,7 @@ const MenuToggle:React.FC<Props> = ({showModal, children})=>{
     const loginSlice = useSelector((state : RootStateType) =>{return state.loginSliceReducers})
     return (
         <>
-        <ul  id={style.MenuToggle}>
+        <ul id={style.MenuToggle}>
         
             <li className={router.pathname.search(/\Wblog/gmi)!= -1 ? style.active : ""}>
                 

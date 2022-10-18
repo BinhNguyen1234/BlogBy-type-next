@@ -1,5 +1,5 @@
 import React from "react"
-import style from "../styles/components/ToggleBtn.module.sass"
+import style from "../../styles/components/ToggleBtn.module.sass"
 
 interface Props{
     onClick: React.MouseEventHandler,

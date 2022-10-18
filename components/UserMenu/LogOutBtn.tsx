@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import axios from "axios"
 import { useCallback } from "react";
 import { useDispatch} from "react-redux";
-import {LOGOUT} from "../feature/login"
+import {LOGOUT} from "../../feature/login"
 import router from "next/router"
 export default function LogOutBtn():ReactElement{
     const dispatch = useDispatch()

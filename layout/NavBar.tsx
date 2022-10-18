@@ -1,9 +1,9 @@
 import Link from "next/link"
 import { useSelector,useDispatch } from "react-redux";
 import style from "../styles/Layouts/NavBar.module.sass"
-import ToggleBtn from "../components/ToggleBtn";
-import ToggleMenu from "../components/ToggleMenu";
-import ToggleContainer from "../components/ToggleContainer"
+import ToggleBtn from "../components/NavBar/ToggleBtn";
+import ToggleMenu from "../components/NavBar/ToggleMenu";
+import ToggleContainer from "../components/NavBar/ToggleContainer"
 import React, {useCallback, useRef, useEffect} from 'react'
 import axios from "axios"
 import { RootStateType } from "../feature";
@@ -34,7 +34,7 @@ const NavBar: React.FC<Props> = ({showModal}) =>{
                 dispatch(handleReadMode(null))
                
                 
-            } else if (currentScrollPos - prevScroll < -4 || currentScrollPos == 0) {
+            } else if (currentScrollPos - prevScroll < -8 || currentScrollPos == 0) {
                 
                 dispatch(handleReadModeFalse(null))
                 

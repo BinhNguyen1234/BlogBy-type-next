@@ -1,4 +1,4 @@
-import style from "../styles/components/Login/LoginModal.module.sass"
+import style from "../../styles/components/Login/LoginModal.module.sass"
 import { ReactElement} from "react"
 interface Props{
     children: JSX.Element | Array<JSX.Element>

@@ -1,5 +1,5 @@
 import React from "react"
-import style from "../styles/components/ToggleContainer.module.sass"
+import style from "../../styles/components/ToggleContainer.module.sass"
 
 interface Props {
     children:JSX.Element,

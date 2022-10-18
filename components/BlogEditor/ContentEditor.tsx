@@ -9,9 +9,7 @@ const ReactQuill = dynamic(
     
     
       return function displayName({forwardedRef,onChange ,...props}:{forwardedRef:any,id : any, onChange: any,modules: any, placeholder: any}){
-        
-        return <RQ onChange={(a,b,c,e)=>{
-          onChange(e.getText())}} ref={forwardedRef} {...props}></RQ>
+        return <RQ onChange={(a,b,c,e)=>{onChange(e.getText())}} ref={forwardedRef} {...props}></RQ>
       }
   },
   {
@@ -27,13 +25,12 @@ const ReactQuill = dynamic(
 );
 
 interface Props {
-  ref: LegacyRef<typeof ReactQuill>,
   onChange: any,
   setDefaultPreviewUrl: any
 }
 
-const ContentEditor = forwardRef(function useDisplayName({onChange, setDefaultPreviewUrl ,ref}:Props):ReactElement{
-
+const ContentEditor = forwardRef(function useDisplayName(props:Props,ref):ReactElement{
+  console.log("onchange", props.onChange)
   let toolbarOptions = useRef([
     ['bold', 'italic', 'underline'], 
     ['link', 'image'],
@@ -74,7 +71,7 @@ const ContentEditor = forwardRef(function useDisplayName({onChange, setDefaultPr
             }).then((res)=>{
                 console.log(res.data)
                 editor.insertEmbed(range.index,'image',`/external/${res.data}`)
-                setDefaultPreviewUrl(`/external/${res.data}`)
+                props.setDefaultPreviewUrl(`/external/${res.data}`)
             }).catch((e)=>{
                 console.log(e)
             })
@@ -87,7 +84,7 @@ const ContentEditor = forwardRef(function useDisplayName({onChange, setDefaultPr
   )
   console.log("render content")
   return (<>
-      <ReactQuill onChange={onChange} forwardedRef={ref} id={Style.ContentEditor} modules={modules.current} placeholder="Write your blog"></ReactQuill>
+      <ReactQuill onChange={props.onChange} forwardedRef={ref} id={Style.ContentEditor} modules={modules.current} placeholder="Write your blog"></ReactQuill>
   </>)
 })
 export default memo(ContentEditor)

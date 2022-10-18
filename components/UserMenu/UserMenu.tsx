@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import WriteBlogBtn from "./WriteBlogBtn";
-import Style from "../styles/components/User/UserMenu.module.sass"
+import Style from "../../styles/components/User/UserMenu.module.sass"
 import LogOutBtn from "./LogOutBtn";
 function MenuUser():ReactElement {
     return (
