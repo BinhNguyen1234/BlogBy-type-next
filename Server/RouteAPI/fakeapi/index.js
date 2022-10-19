@@ -59,6 +59,8 @@ const data =[
 fakeapi.get("",(req,res)=>{
     res.status(222).send(data)
 })
-
+fakeapi.get("/querry=:querry",(req,res)=>{
+    res.status(222).send(req.params.querry)
+})
 
 module.exports = fakeapi

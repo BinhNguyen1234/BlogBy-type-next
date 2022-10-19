@@ -16,7 +16,6 @@ interface Props {
             previewContent: "content test1",
             previewDate: "10/2/1005"
         }
-    let [current, setCurrent] = useState(1)
     return (<>
         <div id={Style.PreviewBlogContainer} >{
            children.data?
@@ -25,6 +24,6 @@ interface Props {
             </>}):
             <PreviewBlogChild className={className}>{defaultData}</PreviewBlogChild>
         }</div>
-        <Pagination changePage={setCurrent}>{current}</Pagination>
+        
     </>)
  }

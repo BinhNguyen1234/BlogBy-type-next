@@ -49,18 +49,15 @@ const ContentEditor = forwardRef(function useDisplayName(props:Props,ref):ReactE
         const edit:any = this;
         const editor = edit.quill
         const range = editor.getSelection()
-        console.log(range)
         let input = document.createElement("input")
         input.setAttribute('type', 'file');  
         input.setAttribute('accept', 'image/*');
         input.setAttribute('name','upload-name')  
         input.click()
         input.onchange = async ()=>{
-            console.log(input)
-            console.log(input.files)
             let formData:any = new FormData()
             formData.append("upload-name",input.files?.[0],"upload-name");
-            console.log(formData)
+            console.log(range)
             axios({
                 method: 'post',
                 url:"/api/post/image",
@@ -69,8 +66,10 @@ const ContentEditor = forwardRef(function useDisplayName(props:Props,ref):ReactE
                 },
                 data: formData
             }).then((res)=>{
-                console.log(res.data)
+                console.log(range)
                 editor.insertEmbed(range.index,'image',`/external/${res.data}`)
+                editor.setSelection(range.index++)
+                console.log(range)
                 props.setDefaultPreviewUrl(`/external/${res.data}`)
             }).catch((e)=>{
                 console.log(e)
