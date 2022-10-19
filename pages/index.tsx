@@ -41,8 +41,8 @@ interface Propstype {
 function Home({data}:Propstype){
   const dispatch = useDispatch()
   useEffect(()=>{
-      // dispatch(LOGINSSR(data)) // on product
-    dispatch(LOGIN("Dev")) // one Dev
+    dispatch(LOGINSSR(data)) // on product
+    // dispatch(LOGIN("Dev")) // one Dev
   },[])
      return (
         <>
