@@ -1,12 +1,12 @@
 import {ReactElement} from "react"
 import { useRouter } from "next/router"
-import LargeContentLayout from "../../layout/LargeContentLayout"
-import DecodeDelta from "../../components/Post/DecodeDelta"
-import  BackPostBtn  from "../../components/Post/BackPostBtn"
+import LargeContentLayout from "../../../layout/LargeContentLayout"
+import DecodeDelta from "../../../components/Post/DecodeDelta"
+import  BackPostBtn  from "../../../components/Post/BackPostBtn"
 
 import Head from "next/head"
 
-const blog = require("../../Server/Model/post")
+const blog = require("../../../Server/Model/post")
 // import { type } from "os"
 
 export async function getServerSideProps(context:any){
@@ -34,7 +34,6 @@ export async function getServerSideProps(context:any){
 }
 type Props = Awaited<ReturnType<typeof getServerSideProps>>
 export default function Post({title, content}: any):ReactElement {
-    console.log("post render")
     const router = useRouter()
     
     return (<>

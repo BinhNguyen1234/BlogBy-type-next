@@ -15,15 +15,15 @@ const initialState ={
     title: null,
     contentString:  null,
     date:null, 
-    url:  null
+    imgThumbnail:  null
 }
 
 export default function BlogEditor ():ReactElement{
     const [title, setTitle] = useState(null)
     const [contentString, setContentString] = useState()
-    const [url,setUrl] = useState(null)
-    const refState = useRef({contentString,url})
-    refState.current = {contentString,url}
+    const [imgThumbnail,setUrl] = useState(null)
+    const refState = useRef({contentString,imgThumbnail})
+    refState.current = {contentString,imgThumbnail}
     const handleUiSendBtn = useCallback(()=>{
         if(statusBtn!="TRY AGAIN"){sendNewPost()}
         else{
@@ -33,7 +33,7 @@ export default function BlogEditor ():ReactElement{
     const titleEditorRef = useRef<HTMLTextAreaElement>(null)
     const contentEditorRef = useRef<ReactQuill>(null)
     const dispatch = useDispatch()
-    const statusBtn = useSelector((state:RootStateType)=>{return state.UISendPostBtn.content})
+    const statusBtn = useSelector((state:RootStateType)=>{return state?.UISendPostBtn.content})
     const sendNewPost = useCallback(() => {
             dispatch(handleSendPostBtn({type: "WAITTING"}))
             const editor = contentEditorRef.current?.getEditor()
@@ -46,7 +46,7 @@ export default function BlogEditor ():ReactElement{
                     title: titleEditorRef.current?.value,
                     content: editor?.getContents().ops,
                     contentString: refState.current.contentString,
-                    imgThumbnail: refState.current.url
+                    imgThumbnail: refState.current.imgThumbnail
                 }
             })
             .then(()=>{
@@ -65,7 +65,7 @@ export default function BlogEditor ():ReactElement{
             <ContentEditor setDefaultPreviewUrl={setUrl} onChange={setContentString} ref={contentEditorRef}></ContentEditor>
             <PostThumbnailSelect onChange={setUrl}></PostThumbnailSelect>
                 <PreviewBlogChild  style={{"justifySelf": "flex-start", "margin": "2rem 0 0 0"}}>
-                    {{title, contentString,url, date: new Date().toLocaleDateString(['ban', 'id'])}}
+                    {{data:{title, contentString,imgThumbnail, date: new Date().toLocaleDateString(['ban', 'id'])}}}
                 </PreviewBlogChild>
             <SendBlogBtn onClick={handleUiSendBtn}></SendBlogBtn>
         </form>

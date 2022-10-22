@@ -30,7 +30,7 @@ async function postBlog(req,res){
                     _writter: writer._id,
                     title : req.body.title,
                     content: req.body.content,
-                    date: new Date(),
+                    date: new Date().toString(),
                     contentString: req.body.contentString,
                     imgThumbnail: req.body.imgThumbnail,
                     url: req.body.title.toLowerCase().normalize('NFD')// lowercase and  parse Vietnamese code to latin code + sign of Vietnamese code
