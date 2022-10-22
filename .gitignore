@@ -9,15 +9,15 @@
 /coverage
 #ignore
 # /server/image
-blog
-blog.pub
+/blog
+/blog.pub
 git
 git.pub
 
 # next.js
 /.next/
 /out/
-/pages/index.tsx
+
 # production
 /build
 
