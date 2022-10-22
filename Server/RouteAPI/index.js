@@ -4,7 +4,6 @@ const getuser = require("./getuser")
 const user = require("./user")
 const api = require("./api")
 const fakeapi = require("./fakeapi")
-// const blog = require("./blog")
 function appendAPIRoute (app) {
     app.use("/login",Login)
     app.use("/getuser",getuser)
