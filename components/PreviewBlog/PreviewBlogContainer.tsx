@@ -3,26 +3,20 @@ import Style from "../../styles/components/PreviewBlog/PreviewBlogContainer.modu
 import PreviewBlogChild from "./PreviewBlogChild"
 import Pagination from "../Pagination"
 interface Props {
-    children: {
-        data: Array<Object> | string[] |null,
-        
-    },
+    children?: Array<Object> | string[] |null,
     className?: string
 }
  export default function PreviewBlogContainer({children, className}:Props):ReactElement{
-   const defaultData =  {
-            previewImgUrl : "test",
-            previewTitle: "titletest1",
-            previewContent: "content test1",
-            previewDate: "10/2/1005"
-        }
+    
     return (<>
         <div id={Style.PreviewBlogContainer} >{
-           children.data?
-           children.data?.map((data:any)=>{return <>
-                <PreviewBlogChild className={className}>{data}</PreviewBlogChild>
-            </>}):
-            <PreviewBlogChild className={className}>{defaultData}</PreviewBlogChild>
+           children?
+           children.map(
+            (data:any)=>{return <>
+                <PreviewBlogChild className={className}>{{data}}</PreviewBlogChild>
+            </>}
+            ):
+            <PreviewBlogChild className={className}>{}</PreviewBlogChild>
         }</div>
         
     </>)

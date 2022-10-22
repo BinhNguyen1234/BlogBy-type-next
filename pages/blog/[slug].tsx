@@ -34,6 +34,7 @@ export async function getServerSideProps(context:any){
 }
 type Props = Awaited<ReturnType<typeof getServerSideProps>>
 export default function Post({title, content}: any):ReactElement {
+    console.log("post render")
     const router = useRouter()
     
     return (<>

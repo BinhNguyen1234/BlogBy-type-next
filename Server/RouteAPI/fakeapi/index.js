@@ -60,6 +60,7 @@ fakeapi.get("",(req,res)=>{
     res.status(222).send(data)
 })
 fakeapi.get("/querry=:querry",(req,res)=>{
+    console.log("req",req.params.querry)
     res.status(222).send(req.params.querry)
 })
 
