@@ -8,13 +8,16 @@ interface Props {
 }
  export default function PreviewBlogContainer({children, className}:Props):ReactElement{
     return (<>
-        {children?.map((data:any)=>{console.log(data.url)})}
         <div id={Style.PreviewBlogContainer} >{
         
            children?
            children.map(
             (data:any)=>{return <>
-                <Link href={`/${data.url}`}><PreviewBlogChild className={className}>{{data}}</PreviewBlogChild></Link>
+                <Link href={`/blog/post/${data.url}`}>
+                    <a>
+                        <PreviewBlogChild className={className}>{{data}}</PreviewBlogChild>
+                    </a>
+                </Link>
             </>}
             ):
             <PreviewBlogChild className={className}>{}</PreviewBlogChild>
