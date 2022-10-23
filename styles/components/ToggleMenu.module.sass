@@ -1,66 +1,26 @@
 @import "../ultilities/color"
 @import "../ultilities/devices"
-#MenuToggle
-    display: flex
-    justify-content: space-around
-    flex-direction: row
-    align-items: center
-    padding: 0
-    postion: relative
-    flex-basis: 100%
-    margin: 0
-    height: 65%
-    li  
-        text-align: center
-        font-size: 1.4em
-        width: 22%
-        position: relative
-        list-style: none
-        display: flex
-        justify-content: center
-        align-items: center
-    a   
-        z-index: 2
-        background: $themse
-        background-clip: text
-        color: rgba(0, 0, 0, 0)
-        display: flex
-        align-items: center
-        justify-content: center
-        width: 100%
-        height: 100%
-        text-decoration: none
-    div     
-        width: 100%
-        z-index: 2  
-        background: $themse
-        background-clip: text
-        color: rgba(0, 0, 0, 0)
-        cursor: pointer   
+
 @media only screen and (min-width: $large)
-    .active
-        &:before
-            left: 0% !important
-            top: 7% !important
-            width: 100% !important
-            height: 100% !important
-        a
-            background: $themse !important
-            background-clip: text !important 
-            color: rgba(0, 0, 0, 0) !important
-        div
-            background: $themse !important
-            background-clip: text !important
-            color: rgba(0, 0, 0, 0) !important
     #MenuToggle
-        div
-            color: white
-            
-        a
-            color: white
-        li
-            overflow: hidden
+        display: flex
+        justify-content: space-around
+        flex-direction: row
+        align-items: center
+        postion: relative
+        flex-basis: 100%
+        margin: 0
+        height: 65%
+        li  
+            text-align: center
+            font-size: 1.4em
             width: 100%
+            position: relative
+            list-style: none
+            display: flex
+            justify-content: center
+            align-items: center
+            overflow: hidden
             height: 100%
             &:before
                 top: 50%
@@ -88,7 +48,45 @@
                 background: $themse
                 background-clip: text
                 color: rgba(0, 0, 0, 0)
-        
+        a   
+            z-index: 2
+            background: $themse
+            background-clip: text
+            color: white
+            display: flex
+            align-items: center
+            justify-content: center
+            width: 100%
+            height: 100%
+            text-decoration: none
+        div     
+            width: 100%
+            z-index: 2  
+            background: $themse
+            background-clip: text
+            color: white
+            cursor: pointer
+        .active
+            &:before
+                left: 0% !important
+                top: 7% !important
+                width: 100% !important
+                height: 100% !important
+            a
+                background: $themse !important
+                background-clip: text !important 
+                color: rgba(0, 0, 0, 0) !important
+            div
+                background: $themse !important
+                background-clip: text !important
+                color: rgba(0, 0, 0, 0) !important
+            
+#MenuToggle
+    list-style-type: none
+    padding: 0
+    li
+        a
+            text-decoration: none
                 
 
 @media only screen and (max-width: $large) 
