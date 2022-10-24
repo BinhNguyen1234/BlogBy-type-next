@@ -44,6 +44,7 @@ export default function Post({title, content,imgThumbnail, url}: any):ReactEleme
         <Head>
             <meta property="og:locale" content="vi_VN"></meta>
             <meta property="og:type" content="website"></meta>
+            <meta property="og:image:alt" content={`${title}`}></meta>
             <meta property="og:url" content={`http://103.161.172.66/blog/post/${url}`}></meta>
             <meta name="description" content={`${title}`}></meta>
             <meta property="og:description" content={`${title}`}></meta>
