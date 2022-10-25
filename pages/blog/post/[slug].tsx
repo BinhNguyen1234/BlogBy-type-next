@@ -1,10 +1,11 @@
-import {ReactElement} from "react"
+import {ReactElement, useEffect, useLayoutEffect} from "react"
 import { useRouter } from "next/router"
 import LargeContentLayout from "../../../layout/LargeContentLayout"
 import DecodeDelta from "../../../components/Post/DecodeDelta"
 import  BackPostBtn  from "../../../components/Post/BackPostBtn"
-
+import { RESET, RENDERED } from "../../../feature/handleProgressBar"
 import Head from "next/head"
+import { useDispatch } from "react-redux"
 
 const blog = require("../../../Server/Model/post")
 // import { type } from "os"
@@ -39,7 +40,11 @@ export async function getServerSideProps(context:any){
 type Props = Awaited<ReturnType<typeof getServerSideProps>>
 export default function Post({title, content,imgThumbnail, url}: any):ReactElement {
     const router = useRouter()
-    
+    const dispatch = useDispatch()
+    dispatch(RENDERED(null))
+    useEffect(()=>{
+        setTimeout(()=>{dispatch(RESET(null))},500)
+    },[])
     return (<>
         <Head>
             <meta property="og:locale" content="vi_VN"></meta>
