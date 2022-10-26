@@ -1,5 +1,4 @@
-import {ReactElement, useEffect, useLayoutEffect} from "react"
-import { useRouter } from "next/router"
+import {ReactElement, useEffect} from "react"
 import LargeContentLayout from "../../../layout/LargeContentLayout"
 import DecodeDelta from "../../../components/Post/DecodeDelta"
 import  BackPostBtn  from "../../../components/Post/BackPostBtn"
@@ -38,8 +37,8 @@ export async function getServerSideProps(context:any){
     
 }
 type Props = Awaited<ReturnType<typeof getServerSideProps>>
-export default function Post({title, content,imgThumbnail, url}: any):ReactElement {
-    const router = useRouter()
+export default  function Post({title, content,imgThumbnail, url}: any):ReactElement {
+    console.log("post render")
     const dispatch = useDispatch<any>()
     dispatch(RENDERED(null))
     useEffect(()=>{

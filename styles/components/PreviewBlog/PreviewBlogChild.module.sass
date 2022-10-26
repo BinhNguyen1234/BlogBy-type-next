@@ -10,11 +10,13 @@
     overflow: hidden
     aspect-ratio: 6/5.1
     .img_container
+        overflow: hidden
         width: 100%
         aspect-ratio: 16/9
+        border: 1px solid black
+        border-radius: 0.5rem
         img
-            border: 1px solid black
-            border-radius: 0.5rem
+            transition: width 0.5s ease
             object-fit: fill
             width: 100%
             aspect-ratio: 16/9
@@ -35,6 +37,8 @@
     .date
         font-size: 12px
         margin: 0
+    &:hover img
+        width: 105%
         
 @media only screen and (max-width: $medium)
     .PreviewBlogChild

@@ -28,7 +28,6 @@ const NavBar: React.FC<Props> = ({showModal}) =>{
         let prevScroll = 0
         window.addEventListener('scroll', handleScroll,{passive : true})
         function handleScroll(){
-            console.log("1")
             var currentScrollPos = window.scrollY;
             if (currentScrollPos - prevScroll > 10 ) {
                 

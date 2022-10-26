@@ -1,19 +1,25 @@
 import { ReactElement } from "react";
 import Style from "../../styles/components/post/BackPostBtn.module.sass"
-import {Router, useRouter} from "next/router"
+import { useRouter} from "next/router"
+import {SEND} from "../../feature/handleProgressBar"
+import {useDispatch} from "react-redux"
 interface Props {
     children: string
 }
 
 export default function BackPostBtn({children}:Props): ReactElement {
-    const router = useRouter()
+    const dispatch = useDispatch()
+    const router:any = useRouter()
     const handleBackward = function(){
-        if(window){
+        dispatch(SEND(null))
+        if(window && router.components["/blog"]){
             router.back()
-        }else{
+        }else {
             router.push("/blog?page=1")
         }
+        
     }
+    
         
     
     return (

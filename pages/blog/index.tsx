@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react"
+import { ReactElement, useEffect, memo } from "react"
 import {RENDERED, RESET} from "../../feature/handleProgressBar"
 import MainContentLayout from "../../layout/MainContentLayout"
 import { useRouter } from "next/router"
@@ -20,6 +20,7 @@ export async function getServerSideProps({req}:any){
 function Page({params,data}:any):ReactElement{
     const dispatch = useDispatch<any>()
     const router = useRouter()
+    console.log("blog render")
     dispatch(RENDERED(null))
     useEffect(()=>{
         if(!params){
@@ -28,15 +29,15 @@ function Page({params,data}:any):ReactElement{
     },[])
     useEffect(()=>{
         dispatch(RESET())
-    })
-    let [currentPage,setCurrentPage] = useState(parseInt(params||1))
+    },[params])
+    // let [currentPage,setCurrentPage] = useState(parseInt(params||1))
     return (
         <>
         <MainContentLayout>
             <PreviewBlogContainer className={!data?"--skeleton": ""}>
                 {data}
             </PreviewBlogContainer>
-        <Pagination page={currentPage} changePage={setCurrentPage}></Pagination>
+        <Pagination page={parseInt(params||1)} ></Pagination>
         </MainContentLayout>
         
         </>
@@ -44,4 +45,4 @@ function Page({params,data}:any):ReactElement{
 }
 
 
-export default Page
+export default memo(Page)
