@@ -18,7 +18,10 @@ export default function PreviewBlogChild({children, style, className}:Props):Rea
         <>
             <div  style={style}  className={Style.PreviewBlogChild + ` ${className}`}>
                 <div className={Style.img_container}>
-                    <img src={`${children?.data.imgThumbnail||"null"}`}></img>
+                    <img onError={({currentTarget})=>{
+                        currentTarget.onerror = null;
+                        currentTarget.src ="/external/404-not-found-error.jpeg"
+                    }} src={`${children?.data.imgThumbnail||"/external/404-not-found-error.jpeg"}`}></img>
                 </div>
                 <div  className={Style.title}>{children?.data.title||"Title"}</div>
                 <div className={Style.content}>{children?.data.contentString||"content"}</div>
