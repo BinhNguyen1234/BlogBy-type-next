@@ -18,5 +18,6 @@ const store = () =>{
         reducer: allReducers
     })
 }
+
 export type RootStateType = ReturnType<typeof allReducers>
 export const wrapper = createWrapper(store)

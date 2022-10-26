@@ -1,4 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { resolveHref } from "next/dist/shared/lib/router/router";
+
+const RESET = createAsyncThunk<number>("RESET", async ()=>{
+    return await new Promise((resolve,reject)=>{
+
+        try{setTimeout(()=>{
+            resolve(0)
+        },500)}
+        catch(e){
+            reject(e)
+        }
+    })
+
+   
+})
 
 interface StateType {
     valueNow : number,
@@ -24,13 +39,16 @@ const handleProgressBar = createSlice({
             return {
                 valueNow: 100
             }
-        },
-        RESET: (state, action)=>{
-            return {
-                valueNow: 0
-            }
         }
-    }
+    },
+    extraReducers:(builder)=>{
+        builder.addCase(RESET.fulfilled,(state,action)=>{
+            return {
+                valueNow: action.payload
+            }
+        })
+    },
 })
 export default handleProgressBar.reducer
-export const {SEND, ACEPT, RENDERED, RESET} = handleProgressBar.actions
+export const {SEND, ACEPT, RENDERED} = handleProgressBar.actions
+export {RESET}

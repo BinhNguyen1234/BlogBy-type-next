@@ -40,10 +40,10 @@ export async function getServerSideProps(context:any){
 type Props = Awaited<ReturnType<typeof getServerSideProps>>
 export default function Post({title, content,imgThumbnail, url}: any):ReactElement {
     const router = useRouter()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<any>()
     dispatch(RENDERED(null))
     useEffect(()=>{
-        setTimeout(()=>{dispatch(RESET(null))},500)
+        dispatch(RESET())
     },[])
     return (<>
         <Head>

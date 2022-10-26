@@ -10,7 +10,7 @@ interface Props {
 }
  export default function PreviewBlogContainer({children, className}:Props):ReactElement{
     const dispatch = useDispatch()
-    const setProgressBarSEND = ()=>{
+    const setProgressBarSEND = () =>{
         dispatch(SEND(null))
     }
     return (<>
