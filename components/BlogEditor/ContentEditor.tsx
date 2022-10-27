@@ -2,12 +2,10 @@ import React,{ memo,forwardRef, LegacyRef, ReactElement, useEffect, useRef } fro
 import Style from "../../styles/components/BlogEditor/ContentEditor.module.sass"
 import dynamic from "next/dynamic";
 import axios from "axios"
-
 const ReactQuill = dynamic(
   async () => {
-    const {default: RQ} = await import("react-quill")
-    
-    
+    const Editor = await import("react-quill")
+    let RQ = Editor.default
       return function displayName({forwardedRef,onChange ,...props}:{forwardedRef:any,id : any, onChange: any,modules: any, placeholder: any}){
         return <RQ onChange={(a,b,c,e)=>{onChange(e.getText())}} ref={forwardedRef} {...props}></RQ>
       }
@@ -30,7 +28,6 @@ interface Props {
 }
 
 const ContentEditor = forwardRef(function useDisplayName(props:Props,ref):ReactElement{
-  console.log("onchange", props.onChange)
   let toolbarOptions = useRef([
     ['bold', 'italic', 'underline'], 
     ['link', 'image'],
@@ -57,7 +54,6 @@ const ContentEditor = forwardRef(function useDisplayName(props:Props,ref):ReactE
         input.onchange = async ()=>{
             let formData:any = new FormData()
             formData.append("upload-name",input.files?.[0],"upload-name");
-            console.log(range)
             axios({
                 method: 'post',
                 url:"/api/post/image",
@@ -66,10 +62,10 @@ const ContentEditor = forwardRef(function useDisplayName(props:Props,ref):ReactE
                 },
                 data: formData
             }).then((res)=>{
-                console.log(range)
-                editor.insertEmbed(range.index,'image',`/external/${res.data}`)
+                let ops = editor.insertEmbed(range.index,'image',`/external/${res.data}`)
+                console.log(ops.ops)
+                ops.ops[0].insert.attributes = {"alt":"123465"}
                 editor.setSelection(range.index++)
-                console.log(range)
                 props.setDefaultPreviewUrl(`/external/${res.data}`)
             }).catch((e)=>{
                 console.log(e)

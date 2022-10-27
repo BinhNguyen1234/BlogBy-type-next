@@ -1,6 +1,10 @@
 @import "../ultilities/color"
 @import "../ultilities/devices"
-
+#MenuToggle
+    li
+        a
+            text-decoration: none
+    
 @media only screen and (min-width: $large)
     #MenuToggle
         display: flex
@@ -11,6 +15,7 @@
         flex-basis: 100%
         margin: 0
         height: 65%
+    
         li  
             text-align: center
             font-size: 1.4em
@@ -58,7 +63,6 @@
             justify-content: center
             width: 100%
             height: 100%
-            text-decoration: none
         div     
             width: 100%
             z-index: 2  
@@ -85,8 +89,6 @@
     list-style-type: none
     padding: 0
     li
-        a
-            text-decoration: none
                 
 
 @media only screen and (max-width: $large) 
@@ -94,13 +96,18 @@
         justify-content: flex-start
         flex-direction: column
         width: 100%
-        height: 100vh
-        padding-top: 100px
-        background-color: gray
+        height: 100%
+        padding-top: 5vh
+        background-color: rgb(17,17,17)
         li  
+            padding-left: 10%
             width: 100%
-            border: 1px solid black
-            border-radius: 0px
+            margin-bottom: 0.5rem  
             &:last-child
                 display: none
-      
+            a
+                font-size: 1.5rem
+                color: rgb(221,221,221)  
+@media only screen and (max-width: $medium)
+    #MenuToggle
+        width: 100%

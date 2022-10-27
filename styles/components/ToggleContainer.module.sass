@@ -1,14 +1,13 @@
 @import "../ultilities/devices"
-
+@import "../ultilities/font"
 #ToggleContainer
     display: flex
     flex-basis: 40%
     justify-content: space-evenly
-    transition-property: transform
-    transition-duration: 0.5s
-    transition-timing-function: ease-in-out
+    transition: transform 0.5s ease-in-out
     align-items: center
-    
+    font-family: MainFont
+    font-weight: 700
     
 @media only screen and (max-width: $large) 
     #ToggleContainer
@@ -20,8 +19,7 @@
         top: 0
         justify-content: space-evenly
         flex-direction: column
-        align-items: flex-start
-        background-color: gray
+        align-items: flex-end
 @media only screen and (max-width: $medium)
      #ToggleContainer
         width: 50vw
