@@ -6,7 +6,7 @@ import {ReactElement, useEffect} from "react"
 import { RootStateType } from "../../feature"
 
 
-import UserMenu from "../../components/UserMenu/UserMenu"
+import UserMenu from "../../components/UserMenu"
 import MiddleContentLayout from "../../layout/MiddleContentLayout"
 
 

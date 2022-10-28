@@ -23,10 +23,10 @@ const MenuToggle:React.FC<Props> = ({showModal, children})=>{
                 
                 <Link href="/blog?page=1">Blog</Link>
             </li>
-            <li className={router.pathname == "/aboutme" ? style.active : ""}>
+            <li className={router.pathname.search(/\Waboutme/gmi)!= -1 ? style.active : ""}>
                 <Link href="/aboutme">About Me</Link>
             </li>
-            <li className={router.pathname == "/user" ? style.active : ""}>
+            <li className={router.pathname.search(/\Wuser/gmi)!= -1 ? style.active : ""}>
                 {loginSlice.isAuth? 
                     <Link href="/user">{"Hi, " + loginSlice.infoUser}</Link>:
                     <div onClick={()=>{showModal("flex")}}>Login</div>}

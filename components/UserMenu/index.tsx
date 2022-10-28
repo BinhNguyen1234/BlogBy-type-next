@@ -1,16 +1,18 @@
 import { ReactElement } from "react";
-import WriteBlogBtn from "./WriteBlogBtn";
 import Style from "../../styles/components/User/UserMenu.module.sass"
 import LogOutBtn from "./LogOutBtn";
+import UserNavBtn from "./UserNavBtn";
 function MenuUser():ReactElement {
     return (
         <>
             <ul id={Style.UserMenu}>
                 <li>
-                    <WriteBlogBtn></WriteBlogBtn>
+                    <UserNavBtn href="/user/writeblog">Write Blog</UserNavBtn>
                 </li>
-                <li>Edit Blog</li>
-                <li>Change Password</li>
+                <li>
+                    <UserNavBtn href="/user/editblog">Edit Blog</UserNavBtn>
+                </li>
+                <li><UserNavBtn href="/user/information?edit=password">Change Password</UserNavBtn></li>
                 <li>
                     <LogOutBtn></LogOutBtn>
                 </li>
