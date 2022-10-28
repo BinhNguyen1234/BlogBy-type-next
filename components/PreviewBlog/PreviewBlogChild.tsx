@@ -1,4 +1,4 @@
-import { CSSProperties, ReactElement } from "react";
+import { CSSProperties, ReactElement, useCallback } from "react";
 import Style from "../../styles/components/PreviewBlog/PreviewBlogChild.module.sass"
 
 interface Props{
@@ -13,7 +13,7 @@ interface Props{
     className?: string
   }
 export default function PreviewBlogChild({children, style, className}:Props):ReactElement{
- 
+   
     return (
         <>
             <div  style={style}  className={Style.PreviewBlogChild + ` ${className}`}>

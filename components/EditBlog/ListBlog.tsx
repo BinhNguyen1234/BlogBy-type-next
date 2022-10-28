@@ -1,16 +1,20 @@
 import { ReactElement } from "react";
-import Link from "next/link"
+import BlogChild from "./BlogChild"
+export interface DataType{
+    url: string,
+    title: string,
+    date: string
+}
 interface Props{
-    data: Array<string>
+    data?: Array<DataType>
 }
 export default function ListBlog({data}:Props):ReactElement{
     return (<>
-        {data.map((blog):ReactElement=>{return(<>
-        <Link href={"/user/editpost?post=blog-url"}>
-            <div>
-                {blog}
-            </div>
-        </Link>
-        </>)})}
+        <ul><hr></hr>
+            {data?.map(({url,title,date},index):ReactElement=>{return(<>
+                <BlogChild key={url} data={{title,date,url}}></BlogChild>
+                <hr></hr>
+            </>)})}
+        </ul>   
     </>)
 } 

@@ -14,12 +14,12 @@ interface Props {
         dispatch(SEND(null))
     }
     return (<>
-        <div id={Style.PreviewBlogContainer} >{
+        <ul id={Style.PreviewBlogContainer} >{
         
            children?
            children.map(
             (data:any)=>{return <>
-                <Link href={`/blog/post/${data.url}`}>
+                <Link key={data.url} href={`/blog/post/${data.url}`}>
                     <a onClick={setProgressBarSEND}>
                         <PreviewBlogChild className={className}>{{data}}</PreviewBlogChild>
                     </a>
@@ -27,7 +27,7 @@ interface Props {
             </>}
             ):
             <PreviewBlogChild className={className}>{}</PreviewBlogChild>
-        }</div>
+        }</ul>
         
     </>)
  }
