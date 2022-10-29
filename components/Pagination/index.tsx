@@ -3,17 +3,19 @@ import Style from "../../styles/components/Pagination/Pagination.module.sass"
 import Link from "next/link"
 import {SEND} from "../../feature/handleProgressBar"
 import { useDispatch } from "react-redux"
+
 interface Props {
-    page: number
+    page: number,
+    hrefToQuerry: string
 }
 
-export default function Pagination({page}:Props):ReactElement{
+export default function Pagination({page,hrefToQuerry}:Props):ReactElement{
     const dispatch = useDispatch()
     return  <>
     <nav id={Style.Pagination} aria-label="Page navigation example">
         <ul className="pagination">
             <li>
-                <Link prefetch={false}   href={`/blog?page=${page-1}`}>
+                <Link prefetch={false}   href={`${hrefToQuerry}${page-1}`}>
                     <a onClick={()=>{dispatch(SEND(null))}} className={`page-item page-link ${page ===1?"disabled": null}`}>
                         Previous
                     </a>
@@ -23,7 +25,7 @@ export default function Pagination({page}:Props):ReactElement{
             page ===1 ? 
             null: 
             <li>
-                <Link prefetch={false} href={`/blog?page=${page-1}`}>
+                <Link prefetch={false} href={`${hrefToQuerry}${page-1}`}>
                     <a onClick={()=>{dispatch(SEND(null))}} className="page-item page-link">
                         {page-1}
                     </a>
@@ -34,14 +36,14 @@ export default function Pagination({page}:Props):ReactElement{
                 {page}
             </li>
             <li  >
-                <Link prefetch={false}   href={`/blog?page=${page+1}`}>
+                <Link prefetch={false}   href={`${hrefToQuerry}${page+1}`}>
                     <a onClick={()=>{dispatch(SEND(null))}} className="page-item page-link">
                         {page+1}
                     </a>
                 </Link>
             </li>
             <li  >
-                <Link prefetch={false}   href={`/blog?page=${page+1}`}>
+                <Link prefetch={false}   href={`${hrefToQuerry}${page+1}`}>
                     <a onClick={()=>{dispatch(SEND(null))}} className="page-item page-link">
                         Next
                     </a>

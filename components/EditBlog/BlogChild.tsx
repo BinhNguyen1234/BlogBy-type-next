@@ -12,7 +12,7 @@ export interface InforType {
 
 export default function BlogChild({data}:InforType):ReactElement{
     return(<>
-        <li id={Style.BlogChild}>
+        <li className={Style.BlogChild}>
             <InforBlog data={data}></InforBlog>
             <ModifyBtn></ModifyBtn>
         </li>

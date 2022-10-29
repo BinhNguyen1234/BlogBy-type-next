@@ -37,7 +37,7 @@ function Page({params,data}:any):ReactElement{
             <PreviewBlogContainer className={!data?"--skeleton": ""}>
                 {data}
             </PreviewBlogContainer>
-        <Pagination page={parseInt(params||1)} ></Pagination>
+        <Pagination hrefToQuerry={"/blog?page="} page={parseInt(params||1)} ></Pagination>
         </MainContentLayout>
         
         </>

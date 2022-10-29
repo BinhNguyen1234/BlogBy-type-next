@@ -1,13 +1,13 @@
 import { ReactElement } from "react";
 import { InforType } from "./BlogChild";
 import Link from "next/link";
-
+import Style from "../../styles/components/EditBlog/InforBlog.module.sass"
 export default function InforBlog({data}:InforType):ReactElement{
     return (<>
         <div>
             <Link href={data.url}>
-                <a>
-                    <div>{data.title}</div>
+                <a style={{"textDecorationLine":"none"}}>
+                    <div className={Style.InforBlogTitle}>{data.title}</div>
                 </a>
             </Link>
             <div>{data.date}</div>
