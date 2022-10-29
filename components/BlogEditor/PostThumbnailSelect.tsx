@@ -8,7 +8,7 @@ export default function PostThumbnailSelect ({onChange}:{onChange:any}):ReactEle
         let formData = new FormData(formRef.current)
         axios({
             method: "post",
-            url:"/api/post/image",
+            url:"/api/v1//image/upload/blog",
             headers: {
                 'Content-Type': '"multipart/form-data"'
             },

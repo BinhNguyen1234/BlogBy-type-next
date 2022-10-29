@@ -56,7 +56,7 @@ const ContentEditor = forwardRef(function useDisplayName(props:Props,ref):ReactE
             formData.append("upload-name",input.files?.[0],"upload-name");
             axios({
                 method: 'post',
-                url:"/api/post/image",
+                url:"/api/v1//image/upload/blog",
                 headers: {
                     'Content-Type': '"multipart/form-data"'
                 },

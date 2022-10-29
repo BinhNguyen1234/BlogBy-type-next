@@ -2,13 +2,12 @@ const express = require('express');
 const next = require('next');
 const bodyParser = require("body-parser")
 const dev = process.env.NODE_ENV !== 'production';
-const appendAPIRoute = require("../RouteAPI")
 const Database = require("./Database")
 const session = require("express-session");
 const passport = require("passport")
-const Auth = require("../Middeware/Auth")
+const api = require("../Api")
 const MongoStore = require('connect-mongo')
-const {networkInterfaces} = require('os')
+const {networkInterfaces} = require('os');
  class  App  {
     
     
@@ -47,11 +46,11 @@ const {networkInterfaces} = require('os')
                 passport.session()
             )
             app.use(passport.initialize())
-           
+            app.use("/api",api)
 
 
 
-            appendAPIRoute(app)
+       
             app.get("*",(req,res)=>{
                 return handle(req,res)
             })

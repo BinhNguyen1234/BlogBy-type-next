@@ -7,7 +7,7 @@ import router from "next/router"
 export default function LogOutBtn():ReactElement{
     const dispatch = useDispatch()
     const logOutHandle = useCallback(()=>{
-        axios.post("/user/logout",{
+        axios.post("api/v1/user/logout",{
             method: "POST"
         })
         .then((response)=>{

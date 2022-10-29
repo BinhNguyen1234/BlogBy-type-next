@@ -31,7 +31,7 @@ const LoginForm: React.FC<Props> = ({hideModal}:Props)=>{
             username : formData.get("username"),
             password : sha256(formData.get("password") as string)
         }
-        axios.post("/login/auth",UserInfo,{
+        axios.post("api/v1/login/auth",UserInfo,{
             method: "POST",
             headers:{
                 "Content-Type": "application/json"
@@ -70,7 +70,7 @@ const LoginForm: React.FC<Props> = ({hideModal}:Props)=>{
                     <input form="loginfeature" name="username" placeholder="Enter Username"></input>
                     <label>Password</label>
                     <input form="loginfeature" name="password" placeholder="Enter password" type="password"></input>
-                    <p>{message}</p>
+                    <p id={style.message}>{message}</p>
                     <SubmitBtn onClick={sendRequesLogin}></SubmitBtn>
                     
                 </form>

@@ -23,7 +23,7 @@ export default function BlogEditor ():ReactElement{
     const [contentString, setContentString] = useState()
     const [imgThumbnail,setUrl] = useState(null)
     const refState = useRef({contentString,imgThumbnail})
-    refState.current = {contentString,imgThumbnail}
+            refState.current = {contentString,imgThumbnail}
     const handleUiSendBtn = useCallback(()=>{
         if(statusBtn!="TRY AGAIN"){sendNewPost()}
         else{
@@ -40,7 +40,7 @@ export default function BlogEditor ():ReactElement{
             console.log;
             axios({
                 method: 'post',
-                url:"writeblog/newpost",
+                url:"api/v1/user/writeblog/newpost",
                 
                 data: {
                     title: titleEditorRef.current?.value,
