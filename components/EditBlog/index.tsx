@@ -1,11 +1,15 @@
 import { ReactElement } from "react";
 import ListBlog from "./ListBlog";
-import {DataType} from "./ListBlog"
-interface Props {
-    data: Array<DataType>
-    stage?: number
+
+export interface DataType{
+    url: string,
+    title: string,
+    date: string
 }
-export default function EditBlog({data,stage}:Props):ReactElement{
+interface Props {
+    data: { data: Array<DataType>, isLoading: boolean}
+}
+export default function EditBlog({data}:Props):ReactElement{
     return (<>
         
         <ListBlog data={data}></ListBlog>

@@ -23,7 +23,7 @@ export default function SearchBar({filter}:Props):ReactElement{
                         {filter.fields.map((field):ReactElement=>{return (<>
                             <li className="dropdown-item ">
                                 <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" value="" id={field}></input>
+                                    <input className="form-check-input" name="flexRadioDefault" type="radio" value="" id={field}></input>
                                     <label className="form-check-label" htmlFor={field}>
                                         {field}
                                     </label>

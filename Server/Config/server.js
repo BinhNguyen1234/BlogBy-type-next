@@ -25,7 +25,7 @@ const {networkInterfaces} = require('os');
                 console.log(`Address for access from external device ${networkInterfaces().en0[1].cidr}`)
             })
 
-            Database.connect('binhnguyen','170116Abc','Blog');
+            Database.connect('Blog');
          
             app.use("/external",express.static("./Server/image"))
             app.use(bodyParser.json({limit: "50mb"}))

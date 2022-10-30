@@ -40,7 +40,7 @@ export default function BlogEditor ():ReactElement{
             console.log;
             axios({
                 method: 'post',
-                url:"api/v1/user/writeblog/newpost",
+                url:"/api/v1/user/writeblog/newpost",
                 
                 data: {
                     title: titleEditorRef.current?.value,

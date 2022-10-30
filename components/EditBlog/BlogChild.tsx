@@ -7,13 +7,14 @@ export interface InforType {
         title: string,
         date: string,
         url: string
-    }
+    },
+    isLoading: boolean
 }
 
-export default function BlogChild({data}:InforType):ReactElement{
+export default function BlogChild({data, isLoading}:InforType):ReactElement{
     return(<>
         <li className={Style.BlogChild}>
-            <InforBlog data={data}></InforBlog>
+            <InforBlog isLoading={isLoading} data={data}></InforBlog>
             <ModifyBtn></ModifyBtn>
         </li>
     </>)

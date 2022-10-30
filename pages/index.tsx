@@ -41,7 +41,7 @@ interface Propstype {
 function Home({data}:Propstype){
   const dispatch = useDispatch()
   useEffect(()=>{
-    dispatch(LOGINSSR(data)) // on product
+    process.env.NODE_ENV=="production" ? dispatch(LOGINSSR(data)):dispatch(LOGIN("Dev")) // on product
     // dispatch(LOGIN("Dev")) // one Dev
   },[])
      return (
