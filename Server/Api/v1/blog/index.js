@@ -1,8 +1,5 @@
-const blog = require('express').Router()
+const blog = require('express').Router();
+const getPost = require('../../../Controller/blog/index');
+blog.get('*', getPost);
 
-
-blog.get("*",(req,res)=>{
-    res.send("ok")
-})
-
-module.exports = blog
+module.exports = blog;

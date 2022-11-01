@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "format": "prettier --write *",
     "dev": "next",
     "build": "next build",
     "product": "next build && NODE_ENV=production node ./Server/index.js",

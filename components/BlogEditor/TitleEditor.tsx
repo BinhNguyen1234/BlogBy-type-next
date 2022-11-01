@@ -1,12 +1,26 @@
-import { memo, LegacyRef, forwardRef } from "react";
-import Style from "../../styles/components/BlogEditor/TitleEditor.module.sass"
+import {memo, LegacyRef, useState, forwardRef} from 'react';
+import Style from '../../styles/components/BlogEditor/TitleEditor.module.sass';
 interface Props {
-    form:string,
-    onChange: any
+  form: string;
+  onChange: any;
+  customref: any;
+  children?: string;
 }
-const TitleEditor = forwardRef(function displayName(props:Props,ref:LegacyRef<HTMLTextAreaElement>){
-    return (<>
-        <textarea onChange={(e)=>{props.onChange(e.target.value)}} ref={ref} form={props.form} id={Style.TitleEditor}  placeholder="Title"></textarea>
-    </>)
-})
-export default  memo(TitleEditor)
+const TitleEditor = (props: Props) => {
+  return (
+    <>
+      {console.log('title render', props.children)}
+      <textarea
+        onChange={(e) => {
+          props.onChange(e.target.value);
+        }}
+        ref={props.customref}
+        form={props.form}
+        id={Style.TitleEditor}
+        placeholder="Title">
+        {props.children ? 'co' : 'khong'}
+      </textarea>
+    </>
+  );
+};
+export default memo(TitleEditor);

@@ -1,8 +1,3 @@
+const App = require('./Config/server');
 
-
-const App = require("./Config/server")
-
-
-
-
-    App.run(80)
+App.run(80);

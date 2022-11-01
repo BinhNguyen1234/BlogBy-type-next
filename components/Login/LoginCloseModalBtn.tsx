@@ -1,17 +1,17 @@
-import style from "../../styles/components/Login/LoginCloseModalBtn.module.sass"
+import style from '../../styles/components/Login/LoginCloseModalBtn.module.sass';
 interface Props {
-    hideModal: Function
+  hideModal: Function;
 }
-const LoginCloseModalBtn:React.FC<Props>=({hideModal})=>{
-    return(
-        <>
-            <div onClick={(e)=>{
-                
-                hideModal("none")}} id={style.LoginCloseModalBtn}>
-                
-            </div>
-        </>
-    )
-}
+const LoginCloseModalBtn: React.FC<Props> = ({hideModal}) => {
+  return (
+    <>
+      <div
+        onClick={(e) => {
+          hideModal('none');
+        }}
+        id={style.LoginCloseModalBtn}></div>
+    </>
+  );
+};
 
-export default LoginCloseModalBtn
+export default LoginCloseModalBtn;

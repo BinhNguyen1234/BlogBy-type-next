@@ -1,10 +1,8 @@
-const getuser = require('express').Router()
-const Auth = require("../../../Middeware/Auth")
+const getuser = require('express').Router();
+const Auth = require('../../../Middeware/Auth');
 
-getuser.use("",Auth(),(req,res)=>{
-    res.status(200).send("OK")
-})
+getuser.use('', Auth(), (req, res) => {
+  res.status(200).send('OK');
+});
 
-module.exports = getuser
-
-
+module.exports = getuser;
