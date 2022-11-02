@@ -1,44 +1,44 @@
 {
-  "name": "teeblog_next",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "format": "prettier --write *",
-    "dev": "next",
-    "build": "next build",
-    "product": "next build && NODE_ENV=production node ./Server/index.js",
-    "start": "NODE_ENV=production node ./Server/index.js",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@reduxjs/toolkit": "^1.8.5",
-    "@types/node": "^18.7.5",
-    "@types/react": "^18.0.17",
-    "@types/react-redux": "^7.1.24",
-    "axios": "^0.27.2",
-    "body-parser": "^1.20.0",
-    "bootstrap": "^5.2.0",
-    "connect-mongo": "^4.6.0",
-    "cookie-session": "^2.0.0",
-    "express": "^4.18.1",
-    "express-session": "^1.17.3",
-    "js-sha256": "^0.9.0",
-    "mongoose": "^6.5.2",
-    "multer": "^1.4.5-lts.1",
-    "next": "12.2.5",
-    "next-redux-wrapper": "^7.0.5",
-    "passport": "^0.6.0",
-    "passport-local": "^1.0.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-quill": "^2.0.0",
-    "react-redux": "^8.0.2",
-    "sass": "^1.54.4"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.13",
-    "@types/lodash": "^4.14.186",
-    "eslint": "8.22.0",
-    "eslint-config-next": "12.2.5"
-  }
+   "name": "teeblog_next",
+   "version": "0.1.0",
+   "private": true,
+   "scripts": {
+      "format": "prettier --write *",
+      "dev": "next",
+      "build": "next build",
+      "product": "next build && NODE_ENV=production node ./Server/index.js",
+      "start": "NODE_ENV=production node ./Server/index.js",
+      "lint": "next lint"
+   },
+   "dependencies": {
+      "@reduxjs/toolkit": "^1.8.5",
+      "@types/node": "^18.7.5",
+      "@types/react": "^18.0.17",
+      "@types/react-redux": "^7.1.24",
+      "axios": "^0.27.2",
+      "body-parser": "^1.20.0",
+      "bootstrap": "^5.2.0",
+      "connect-mongo": "^4.6.0",
+      "cookie-session": "^2.0.0",
+      "express": "^4.18.1",
+      "express-session": "^1.17.3",
+      "js-sha256": "^0.9.0",
+      "mongoose": "^6.5.2",
+      "multer": "^1.4.5-lts.1",
+      "next": "12.2.5",
+      "next-redux-wrapper": "^7.0.5",
+      "passport": "^0.6.0",
+      "passport-local": "^1.0.0",
+      "react": "18.2.0",
+      "react-dom": "18.2.0",
+      "react-quill": "^2.0.0",
+      "react-redux": "^8.0.2",
+      "sass": "^1.54.4"
+   },
+   "devDependencies": {
+      "@types/express": "^4.17.13",
+      "@types/lodash": "^4.14.186",
+      "eslint": "8.22.0",
+      "eslint-config-next": "12.2.5"
+   }
 }
