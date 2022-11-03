@@ -5,7 +5,6 @@ import BackPostBtn from '../../../components/Post/BackPostBtn';
 import { RESET, RENDERED } from '../../../feature/handleProgressBar';
 import Head from 'next/head';
 import { useDispatch } from 'react-redux';
-
 const blog = require('../../../Server/Model/post');
 // import { type } from "os"
 
@@ -15,11 +14,14 @@ export async function getServerSideProps(context: any) {
       const data = await blog
          .findOne(
             {
-               url: url.toLowerCase(),
+               url: url,
             },
             { title: 1, content: 1, url: 1, imgThumbnail: 1, _id: 0 }
          )
          .then((blog: any) => {
+            if(!blog){
+               throw new Error(`No post when find`)
+            }
             return {
                imgThumbnail: blog.imgThumbnail,
                url: blog.url,
@@ -70,7 +72,7 @@ export default function Post({
             <meta property="og:description" content={`${title}`}></meta>
             <meta
                property="og:image"
-               content={`http://103.161.172.66${imgThumbnail}`}
+               content={`http://103.161.172.66${imgThumbnail||"/null"}`}
             ></meta>
             <meta property="og:title" content={`${title}`}></meta>
             <title>{title}</title>

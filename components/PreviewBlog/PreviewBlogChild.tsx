@@ -25,6 +25,11 @@ export default function PreviewBlogChild({
             style={style}
             className={Style.PreviewBlogChild + ` ${className}`}
          >
+            <div className={Style.WindowBar}>
+               <div></div>
+               <div></div>
+               <div></div>
+            </div>
             <div className={Style.img_container}>
                <img
                   onError={({ currentTarget }) => {

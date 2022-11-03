@@ -1,6 +1,6 @@
 const user = require('../../../Model/user');
-const post = require('../../../Model/post');
-async function editblog(req, res) {
+const post = require('../../../Model/post')
+async function GetBlogList(req, res) {
    const query = req.query.page;
    const skip = (query && query > 0 ? query : 0) - 1;
    let ListBlog = await user.findOne({ username: req.user.username }).populate({
@@ -14,5 +14,16 @@ async function editblog(req, res) {
    });
    res.send(ListBlog['_post']);
 }
+async function EditPost(req, res) {
+   let data = req.body
+   console.log(data)
 
-module.exports = editblog;
+   let blog = await post.findOneAndUpdate({url: req.query.url},data,{new: true})
+      .then((blog)=>{
+         res.send({url: blog.url})
+      })
+      .catch((e)=>{
+         res.status(500).send(e)
+      })
+}
+module.exports = { GetBlogList, EditPost };

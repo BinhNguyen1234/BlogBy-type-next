@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import { ReactElement } from 'react';
 import Style from '../../styles/components/post/DecodeDelta.module.sass';
+
 const ReactQuill = dynamic(
    async () => {
       const { default: RQ } = await import('react-quill');

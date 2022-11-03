@@ -64,10 +64,10 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
             dispatch(handleSendPostBtn({ type: 'SUCCESS' }));
             editor?.enable(false);
             editor?.blur();
-            setTimeout(()=>{
-               router.push(`/blog/${res.data.url}`)
+            setTimeout(() => {
+               router.push(`/blog/${res.data.url}`);
                dispatch(handleSendPostBtn({ type: 'INITIAL' }));
-            },1000)
+            }, 1000);
          })
          .catch((err) => {
             dispatch(
@@ -100,9 +100,9 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
             >
                {{
                   data: {
-                     title: title||value?.title,
+                     title: title || value?.title,
                      contentString,
-                     imgThumbnail,
+                     imgThumbnail: imgThumbnail || value?.imgThumbnail,
                      date: new Date().toLocaleDateString(['ban', 'id']),
                   },
                }}

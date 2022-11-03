@@ -1,5 +1,6 @@
 @import "../ultilities/color"
 @import "../ultilities/devices"
+
 #MenuToggle
     li
         a
@@ -7,6 +8,8 @@
     
 @media only screen and (min-width: $large)
     #MenuToggle
+        
+        font-weight: 100
         display: flex
         justify-content: space-around
         flex-direction: row
@@ -89,7 +92,9 @@
     list-style-type: none
     padding: 0
     li
-                
+        font-family: Gravity
+        font-size: 2.2rem
+        line-height: 1em
 
 @media only screen and (max-width: $large) 
     #MenuToggle
@@ -100,14 +105,15 @@
         padding-top: 5vh
         background-color: rgb(17,17,17)
         li  
+            font-size: 2rem
+            color: rgb(221,221,221)  
             padding-left: 10%
             width: 100%
             margin-bottom: 0.5rem  
             &:last-child
                 display: none
-            a
-                font-size: 1.5rem
-                color: rgb(221,221,221)  
+            
+                
 @media only screen and (max-width: $medium)
     #MenuToggle
         width: 100%

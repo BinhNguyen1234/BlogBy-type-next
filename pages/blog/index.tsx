@@ -12,7 +12,7 @@ export async function getServerSideProps({ req }: any) {
 
    let data = await blog
       .aggregate()
-      .sort({date: -1})
+      .sort({ date: -1 })
       .match({})
       .project({
          title: 1,
@@ -23,7 +23,7 @@ export async function getServerSideProps({ req }: any) {
          _id: 0,
       })
       .skip((params ? params - 1 : 0) * 8)
-      .limit(8)
+      .limit(8);
    return {
       props: {
          params,

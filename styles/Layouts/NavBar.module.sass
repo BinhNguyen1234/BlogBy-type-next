@@ -1,10 +1,11 @@
 @import "../ultilities/devices"
 @import "../ultilities/color"
-@import "../ultilities/font"
+
    
  
 .NavStyle
-    font-size: 3em
+    font-size: 5rem
+    line-height: 1em
 #FakeNav
  
     visibility: hidden
@@ -24,9 +25,9 @@
 
 #MyNavBrand
     
-    font-family: MainFont
+    font-family: Gravity
     padding-left: 5%
-    font-weight: 300
+    font-weight: 200
     text-align: center
     a 
         color: white
@@ -40,14 +41,19 @@
     #MyNavBar  
         justify-content: space-around
         position: relative
-@media only screen and (max-width: $medium) 
+@media only screen and (max-width: $medium)
+    #FakeNav
+        visibility: hidden
+        position: absolute
+        top: 0 
+        z-index: -1
     .NavStyle
-        font-size: 3rem
-        
+        font-size: 4rem
+        z-index: -1
     #MyNavBar  
         justify-content: space-around
 @media only screen and (max-width: $small) 
     #MyNavBrand
         justify-content: space-around
     .NavStyle
-        font-size: 1.9em 
+        font-size: 3rem

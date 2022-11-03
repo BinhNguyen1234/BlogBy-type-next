@@ -1,6 +1,7 @@
 const Auth = require('../../../../Middeware/Auth');
-const EndPoint = require('../../../../Controller/user/editblog');
+const post = require('./post');
+const { GetBlogList } = require('../../../../Controller/user/editblog');
 const editblog = require('express').Router();
-editblog.get('', Auth(), EndPoint);
-
+editblog.get('', Auth(), GetBlogList);
+editblog.use("/post", post);
 module.exports = editblog;

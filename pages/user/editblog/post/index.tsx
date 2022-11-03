@@ -12,7 +12,6 @@ export default withRouter(function EditPost({ router }): ReactElement {
       return state.loginSliceReducers.isAuth;
    });
    useLayoutEffect(() => {
-      if (router.isReady) {
          axios({
             method: 'get',
             url: `/api/v1/blog?url=${router.query.url}`,
@@ -23,7 +22,7 @@ export default withRouter(function EditPost({ router }): ReactElement {
             .catch((e) => {
                console.log(e);
             });
-      }
+      
    }, []);
    if (isAuth === true) {
       return (
@@ -31,7 +30,7 @@ export default withRouter(function EditPost({ router }): ReactElement {
             <LargeContentLayout>
                <BlogEditor
                   value={value}
-                  href="/api/v1/user/writeblog/newpost"
+                  href={`/api/v1/user/editblog/post?url=${router.query.url}`}
                ></BlogEditor>
             </LargeContentLayout>
          </>

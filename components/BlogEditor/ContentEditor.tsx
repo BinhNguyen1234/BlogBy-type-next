@@ -1,9 +1,7 @@
 import React, {
    memo,
    forwardRef,
-   LegacyRef,
    ReactElement,
-   useEffect,
    useRef,
 } from 'react';
 import Style from '../../styles/components/BlogEditor/ContentEditor.module.sass';

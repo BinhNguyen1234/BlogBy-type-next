@@ -5,9 +5,8 @@ import ToggleBtn from '../components/NavBar/ToggleBtn';
 import ToggleMenu from '../components/NavBar/ToggleMenu';
 import ToggleContainer from '../components/NavBar/ToggleContainer';
 import React, { useRef } from 'react';
-import axios from 'axios';
 import { RootStateType } from '../feature';
-import { handleReadMode, handleReadModeFalse } from '../feature/readMode';
+
 interface Props {
    showModal: Function;
 }
