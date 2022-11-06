@@ -32,10 +32,10 @@ export default function PreviewBlogChild({
             </div>
             <div className={Style.img_container}>
                <img
-                  onError={({ currentTarget }) => {
-                     currentTarget.onerror = null;
-                     currentTarget.src = '/external/404-not-found-error.jpeg';
-                  }}
+                  // onError={({ currentTarget }) => {
+                  //    currentTarget.onerror = null;
+                  //    currentTarget.src = '/external/404-not-found-error.jpeg';
+                  // }}
                   src={`${
                      children?.data.imgThumbnail ||
                      '/external/404-not-found-error.jpeg'

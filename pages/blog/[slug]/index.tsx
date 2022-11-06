@@ -19,8 +19,8 @@ export async function getServerSideProps(context: any) {
             { title: 1, content: 1, url: 1, imgThumbnail: 1, _id: 0 }
          )
          .then((blog: any) => {
-            if(!blog){
-               throw new Error(`No post when find`)
+            if (!blog) {
+               throw new Error(`No post when find`);
             }
             return {
                imgThumbnail: blog.imgThumbnail,
@@ -72,7 +72,7 @@ export default function Post({
             <meta property="og:description" content={`${title}`}></meta>
             <meta
                property="og:image"
-               content={`http://103.161.172.66${imgThumbnail||"/null"}`}
+               content={`http://103.161.172.66${imgThumbnail || '/null'}`}
             ></meta>
             <meta property="og:title" content={`${title}`}></meta>
             <title>{title}</title>

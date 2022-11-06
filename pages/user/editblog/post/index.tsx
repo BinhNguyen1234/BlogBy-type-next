@@ -12,17 +12,16 @@ export default withRouter(function EditPost({ router }): ReactElement {
       return state.loginSliceReducers.isAuth;
    });
    useLayoutEffect(() => {
-         axios({
-            method: 'get',
-            url: `/api/v1/blog?url=${router.query.url}`,
+      axios({
+         method: 'get',
+         url: `/api/v1/blog?url=${router.query.url}`,
+      })
+         .then((res) => {
+            setValue(res.data);
          })
-            .then((res) => {
-               setValue(res.data);
-            })
-            .catch((e) => {
-               console.log(e);
-            });
-      
+         .catch((e) => {
+            console.log(e);
+         });
    }, []);
    if (isAuth === true) {
       return (

@@ -5,6 +5,7 @@
     width: 100vw
     max-width:100%
     overflow-x: hidden
+    
 .hideMenu
     transform: translate(0%,0%) !important
 .displayBlock
@@ -30,6 +31,33 @@
     flex-direction: column
 html
     font-size: 18px
+.--pixelContainer
+    border-style: solid !important
+    border-width: 5px 0px !important
+    position: relative
+    transform-style: preserve-3d
+    background-color: white
+    z-index: 2
+    &::after
+       content: "" !important
+       z-index: -1
+       transform: translateZ(-10px)
+       position: absolute !important
+       border-width: 5px  0px!important
+       border-style: solid !important
+       width: calc( 100% + 10px ) !important
+       top: 0 !important
+       height: 100% !important
+       background-color: white
+    &::before
+       content: "" !important
+       z-index: -1
+       position: absolute !important
+       border-width: 0px 5px !important
+       border-style: solid !important
+       height: calc(100% - 10px) !important
+       width: calc( 100% + 20px) !important
+       top: 5px !important
 .--disabled
     cursor: not-allowed !important
     color: #6c757d !important

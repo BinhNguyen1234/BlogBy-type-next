@@ -1,8 +1,8 @@
-import { memo, LegacyRef, useState, forwardRef } from 'react';
+import { memo } from 'react';
 import Style from '../../styles/components/BlogEditor/TitleEditor.module.sass';
+
 interface Props {
    form: string;
-   onChange: any;
    customref: any;
    children?: string;
 }
@@ -11,9 +11,6 @@ const TitleEditor = (props: Props) => {
       <>
          {console.log('title render', props.children)}
          <textarea
-            onChange={(e) => {
-               props.onChange(e.target.value);
-            }}
             ref={props.customref}
             form={props.form}
             id={Style.TitleEditor}

@@ -24,7 +24,10 @@ export default function PreviewBlogContainer({
                   return (
                      <>
                         <Link key={data.url} href={`/blog/${data.url}`}>
-                           <a className={Style.Wrapper} onClick={setProgressBarSEND}>
+                           <a
+                              className={Style.Wrapper}
+                              onClick={setProgressBarSEND}
+                           >
                               <PreviewBlogChild className={className}>
                                  {{ data }}
                               </PreviewBlogChild>

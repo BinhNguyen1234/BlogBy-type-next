@@ -1,4 +1,4 @@
-import { ReactElement, useRef, useCallback, useState } from 'react';
+import { ReactElement, useRef, useCallback, useState, useLayoutEffect } from 'react';
 import ContentEditor from './ContentEditor';
 import TitleEditor from './TitleEditor';
 import SendBlogBtn from './SendBlogBtn';
@@ -11,7 +11,7 @@ import { handleSendPostBtn } from '../../feature/login/UISendPostBtn';
 import { RootStateType } from '../../feature';
 import PreviewBlogChild from '../PreviewBlog/PreviewBlogChild';
 import { useRouter } from 'next/router';
-
+import { debounceChangeTitle} from '../../ulitlity/debounce';
 const initialState = {
    title: null,
    contentString: null,
@@ -27,6 +27,7 @@ interface Props {
    } | null;
 }
 export default function BlogEditor({ value, href }: Props): ReactElement {
+   console.log('blog render');
    const router = useRouter();
    const [title, setTitle] = useState(null);
    const [contentString, setContentString] = useState();
@@ -78,20 +79,22 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
             );
          });
    }, []);
+   useLayoutEffect(() => {
+      titleEditorRef.current?.addEventListener('input', debounceChangeTitle(setTitle, 2000));
+   }, []);
    return (
       <>
          <form id={Style.Editor}>
             <TitleEditor
-               onChange={setTitle}
                customref={titleEditorRef}
                form={Style.Editor.toString()}
             >
                {value?.title}
             </TitleEditor>
             <ContentEditor
+               onChange={setContentString}
                content={value?.content}
                setDefaultPreviewUrl={setUrl}
-               onChange={setContentString}
                ref={contentEditorRef}
             ></ContentEditor>
             <PostThumbnailSelect onChange={setUrl}></PostThumbnailSelect>
