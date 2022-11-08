@@ -1,17 +1,26 @@
+import { STATES } from 'mongoose';
 import { title } from 'process';
 import { ReactElement } from 'react';
 import Style from '../../styles/components/SearchBar/SearchBar.module.sass';
 interface Props {
+   onInput: any;
    filter?: {
       title?: string;
       fields: Array<string>;
    };
 }
-export default function SearchBar({ filter }: Props): ReactElement {
+export default function SearchBar({ filter, onInput }: Props): ReactElement {
    return (
       <>
          <form id={Style.SearchBar}>
-            <input type="text" placeholder="Search"></input>
+            <input
+               onInput={(e) => {
+                  const target = e.target as HTMLInputElement;
+                  onInput(target.value);
+               }}
+               type="text"
+               placeholder="Search"
+            ></input>
             {filter ? (
                <div className="dropdown ">
                   <button

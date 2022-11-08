@@ -15,17 +15,16 @@ interface InitialStateType {
 function reducer(state: InitialStateType, action: any) {
    switch (action.type) {
       case 'Done':
-         return { data: action.payload, isLoading: false };
+         return { data: action.payload.post, isLoading: false };
       case 'Sent':
          return { ...state, isLoading: true };
       default:
          throw new Error();
    }
 }
+
+//-----invoked
 export default function EditBlogPage(): ReactElement {
-   const isAuth = useSelector((state: RootStateType) => {
-      return state.loginSliceReducers.isAuth;
-   });
    const defaultData = [
       {
          title: 'this is simulate title number 1',
@@ -68,6 +67,12 @@ export default function EditBlogPage(): ReactElement {
          date: '20/12/2020',
       },
    ];
+   console.log("render")
+   const [displayedData, setDisplayedData] = useState(defaultData);
+   const [searchWord, setSearchWord] = useState("")
+   const isAuth = useSelector((state: RootStateType) => {
+      return state.loginSliceReducers.isAuth;
+   });
    const [state, dispatch] = useReducer(reducer, {
       data: defaultData,
       isLoading: true,
@@ -77,8 +82,20 @@ export default function EditBlogPage(): ReactElement {
       dispatch({ type: 'Sent' });
       setPage(page);
    };
-   console.log('get blog');
+   const handleFilter = (keySearch: string) => {
+
+      if (keySearch) {
+         setDisplayedData(
+            state.data.filter((data: DataType) => {
+               return data.title.search(new RegExp(`${keySearch}`, 'gmiu'))>=0;
+            })
+         );
+      }else{
+         setDisplayedData(state.data)
+      }
+   };
    useEffect(() => {
+      console.log("useEffect")
       axios({
          method: 'get',
          url: `/api/v1/user/editblog?page=${page}`,
@@ -89,16 +106,23 @@ export default function EditBlogPage(): ReactElement {
                date: new Date(object.date).toLocaleDateString(['ban', 'id']),
             };
          });
-         dispatch({ type: 'Done', payload: data });
+         dispatch({ type: 'Done', payload: { post: data } });
+         
       });
    }, [page]);
    if (isAuth === true) {
       return (
          <>
             <LargeContentLayout>
-               <SearchBar filter={{ fields: ['title', 'content'] }}></SearchBar>
+               <SearchBar
+                  onInput={handleFilter}
+                  filter={{ fields: ['title', 'content'] }}
+               ></SearchBar>
                <hr></hr>
-               <EditBlog data={state}></EditBlog>
+               <EditBlog
+                  isLoading={state.isLoading}
+                  displayedData={displayedData}
+               ></EditBlog>
                <Pagination page={page} setPage={setPageAndUi}></Pagination>
             </LargeContentLayout>
          </>

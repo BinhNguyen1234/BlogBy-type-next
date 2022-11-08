@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import axios from 'axios';
 import { debounceChangeContent } from '../../ulitlity/debounce';
 const ReactQuill = dynamic(
-   async function() {
+   async function () {
       const Editor = await import('react-quill');
       let RQ = Editor.default;
       return function displayName({
@@ -20,11 +20,10 @@ const ReactQuill = dynamic(
          value: any;
          placeholder: any;
       }) {
-         
          return (
             <RQ
                value={value}
-               onChange={debounceChangeContent(onChange,2000)}
+               onChange={debounceChangeContent(onChange, 2000)}
                ref={forwardedRef}
                {...props}
             ></RQ>
@@ -111,7 +110,6 @@ const ContentEditor = forwardRef(function useDisplayName(
          },
       },
    });
-
 
    return (
       <>

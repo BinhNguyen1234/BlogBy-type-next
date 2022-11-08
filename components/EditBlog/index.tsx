@@ -7,12 +7,16 @@ export interface DataType {
    date: string;
 }
 interface Props {
-   data: { data: Array<DataType>; isLoading: boolean };
+   displayedData: Array<DataType>;
+   isLoading: boolean;
 }
-export default function EditBlog({ data }: Props): ReactElement {
+export default function EditBlog({
+   isLoading,
+   displayedData,
+}: Props): ReactElement {
    return (
       <>
-         <ListBlog data={data}></ListBlog>
+         <ListBlog isLoading={isLoading} data={displayedData}></ListBlog>
       </>
    );
 }
