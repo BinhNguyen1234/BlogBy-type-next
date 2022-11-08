@@ -10,19 +10,41 @@ import { useSelector } from 'react-redux';
 interface InitialStateType {
    data: Array<DataType>;
    isLoading: boolean;
+   displayedData: Array<DataType>;
+   keyFilter: string | null
 }
 
 function reducer(state: InitialStateType, action: any) {
    switch (action.type) {
       case 'Done':
-         return { data: action.payload.post, isLoading: false };
+         return { 
+            ...state, 
+            data: action.payload.posts, 
+            displayedData: action.payload.posts.filter((data: DataType)=>{
+               return (
+                  data.title.search(new RegExp(`${state.keyFilter}`, 'gmiu')) >= 0
+               );
+            }),
+            isLoading: false};
       case 'Sent':
          return { ...state, isLoading: true };
+      case 'Filter': 
+         return {
+            ...state, 
+            isLoading: false, 
+            displayedData: (()=>{
+               return state.data.filter((data: DataType) => {
+                  return (
+                     data.title.search(new RegExp(`${action.payload.keyFilter}`, 'gmiu')) >= 0
+                  );
+               })
+            })(), 
+            keyFilter: action.payload.keyFilter
+         }
       default:
          throw new Error();
    }
 }
-
 //-----invoked
 export default function EditBlogPage(): ReactElement {
    const defaultData = [
@@ -67,35 +89,23 @@ export default function EditBlogPage(): ReactElement {
          date: '20/12/2020',
       },
    ];
-   console.log("render")
-   const [displayedData, setDisplayedData] = useState(defaultData);
-   const [searchWord, setSearchWord] = useState("")
    const isAuth = useSelector((state: RootStateType) => {
       return state.loginSliceReducers.isAuth;
    });
    const [state, dispatch] = useReducer(reducer, {
       data: defaultData,
       isLoading: true,
+      displayedData: defaultData,
+      keyFilter: ""
    });
    const [page, setPage] = useState(1);
    const setPageAndUi = (page: number) => {
       dispatch({ type: 'Sent' });
       setPage(page);
    };
-   const handleFilter = (keySearch: string) => {
-
-      if (keySearch) {
-         setDisplayedData(
-            state.data.filter((data: DataType) => {
-               return data.title.search(new RegExp(`${keySearch}`, 'gmiu'))>=0;
-            })
-         );
-      }else{
-         setDisplayedData(state.data)
-      }
-   };
+   console.log('render')
    useEffect(() => {
-      console.log("useEffect")
+      console.log('useEffect');
       axios({
          method: 'get',
          url: `/api/v1/user/editblog?page=${page}`,
@@ -106,8 +116,7 @@ export default function EditBlogPage(): ReactElement {
                date: new Date(object.date).toLocaleDateString(['ban', 'id']),
             };
          });
-         dispatch({ type: 'Done', payload: { post: data } });
-         
+         dispatch({ type: 'Done', payload: { posts: data } });
       });
    }, [page]);
    if (isAuth === true) {
@@ -115,13 +124,13 @@ export default function EditBlogPage(): ReactElement {
          <>
             <LargeContentLayout>
                <SearchBar
-                  onInput={handleFilter}
+                  onInput={dispatch}
                   filter={{ fields: ['title', 'content'] }}
                ></SearchBar>
                <hr></hr>
                <EditBlog
                   isLoading={state.isLoading}
-                  displayedData={displayedData}
+                  displayedData={state.displayedData}
                ></EditBlog>
                <Pagination page={page} setPage={setPageAndUi}></Pagination>
             </LargeContentLayout>

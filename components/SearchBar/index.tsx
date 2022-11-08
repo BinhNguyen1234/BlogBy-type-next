@@ -16,7 +16,7 @@ export default function SearchBar({ filter, onInput }: Props): ReactElement {
             <input
                onInput={(e) => {
                   const target = e.target as HTMLInputElement;
-                  onInput(target.value);
+                  onInput({type: "Filter",payload : {keyFilter: target.value}});
                }}
                type="text"
                placeholder="Search"
