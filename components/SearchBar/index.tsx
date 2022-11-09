@@ -1,5 +1,4 @@
-import { STATES } from 'mongoose';
-import { title } from 'process';
+import axios from 'axios';
 import { ReactElement } from 'react';
 import Style from '../../styles/components/SearchBar/SearchBar.module.sass';
 interface Props {
@@ -8,15 +7,30 @@ interface Props {
       title?: string;
       fields: Array<string>;
    };
+   href?: string;
 }
-export default function SearchBar({ filter, onInput }: Props): ReactElement {
+export default function SearchBar({
+   href,
+   filter,
+   onInput,
+}: Props): ReactElement {
    return (
       <>
-         <form id={Style.SearchBar}>
+         <form
+            onSubmit={(e) => {
+               const target = e.target as HTMLFormElement;
+               console.log((target[0] as HTMLInputElement).value);
+               e.preventDefault();
+            }}
+            id={Style.SearchBar}
+         >
             <input
                onInput={(e) => {
                   const target = e.target as HTMLInputElement;
-                  onInput({type: "Filter",payload : {keyFilter: target.value}});
+                  onInput({
+                     type: 'Filter',
+                     payload: { keyFilter: target.value },
+                  });
                }}
                type="text"
                placeholder="Search"
@@ -64,7 +78,7 @@ export default function SearchBar({ filter, onInput }: Props): ReactElement {
                   </ul>
                </div>
             ) : null}
-            <button type="button" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary">
                <span>&#128270;</span>
                <span>Find</span>
             </button>

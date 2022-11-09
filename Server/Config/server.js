@@ -6,6 +6,7 @@ const Database = require('./Database');
 const session = require('express-session');
 const passport = require('passport');
 const api = require('../Api');
+const logReq = require('../Middeware/LogReq');
 const MongoStore = require('connect-mongo');
 const { networkInterfaces } = require('os');
 class App {
@@ -27,7 +28,7 @@ class App {
             });
 
             Database.connect('Blog');
-
+            app.use(logReq);
             app.use('/external', express.static('./Server/image'));
             app.use(bodyParser.json({ limit: '50mb' }));
             app.use(bodyParser.urlencoded({ extended: true }));

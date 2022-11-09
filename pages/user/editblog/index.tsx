@@ -11,36 +11,40 @@ interface InitialStateType {
    data: Array<DataType>;
    isLoading: boolean;
    displayedData: Array<DataType>;
-   keyFilter: string | null
+   keyFilter: string | null;
 }
 
 function reducer(state: InitialStateType, action: any) {
    switch (action.type) {
       case 'Done':
-         return { 
-            ...state, 
-            data: action.payload.posts, 
-            displayedData: action.payload.posts.filter((data: DataType)=>{
+         return {
+            ...state,
+            data: action.payload.posts,
+            displayedData: action.payload.posts.filter((data: DataType) => {
                return (
-                  data.title.search(new RegExp(`${state.keyFilter}`, 'gmiu')) >= 0
+                  data.title.search(new RegExp(`${state.keyFilter}`, 'gmiu')) >=
+                  0
                );
             }),
-            isLoading: false};
+            isLoading: false,
+         };
       case 'Sent':
          return { ...state, isLoading: true };
-      case 'Filter': 
+      case 'Filter':
          return {
-            ...state, 
-            isLoading: false, 
-            displayedData: (()=>{
+            ...state,
+            isLoading: false,
+            displayedData: (() => {
                return state.data.filter((data: DataType) => {
                   return (
-                     data.title.search(new RegExp(`${action.payload.keyFilter}`, 'gmiu')) >= 0
+                     data.title.search(
+                        new RegExp(`${action.payload.keyFilter}`, 'gmiu')
+                     ) >= 0
                   );
-               })
-            })(), 
-            keyFilter: action.payload.keyFilter
-         }
+               });
+            })(),
+            keyFilter: action.payload.keyFilter,
+         };
       default:
          throw new Error();
    }
@@ -96,14 +100,14 @@ export default function EditBlogPage(): ReactElement {
       data: defaultData,
       isLoading: true,
       displayedData: defaultData,
-      keyFilter: ""
+      keyFilter: '',
    });
    const [page, setPage] = useState(1);
    const setPageAndUi = (page: number) => {
       dispatch({ type: 'Sent' });
       setPage(page);
    };
-   console.log('render')
+   console.log('render');
    useEffect(() => {
       console.log('useEffect');
       axios({
