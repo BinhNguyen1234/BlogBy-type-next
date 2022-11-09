@@ -6,7 +6,6 @@ import { RESET, RENDERED } from '../../../feature/handleProgressBar';
 import Head from 'next/head';
 import { useDispatch } from 'react-redux';
 const blog = require('../../../Server/Model/post');
-// import { type } from "os"
 
 export async function getServerSideProps(context: any) {
    const url = context.params.slug;
