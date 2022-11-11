@@ -11,7 +11,7 @@ interface InitialStateType {
    data: Array<DataType>;
    isLoading: boolean;
    displayedData: Array<DataType>;
-   keyFilter: string | null;
+   keyFilter: string;
 }
 
 function reducer(state: InitialStateType, action: any) {
@@ -20,12 +20,30 @@ function reducer(state: InitialStateType, action: any) {
          return {
             ...state,
             data: action.payload.posts,
-            displayedData: action.payload.posts.filter((data: DataType) => {
-               return (
-                  data.title.search(new RegExp(`${state.keyFilter}`, 'gmiu')) >=
-                  0
-               );
-            }),
+            displayedData: action.payload.posts.reduce(
+               (pV: Array<DataType>, cV: DataType) => {
+                  let positonSearchWord = (cV.title as string).search(
+                     new RegExp(`${state.keyFilter}(.*)`, 'miu')
+                  );
+                  let headAndTrail = (cV.title as string).split(
+                     new RegExp(`${state.keyFilter}(.*)`, 'miu'),2
+                  );
+                  let body = cV.title.slice(
+                     positonSearchWord,
+                     positonSearchWord + state.keyFilter.length
+                  );
+                  headAndTrail.splice(1, 0, body as string);
+                  if (positonSearchWord >= 0) {
+                     pV.push({ ...cV, title: headAndTrail });
+                  }
+                  return pV;
+                  // return (
+                  //    data.title.search(new RegExp(`${state.keyFilter}`, 'gmiu')) >=
+                  //    0
+                  // );
+               },
+               []
+            ),
             isLoading: false,
          };
       case 'Sent':
@@ -35,13 +53,28 @@ function reducer(state: InitialStateType, action: any) {
             ...state,
             isLoading: false,
             displayedData: (() => {
-               return state.data.filter((data: DataType) => {
-                  return (
-                     data.title.search(
-                        new RegExp(`${action.payload.keyFilter}`, 'gmiu')
-                     ) >= 0
+               return state.data.reduce((pV: any, cV) => {
+                  let positonSearchWord = (cV.title as string).search(
+                     new RegExp(`${action.payload.keyFilter}(.*)`, 'miu')
                   );
-               });
+                  let headAndTrail = (cV.title as string).split(
+                     new RegExp(`${action.payload.keyFilter}(.*)`, 'miu'),2
+                  );
+                  let body = cV.title.slice(
+                     positonSearchWord,
+                     positonSearchWord + action.payload.keyFilter.length
+                  );
+                  headAndTrail.splice(1, 0, body as string);
+                  if (positonSearchWord >= 0) {
+                     pV.push({ ...cV, title: headAndTrail });
+                  }
+                  return pV;
+                  // return (
+                  //    data.title.search(
+                  //       new RegExp(`${action.payload.keyFilter}`, 'miu')
+                  //    ) >= 0
+                  // );
+               }, []);
             })(),
             keyFilter: action.payload.keyFilter,
          };
@@ -53,42 +86,42 @@ function reducer(state: InitialStateType, action: any) {
 export default function EditBlogPage(): ReactElement {
    const defaultData = [
       {
-         title: 'this is simulate title number 1',
+         title: [[],[],'this is simulate title number 1'],
          url: 'simulate-url-1',
          date: '10/10/2020',
       },
       {
-         title: 'this is simulate title number 2',
+         title: [[],[],'this is simulate title number 2'],
          url: 'simulate-url-2',
          date: '20/12/2020',
       },
       {
-         title: 'this is simulate title number 1',
+         title: [[],[],'this is simulate title number 1'],
          url: 'simulate-url-1',
          date: '10/10/2020',
       },
       {
-         title: 'this is simulate title number 2',
+         title: [[],[],'this is simulate title number 2'],
          url: 'simulate-url-2',
          date: '20/12/2020',
       },
       {
-         title: 'this is simulate title number 1',
+         title: [[],[],'this is simulate title number 1'],
          url: 'simulate-url-1',
          date: '10/10/2020',
       },
       {
-         title: 'this is simulate title number 2',
+         title: [[],[],'this is simulate title number 2'],
          url: 'simulate-url-2',
          date: '20/12/2020',
       },
       {
-         title: 'this is simulate title number 1',
+         title: [[],[],'this is simulate title number 1'],
          url: 'simulate-url-1',
          date: '10/10/2020',
       },
       {
-         title: 'this is simulate title number 2',
+         title: [[],[],'this is simulate title number 2'],
          url: 'simulate-url-2',
          date: '20/12/2020',
       },
@@ -107,12 +140,10 @@ export default function EditBlogPage(): ReactElement {
       dispatch({ type: 'Sent' });
       setPage(page);
    };
-   console.log('render');
    useEffect(() => {
-      console.log('useEffect');
       axios({
          method: 'get',
-         url: `/api/v1/user/editblog?page=${page}`,
+         url: `/api/v1/user/editblog?page=${page}&key=${state.keyFilter}`,
       }).then((res) => {
          let data = res.data.map((object: any) => {
             return {
@@ -120,14 +151,18 @@ export default function EditBlogPage(): ReactElement {
                date: new Date(object.date).toLocaleDateString(['ban', 'id']),
             };
          });
+         console.log(data)
          dispatch({ type: 'Done', payload: { posts: data } });
-      });
+      })
+      .catch((e)=>{console.log(e)})
+      ;
    }, [page]);
    if (isAuth === true) {
       return (
          <>
             <LargeContentLayout>
                <SearchBar
+                  href={`/api/v1/user/editblog?page=${page}&key=${state.keyFilter}`}
                   onInput={dispatch}
                   filter={{ fields: ['title', 'content'] }}
                ></SearchBar>

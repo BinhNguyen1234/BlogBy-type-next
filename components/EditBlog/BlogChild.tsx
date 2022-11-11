@@ -4,7 +4,7 @@ import ModifyBtn from './ModifyBtn';
 import Style from '../../styles/components/EditBlog/BlogChild.module.sass';
 export interface InforType {
    data: {
-      title: string;
+      title: string | string[];
       date: string;
       url: string;
    };

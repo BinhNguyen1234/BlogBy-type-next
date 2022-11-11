@@ -11,7 +11,11 @@ export default function InforBlog({
          <div className={isLoading ? '--skeleton' : ''}>
             <Link href={`editblog/post?url=${data.url}`}>
                <a style={{ textDecorationLine: 'none' }}>
-                  <div className={Style.InforBlogTitle}>{data.title}</div>
+                  <div className={Style.InforBlogTitle}>
+                     <span>{data.title[0]}</span>
+                     <span style={{"color": "black", "backgroundColor":"yellow"}}>{data.title[1]}</span>
+                     <span>{data.title[2]}</span>
+                  </div>
                </a>
             </Link>
             <div>{data.date}</div>

@@ -49,7 +49,6 @@ function Page({ params, data }: any): ReactElement {
    useEffect(() => {
       dispatch(RESET());
    });
-   // let [currentPage,setCurrentPage] = useState(parseInt(params||1))
    return (
       <>
          <MainContentLayout>

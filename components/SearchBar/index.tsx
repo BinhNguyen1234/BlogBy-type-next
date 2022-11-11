@@ -18,9 +18,29 @@ export default function SearchBar({
       <>
          <form
             onSubmit={(e) => {
-               const target = e.target as HTMLFormElement;
-               console.log((target[0] as HTMLInputElement).value);
                e.preventDefault();
+               onInput({ type: 'Sent'});;
+               axios({
+                  method: "get",
+                  url: href
+               })
+               .then((res)=>{
+                  let data = res.data.map((object: any) => {
+                     return {
+                        ...object,
+                        date: new Date(object.date).toLocaleDateString(['ban', 'id']),
+                     };
+                     
+                  })
+                  onInput({ type: 'Done', payload: { posts: data } });;
+               })
+               .catch((e)=>{
+                  console.log(e)
+               })
+               // console.log(href)
+               // const target = e.target as HTMLFormElement;
+               // console.log((target[0] as HTMLInputElement).value);
+               
             }}
             id={Style.SearchBar}
          >
@@ -55,8 +75,8 @@ export default function SearchBar({
                      {filter.fields.map((field): ReactElement => {
                         return (
                            <>
-                              <li className="dropdown-item ">
-                                 <div className="form-check">
+                              <li  className="dropdown-item ">
+                                 <div  className="form-check">
                                     <input
                                        className="form-check-input"
                                        name="flexRadioDefault"
