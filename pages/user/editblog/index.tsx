@@ -12,6 +12,7 @@ interface InitialStateType {
    isLoading: boolean;
    displayedData: Array<DataType>;
    keyFilter: string;
+   filter: string;
 }
 
 function reducer(state: InitialStateType, action: any) {
@@ -20,31 +21,110 @@ function reducer(state: InitialStateType, action: any) {
          return {
             ...state,
             data: action.payload.posts,
-            displayedData: action.payload.posts.reduce(
-               (pV: Array<DataType>, cV: DataType) => {
-                  let positonSearchWord = (cV.title as string).search(
-                     new RegExp(`${state.keyFilter}(.*)`, 'miu')
-                  );
-                  let headAndTrail = (cV.title as string).split(
-                     new RegExp(`${state.keyFilter}(.*)`, 'miu'),2
-                  );
-                  let body = cV.title.slice(
-                     positonSearchWord,
-                     positonSearchWord + state.keyFilter.length
-                  );
-                  headAndTrail.splice(1, 0, body as string);
-                  if (positonSearchWord >= 0) {
-                     pV.push({ ...cV, title: headAndTrail });
-                  }
-                  return pV;
-                  // return (
-                  //    data.title.search(new RegExp(`${state.keyFilter}`, 'gmiu')) >=
-                  //    0
-                  // );
-               },
-               []
-            ),
+            displayedData: (() => {
+               if (state.filter == 'title') {
+                  return action.payload.posts.reduce((pV: any, cV: any) => {
+                     let positonSearchWordTitle = (cV.title as string).search(
+                        new RegExp(`${state.keyFilter}(.*)`, 'miu')
+                     );
+                     let headAndTrailTitle = (cV.title as string).split(
+                        new RegExp(`${state.keyFilter}(.*)`, 'miu'),
+                        2
+                     );
+                     let body = cV.title.slice(
+                        positonSearchWordTitle,
+                        positonSearchWordTitle + state.keyFilter.length
+                     );
+                     headAndTrailTitle.splice(1, 0, body as string);
+                     if (positonSearchWordTitle >= 0) {
+                        pV.push({
+                           ...cV,
+                           title: headAndTrailTitle,
+                           contentString: ['', '', cV.contentString as string],
+                        });
+                     }
+                     return pV;
+                  }, []);
+               } else if (state.filter == 'content') {
+                  return action.payload.posts.reduce((pV: any, cV: any) => {
+                     let positonSearchWordContent = (
+                        cV.contentString as string
+                     ).search(new RegExp(`${state.keyFilter}(.*)`, 'miu'));
+                     let headAndContent = (cV.contentString as string).split(
+                        new RegExp(`${state.keyFilter}(.*)`, 'miu'),
+                        2
+                     );
+                     let body = cV.contentString.slice(
+                        positonSearchWordContent,
+                        positonSearchWordContent + state.keyFilter.length
+                     );
+                     headAndContent.splice(1, 0, body as string);
+                     if (positonSearchWordContent >= 0) {
+                        pV.push({
+                           ...cV,
+                           title: ['', '', cV.title],
+                           contentString: headAndContent,
+                        });
+                     }
+                     return pV;
+                  }, []);
+               }
+            })(),
             isLoading: false,
+         };
+      case 'Checked':
+         return {
+            ...state,
+            filter: action.payload.filter,
+            displayedData: (() => {
+               if (action.payload.filter == 'title') {
+                  return state.data.reduce((pV: any, cV) => {
+                     let positonSearchWordTitle = (cV.title as string).search(
+                        new RegExp(`${state.keyFilter}(.*)`, 'miu')
+                     );
+                     let headAndTrailTitle = (cV.title as string).split(
+                        new RegExp(`${state.keyFilter}(.*)`, 'miu'),
+                        2
+                     );
+                     let body = cV.title.slice(
+                        positonSearchWordTitle,
+                        positonSearchWordTitle + state.keyFilter.length
+                     );
+                     headAndTrailTitle.splice(1, 0, body as string);
+                     if (positonSearchWordTitle >= 0) {
+                        pV.push({
+                           ...cV,
+                           title: headAndTrailTitle,
+                           contentString: ['', '', cV.contentString as string],
+                        });
+                     }
+                     return pV;
+                  }, []);
+               } else if (action.payload.filter == 'content') {
+                  return state.data.reduce((pV: any, cV) => {
+                     let positonSearchWordContent = (
+                        cV.contentString as string
+                     ).search(new RegExp(`${state.keyFilter}(.*)`, 'miu'));
+                     let headAndContent = (cV.contentString as string).split(
+                        new RegExp(`${state.keyFilter}(.*)`, 'miu'),
+                        2
+                     );
+                     let body = cV.contentString.slice(
+                        positonSearchWordContent,
+                        positonSearchWordContent + state.keyFilter.length
+                     );
+                     headAndContent.splice(1, 0, body as string);
+                     if (positonSearchWordContent >= 0) {
+                        pV.push({
+                           ...cV,
+                           title: ['', '', cV.title],
+                           contentString: headAndContent,
+                        });
+                     }
+                     return pV;
+                  }, []);
+               }
+            })(),
          };
       case 'Sent':
          return { ...state, isLoading: true };
@@ -53,28 +133,56 @@ function reducer(state: InitialStateType, action: any) {
             ...state,
             isLoading: false,
             displayedData: (() => {
-               return state.data.reduce((pV: any, cV) => {
-                  let positonSearchWord = (cV.title as string).search(
-                     new RegExp(`${action.payload.keyFilter}(.*)`, 'miu')
-                  );
-                  let headAndTrail = (cV.title as string).split(
-                     new RegExp(`${action.payload.keyFilter}(.*)`, 'miu'),2
-                  );
-                  let body = cV.title.slice(
-                     positonSearchWord,
-                     positonSearchWord + action.payload.keyFilter.length
-                  );
-                  headAndTrail.splice(1, 0, body as string);
-                  if (positonSearchWord >= 0) {
-                     pV.push({ ...cV, title: headAndTrail });
-                  }
-                  return pV;
-                  // return (
-                  //    data.title.search(
-                  //       new RegExp(`${action.payload.keyFilter}`, 'miu')
-                  //    ) >= 0
-                  // );
-               }, []);
+               if (state.filter == 'title') {
+                  return state.data.reduce((pV: any, cV) => {
+                     let positonSearchWordTitle = (cV.title as string).search(
+                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu')
+                     );
+                     let headAndTrailTitle = (cV.title as string).split(
+                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu'),
+                        2
+                     );
+                     let body = cV.title.slice(
+                        positonSearchWordTitle,
+                        positonSearchWordTitle + action.payload.keyFilter.length
+                     );
+                     headAndTrailTitle.splice(1, 0, body as string);
+                     if (positonSearchWordTitle >= 0) {
+                        pV.push({
+                           ...cV,
+                           title: headAndTrailTitle,
+                           contentString: ['', '', cV.contentString as string],
+                        });
+                     }
+                     return pV;
+                  }, []);
+               } else if (state.filter == 'content') {
+                  return state.data.reduce((pV: any, cV) => {
+                     let positonSearchWordContent = (
+                        cV.contentString as string
+                     ).search(
+                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu')
+                     );
+                     let headAndContent = (cV.contentString as string).split(
+                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu'),
+                        2
+                     );
+                     let body = cV.contentString.slice(
+                        positonSearchWordContent,
+                        positonSearchWordContent +
+                           action.payload.keyFilter.length
+                     );
+                     headAndContent.splice(1, 0, body as string);
+                     if (positonSearchWordContent >= 0) {
+                        pV.push({
+                           ...cV,
+                           title: ['', '', cV.title],
+                           contentString: headAndContent,
+                        });
+                     }
+                     return pV;
+                  }, []);
+               }
             })(),
             keyFilter: action.payload.keyFilter,
          };
@@ -86,44 +194,52 @@ function reducer(state: InitialStateType, action: any) {
 export default function EditBlogPage(): ReactElement {
    const defaultData = [
       {
-         title: [[],[],'this is simulate title number 1'],
+         title: [[], [], 'this is simulate title number 1'],
          url: 'simulate-url-1',
          date: '10/10/2020',
+         contentString: [[], [], 'this is simulate content'],
       },
       {
-         title: [[],[],'this is simulate title number 2'],
+         title: [[], [], 'this is simulate title number 2'],
          url: 'simulate-url-2',
          date: '20/12/2020',
+         contentString: [[], [], 'this is simulate content'],
       },
       {
-         title: [[],[],'this is simulate title number 1'],
+         title: [[], [], 'this is simulate title number 1'],
          url: 'simulate-url-1',
          date: '10/10/2020',
+         contentString: [[], [], 'this is simulate content'],
       },
       {
-         title: [[],[],'this is simulate title number 2'],
+         title: [[], [], 'this is simulate title number 2'],
          url: 'simulate-url-2',
          date: '20/12/2020',
+         contentString: [[], [], 'this is simulate content'],
       },
       {
-         title: [[],[],'this is simulate title number 1'],
+         title: [[], [], 'this is simulate title number 1'],
          url: 'simulate-url-1',
          date: '10/10/2020',
+         contentString: [[], [], 'this is simulate content'],
       },
       {
-         title: [[],[],'this is simulate title number 2'],
+         title: [[], [], 'this is simulate title number 2'],
          url: 'simulate-url-2',
          date: '20/12/2020',
+         contentString: [[], [], 'this is simulate content'],
       },
       {
-         title: [[],[],'this is simulate title number 1'],
+         title: [[], [], 'this is simulate title number 1'],
          url: 'simulate-url-1',
          date: '10/10/2020',
+         contentString: [[], [], 'this is simulate content'],
       },
       {
-         title: [[],[],'this is simulate title number 2'],
+         title: [[], [], 'this is simulate title number 2'],
          url: 'simulate-url-2',
          date: '20/12/2020',
+         contentString: [[], [], 'this is simulate content'],
       },
    ];
    const isAuth = useSelector((state: RootStateType) => {
@@ -134,7 +250,9 @@ export default function EditBlogPage(): ReactElement {
       isLoading: true,
       displayedData: defaultData,
       keyFilter: '',
+      filter: 'title',
    });
+   console.log(state);
    const [page, setPage] = useState(1);
    const setPageAndUi = (page: number) => {
       dispatch({ type: 'Sent' });
@@ -144,26 +262,28 @@ export default function EditBlogPage(): ReactElement {
       axios({
          method: 'get',
          url: `/api/v1/user/editblog?page=${page}&key=${state.keyFilter}`,
-      }).then((res) => {
-         let data = res.data.map((object: any) => {
-            return {
-               ...object,
-               date: new Date(object.date).toLocaleDateString(['ban', 'id']),
-            };
-         });
-         console.log(data)
-         dispatch({ type: 'Done', payload: { posts: data } });
       })
-      .catch((e)=>{console.log(e)})
-      ;
+         .then((res) => {
+            let data = res.data.map((object: any) => {
+               return {
+                  ...object,
+                  date: new Date(object.date).toLocaleDateString(['ban', 'id']),
+               };
+            });
+            dispatch({ type: 'Done', payload: { posts: data } });
+         })
+         .catch((e) => {
+            console.log(e);
+         });
    }, [page]);
    if (isAuth === true) {
       return (
          <>
             <LargeContentLayout>
                <SearchBar
+                  stateCheck={state.filter}
                   href={`/api/v1/user/editblog?page=${page}&key=${state.keyFilter}`}
-                  onInput={dispatch}
+                  dispatch={dispatch}
                   filter={{ fields: ['title', 'content'] }}
                ></SearchBar>
                <hr></hr>

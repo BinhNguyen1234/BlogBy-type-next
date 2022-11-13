@@ -10,18 +10,20 @@ export default function ListBlog({ data, isLoading }: Props): ReactElement {
    return (
       <>
          <ul id={Style.ListBlog}>
-            {data?.map(({ url, title, date }, index): ReactElement => {
-               return (
-                  <>
-                     <BlogChild
-                        isLoading={isLoading}
-                        key={url}
-                        data={{ title, date, url }}
-                     ></BlogChild>
-                     <hr></hr>
-                  </>
-               );
-            })}
+            {data?.map(
+               ({ url, title, date, contentString }, index): ReactElement => {
+                  return (
+                     <>
+                        <BlogChild
+                           isLoading={isLoading}
+                           key={url}
+                           data={{ title, date, url, contentString }}
+                        ></BlogChild>
+                        <hr></hr>
+                     </>
+                  );
+               }
+            )}
          </ul>
       </>
    );

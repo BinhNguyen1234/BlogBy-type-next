@@ -26,7 +26,7 @@ export default function ModifyBtn({ url }: { url: string }): ReactElement {
                </li>
                <hr style={{ margin: '0' }}></hr>
                <li id={Style.EditBtn}>
-                  <Link href={`editblog/${url}?action=edit`}>
+                  <Link href={`editblog/post?url=${url}`}>
                      <a className="dropdown-item">&#9998; Edit</a>
                   </Link>
                </li>

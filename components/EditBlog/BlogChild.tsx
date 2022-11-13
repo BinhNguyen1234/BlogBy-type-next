@@ -7,6 +7,7 @@ export interface InforType {
       title: string | string[];
       date: string;
       url: string;
+      contentString: string | string[];
    };
    isLoading: boolean;
 }

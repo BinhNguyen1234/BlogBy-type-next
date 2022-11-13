@@ -8,13 +8,32 @@ export default function InforBlog({
 }: InforType): ReactElement {
    return (
       <>
-         <div className={isLoading ? '--skeleton' : ''}>
+         <div  className={isLoading ? '--skeleton' : ''}>
             <Link href={`editblog/post?url=${data.url}`}>
                <a style={{ textDecorationLine: 'none' }}>
-                  <div className={Style.InforBlogTitle}>
-                     <span>{data.title[0]}</span>
-                     <span style={{"color": "black", "backgroundColor":"yellow"}}>{data.title[1]}</span>
-                     <span>{data.title[2]}</span>
+                  <div style={{"width": "100%"}} className={Style.InforBlogTitle}>
+                     {[
+                        data.title[0],
+                        <span
+                           key={1}
+                           style={{ color: 'black', backgroundColor: 'yellow' }}
+                        >
+                           {data.title[1]}
+                        </span>,
+                        data.title[2],
+                     ]}
+                  </div>
+                  <div style={{"width": "100%"}} className={Style.InforBlogContent}>
+                     {[
+                        <span key={2}>{data.contentString[0]}</span>,
+                        <span
+                           key={1}
+                           style={{ color: 'black', backgroundColor: 'yellow' }}
+                        >
+                           {" "+data.contentString[1]}
+                        </span>,
+                        data.contentString[2],
+                     ]}
                   </div>
                </a>
             </Link>

@@ -2,58 +2,62 @@ import axios from 'axios';
 import { ReactElement } from 'react';
 import Style from '../../styles/components/SearchBar/SearchBar.module.sass';
 interface Props {
-   onInput: any;
+   dispatch: any;
    filter?: {
       title?: string;
       fields: Array<string>;
    };
    href?: string;
+   stateCheck: string;
 }
 export default function SearchBar({
    href,
    filter,
-   onInput,
+   dispatch,
+   stateCheck,
 }: Props): ReactElement {
    return (
       <>
          <form
             onSubmit={(e) => {
                e.preventDefault();
-               onInput({ type: 'Sent'});;
+               dispatch({ type: 'Sent' });
                axios({
-                  method: "get",
-                  url: href
+                  method: 'get',
+                  url: href,
                })
-               .then((res)=>{
-                  let data = res.data.map((object: any) => {
-                     return {
-                        ...object,
-                        date: new Date(object.date).toLocaleDateString(['ban', 'id']),
-                     };
-                     
+                  .then((res) => {
+                     let data = res.data.map((object: any) => {
+                        return {
+                           ...object,
+                           date: new Date(object.date).toLocaleDateString([
+                              'ban',
+                              'id',
+                           ]),
+                        };
+                     });
+                     dispatch({ type: 'Done', payload: { posts: data } });
                   })
-                  onInput({ type: 'Done', payload: { posts: data } });;
-               })
-               .catch((e)=>{
-                  console.log(e)
-               })
+                  .catch((e) => {
+                     console.log(e);
+                  });
                // console.log(href)
-               // const target = e.target as HTMLFormElement;
+               const target = e.target as HTMLFormElement;
                // console.log((target[0] as HTMLInputElement).value);
-               
+               console.log({ target });
             }}
             id={Style.SearchBar}
          >
             <input
                onInput={(e) => {
                   const target = e.target as HTMLInputElement;
-                  onInput({
+                  dispatch({
                      type: 'Filter',
                      payload: { keyFilter: target.value },
                   });
                }}
                type="text"
-               placeholder="Search"
+               placeholder='Press enter or click "Find" button for search more'
             ></input>
             {filter ? (
                <div className="dropdown ">
@@ -72,16 +76,23 @@ export default function SearchBar({
                   <ul className="dropdown-menu">
                      {filter.title ? <li>{filter.title}</li> : null}
                      {filter.title ? <hr></hr> : null}
-                     {filter.fields.map((field): ReactElement => {
+                     {filter.fields.map((field, index): ReactElement => {
                         return (
                            <>
-                              <li  className="dropdown-item ">
-                                 <div  className="form-check">
+                              <li className="dropdown-item ">
+                                 <div className="form-check">
                                     <input
+                                       onChange={() => {
+                                          dispatch({
+                                             type: 'Checked',
+                                             payload: { filter: field },
+                                          });
+                                       }}
+                                       defaultChecked={field == stateCheck}
                                        className="form-check-input"
                                        name="flexRadioDefault"
                                        type="radio"
-                                       value=""
+                                       value={`${field}`}
                                        id={field}
                                     ></input>
                                     <label
