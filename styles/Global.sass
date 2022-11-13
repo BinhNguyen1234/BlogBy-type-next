@@ -38,6 +38,7 @@ html
     transform-style: preserve-3d
     background-color: white
     z-index: 2
+    cursor: pointer
     &::after
        content: "" !important
        z-index: -1
@@ -58,6 +59,12 @@ html
        height: calc(100% - 10px) !important
        width: calc( 100% + 20px) !important
        top: 5px !important
+    &:hover
+        border-color: rgb(136,60,252)
+        &::before
+            border-color:  rgb(136,60,252)
+        &::after
+            border-color:  rgb(136,60,252)   
 .--disabled
     cursor: not-allowed !important
     color: #6c757d !important

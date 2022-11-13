@@ -1,14 +1,15 @@
 import axios from 'axios';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect } from 'react';
 import Style from '../../styles/components/SearchBar/SearchBar.module.sass';
+
 interface Props {
-   dispatch: any;
+   dispatch?: any;
    filter?: {
       title?: string;
       fields: Array<string>;
    };
    href?: string;
-   stateCheck: string;
+   stateCheck?: string;
 }
 export default function SearchBar({
    href,
@@ -16,6 +17,9 @@ export default function SearchBar({
    dispatch,
    stateCheck,
 }: Props): ReactElement {
+   useEffect(() => {
+      require('bootstrap/dist/js/bootstrap.bundle.min.js');
+   }, []);
    return (
       <>
          <form

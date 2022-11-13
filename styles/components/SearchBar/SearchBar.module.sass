@@ -1,9 +1,10 @@
-
+@import "../../ultilities/devices"
 #SearchBar
     width: 100%
     display: flex
+    justify-content: center
     >input
-        flex-basis: 88%
+        flex-basis: 70%
         border-radius: 5px 0px 0px 5px
         border: solid rgb(13,110,253) 1px
     >button
@@ -12,4 +13,10 @@
         justify-content: space-between
         width: fit-content
         border-radius: 0px 5px 5px 0px
-        
+@media only screen and (max-width: $small)
+    #SearchBar
+        font-size: 12px
+        >input
+            flex-basis: 50%
+            border-radius: 5px 0px 0px 5px
+            border: solid rgb(13,110,253) 1px

@@ -5,7 +5,8 @@ import { useRouter } from 'next/router';
 import PreviewBlogContainer from '../../components/PreviewBlog/PreviewBlogContainer';
 import Pagination from '../../components/Pagination';
 import { useDispatch } from 'react-redux';
-
+import SearchBar from '../../components/SearchBar';
+import LargeContentLayout from '../../layout/LargeContentLayout';
 const blog = require('../../Server/Model/post');
 
 export async function getServerSideProps({ req }: any) {
@@ -53,6 +54,9 @@ function Page({ params, data }: any): ReactElement {
    return (
       <>
          <MainContentLayout>
+            <LargeContentLayout>
+               <SearchBar filter={{ fields: ['title', 'content'] }}></SearchBar>
+            </LargeContentLayout>
             <PreviewBlogContainer className={!data ? '--skeleton' : ''}>
                {data}
             </PreviewBlogContainer>

@@ -11,6 +11,7 @@ const TitleEditor = (props: Props) => {
       <>
          {console.log('title render', props.children)}
          <textarea
+            contentEditable="true"
             ref={props.customref}
             form={props.form}
             id={Style.TitleEditor}

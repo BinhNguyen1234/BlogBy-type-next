@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { useSelector, useDispatch } from 'react-redux';
-import { ReactElement, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import React from 'react';
 import { LOGINSSR, LOGIN } from '../feature/login';
 interface ContextType {
