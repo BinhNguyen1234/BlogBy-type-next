@@ -6,23 +6,26 @@ interface Props {
    page: number;
    hrefToQuerry?: string;
    setPage?: any;
+   dispatch? :any
 }
 
 export default function Pagination({
    page,
    hrefToQuerry,
    setPage,
+   dispatch
 }: Props): ReactElement {
    return (
       <>
          {hrefToQuerry && !setPage ? (
             <WSSR
+               dispatch = {dispatch }
                id={Style.Pagination}
                page={page}
                hrefToQuerry={hrefToQuerry}
             ></WSSR>
          ) : (
-            <WCSR id={Style.Pagination} page={page} setPage={setPage}></WCSR>
+            <WCSR id={Style.Pagination} dispatch page={page} setPage={setPage}></WCSR>
          )}
       </>
    );

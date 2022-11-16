@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import React from 'react';
 import { LOGINSSR, LOGIN } from '../feature/login';
+import { useRouter } from 'next/router';
 interface ContextType {
    req: any;
 }
@@ -36,6 +37,7 @@ interface Propstype {
 }
 
 function Home({ data }: Propstype) {
+   const router = useRouter()
    const dispatch = useDispatch();
    useEffect(() => {
       process.env.NODE_ENV == 'production'
@@ -45,10 +47,15 @@ function Home({ data }: Propstype) {
    }, []);
    return (
       <>
-         <div>
-            <Link href="/user/editblog/test2?url=toimuontest&check=true">
+         <div onClick={()=>{
+            router.push({
+               pathname: "blog",
+               query: {page: 1}
+            },undefined,{shallow: true})
+         }} >
+            
                Hello
-            </Link>
+           
          </div>
       </>
    );

@@ -42,9 +42,9 @@ export default function PreviewBlogChild({
                   }`}
                ></img>
             </div>
-            <div className={Style.title}>{children?.data.title || 'Title'}</div>
+            <div className={Style.title}>{[<span key={2}>{children?.data.title[0]}</span>, <span key={1} style={{"color":"#905cf9"}}>{children?.data.title[1]}</span>,children?.data.title[2]||'Title']}</div>
             <div className={Style.content}>
-               {children?.data.contentString || 'content'}
+               {[<span key={2}>{children?.data.contentString[0]}</span>,<span key={1} style={{"color":"#905cf9"}}>{children?.data.contentString[1]}</span>,children?.data.contentString[2]|| 'content']}
             </div>
             <div className={Style.date}>{`${
                children?.data.date || '01/01/1991'

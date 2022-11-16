@@ -4,9 +4,10 @@ interface Props {
    page: number;
    id: string;
    setPage: any;
+   dispatch? : any
 }
 
-export default function WCSR({ page, id, setPage }: Props): ReactElement {
+export default function WCSR({ page, id, setPage, dispatch }: Props): ReactElement {
    return (
       <>
          <nav id={id} aria-label="Page navigation example">

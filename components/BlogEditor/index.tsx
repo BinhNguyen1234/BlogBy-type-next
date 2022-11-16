@@ -112,8 +112,8 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
             >
                {{
                   data: {
-                     title: title || value?.title,
-                     contentString,
+                     title: [,,title || value?.title],
+                     contentString: [,,contentString],
                      imgThumbnail: imgThumbnail || value?.imgThumbnail,
                      date: new Date().toLocaleDateString(['ban', 'id']),
                   },

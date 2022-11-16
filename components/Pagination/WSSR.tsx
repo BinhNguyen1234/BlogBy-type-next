@@ -6,19 +6,19 @@ interface Props {
    page: number;
    hrefToQuerry: string;
    id: string;
+   dispatch? :any
 }
 
-export default function WSSR({ page, hrefToQuerry, id }: Props): ReactElement {
-   const dispatch = useDispatch();
+export default function WSSR({ page, hrefToQuerry, id, dispatch }: Props): ReactElement {
    return (
       <>
          <nav id={id} aria-label="Page navigation example">
             <ul className="pagination">
-               <li>
-                  <Link prefetch={false} href={`${hrefToQuerry}${page - 1}`}>
+               <li >
+                  <Link  prefetch={false} href={`${hrefToQuerry}${page - 1}`}>
                      <a
                         onClick={() => {
-                           dispatch(SEND(null));
+                           dispatch.dispatch({type:dispatch.type});
                         }}
                         className={`page-item page-link ${
                            page === 1 ? 'disabled' : null
@@ -33,7 +33,7 @@ export default function WSSR({ page, hrefToQuerry, id }: Props): ReactElement {
                      <Link prefetch={false} href={`${hrefToQuerry}${page - 1}`}>
                         <a
                            onClick={() => {
-                              dispatch(SEND(null));
+                              dispatch.dispatch({type:dispatch.type});
                            }}
                            className="page-item page-link"
                         >
@@ -52,7 +52,7 @@ export default function WSSR({ page, hrefToQuerry, id }: Props): ReactElement {
                   <Link prefetch={false} href={`${hrefToQuerry}${page + 1}`}>
                      <a
                         onClick={() => {
-                           dispatch(SEND(null));
+                           dispatch.dispatch({type:dispatch.type});
                         }}
                         className="page-item page-link"
                      >
@@ -64,7 +64,7 @@ export default function WSSR({ page, hrefToQuerry, id }: Props): ReactElement {
                   <Link prefetch={false} href={`${hrefToQuerry}${page + 1}`}>
                      <a
                         onClick={() => {
-                           dispatch(SEND(null));
+                           dispatch.dispatch({type:dispatch.type});
                         }}
                         className="page-item page-link"
                      >

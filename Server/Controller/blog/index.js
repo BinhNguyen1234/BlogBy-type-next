@@ -1,7 +1,6 @@
 const post = require('../../Model/post');
 async function getPost(req, res) {
    const url = req.query.url.toLowerCase();
-   console.log(url);
    const data = await post
       .findOne(
          {
