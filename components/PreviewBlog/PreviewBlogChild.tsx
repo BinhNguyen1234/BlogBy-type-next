@@ -48,7 +48,7 @@ export default function PreviewBlogChild({
                   <span key={1} style={{ color: '#905cf9' }}>
                      {children?.data.title[1]}
                   </span>,
-                  children?.data.title[2] || 'Title',
+                  children?.data.title[2] ,
                ]}
             </div>
             <div className={Style.content}>
@@ -74,7 +74,7 @@ export default function PreviewBlogChild({
                      ]}
                   </span>,
 
-                  <span key={3}>{children?.data.contentString[2] || 'content'}</span>
+                  <span key={3}>{children?.data.contentString[2] }</span>
                ]}
             </div>
             <div className={Style.date}>{`${
