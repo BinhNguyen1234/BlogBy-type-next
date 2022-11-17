@@ -10,7 +10,7 @@ const TitleEditor = (props: Props) => {
    return (
       <>
          {console.log('title render', props.children)}
-         <textarea 
+         <textarea
             required={true}
             contentEditable="true"
             ref={props.customref}

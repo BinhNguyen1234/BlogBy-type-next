@@ -31,14 +31,15 @@ export default function InforBlog({
                      className={Style.InforBlogContent}
                   >
                      {[
-                        <span key={2}>{data.contentString[0]}</span>,
-                        <span
+                        <span key={2}>{[data.contentString[0],<span
                            key={1}
                            style={{ color: 'black', backgroundColor: 'yellow' }}
+                           id={Style.HightLightWord}
                         >
                            {data.contentString[1]}
-                        </span>,
-                        data.contentString[2],
+                        </span>,]}</span>,
+                        
+                        <span key={3}>{data.contentString[2]}</span>,
                      ]}
                   </div>
                </a>

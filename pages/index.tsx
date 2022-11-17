@@ -37,7 +37,7 @@ interface Propstype {
 }
 
 function Home({ data }: Propstype) {
-   const router = useRouter()
+   const router = useRouter();
    const dispatch = useDispatch();
    useEffect(() => {
       process.env.NODE_ENV == 'production'
@@ -47,15 +47,19 @@ function Home({ data }: Propstype) {
    }, []);
    return (
       <>
-         <div onClick={()=>{
-            router.push({
-               pathname: "blog",
-               query: {page: 1}
-            },undefined,{shallow: true})
-         }} >
-            
-               Hello
-           
+         <div
+            onClick={() => {
+               router.push(
+                  {
+                     pathname: 'blog',
+                     query: { page: 1 },
+                  },
+                  undefined,
+                  { shallow: true }
+               );
+            }}
+         >
+            Hello
          </div>
       </>
    );

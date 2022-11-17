@@ -17,8 +17,8 @@ async function getList(req, res) {
          })
          .skip((page ? page - 1 : 0) * 10)
          .limit(10)
-         .catch((e)=>{
-            throw e
+         .catch((e) => {
+            throw e;
          });
       let data = rawData.map((object) => {
          return {
@@ -29,7 +29,7 @@ async function getList(req, res) {
       res.send(data);
    } catch (e) {
       console.log(e);
-      res.status(500).send("Server Error")
+      res.status(500).send('Server Error');
    }
 }
 module.exports = getList;

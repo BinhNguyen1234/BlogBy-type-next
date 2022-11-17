@@ -59,13 +59,14 @@
         margin: 2px 
         padding: 0 0.5rem
         span
-            &:nth-child(1)
+            &:first-child
                 float: left
                 max-width: 50%
                 white-space: nowrap 
                 overflow: hidden
+                direction: rtl !important
                 text-overflow: ellipsis 
-                direction: rtl
+                
     .date
         font-size: 12px
         margin: 0
@@ -81,6 +82,14 @@
             font-size: 1.6rem
         .content
             font-size: 14px
+            span
+                &:first-child
+                    float: left
+                    max-width: 50%
+                    white-space: nowrap 
+                    overflow: hidden
+                    direction: rtl !important
+                    text-overflow: clip 
 @media only screen and (max-width: $small)
     .PreviewBlogChild
         width: 90vw
@@ -88,3 +97,12 @@
             font-size: 1.4rem
         .content
             font-size: 12px
+            span
+                &:first-child
+
+                    float: left
+                    max-width: 50%
+                    white-space: nowrap 
+                    overflow: hidden
+                    direction: rtl !important
+                    text-overflow: clip 

@@ -1,4 +1,10 @@
-import { ReactElement, useReducer, useEffect, createContext, useState } from 'react';
+import {
+   ReactElement,
+   useReducer,
+   useEffect,
+   createContext,
+   useState,
+} from 'react';
 import { RENDERED, RESET } from '../../feature/handleProgressBar';
 import MainContentLayout from '../../layout/MainContentLayout';
 import { useRouter } from 'next/router';
@@ -226,10 +232,16 @@ function reducer(state: InitialStateType, action: any) {
                if (state.filter == 'title') {
                   return state.data.reduce((pV: any, cV) => {
                      let positonSearchWordTitle = (cV.title as string).search(
-                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu')
+                        new RegExp(
+                           ` ${action.payload.keyFilter}|${action.payload.keyFilter}`,
+                           'miu'
+                        )
                      );
                      let headAndTrailTitle = (cV.title as string).split(
-                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu'),
+                        new RegExp(
+                           ` ${action.payload.keyFilter}|${action.payload.keyFilter}`,
+                           'miu'
+                        ),
                         2
                      );
                      let body = cV.title.slice(
@@ -290,43 +302,46 @@ function Page(): ReactElement {
       keyFilter: '',
       filter: 'title',
    });
-   const LoadingContext = createContext(true)
+   const LoadingContext = createContext(true);
 
    // useEffect(() => {
    //    if (!page) {
    //       router.push('/blog?page=1');
    //    }
    // }, []);
-   
-      useEffect(() => {
-         // dispatch(RESET());
-        
-         axios({
-            method: 'get',
-            url: `api/v1/blog/getblog?page=${page}`,
+
+   useEffect(() => {
+      // dispatch(RESET());
+
+      axios({
+         method: 'get',
+         url: `api/v1/blog/getblog?page=${page}`,
+      })
+         .then((res) => {
+            let data = res.data;
+            dispatch({ type: 'Done', payload: { posts: data } });
          })
-            .then((res) => {
-               console.log(page)
-               let data = res.data;
-               dispatch({ type: 'Done', payload: { posts: data } });
-            })
-            .catch((e) => {
-               console.log(e);
-            });
-      }, [router]);
-   
+         .catch((e) => {
+            console.log(e);
+         });
+   }, [router]);
+
    return (
       <>
          <MainContentLayout>
             <LargeContentLayout>
-               <SearchBar dispatch={dispatch}
-                   filter={{ fields: ['title', 'content'] }}></SearchBar>
+               <SearchBar
+                  dispatch={dispatch}
+                  filter={{ fields: ['title', 'content'] }}
+               ></SearchBar>
             </LargeContentLayout>
-               <PreviewBlogContainer className={state.isLoading?'--skeleton':""}>
-                  {state.displayedData}
-               </PreviewBlogContainer>
+            <PreviewBlogContainer
+               className={state.isLoading ? '--skeleton' : ''}
+            >
+               {state.displayedData}
+            </PreviewBlogContainer>
             <Pagination
-               dispatch={{dispatch,type:"Sent"}}
+               dispatch={{ dispatch, type: 'Sent' }}
                hrefToQuerry={'/blog?page='}
                page={parseInt(page as string)}
             ></Pagination>

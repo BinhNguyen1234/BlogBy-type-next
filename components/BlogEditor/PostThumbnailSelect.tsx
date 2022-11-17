@@ -30,7 +30,6 @@ export default function PostThumbnailSelect({
          <form ref={formRef} id={Style.PostThumbnailSelect}>
             <label htmlFor="inputThumbail">Chose image for thumbnail</label>
             <input
-               required
                ref={inputRef}
                name="upload-name"
                form={Style.PostThumbnailSelect}

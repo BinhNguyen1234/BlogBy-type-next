@@ -1,12 +1,14 @@
 #ContentEditor 
     box-sizing: content-box
     width: 100%
+    position: relative
     >div
         box-sizing: content-box
         width: 100%
         padding: 0 10px 
-    div:last-child
-        min-height: 100vh !important
+    div
+        &:last-child
+            min-height: 100vh !important
         
-        div:first-child
-           padding: 0
+        &:first-child
+            padding: 0
