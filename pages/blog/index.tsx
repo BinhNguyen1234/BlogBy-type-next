@@ -232,16 +232,10 @@ function reducer(state: InitialStateType, action: any) {
                if (state.filter == 'title') {
                   return state.data.reduce((pV: any, cV) => {
                      let positonSearchWordTitle = (cV.title as string).search(
-                        new RegExp(
-                           ` ${action.payload.keyFilter}|${action.payload.keyFilter}`,
-                           'miu'
-                        )
+                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu')
                      );
                      let headAndTrailTitle = (cV.title as string).split(
-                        new RegExp(
-                           ` ${action.payload.keyFilter}|${action.payload.keyFilter}`,
-                           'miu'
-                        ),
+                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu'),
                         2
                      );
                      let body = cV.title.slice(

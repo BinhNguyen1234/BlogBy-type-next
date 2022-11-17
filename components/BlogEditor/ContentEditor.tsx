@@ -35,8 +35,8 @@ const ReactQuill = dynamic(
       loading: () => {
          return (
             <div
-               className="spinner-border"
-               style={{ width: '3rem', height: '3rem', alignSelf: 'center' }}
+               className="--skeleton"
+               style={{ width: '100%', height: '100vh', alignSelf: 'center' }}
                role="status"
             ></div>
          );

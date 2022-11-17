@@ -83,8 +83,8 @@ export default function SearchBar({
                      {filter.fields.map((field, index): ReactElement => {
                         return (
                            <>
-                              <li className="dropdown-item ">
-                                 <div className="form-check">
+                              <li style={{display:"flex", justifyContent: "center", paddingLeft: "5%", paddingRight: 0}} className="dropdown-item ">
+                                 <label htmlFor={field} style={{ width: "100%"}} className="form-check">
                                     <input
                                        onChange={() => {
                                           dispatch({
@@ -100,12 +100,13 @@ export default function SearchBar({
                                        id={field}
                                     ></input>
                                     <label
+                                       style={{width: "100%"}}
                                        className="form-check-label"
                                        htmlFor={field}
                                     >
                                        {field}
                                     </label>
-                                 </div>
+                                 </label>
                               </li>
                            </>
                         );

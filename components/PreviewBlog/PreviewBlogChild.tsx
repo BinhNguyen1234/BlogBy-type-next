@@ -53,13 +53,28 @@ export default function PreviewBlogChild({
             </div>
             <div className={Style.content}>
                {[
-                  <span dir="rtl" key={2}>
-                     {children?.data.contentString[0]}
+                  <span key={2}>
+                     {[
+                        children?.data.contentString[0],
+                        <span
+                           key={1}
+                           className={Style.HighLightWord}
+                           style={{
+                              color: '#905cf9',
+                              float: 'none',
+                              maxWidth: 'none',
+                              whiteSpace: 'nowrap',
+                              overflow: 'initial',
+                              textOverflow: 'initial',
+                              direction: 'ltr',
+                           }}
+                        >
+                           {children?.data.contentString[1]}
+                        </span>,
+                     ]}
                   </span>,
-                  <span key={1} style={{ color: '#905cf9' }}>
-                     {children?.data.contentString[1]}
-                  </span>,
-                  children?.data.contentString[2] || 'content',
+
+                  <span key={3}>{children?.data.contentString[2] || 'content'}</span>
                ]}
             </div>
             <div className={Style.date}>{`${
