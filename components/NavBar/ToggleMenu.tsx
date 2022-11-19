@@ -14,6 +14,7 @@ interface Props {
 
 const MenuToggle: React.FC<Props> = ({ showModal, children }) => {
    const router = useRouter();
+
    const loginSlice = useSelector((state: RootStateType) => {
       return state.loginSliceReducers;
    });

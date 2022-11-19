@@ -1,7 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('../../Model/user');
-
 function loginHandler() {
    passport.serializeUser(({ username, password }, setToSessionCb) => {
       return setToSessionCb(null, { username, password });

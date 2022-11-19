@@ -9,7 +9,6 @@ interface Props {
 const TitleEditor = (props: Props) => {
    return (
       <>
-         {console.log('title render', props.children)}
          <textarea
             required={true}
             contentEditable="true"

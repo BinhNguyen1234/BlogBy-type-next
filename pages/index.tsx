@@ -7,44 +7,44 @@ import { useRouter } from 'next/router';
 interface ContextType {
    req: any;
 }
-export function getServerSideProps({ req }: ContextType) {
-   interface data {
-      infoUser: string;
-      isAuth: boolean;
-   }
-   let data: data = {
-      infoUser: 'Login',
-      isAuth: false,
-   };
-   try {
-      data = {
-         infoUser: req.user.username,
-         isAuth: true,
-      };
-   } catch (e) {
-      if (e) {
-         console.log('Not in log-in /pages/index.txs line 26 ');
-      }
-   }
-   return {
-      props: {
-         data: data,
-      },
-   };
-}
-interface Propstype {
-   data: any;
-}
+// export function getServerSideProps({ req }: ContextType) {
+//    interface data {
+//       infoUser: string;
+//       isAuth: boolean;
+//    }
+//    let data: data = {
+//       infoUser: 'Login',
+//       isAuth: false,
+//    };
+//    try {
+//       data = {
+//          infoUser: req.user.username,
+//          isAuth: true,
+//       };
+//    } catch (e) {
+//       if (e) {
+//          console.log('Not in log-in /pages/index.txs line 26 ');
+//       }
+//    }
+//    return {
+//       props: {
+//          data: data,
+//       },
+//    };
+// }
+// interface Propstype {
+//    data: any;
+// }
 
-function Home({ data }: Propstype) {
+function Home(/*{ data }: Propstype*/) {
    const router = useRouter();
    const dispatch = useDispatch();
-   useEffect(() => {
-      process.env.NODE_ENV == 'production'
-         ? dispatch(LOGINSSR(data))
-         : dispatch(LOGIN('Dev')); // on product
-      // dispatch(LOGIN("Dev")) // one Dev
-   }, []);
+   // useEffect(() => {
+   //    process.env.NODE_ENV == 'production'
+   //       ? dispatch(LOGINSSR(data))
+   //       : dispatch(LOGIN('Dev')); // on product
+   //    // dispatch(LOGIN("Dev")) // one Dev
+   // }, []);
    return (
       <>
          <div
