@@ -4,32 +4,37 @@ import { HYDRATE } from 'next-redux-wrapper';
 export interface LoginStateType {
    isAuth: boolean;
    infoUser: string;
+   token: string | undefined;
 }
 
 const initialState: LoginStateType = {
    isAuth: false,
    infoUser: 'Loign',
+   token: undefined
 };
 const loginSlice = createSlice({
    name: 'Login',
    initialState,
    reducers: {
-      LOGIN: (state, action) => {
+      LOGINWITHTK: (state,action)=>{
          return (state = {
+            token: action.payload.token,
             isAuth: true,
-            infoUser: action.payload,
+            infoUser: action.payload.username,
          });
       },
-      LOGINSSR: (state, action) => {
+      LOGIN: (state, action) => {
          return (state = {
-            isAuth: action.payload.isAuth,
-            infoUser: action.payload.infoUser,
+            ...state,
+            isAuth: true,
+            infoUser: action.payload,
          });
       },
       LOGOUT: (state, action) => {
          return (state = {
             isAuth: false,
             infoUser: 'Login',
+            token: undefined
          });
       },
    },
@@ -41,4 +46,4 @@ const loginSlice = createSlice({
 });
 
 export default loginSlice.reducer;
-export const { LOGIN, LOGOUT, LOGINSSR } = loginSlice.actions;
+export const { LOGIN, LOGOUT,LOGINWITHTK } = loginSlice.actions;

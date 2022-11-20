@@ -1,3 +1,3 @@
 const App = require('./Config/server');
 
-App.run(80);
+App.run(process.env.PORT || 80);

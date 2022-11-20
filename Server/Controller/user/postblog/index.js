@@ -1,6 +1,7 @@
 const user = require('../../../Model/user');
 const post = require('../../../Model/post');
 async function postBlog(req, res) {
+   console.log(req.user)
    // const test =  await user.findOne({"username":req.user.username}).populate({path: "_post", match : {"title":"213213214"}})
    // console.log(test) // Querry post base on user
    let writer = new Promise((resolve, reject) => {

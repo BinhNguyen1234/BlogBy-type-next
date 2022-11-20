@@ -18,14 +18,14 @@ async function loginController(req, res) {
             console.log(`Find ${username} success `);
             if (password == result.password) {
                console.log(`password verify sucess`);
-               const accToken = jwt.sign({ username: username }, 'blogcho',);
-               const rfToken = jwt.sign({ username: username }, '170116Abcrefresh',);
-               res
-               .status(201)
-               .cookie( "actk", accToken,{maxAge: 1000 * 60 * 5, httpOnly: true})
-               .cookie("rf", rfToken,{maxAge:1000 * 60 * 60 * 24})
-               .cookie("test", "test",{maxAge:1000 * 60 * 60 * 24})
-               .send("Log-in success");
+               const accToken = jwt.sign({ username: username }, 'blogtee;accessToken');
+               const rfToken = jwt.sign(
+                  { username: username },
+                  'blogtee;refreshToken'
+               );
+               res.status(201)
+                  .cookie('rf', rfToken, { maxAge: 1000 * 60 * 60 * 4 }) // expire after 4h
+                  .send({token: accToken});
             } else {
                console.log(`password verify failed`);
                res.status(401).send('wrong password');
@@ -37,7 +37,7 @@ async function loginController(req, res) {
             res.status(401).send('username not exist');
          });
    } catch (e) {
-      console.log(e);
+      res.status(501).send('server error')
    }
 }
 module.exports = loginController;

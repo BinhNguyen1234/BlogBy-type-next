@@ -7,7 +7,7 @@ import shadow from '../../public/image/shadow.png';
 import LoginCloseModalBtn from './LoginCloseModalBtn';
 import React, { useCallback, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { LOGIN } from '../../feature/login';
+import { LOGINWITHTK } from '../../feature/login';
 import { handleUI } from '../../feature/login/UISubmitBtn';
 import SubmitBtn from '../../components/Login/SubmitBtn';
 import { RootStateType } from '../../feature';
@@ -23,7 +23,6 @@ const LoginForm: React.FC<Props> = ({ hideModal }: Props) => {
    const message = useSelector((state: RootStateType) => {
       return state.UISubmitBtn.message;
    });
-
    const sendRequesLogin = useCallback((e: React.MouseEvent) => {
       dispatch(handleUI({ type: 'SEND' }));
       e.preventDefault();
@@ -44,7 +43,8 @@ const LoginForm: React.FC<Props> = ({ hideModal }: Props) => {
 
          .then((response) => {
             if (response.status === 201) {
-               dispatch(LOGIN(UserInfo.username));
+               
+               dispatch(LOGINWITHTK({username: UserInfo.username,token: response.data.token}));
                dispatch(handleUI({ type: 'SUCCESS' }));
                hideModal('none');
             }

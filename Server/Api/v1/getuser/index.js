@@ -1,8 +1,6 @@
 const getuser = require('express').Router();
-const Auth = require('../../../Middeware/Auth');
-
-getuser.use('', Auth(), (req, res) => {
-   res.status(200).send('OK');
-});
+const Auth = require('../../../Middeware/AuthMiddleware');
+const provideAccessJWT = require("../../../Controller/login/provideAccessJWT")
+getuser.use('', Auth('blogtee;refreshToken'), provideAccessJWT);
 
 module.exports = getuser;
