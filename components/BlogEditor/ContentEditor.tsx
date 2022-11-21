@@ -1,8 +1,11 @@
 import React, { memo, forwardRef, ReactElement, useRef } from 'react';
 import Style from '../../styles/components/BlogEditor/ContentEditor.module.sass';
 import dynamic from 'next/dynamic';
-import axios from 'axios';
+import { useSelector } from 'react-redux';
+import APIAuth from '../../ulitlity/callApiWAuth';
 import { debounceChangeContent } from '../../ulitlity/debounce';
+import { RootStateType } from '../../feature';
+import { getCookie } from '../../ulitlity/ManupulateCookie';
 const ReactQuill = dynamic(
    async function () {
       const Editor = await import('react-quill');
@@ -54,6 +57,7 @@ const ContentEditor = forwardRef(function useDisplayName(
    props: Props,
    ref
 ): ReactElement {
+   const token = useSelector((state:RootStateType)=>{return state.loginSliceReducers.token})
    let toolbarOptions = useRef([
       ['bold', 'italic', 'underline'],
       ['link', 'image'],
@@ -64,7 +68,8 @@ const ContentEditor = forwardRef(function useDisplayName(
       [{ header: [2, 3, 4, 5, 6, false] }],
       ['clean'],
    ]);
-   const modules = useRef({
+   const API = new APIAuth()
+   const modules = {
       toolbar: {
          container: toolbarOptions.current,
          handlers: {
@@ -84,22 +89,21 @@ const ContentEditor = forwardRef(function useDisplayName(
                      input.files?.[0],
                      'upload-name'
                   );
-                  axios({
+                  API.callAPI({
                      method: 'post',
                      url: '/api/v1//image/upload/blog',
                      headers: {
                         'Content-Type': '"multipart/form-data"',
                      },
                      data: formData,
-                  })
+                  },getCookie('acc'))
                      .then((res) => {
-                        let ops = editor.insertEmbed(
+                        console.log(range.index)
+                        editor.insertEmbed(
                            range.index,
                            'image',
                            `/external/${res.data}`
                         );
-                        ops.ops[0].insert.attributes = { alt: '123465' };
-                        editor.setSelection(range.index++);
                         props.setDefaultPreviewUrl(`/external/${res.data}`);
                      })
                      .catch((e) => {
@@ -109,7 +113,7 @@ const ContentEditor = forwardRef(function useDisplayName(
             },
          },
       },
-   });
+   };
 
    return (
       <>
@@ -118,7 +122,7 @@ const ContentEditor = forwardRef(function useDisplayName(
             onChange={props.onChange}
             forwardedRef={ref}
             id={Style.ContentEditor}
-            modules={modules.current}
+            modules={modules}
             placeholder="Write your blog"
          ></ReactQuill>
       </>

@@ -1,23 +1,26 @@
 import { ReactElement, useRef } from 'react';
 import Style from '../../styles/components/BlogEditor/PostThumbnailSelect.module.sass';
-import axios from 'axios';
+import APIAuth from '../../ulitlity/callApiWAuth';
+import { getCookie } from '../../ulitlity/ManupulateCookie';
 export default function PostThumbnailSelect({
    onChange,
+
 }: {
    onChange: any;
 }): ReactElement {
+   const API = new APIAuth
    const inputRef: any = useRef<HTMLInputElement>(null);
    const formRef: any = useRef<HTMLFormElement | undefined>();
    const handleImageThumbnail = () => {
       let formData = new FormData(formRef.current);
-      axios({
+      API.callAPI({
          method: 'post',
          url: '/api/v1//image/upload/blog',
          headers: {
             'Content-Type': '"multipart/form-data"',
          },
          data: formData,
-      })
+      },getCookie("acc"))
          .then((res) => {
             onChange(`/external/${res.data}`);
          })

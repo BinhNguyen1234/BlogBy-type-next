@@ -1,6 +1,7 @@
 const newpost = require('express').Router();
 const postBlog = require('../../../../../Controller/user/postblog');
-const Auth = require('../../../../../Middeware/AuthMiddleware');
+const AuthClass = require('../../../../../Middeware/AuthMiddleware');
+const Auth =  new AuthClass()
 
-newpost.post('/', Auth("blogtee;accessToken"), postBlog);
+newpost.post('/', Auth.authenticate('blogtee;accessToken'), postBlog);
 module.exports = newpost;

@@ -5,12 +5,12 @@ import {
    useState,
    useLayoutEffect,
 } from 'react';
+import APIAuth from "../../ulitlity/callApiWAuth"
 import ContentEditor from './ContentEditor';
 import TitleEditor from './TitleEditor';
 import SendBlogBtn from './SendBlogBtn';
 import PostThumbnailSelect from './PostThumbnailSelect';
 import Style from '../../styles/components/BlogEditor/BlogEditor.module.sass';
-import axios from 'axios';
 import ReactQuill from 'react-quill';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleSendPostBtn } from '../../feature/login/UISendPostBtn';
@@ -18,6 +18,8 @@ import { RootStateType } from '../../feature';
 import PreviewBlogChild from '../PreviewBlog/PreviewBlogChild';
 import { useRouter } from 'next/router';
 import { debounceChangeTitle } from '../../ulitlity/debounce';
+import { getCookie } from '../../ulitlity/ManupulateCookie';
+
 const initialState = {
    title: null,
    contentString: null,
@@ -33,9 +35,9 @@ interface Props {
    } | null;
 }
 export default function BlogEditor({ value, href }: Props): ReactElement {
-   const token = useSelector((state:RootStateType)=>{return state.loginSliceReducers.token})
+
+   const APIwAuth = new APIAuth()
    const router = useRouter();
-   console.log(token)
    const [title, setTitle] = useState('title');
    const [contentString, setContentString] = useState();
    const [imgThumbnail, setUrl] = useState(value?.imgThumbnail || null);
@@ -54,34 +56,20 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
    const statusBtn = useSelector((state: RootStateType) => {
       return state?.UISendPostBtn.content;
    });
-   console.log(token, "token")
+
    const sendNewPost = useCallback(async () => {
-      console.log(token, "token")
       dispatch(handleSendPostBtn({ type: 'WAITTING' }));
       const editor = contentEditorRef.current?.getEditor();
-      axios.interceptors.request.use((req)=>{
-         if(!token){
-            console.log("not have token")
-            return req.headers = {Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjY4OTYxNjczfQ.OTtJ9Bxr6InYZfoypF7d0antsqT2kMBFK0p6FxncRVE"}
-         }
-         
-      },(e)=>{
-         console.log(e)
-         return e.response = {status: 500,data: "test"}
-      })
-      axios({
+      APIwAuth.callAPI({
          method: 'post',
          url: href,
-         headers: {
-            Authorization: `Bearer ${token}`
-         },
          data: {
             title: titleEditorRef.current?.value,
             content: editor?.getContents().ops,
             contentString: refState.current.contentString,
             imgThumbnail: refState.current.imgThumbnail,
          },
-      })
+      },getCookie("acc"))
          .then((res) => {
             dispatch(handleSendPostBtn({ type: 'SUCCESS' }));
             editor?.enable(false);

@@ -43,8 +43,12 @@ const LoginForm: React.FC<Props> = ({ hideModal }: Props) => {
 
          .then((response) => {
             if (response.status === 201) {
-               
-               dispatch(LOGINWITHTK({username: UserInfo.username,token: response.data.token}));
+               dispatch(
+                  LOGINWITHTK({
+                     username: UserInfo.username,
+                     token: response.data.token,
+                  })
+               );
                dispatch(handleUI({ type: 'SUCCESS' }));
                hideModal('none');
             }

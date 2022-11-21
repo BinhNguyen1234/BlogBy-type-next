@@ -10,13 +10,13 @@ export interface LoginStateType {
 const initialState: LoginStateType = {
    isAuth: false,
    infoUser: 'Loign',
-   token: undefined
+   token: undefined,
 };
 const loginSlice = createSlice({
    name: 'Login',
    initialState,
    reducers: {
-      LOGINWITHTK: (state,action)=>{
+      LOGINWITHTK: (state, action) => {
          return (state = {
             token: action.payload.token,
             isAuth: true,
@@ -34,7 +34,7 @@ const loginSlice = createSlice({
          return (state = {
             isAuth: false,
             infoUser: 'Login',
-            token: undefined
+            token: undefined,
          });
       },
    },
@@ -46,4 +46,4 @@ const loginSlice = createSlice({
 });
 
 export default loginSlice.reducer;
-export const { LOGIN, LOGOUT,LOGINWITHTK } = loginSlice.actions;
+export const { LOGIN, LOGOUT, LOGINWITHTK} = loginSlice.actions;
