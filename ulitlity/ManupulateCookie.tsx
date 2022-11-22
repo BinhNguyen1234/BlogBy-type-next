@@ -6,7 +6,6 @@ export function getCookie(name: string) {
       });
       return Cookie[0].replace(`${name}=`, '');
    } catch (e) {
-      console.log(e);
       return null;
    }
 }

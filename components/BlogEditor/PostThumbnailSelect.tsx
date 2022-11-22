@@ -4,11 +4,10 @@ import APIAuth from '../../ulitlity/callApiWAuth';
 import { getCookie } from '../../ulitlity/ManupulateCookie';
 export default function PostThumbnailSelect({
    onChange,
-
 }: {
    onChange: any;
 }): ReactElement {
-   const API = new APIAuth
+   const API = new APIAuth();
    const inputRef: any = useRef<HTMLInputElement>(null);
    const formRef: any = useRef<HTMLFormElement | undefined>();
    const handleImageThumbnail = () => {
@@ -20,7 +19,7 @@ export default function PostThumbnailSelect({
             'Content-Type': '"multipart/form-data"',
          },
          data: formData,
-      },getCookie("acc"))
+      })
          .then((res) => {
             onChange(`/external/${res.data}`);
          })
@@ -31,7 +30,14 @@ export default function PostThumbnailSelect({
    return (
       <>
          <form ref={formRef} id={Style.PostThumbnailSelect}>
-            <label htmlFor="inputThumbail">Chose image for thumbnail</label>
+            <label
+               className="btn btn-primary"
+               role="button"
+               data-bs-toggle="button"
+               htmlFor="inputThumbail"
+            >
+               Chose image for thumbnail
+            </label>
             <input
                ref={inputRef}
                name="upload-name"
@@ -40,6 +46,7 @@ export default function PostThumbnailSelect({
                id="inputThumbail"
                type="file"
                accept="image/*"
+               placeholder={'test'}
             ></input>
          </form>
       </>

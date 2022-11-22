@@ -1,11 +1,10 @@
 import React, { memo, forwardRef, ReactElement, useRef } from 'react';
 import Style from '../../styles/components/BlogEditor/ContentEditor.module.sass';
 import dynamic from 'next/dynamic';
-import { useSelector } from 'react-redux';
 import APIAuth from '../../ulitlity/callApiWAuth';
 import { debounceChangeContent } from '../../ulitlity/debounce';
-import { RootStateType } from '../../feature';
 import { getCookie } from '../../ulitlity/ManupulateCookie';
+import { useDispatch } from 'react-redux';
 const ReactQuill = dynamic(
    async function () {
       const Editor = await import('react-quill');
@@ -57,7 +56,7 @@ const ContentEditor = forwardRef(function useDisplayName(
    props: Props,
    ref
 ): ReactElement {
-   const token = useSelector((state:RootStateType)=>{return state.loginSliceReducers.token})
+   const dispatch = useDispatch();
    let toolbarOptions = useRef([
       ['bold', 'italic', 'underline'],
       ['link', 'image'],
@@ -68,7 +67,7 @@ const ContentEditor = forwardRef(function useDisplayName(
       [{ header: [2, 3, 4, 5, 6, false] }],
       ['clean'],
    ]);
-   const API = new APIAuth()
+   const API = new APIAuth();
    const modules = {
       toolbar: {
          container: toolbarOptions.current,
@@ -96,9 +95,9 @@ const ContentEditor = forwardRef(function useDisplayName(
                         'Content-Type': '"multipart/form-data"',
                      },
                      data: formData,
-                  },getCookie('acc'))
+                  })
                      .then((res) => {
-                        console.log(range.index)
+                        console.log(range.index);
                         editor.insertEmbed(
                            range.index,
                            'image',

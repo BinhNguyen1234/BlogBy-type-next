@@ -27,12 +27,12 @@ async function loginController(req, res) {
                   'blogtee;refreshToken'
                );
                res.status(201)
-                  .cookie('acc', accToken,{ maxAge: 1000 * 60 * 5 })
+                  .cookie('acc', accToken, { maxAge: 1000 * 60 * 5 })
                   .cookie('rf', rfToken, { maxAge: 1000 * 60 * 60 * 4 })
-                  .send("OK") // expire after 4h;
+                  .send('OK'); // expire after 4h;
             } else {
                console.log(`password verify failed`);
-               res.status(401).send('wrong password');
+               res.status(401).send('Wrong username adn password');
             }
          })
          .catch((err) => {

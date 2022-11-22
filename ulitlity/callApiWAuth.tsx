@@ -1,36 +1,84 @@
-import axios from "axios"
-import {getCookie, deleteCookie} from "../ulitlity/ManupulateCookie"
-import {useDispatch} from "react-redux"
-import {LOGOUT} from "../feature/login"
+import axios from 'axios';
+import { getCookie, deleteCookie } from '../ulitlity/ManupulateCookie';
+import { useDispatch } from 'react-redux';
+import { RELOGIN } from '../feature/login';
 interface constructorType {
-    method: string,
-    url: string,
-    data: any,
-    headers?: any
+   method: string;
+   url: string;
+   data: any;
+   headers?: any;
 }
 class APIAuth {
-    dispatch = useDispatch()
-    config =null;
-    callAPI( config: constructorType,token: string| null | undefined){
-         axios.interceptors.response.use(
-            (response) => {
-                return response
-            },
-            (e) => {
-                if(e.response.status !== 401){
-                    return Promise.reject(e)
-                }
-                return axios({...config, data: null,url: "/api/v1/getuser", headers:{Authorization: `Bearer ${getCookie("rf")}`}})
-                .then((response)=>{
-                    return axios({...config, headers:{Authorization: `Bearer ${getCookie('acc')}`}})
-                })
-                .catch((e)=>{
-                    this.dispatch(LOGOUT(null))
-                    return Promise.reject(e)})
+   dispatch = useDispatch();
+   config = null;
+   callAPI(config: constructorType) {
+      const instance = axios.create();
+      instance.interceptors.request.use(
+         (request) => {
+            if (!getCookie('acc')) {
+               request.url = '/api/v1/getuser';
+               request.headers = { Authorization: `Bearer ${getCookie('rf')}` };
+               request.data = null;
             }
-         )
-        return axios({...config,headers:{Authorization: `Bearer ${token}`,...config.headers}})
-    }
+            return request;
+         },
+         (e) => {
+            throw e;
+         }
+      );
+      let a = instance.interceptors.response.use(
+         (response) => {
+            if (
+               response.status == 299 &&
+               response.data.message == 'Post successful'
+            ) {
+               return response;
+            } else if (response.status == 201) {
+               return instance({
+                  ...config,
+                  headers: { Authorization: `Bearer ${getCookie('acc')}` },
+               });
+            }
+         },
+         (e) => {
+            if (e.response.status !== 401) {
+               console.log(1);
+               return Promise.reject(e);
+            } else if (!getCookie('rf')) {
+               console.log(2);
+               this.dispatch(RELOGIN(null));
+               return Promise.reject(e);
+            } else {
+               console.log(3);
+               return instance({
+                  ...config,
+                  data: null,
+                  url: '/api/v1/getuser',
+                  headers: { Authorization: `Bearer ${getCookie('rf')}` },
+               })
+                  .then((response) => {
+                     return instance({
+                        ...config,
+                        headers: {
+                           Authorization: `Bearer ${getCookie('acc')}`,
+                        },
+                     });
+                  })
+                  .catch((e) => {
+                     this.dispatch(RELOGIN(null));
+                     return Promise.reject(e);
+                  });
+            }
+         }
+      );
+      return instance({
+         ...config,
+         headers: {
+            Authorization: `Bearer ${getCookie('acc')}`,
+            ...config.headers,
+         },
+      });
+   }
 }
 
-export default  APIAuth
+export default APIAuth;

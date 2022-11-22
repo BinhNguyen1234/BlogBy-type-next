@@ -13,11 +13,11 @@ function User(): ReactElement<any> {
       return state.loginSliceReducers.isAuth;
    });
    const router = useRouter();
-   useEffect(() => {
-      if (isAuth == false) {
-         router.push('/');
-      }
-   }, []);
+   // useEffect(() => {
+   //    if (isAuth == false) {
+   //       router.push('/');
+   //    }
+   // }, []);
    if (isAuth === true) {
       return (
          <>

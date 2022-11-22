@@ -5,20 +5,19 @@ import {
    useState,
    useLayoutEffect,
 } from 'react';
-import APIAuth from "../../ulitlity/callApiWAuth"
+import APIAuth from '../../ulitlity/callApiWAuth';
 import ContentEditor from './ContentEditor';
 import TitleEditor from './TitleEditor';
 import SendBlogBtn from './SendBlogBtn';
 import PostThumbnailSelect from './PostThumbnailSelect';
 import Style from '../../styles/components/BlogEditor/BlogEditor.module.sass';
 import ReactQuill from 'react-quill';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { handleSendPostBtn } from '../../feature/login/UISendPostBtn';
 import { RootStateType } from '../../feature';
 import PreviewBlogChild from '../PreviewBlog/PreviewBlogChild';
 import { useRouter } from 'next/router';
 import { debounceChangeTitle } from '../../ulitlity/debounce';
-import { getCookie } from '../../ulitlity/ManupulateCookie';
 
 const initialState = {
    title: null,
@@ -35,32 +34,21 @@ interface Props {
    } | null;
 }
 export default function BlogEditor({ value, href }: Props): ReactElement {
-
-   const APIwAuth = new APIAuth()
    const router = useRouter();
    const [title, setTitle] = useState('title');
    const [contentString, setContentString] = useState();
    const [imgThumbnail, setUrl] = useState(value?.imgThumbnail || null);
    const refState = useRef({ contentString, imgThumbnail });
    refState.current = { contentString, imgThumbnail };
-   const handleUiSendBtn = useCallback(() => {
-      if (statusBtn != 'TRY AGAIN') {
-         sendNewPost();
-      } else {
-         dispatch(handleSendPostBtn({ type: 'INITIAL' }));
-      }
-   }, []);
+
    const titleEditorRef = useRef<HTMLTextAreaElement>(null);
    const contentEditorRef = useRef<ReactQuill>(null);
    const dispatch = useDispatch();
-   const statusBtn = useSelector((state: RootStateType) => {
-      return state?.UISendPostBtn.content;
-   });
-
+   const APIwAuth = new APIAuth();
    const sendNewPost = useCallback(async () => {
       dispatch(handleSendPostBtn({ type: 'WAITTING' }));
       const editor = contentEditorRef.current?.getEditor();
-      APIwAuth.callAPI({
+      return APIwAuth.callAPI({
          method: 'post',
          url: href,
          data: {
@@ -69,7 +57,7 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
             contentString: refState.current.contentString,
             imgThumbnail: refState.current.imgThumbnail,
          },
-      },getCookie("acc"))
+      })
          .then((res) => {
             dispatch(handleSendPostBtn({ type: 'SUCCESS' }));
             editor?.enable(false);
@@ -83,11 +71,12 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
             dispatch(
                handleSendPostBtn({
                   type: 'FAILED',
-                  // message: `${err.response.status}: ${err.response.data}`,
+                  message: `${err.response.status}: ${err.response.data.message}`,
                })
             );
          });
    }, []);
+
    useLayoutEffect(() => {
       titleEditorRef.current?.addEventListener(
          'input',
@@ -122,7 +111,7 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
                   },
                }}
             </PreviewBlogChild>
-            <SendBlogBtn onClick={handleUiSendBtn}></SendBlogBtn>
+            <SendBlogBtn onClick={sendNewPost}></SendBlogBtn>
          </form>
       </>
    );

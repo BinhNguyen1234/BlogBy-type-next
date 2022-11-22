@@ -1,6 +1,6 @@
 const multer = require('multer');
 const AuthClass = require('../../../../../Middeware/AuthMiddleware');
-const Auth = new AuthClass()
+const Auth = new AuthClass();
 const image = require('express').Router();
 const storageEngine = multer.diskStorage({
    destination: function (req, file, cb) {

@@ -1,11 +1,10 @@
 import Link from 'next/link';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import style from '../styles/Layouts/NavBar.module.sass';
 import ToggleBtn from '../components/NavBar/ToggleBtn';
 import ToggleMenu from '../components/NavBar/ToggleMenu';
 import ToggleContainer from '../components/NavBar/ToggleContainer';
-import React, { useRef } from 'react';
-import { RootStateType } from '../feature';
+import React, { useRef, memo } from 'react';
 
 interface Props {
    showModal: Function;
@@ -58,4 +57,4 @@ const NavBar: React.FC<Props> = ({ showModal }) => {
    );
 };
 
-export default NavBar;
+export default memo(NavBar);

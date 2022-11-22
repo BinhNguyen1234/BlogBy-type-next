@@ -309,7 +309,7 @@ function Page(): ReactElement {
 
       axios({
          method: 'get',
-         url: `api/v1/blog/getblog?page=${page}`,
+         url: `api/v1/blog/getblog?page=${page || 1}`,
       })
          .then((res) => {
             let data = res.data;

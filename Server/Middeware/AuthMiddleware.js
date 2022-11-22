@@ -3,13 +3,12 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 class Auth {
-   passport = new passportClass()
+   passport = new passportClass();
    secretOrKey = null;
-   constructor (){
-      this.secretOrKey = null
+   constructor() {
+      this.secretOrKey = null;
    }
-   authenticate(secretOrKey){
-      console.log(secretOrKey)
+   authenticate(secretOrKey) {
       this.passport.use(
          new JwtStrategy(
             {
@@ -17,7 +16,7 @@ class Auth {
                jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             },
             (JwtPayload, done) => {
-               console.log(JwtPayload)
+               console.log(JwtPayload);
                if (JwtPayload) {
                   return done(null, JwtPayload);
                } else {
@@ -25,7 +24,7 @@ class Auth {
                }
             }
          )
-      )
+      );
       return async (req, res, next) => {
          this.passport.authenticate(
             'jwt',
@@ -41,7 +40,7 @@ class Auth {
                }
             }
          )(req, res, next);
-      }
+      };
    }
 }
 module.exports = Auth;

@@ -11,7 +11,6 @@ import { getCookie } from '../ulitlity/ManupulateCookie';
 function MyApp({ Component, pageProps }) {
    const dispatch = useDispatch();
    useEffect(() => {
-      console.log(document.cookie);
       const cookie = getCookie('rf');
       if (cookie) {
          const { username } = jwt.verify(

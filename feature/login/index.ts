@@ -9,7 +9,7 @@ export interface LoginStateType {
 
 const initialState: LoginStateType = {
    isAuth: false,
-   infoUser: 'Loign',
+   infoUser: 'Login',
    token: undefined,
 };
 const loginSlice = createSlice({
@@ -37,6 +37,9 @@ const loginSlice = createSlice({
             token: undefined,
          });
       },
+      RELOGIN: (state, action) => {
+         return { ...state, infoUser: 'Login' };
+      },
    },
    extraReducers: (builder) => {
       builder.addCase(HYDRATE, (state, action) => {
@@ -46,4 +49,4 @@ const loginSlice = createSlice({
 });
 
 export default loginSlice.reducer;
-export const { LOGIN, LOGOUT, LOGINWITHTK} = loginSlice.actions;
+export const { LOGIN, LOGOUT, RELOGIN, LOGINWITHTK } = loginSlice.actions;
