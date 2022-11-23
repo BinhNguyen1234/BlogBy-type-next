@@ -1,4 +1,5 @@
 import {
+   memo,
    ReactElement,
    useRef,
    useCallback,
@@ -14,7 +15,6 @@ import Style from '../../styles/components/BlogEditor/BlogEditor.module.sass';
 import ReactQuill from 'react-quill';
 import { useDispatch } from 'react-redux';
 import { handleSendPostBtn } from '../../feature/login/UISendPostBtn';
-import { RootStateType } from '../../feature';
 import PreviewBlogChild from '../PreviewBlog/PreviewBlogChild';
 import { useRouter } from 'next/router';
 import { debounceChangeTitle } from '../../ulitlity/debounce';
@@ -33,7 +33,7 @@ interface Props {
       imgThumbnail: string;
    } | null;
 }
-export default function BlogEditor({ value, href }: Props): ReactElement {
+export default memo(function BlogEditor({ value, href }: Props): ReactElement {
    const router = useRouter();
    const [title, setTitle] = useState('title');
    const [contentString, setContentString] = useState();
@@ -116,3 +116,4 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
       </>
    );
 }
+)

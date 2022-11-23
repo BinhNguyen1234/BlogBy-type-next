@@ -6,8 +6,7 @@ import { debounceChangeContent } from '../../ulitlity/debounce';
 
 const ReactQuill = dynamic(
    async function () {
-      const Editor = await import('react-quill');
-      let RQ = Editor.default;
+      const Editor =  (await import('react-quill')).default;
       return function wrapRQ({
          forwardedRef,
          onChange,
@@ -20,17 +19,17 @@ const ReactQuill = dynamic(
          modules: any;
          value: any;
          placeholder: any;
-      }) {
+      }) { 
          
          return (
             <>
               {console.log("wrapRQ render",value?true:false)}
-               <RQ
-                  value={value}
+               <Editor
+                  defaultValue={value}
                   onChange={debounceChangeContent(onChange, 2000)}
                   ref={forwardedRef}
                   {...props}
-               ></RQ>
+               ></Editor>
             </>
          );
       };
@@ -69,6 +68,7 @@ const ContentEditor = forwardRef(function useWrapContentEditor(
       [{ header: [2, 3, 4, 5, 6, false] }],
       ['clean'],
    ]);
+ 
    const API = new APIAuth();
    const modules = {
       toolbar: {

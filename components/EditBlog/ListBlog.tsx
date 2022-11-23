@@ -15,7 +15,7 @@ export default function ListBlog({ data, isLoading }: Props): ReactElement {
                   return (
                      <>
                         <BlogChild
-                           id={url}
+                           key={index}
                            isLoading={isLoading}
                            data={{ title, date, url, contentString }}
                         ></BlogChild>
