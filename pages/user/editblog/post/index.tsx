@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { RootStateType } from '../../../../feature';
 import axios from 'axios';
 export default withRouter(function EditPost({ router }): ReactElement {
-   console.log('render');
    const [value, setValue] = useState(null);
    const isAuth = useSelector((state: RootStateType) => {
       return state.loginSliceReducers.isAuth;
@@ -17,6 +16,7 @@ export default withRouter(function EditPost({ router }): ReactElement {
          url: `/api/v1/blog?url=${router.query.url}`,
       })
          .then((res) => {
+            console.log("set value")
             setValue(res.data);
          })
          .catch((e) => {

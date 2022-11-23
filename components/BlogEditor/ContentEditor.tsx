@@ -21,12 +21,15 @@ const ReactQuill = dynamic(
          placeholder: any;
       }) {
          return (
+            <>
+            {console.log("wrapRQ render",value?true:false)}
             <RQ
                value={value}
                onChange={debounceChangeContent(onChange, 2000)}
                ref={forwardedRef}
                {...props}
             ></RQ>
+            </>
          );
       };
    },
@@ -113,6 +116,7 @@ const ContentEditor = forwardRef(function useDisplayName(
 
    return (
       <>
+      {console.log("wrapContent render",props.content?true:false)}
          <ReactQuill
             value={props.content}
             onChange={props.onChange}

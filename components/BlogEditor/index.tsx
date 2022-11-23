@@ -33,7 +33,7 @@ interface Props {
    } | null;
 }
 export default function BlogEditor({ value, href }: Props): ReactElement {
-   console.log('blog render');
+   console.log("blogeditor render",value?true:false)
    const router = useRouter();
    const [title, setTitle] = useState("title");
    const [contentString, setContentString] = useState();
