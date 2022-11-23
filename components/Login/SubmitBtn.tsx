@@ -31,7 +31,7 @@ function SubmitBtn({ onClick }: Props): JSX.Element {
             <div className={stateBtn.spinnerIsHide}>
                <span className="spinner-border" role="status"></span>
             </div>
-            <div>{stateBtn.status}</div>
+            <div style={{ textOverflow: 'ellipsis' }}>{stateBtn.status}</div>
          </button>
       </>
    );

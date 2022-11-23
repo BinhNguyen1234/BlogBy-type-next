@@ -1,16 +1,18 @@
 import { ReactElement, useRef } from 'react';
 import Style from '../../styles/components/BlogEditor/PostThumbnailSelect.module.sass';
-import axios from 'axios';
+import APIAuth from '../../ulitlity/callApiWAuth';
+import { getCookie } from '../../ulitlity/ManupulateCookie';
 export default function PostThumbnailSelect({
    onChange,
 }: {
    onChange: any;
 }): ReactElement {
+   const API = new APIAuth();
    const inputRef: any = useRef<HTMLInputElement>(null);
    const formRef: any = useRef<HTMLFormElement | undefined>();
    const handleImageThumbnail = () => {
       let formData = new FormData(formRef.current);
-      axios({
+      API.callAPI({
          method: 'post',
          url: '/api/v1//image/upload/blog',
          headers: {
@@ -28,7 +30,14 @@ export default function PostThumbnailSelect({
    return (
       <>
          <form ref={formRef} id={Style.PostThumbnailSelect}>
-            <label htmlFor="inputThumbail">Chose image for thumbnail</label>
+            <label
+               className="btn btn-primary"
+               role="button"
+               data-bs-toggle="button"
+               htmlFor="inputThumbail"
+            >
+               Chose image for thumbnail
+            </label>
             <input
                ref={inputRef}
                name="upload-name"
@@ -37,6 +46,7 @@ export default function PostThumbnailSelect({
                id="inputThumbail"
                type="file"
                accept="image/*"
+               placeholder={'test'}
             ></input>
          </form>
       </>

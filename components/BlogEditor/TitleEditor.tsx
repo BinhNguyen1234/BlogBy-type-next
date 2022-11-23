@@ -11,7 +11,6 @@ const TitleEditor = (props: Props) => {
       <>
          <textarea
             required={true}
-            contentEditable="true"
             ref={props.customref}
             form={props.form}
             id={Style.TitleEditor}

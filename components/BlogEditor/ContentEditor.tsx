@@ -1,13 +1,13 @@
 import React, { memo, forwardRef, ReactElement, useRef } from 'react';
 import Style from '../../styles/components/BlogEditor/ContentEditor.module.sass';
 import dynamic from 'next/dynamic';
-import axios from 'axios';
+import APIAuth from '../../ulitlity/callApiWAuth';
 import { debounceChangeContent } from '../../ulitlity/debounce';
+
 const ReactQuill = dynamic(
    async function () {
-      const Editor = await import('react-quill');
-      let RQ = Editor.default;
-      return function displayName({
+      const Editor =  (await import('react-quill')).default;
+      return function wrapRQ({
          forwardedRef,
          onChange,
          value,
@@ -19,16 +19,15 @@ const ReactQuill = dynamic(
          modules: any;
          value: any;
          placeholder: any;
-      }) {
+      }) { 
          return (
             <>
-            {console.log("wrapRQ render",value)}
-            <RQ
-               value={value}
-               onChange={debounceChangeContent(onChange, 2000)}
-               ref={forwardedRef}
-               {...props}
-            ></RQ>
+               <Editor
+                  value={value}
+                  onChange={debounceChangeContent(onChange, 2000)}
+                  ref={forwardedRef}
+                  {...props}
+               ></Editor>
             </>
          );
       };
@@ -53,7 +52,7 @@ interface Props {
    content?: string;
 }
 
-const ContentEditor = forwardRef(function useDisplayName(
+const ContentEditor = forwardRef(function useWrapContentEditor(
    props: Props,
    ref
 ): ReactElement {
@@ -67,7 +66,10 @@ const ContentEditor = forwardRef(function useDisplayName(
       [{ header: [2, 3, 4, 5, 6, false] }],
       ['clean'],
    ]);
-   const modules = useRef({
+ 
+   const API = new APIAuth();
+   const modules = useRef( {
+   
       toolbar: {
          container: toolbarOptions.current,
          handlers: {
@@ -87,7 +89,7 @@ const ContentEditor = forwardRef(function useDisplayName(
                      input.files?.[0],
                      'upload-name'
                   );
-                  axios({
+                  API.callAPI({
                      method: 'post',
                      url: '/api/v1//image/upload/blog',
                      headers: {
@@ -96,13 +98,11 @@ const ContentEditor = forwardRef(function useDisplayName(
                      data: formData,
                   })
                      .then((res) => {
-                        let ops = editor.insertEmbed(
+                        editor.insertEmbed(
                            range.index,
                            'image',
                            `/external/${res.data}`
                         );
-                        ops.ops[0].insert.attributes = { alt: '123465' };
-                        editor.setSelection(range.index++);
                         props.setDefaultPreviewUrl(`/external/${res.data}`);
                      })
                      .catch((e) => {
@@ -116,7 +116,7 @@ const ContentEditor = forwardRef(function useDisplayName(
 
    return (
       <>
-      {console.log("wrapContent render",props.content?true:false)}
+      
          <ReactQuill
             value={props.content}
             onChange={props.onChange}

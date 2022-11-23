@@ -19,6 +19,6 @@ async function getPost(req, res) {
          console.log(e);
          return { error: '404' };
       });
-   res.send(data);
+   res.status(299).send(data);
 }
 module.exports = getPost;

@@ -16,8 +16,8 @@ export default withRouter(function EditPost({ router }): ReactElement {
          url: `/api/v1/blog?url=${router.query.url}`,
       })
          .then((res) => {
-            console.log("set value")
-            setTimeout(()=>{setValue(res.data)},3000);
+            
+            setValue(res.data)
          })
          .catch((e) => {
             console.log(e);

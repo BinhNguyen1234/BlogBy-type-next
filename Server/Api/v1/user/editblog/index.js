@@ -1,8 +1,10 @@
-const Auth = require('../../../../Middeware/Auth');
+const AuthClass = require('../../../../Middeware/AuthMiddleware');
 const post = require('./post');
 const { GetBlogList } = require('../../../../Controller/user/editblog');
 const editblog = require('express').Router();
-editblog.get('', Auth(), GetBlogList);
-editblog.get('/search', Auth());
+const Auth = new AuthClass();
+editblog.use(Auth.authenticate('blogtee;accessToken'));
+editblog.get('', GetBlogList);
+editblog.get('/search');
 editblog.use('/post', post);
 module.exports = editblog;

@@ -1,11 +1,10 @@
 import Link from 'next/link';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import style from '../styles/Layouts/NavBar.module.sass';
 import ToggleBtn from '../components/NavBar/ToggleBtn';
 import ToggleMenu from '../components/NavBar/ToggleMenu';
 import ToggleContainer from '../components/NavBar/ToggleContainer';
-import React, { useRef } from 'react';
-import { RootStateType } from '../feature';
+import React, { useRef, memo } from 'react';
 
 interface Props {
    showModal: Function;
@@ -13,9 +12,6 @@ interface Props {
 
 const NavBar: React.FC<Props> = ({ showModal }) => {
    const dispatch = useDispatch();
-   const isReadMode = useSelector((state: RootStateType) => {
-      return state.readMode.read;
-   });
 
    const thisRef = useRef<HTMLElement>(null);
    const opacityElement = useRef<HTMLDivElement>(null);
@@ -26,33 +22,10 @@ const NavBar: React.FC<Props> = ({ showModal }) => {
       refToggleMenu.current?.classList.toggle('hideMenu');
       opacityElement.current?.classList.toggle('displayBlock');
    };
-   // useEffect(()=>{
-   //     let prevScroll = 0
-   //     window.addEventListener('scroll', handleScroll,{passive : true})
-   //     function handleScroll(){
-   //         var currentScrollPos = window.scrollY;
-   //         if (currentScrollPos - prevScroll > 10 ) {
-
-   //             dispatch(handleReadMode(null))
-
-   //         } else if (currentScrollPos - prevScroll < -10 || currentScrollPos == 0) {
-
-   //             dispatch(handleReadModeFalse(null))
-
-   //         }
-   //         prevScroll = currentScrollPos;
-
-   //     }
-
-   // },[])
 
    return (
       <>
-         <nav
-            ref={thisRef}
-            style={isReadMode ? { top: '-100%' } : { top: '0%' }}
-            id={style.MyNavBar}
-         >
+         <nav ref={thisRef} id={style.MyNavBar}>
             <div className={style.NavStyle} id={style.MyNavBrand}>
                <Link href="/">Tee's blog</Link>
             </div>
@@ -84,4 +57,4 @@ const NavBar: React.FC<Props> = ({ showModal }) => {
    );
 };
 
-export default NavBar;
+export default memo(NavBar);

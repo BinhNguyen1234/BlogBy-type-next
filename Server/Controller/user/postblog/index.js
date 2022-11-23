@@ -1,6 +1,7 @@
 const user = require('../../../Model/user');
 const post = require('../../../Model/post');
 async function postBlog(req, res) {
+   console.log(req.user);
    // const test =  await user.findOne({"username":req.user.username}).populate({path: "_post", match : {"title":"213213214"}})
    // console.log(test) // Querry post base on user
    let writer = new Promise((resolve, reject) => {
@@ -13,13 +14,13 @@ async function postBlog(req, res) {
                return resolve(document);
             })
             .catch((e) => {
-               res.status(401).send(
+               res.status(501).send(
                   "Can't find username, please contact Admin"
                );
                throw new Error("Can't find username, please contact Admin");
             });
       } catch (e) {
-         res.status(401).send('Error when verify user, please login again');
+         res.status(501).send('Error when verify user, please login again');
          reject(new Error('Have error when verify user'));
       }
    });
@@ -48,12 +49,12 @@ async function postBlog(req, res) {
                   return writer.updateOne({ $push: { _post: newPost._id } });
                })
                .catch((e) => {
-                  res.status(402).send('Duplicate Title');
+                  res.status(499).send('Duplicate Title');
                   throw e;
                })
                .then((status) => {
-                  res.send({
-                     message: 'New post was be save in user sucesss',
+                  res.status(299).send({
+                     message: 'Post successful',
                      url: newPost.url,
                   });
                });

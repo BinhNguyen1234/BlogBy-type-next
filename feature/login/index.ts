@@ -1,36 +1,53 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
-
+import jwt from 'jsonwebtoken';
+import { getCookie } from '../../ulitlity/ManupulateCookie';
 export interface LoginStateType {
    isAuth: boolean;
-   infoUser: string;
+   infoUser: string | null;
+   token: string | undefined;
 }
-
+const parseToken = () => {
+   const cookie = getCookie('rf');
+   if (cookie) {
+      const { username } = jwt.decode(cookie) as { username: string };
+      return username;
+   } else {
+      return null;
+   }
+};
 const initialState: LoginStateType = {
    isAuth: false,
-   infoUser: 'Loign',
+   infoUser: 'Login',
+   token: undefined,
 };
 const loginSlice = createSlice({
    name: 'Login',
    initialState,
    reducers: {
-      LOGIN: (state, action) => {
+      LOGINWITHTK: (state, action) => {
          return (state = {
+            token: action.payload.token,
             isAuth: true,
-            infoUser: action.payload,
+            infoUser: action.payload.username,
          });
       },
-      LOGINSSR: (state, action) => {
+      LOGIN: (state, action) => {
          return (state = {
-            isAuth: action.payload.isAuth,
-            infoUser: action.payload.infoUser,
+            ...state,
+            isAuth: true,
+            infoUser: action.payload,
          });
       },
       LOGOUT: (state, action) => {
          return (state = {
             isAuth: false,
             infoUser: 'Login',
+            token: undefined,
          });
+      },
+      RELOGIN: (state, action) => {
+         return { ...state, infoUser: 'Login' };
       },
    },
    extraReducers: (builder) => {
@@ -41,4 +58,4 @@ const loginSlice = createSlice({
 });
 
 export default loginSlice.reducer;
-export const { LOGIN, LOGOUT, LOGINSSR } = loginSlice.actions;
+export const { LOGIN, LOGOUT, RELOGIN, LOGINWITHTK } = loginSlice.actions;

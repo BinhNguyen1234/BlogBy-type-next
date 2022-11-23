@@ -14,6 +14,7 @@ interface Props {
 
 const MenuToggle: React.FC<Props> = ({ showModal, children }) => {
    const router = useRouter();
+
    const loginSlice = useSelector((state: RootStateType) => {
       return state.loginSliceReducers;
    });
@@ -41,9 +42,7 @@ const MenuToggle: React.FC<Props> = ({ showModal, children }) => {
                   router.pathname.search(/\Wuser/gim) != -1 ? style.active : ''
                }
             >
-               {loginSlice.isAuth ? (
-                  <Link href="/user">{'Hi, ' + loginSlice.infoUser}</Link>
-               ) : (
+               {loginSlice.infoUser == 'Login' ? (
                   <div
                      onClick={() => {
                         showModal('flex');
@@ -51,6 +50,8 @@ const MenuToggle: React.FC<Props> = ({ showModal, children }) => {
                   >
                      Login
                   </div>
+               ) : (
+                  <Link href="/user">{'Hi, ' + loginSlice.infoUser}</Link>
                )}
             </li>
          </ul>

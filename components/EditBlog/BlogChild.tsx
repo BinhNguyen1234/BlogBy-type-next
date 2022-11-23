@@ -15,6 +15,7 @@ export interface InforType {
 export default function BlogChild({
    data,
    isLoading,
+
 }: InforType): ReactElement {
    return (
       <>
