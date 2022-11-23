@@ -13,7 +13,7 @@
 /blog.pub
 git
 git.pub
-
+/Server/log/log.txt
 # next.js
 /.next/
 /out/
