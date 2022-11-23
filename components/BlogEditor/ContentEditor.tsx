@@ -22,7 +22,6 @@ const ReactQuill = dynamic(
       }) { 
          return (
             <>
-              {console.log("wrapRQ render",value)}
                <Editor
                   value={value}
                   onChange={debounceChangeContent(onChange, 2000)}
