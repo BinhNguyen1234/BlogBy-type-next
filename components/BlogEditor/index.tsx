@@ -40,7 +40,7 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
    const [imgThumbnail, setUrl] = useState(value?.imgThumbnail || null);
    const refState = useRef({ contentString, imgThumbnail });
    refState.current = { contentString, imgThumbnail };
-
+   console.log("blogeditor render",value?true:false)
    const titleEditorRef = useRef<HTMLTextAreaElement>(null);
    const contentEditorRef = useRef<ReactQuill>(null);
    const dispatch = useDispatch();
@@ -84,7 +84,7 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
       );
    }, []);
    return (
-      <>
+      <> 
          <form id={Style.Editor}>
             <TitleEditor
                customref={titleEditorRef}

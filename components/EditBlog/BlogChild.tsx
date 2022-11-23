@@ -10,15 +10,17 @@ export interface InforType {
       contentString: string | string[];
    };
    isLoading: boolean;
+   id?: string
 }
 
 export default function BlogChild({
    data,
    isLoading,
+   id,
 }: InforType): ReactElement {
    return (
       <>
-         <li className={Style.BlogChild}>
+         <li id={id} className={Style.BlogChild}>
             <InforBlog isLoading={isLoading} data={data}></InforBlog>
             <ModifyBtn url={data.url}></ModifyBtn>
          </li>

@@ -13,10 +13,7 @@ function MyApp({ Component, pageProps }) {
    useEffect(() => {
       const cookie = getCookie('rf');
       if (cookie) {
-         const { username } = jwt.verify(
-            getCookie('rf'),
-            'blogtee;refreshToken'
-         );
+         const { username } = jwt.decode(getCookie('rf'));
          if (username) {
          }
          dispatch(LOGIN(username));

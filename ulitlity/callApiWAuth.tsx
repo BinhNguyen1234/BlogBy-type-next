@@ -5,7 +5,7 @@ import { RELOGIN } from '../feature/login';
 interface constructorType {
    method: string;
    url: string;
-   data: any;
+   data?: any;
    headers?: any;
 }
 class APIAuth {
@@ -16,6 +16,7 @@ class APIAuth {
       instance.interceptors.request.use(
          (request) => {
             if (!getCookie('acc')) {
+               request.method = 'post';
                request.url = '/api/v1/getuser';
                request.headers = { Authorization: `Bearer ${getCookie('rf')}` };
                request.data = null;
@@ -28,12 +29,9 @@ class APIAuth {
       );
       let a = instance.interceptors.response.use(
          (response) => {
-            if (
-               response.status == 299 &&
-               response.data.message == 'Post successful'
-            ) {
+            if (response.status != 201) {
                return response;
-            } else if (response.status == 201) {
+            } else {
                return instance({
                   ...config,
                   headers: { Authorization: `Bearer ${getCookie('acc')}` },

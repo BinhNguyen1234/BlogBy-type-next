@@ -3,8 +3,8 @@ const post = require('./post');
 const { GetBlogList } = require('../../../../Controller/user/editblog');
 const editblog = require('express').Router();
 const Auth = new AuthClass();
-
-editblog.get('', Auth.authenticate('blogtee;accessToken'), GetBlogList);
-editblog.get('/search', Auth.authenticate('blogtee;accessToken'));
-editblog.use('/post', Auth.authenticate('blogtee;accessToken'), post);
+editblog.use(Auth.authenticate('blogtee;accessToken'));
+editblog.get('', GetBlogList);
+editblog.get('/search');
+editblog.use('/post', post);
 module.exports = editblog;

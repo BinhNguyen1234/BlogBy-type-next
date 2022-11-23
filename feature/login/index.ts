@@ -1,12 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
-
+import jwt from 'jsonwebtoken';
+import { getCookie } from '../../ulitlity/ManupulateCookie';
 export interface LoginStateType {
    isAuth: boolean;
-   infoUser: string;
+   infoUser: string | null;
    token: string | undefined;
 }
-
+const parseToken = () => {
+   const cookie = getCookie('rf');
+   if (cookie) {
+      const { username } = jwt.decode(cookie) as { username: string };
+      return username;
+   } else {
+      return null;
+   }
+};
 const initialState: LoginStateType = {
    isAuth: false,
    infoUser: 'Login',

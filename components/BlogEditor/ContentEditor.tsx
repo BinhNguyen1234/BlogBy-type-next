@@ -3,13 +3,12 @@ import Style from '../../styles/components/BlogEditor/ContentEditor.module.sass'
 import dynamic from 'next/dynamic';
 import APIAuth from '../../ulitlity/callApiWAuth';
 import { debounceChangeContent } from '../../ulitlity/debounce';
-import { getCookie } from '../../ulitlity/ManupulateCookie';
-import { useDispatch } from 'react-redux';
+
 const ReactQuill = dynamic(
    async function () {
       const Editor = await import('react-quill');
       let RQ = Editor.default;
-      return function displayName({
+      return function wrapRQ({
          forwardedRef,
          onChange,
          value,
@@ -22,13 +21,17 @@ const ReactQuill = dynamic(
          value: any;
          placeholder: any;
       }) {
+         
          return (
-            <RQ
-               value={value}
-               onChange={debounceChangeContent(onChange, 2000)}
-               ref={forwardedRef}
-               {...props}
-            ></RQ>
+            <>
+              {console.log("wrapRQ render",value?true:false)}
+               <RQ
+                  value={value}
+                  onChange={debounceChangeContent(onChange, 2000)}
+                  ref={forwardedRef}
+                  {...props}
+               ></RQ>
+            </>
          );
       };
    },
@@ -52,11 +55,10 @@ interface Props {
    content?: string;
 }
 
-const ContentEditor = forwardRef(function useDisplayName(
+const ContentEditor = forwardRef(function useWrapContentEditor(
    props: Props,
    ref
 ): ReactElement {
-   const dispatch = useDispatch();
    let toolbarOptions = useRef([
       ['bold', 'italic', 'underline'],
       ['link', 'image'],
@@ -97,7 +99,6 @@ const ContentEditor = forwardRef(function useDisplayName(
                      data: formData,
                   })
                      .then((res) => {
-                        console.log(range.index);
                         editor.insertEmbed(
                            range.index,
                            'image',
@@ -116,6 +117,7 @@ const ContentEditor = forwardRef(function useDisplayName(
 
    return (
       <>
+      {console.log("wrapContent render",props.content?true:false)}
          <ReactQuill
             value={props.content}
             onChange={props.onChange}

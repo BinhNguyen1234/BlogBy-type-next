@@ -5,6 +5,7 @@ import SearchBar from '../../../components/SearchBar';
 import Pagination from '../../../components/Pagination';
 import { RootStateType } from '../../../feature';
 import axios from 'axios';
+import APIAuth from '../../../ulitlity/callApiWAuth';
 import { DataType } from '../../../components/EditBlog';
 import { useSelector } from 'react-redux';
 interface InitialStateType {
@@ -242,6 +243,7 @@ export default function EditBlogPage(): ReactElement {
          contentString: [[], [], 'this is simulate content'],
       },
    ];
+   let Api = new APIAuth();
    const isAuth = useSelector((state: RootStateType) => {
       return state.loginSliceReducers.isAuth;
    });
@@ -259,7 +261,7 @@ export default function EditBlogPage(): ReactElement {
       setPage(page);
    };
    useEffect(() => {
-      axios({
+      Api.callAPI({
          method: 'get',
          url: `/api/v1/user/editblog?page=${page}&key=${state.keyFilter}`,
       })

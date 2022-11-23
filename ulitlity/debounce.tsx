@@ -9,7 +9,6 @@ function debounceChangeTitle(fn: any, delay: number) {
          timer = null;
       }
       timer = setTimeout(() => {
-         console.log('invoked');
          fn(input.value);
       }, delay);
    };
@@ -23,7 +22,6 @@ function debounceChangeContent(fn: any, delay: number) {
          timer = null;
       }
       timer = setTimeout(() => {
-         console.log('invoked');
          fn(editor.getText());
       }, delay);
    };
