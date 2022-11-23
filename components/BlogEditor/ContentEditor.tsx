@@ -25,7 +25,7 @@ const ReactQuill = dynamic(
             <>
               {console.log("wrapRQ render",value?true:false)}
                <Editor
-                  defaultValue={value}
+                  // defaultValue={value}
                   onChange={debounceChangeContent(onChange, 2000)}
                   ref={forwardedRef}
                   {...props}
