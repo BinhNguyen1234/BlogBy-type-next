@@ -22,7 +22,7 @@ const ReactQuill = dynamic(
       }) {
          return (
             <>
-            {console.log("wrapRQ render",value?true:false)}
+            {console.log("wrapRQ render",value)}
             <RQ
                value={value}
                onChange={debounceChangeContent(onChange, 2000)}

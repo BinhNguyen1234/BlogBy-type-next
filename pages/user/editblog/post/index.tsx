@@ -17,7 +17,7 @@ export default withRouter(function EditPost({ router }): ReactElement {
       })
          .then((res) => {
             console.log("set value")
-            setValue(res.data);
+            setTimeout(()=>{setValue(res.data)},3000);
          })
          .catch((e) => {
             console.log(e);
