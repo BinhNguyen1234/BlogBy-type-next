@@ -20,12 +20,11 @@ const ReactQuill = dynamic(
          value: any;
          placeholder: any;
       }) { 
-         
          return (
             <>
-              {console.log("wrapRQ render",value?true:false)}
+              {console.log("wrapRQ render",value)}
                <Editor
-                  // defaultValue={value}
+                  value={value}
                   onChange={debounceChangeContent(onChange, 2000)}
                   ref={forwardedRef}
                   {...props}
@@ -70,7 +69,8 @@ const ContentEditor = forwardRef(function useWrapContentEditor(
    ]);
  
    const API = new APIAuth();
-   const modules = {
+   const modules = useRef( {
+   
       toolbar: {
          container: toolbarOptions.current,
          handlers: {
@@ -113,17 +113,17 @@ const ContentEditor = forwardRef(function useWrapContentEditor(
             },
          },
       },
-   };
+   });
 
    return (
       <>
-      {console.log("wrapContent render",props.content?true:false)}
+      
          <ReactQuill
             value={props.content}
             onChange={props.onChange}
             forwardedRef={ref}
             id={Style.ContentEditor}
-            modules={modules}
+            modules={modules.current}
             placeholder="Write your blog"
          ></ReactQuill>
       </>
