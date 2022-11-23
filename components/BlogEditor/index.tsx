@@ -116,4 +116,3 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
       </>
    );
 }
-)

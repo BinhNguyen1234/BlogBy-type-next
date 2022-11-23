@@ -254,7 +254,6 @@ export default function EditBlogPage(): ReactElement {
       keyFilter: '',
       filter: 'title',
    });
-   console.log(state);
    const [page, setPage] = useState(1);
    const setPageAndUi = (page: number) => {
       dispatch({ type: 'Sent' });
