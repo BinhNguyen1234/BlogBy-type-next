@@ -16,8 +16,7 @@ export default withRouter(function EditPost({ router }): ReactElement {
          url: `/api/v1/blog?url=${router.query.url}`,
       })
          .then((res) => {
-            
-            setValue(res.data)
+            setValue(res.data);
          })
          .catch((e) => {
             console.log(e);

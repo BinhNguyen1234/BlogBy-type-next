@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ReactElement, useEffect } from 'react';
+import { ReactElement, useEffect, memo } from 'react';
 import Style from '../../styles/components/SearchBar/SearchBar.module.sass';
 
 interface Props {

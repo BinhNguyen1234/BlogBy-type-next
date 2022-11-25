@@ -28,4 +28,3 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default wrapper.withRedux(MyApp);
-   

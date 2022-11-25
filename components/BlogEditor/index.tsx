@@ -34,7 +34,7 @@ interface Props {
    } | null;
 }
 export default function BlogEditor({ value, href }: Props): ReactElement {
-   console.log("blogeditor render",value?true:false)
+   console.log('blogeditor render', value ? true : false);
    const router = useRouter();
    const [title, setTitle] = useState('title');
    const [contentString, setContentString] = useState();
@@ -84,7 +84,7 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
       );
    }, []);
    return (
-      <> 
+      <>
          <form id={Style.Editor}>
             <TitleEditor
                customref={titleEditorRef}

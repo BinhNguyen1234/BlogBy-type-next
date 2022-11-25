@@ -6,7 +6,6 @@ interface Props {
    setPage: any;
    dispatch?: any;
 }
-
 export default function WCSR({
    page,
    id,
@@ -22,7 +21,8 @@ export default function WCSR({
                      page === 1 ? 'disabled' : null
                   }`}
                   onClick={() => {
-                     setPage(page - 1);
+                     window.history.pushState("page","page",`${window.location.pathname}?page=${page-1}`)
+                     setPage({ type: 'Sent', payload: { page: page - 1 } });
                   }}
                >
                   Previous
@@ -31,7 +31,8 @@ export default function WCSR({
                   <li
                      className="page-item page-link"
                      onClick={() => {
-                        setPage(page - 1);
+                        window.history.pushState("page","page",`${window.location.pathname}?page=${page-1}`)
+                        setPage({ type: 'Sent', payload: { page: page - 1 } });
                      }}
                   >
                      {page - 1}
@@ -46,7 +47,8 @@ export default function WCSR({
                <li
                   className="page-item page-link"
                   onClick={() => {
-                     setPage(page + 1);
+                     window.history.pushState("page","page",`${window.location.pathname}?page=${page+1}`)
+                     setPage({ type: 'Sent', payload: { page: page + 1 } });
                   }}
                >
                   {page + 1}
@@ -54,7 +56,8 @@ export default function WCSR({
                <li
                   className="page-item page-link"
                   onClick={() => {
-                     setPage(page + 1);
+                     window.history.pushState("page","page",`${window.location.pathname}?page=${page+1}`)
+                     setPage({ type: 'Sent', payload: { page: page + 1 } });
                   }}
                >
                   Next

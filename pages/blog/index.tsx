@@ -1,13 +1,7 @@
-import {
-   ReactElement,
-   useReducer,
-   useEffect,
-   createContext,
-   useState,
-} from 'react';
+import { ReactElement, useReducer, useEffect, useState } from 'react';
 import { RENDERED, RESET } from '../../feature/handleProgressBar';
 import MainContentLayout from '../../layout/MainContentLayout';
-import { useRouter } from 'next/router';
+import { withRouter } from 'next/router';
 import axios from 'axios';
 import PreviewBlogContainer from '../../components/PreviewBlog/PreviewBlogContainer';
 import Pagination from '../../components/Pagination';
@@ -110,7 +104,9 @@ interface InitialStateType {
    displayedData: Array<DataType>;
    keyFilter: string;
    filter: string;
+   page: string;
 }
+
 function reducer(state: InitialStateType, action: any) {
    switch (action.type) {
       case 'Done':
@@ -223,7 +219,7 @@ function reducer(state: InitialStateType, action: any) {
             })(),
          };
       case 'Sent':
-         return { ...state, isLoading: true };
+         return { ...state, page: action.payload.page, isLoading: true };
       case 'Filter':
          return {
             ...state,
@@ -286,40 +282,41 @@ function reducer(state: InitialStateType, action: any) {
          throw new Error();
    }
 }
-function Page(): ReactElement {
-   const router = useRouter();
-   const page = router.query.page;
+function Page(): ReactElement | null {
    const [state, dispatch] = useReducer(reducer, {
       data: defaultData,
       isLoading: true,
       displayedData: defaultData,
       keyFilter: '',
       filter: 'title',
+      page: null,
    });
-   const LoadingContext = createContext(true);
-
-   // useEffect(() => {
-   //    if (!page) {
-   //       router.push('/blog?page=1');
-   //    }
-   // }, []);
-
    useEffect(() => {
-      // dispatch(RESET());
-
-      axios({
-         method: 'get',
-         url: `api/v1/blog/getblog?page=${page || 1}`,
-      })
-         .then((res) => {
-            let data = res.data;
-            dispatch({ type: 'Done', payload: { posts: data } });
+      
+      if (state.page != null)  {
+         axios({
+            method: 'get',
+            url: `api/v1/blog/getblog?page=${typeof state.page =="string" ? 1 : state.page}`,
          })
-         .catch((e) => {
-            console.log(e);
-         });
-   }, [router]);
-
+            .then((res) => {
+               let data = res.data;
+               dispatch({ type: 'Done', payload: { posts: data } });
+            })
+            .catch((e) => {
+               console.log(e);
+            });
+      } else {
+         const query = window.location.search;
+         const param = new URLSearchParams(query)
+         let page = param.get('page')
+         dispatch({
+            type: 'Sent',
+            payload: {
+               page: typeof page =="string" ? 1 : page
+            },
+         })
+      }
+   }, [state.page]);
    return (
       <>
          <MainContentLayout>
@@ -335,9 +332,8 @@ function Page(): ReactElement {
                {state.displayedData}
             </PreviewBlogContainer>
             <Pagination
-               dispatch={{ dispatch, type: 'Sent' }}
-               hrefToQuerry={'/blog?page='}
-               page={parseInt(page as string)}
+               setPage={dispatch}
+               page={parseInt(state.page)}
             ></Pagination>
          </MainContentLayout>
       </>

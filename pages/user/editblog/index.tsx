@@ -14,6 +14,7 @@ interface InitialStateType {
    displayedData: Array<DataType>;
    keyFilter: string;
    filter: string;
+   page: number;
 }
 
 function reducer(state: InitialStateType, action: any) {
@@ -128,7 +129,7 @@ function reducer(state: InitialStateType, action: any) {
             })(),
          };
       case 'Sent':
-         return { ...state, isLoading: true };
+         return { ...state, page: action.payload.page, isLoading: true };
       case 'Filter':
          return {
             ...state,
@@ -253,16 +254,13 @@ export default function EditBlogPage(): ReactElement {
       displayedData: defaultData,
       keyFilter: '',
       filter: 'title',
+      page: 1,
    });
-   const [page, setPage] = useState(1);
-   const setPageAndUi = (page: number) => {
-      dispatch({ type: 'Sent' });
-      setPage(page);
-   };
+
    useEffect(() => {
       Api.callAPI({
          method: 'get',
-         url: `/api/v1/user/editblog?page=${page}&key=${state.keyFilter}`,
+         url: `/api/v1/user/editblog?page=${state.page}&key=${state.keyFilter}`,
       })
          .then((res) => {
             let data = res.data.map((object: any) => {
@@ -276,14 +274,14 @@ export default function EditBlogPage(): ReactElement {
          .catch((e) => {
             console.log(e);
          });
-   }, [page]);
+   }, [state.page]);
    if (isAuth === true) {
       return (
          <>
             <LargeContentLayout>
                <SearchBar
                   stateCheck={state.filter}
-                  href={`/api/v1/user/editblog?page=${page}&key=${state.keyFilter}`}
+                  href={`/api/v1/user/editblog?page=${state.page}&key=${state.keyFilter}`}
                   dispatch={dispatch}
                   filter={{ fields: ['title', 'content'] }}
                ></SearchBar>
@@ -292,7 +290,7 @@ export default function EditBlogPage(): ReactElement {
                   isLoading={state.isLoading}
                   displayedData={state.displayedData}
                ></EditBlog>
-               <Pagination page={page} setPage={setPageAndUi}></Pagination>
+               <Pagination page={state.page} setPage={dispatch}></Pagination>
             </LargeContentLayout>
          </>
       );
