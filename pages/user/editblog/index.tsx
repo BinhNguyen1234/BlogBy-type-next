@@ -16,7 +16,7 @@ interface InitialStateType {
    filter: string;
    page: number;
 }
-
+let filter = {fields: ['title', 'content']}
 function reducer(state: InitialStateType, action: any) {
    switch (action.type) {
       case 'Done':
@@ -129,7 +129,7 @@ function reducer(state: InitialStateType, action: any) {
             })(),
          };
       case 'Sent':
-         return { ...state, page: action.payload.page, isLoading: true };
+         return { ...state, page: action.payload? action.payload.page : state.page , isLoading: true };
       case 'Filter':
          return {
             ...state,
@@ -283,7 +283,7 @@ export default function EditBlogPage(): ReactElement {
                   stateCheck={state.filter}
                   href={`/api/v1/user/editblog?page=${state.page}&key=${state.keyFilter}`}
                   dispatch={dispatch}
-                  filter={{ fields: ['title', 'content'] }}
+                  filter={filter}
                ></SearchBar>
                <hr></hr>
                <EditBlog

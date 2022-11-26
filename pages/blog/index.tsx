@@ -10,6 +10,7 @@ import SearchBar from '../../components/SearchBar';
 import LargeContentLayout from '../../layout/LargeContentLayout';
 
 /////
+let filter = {fields: ['title', 'content']}
 const defaultData = [
    {
       title: 'this is simulate title number 1',
@@ -323,7 +324,7 @@ function Page(): ReactElement | null {
             <LargeContentLayout>
                <SearchBar
                   dispatch={dispatch}
-                  filter={{ fields: ['title', 'content'] }}
+                  filter={filter}
                ></SearchBar>
             </LargeContentLayout>
             <PreviewBlogContainer

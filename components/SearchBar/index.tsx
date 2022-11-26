@@ -1,7 +1,7 @@
-import axios from 'axios';
+
 import { ReactElement, useEffect, memo } from 'react';
 import Style from '../../styles/components/SearchBar/SearchBar.module.sass';
-
+import APIAuth from '../../ulitlity/callApiWAuth';
 interface Props {
    dispatch?: any;
    filter?: {
@@ -11,7 +11,7 @@ interface Props {
    href?: string;
    stateCheck?: string;
 }
-export default function SearchBar({
+export default memo(function SearchBar({
    href,
    filter,
    dispatch,
@@ -20,15 +20,16 @@ export default function SearchBar({
    useEffect(() => {
       require('bootstrap/dist/js/bootstrap.bundle.min.js');
    }, []);
+   const API = new APIAuth()
    return (
       <>
          <form
             onSubmit={(e) => {
                e.preventDefault();
                dispatch({ type: 'Sent' });
-               axios({
+               API.callAPI({
                   method: 'get',
-                  url: href,
+                  url: href as string,
                })
                   .then((res) => {
                      let data = res.data.map((object: any) => {
@@ -80,6 +81,7 @@ export default function SearchBar({
                         return (
                            <>
                               <li
+                                 key={index}
                                  style={{
                                     display: 'flex',
                                     justifyContent: 'center',
@@ -129,4 +131,4 @@ export default function SearchBar({
          </form>
       </>
    );
-}
+})

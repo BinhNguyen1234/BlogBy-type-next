@@ -33,7 +33,7 @@ const LoginForm: React.FC<Props> = ({ hideModal }: Props) => {
          password: sha256(formData.get('password') as string),
       };
       axios
-         .post('/api/v2/login', UserInfo, {
+         .post('/api/v1/login/auth', UserInfo, {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',

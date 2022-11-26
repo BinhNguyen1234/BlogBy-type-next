@@ -28,7 +28,7 @@ export default function WCSR({
                >
                   Previous
                </li>
-               {page === 1 ? null : (
+               {page === 1 ? "" : (
                   <li
                      className="page-item page-link"
                      onClick={() => {
