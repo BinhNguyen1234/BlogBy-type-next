@@ -1,6 +1,5 @@
 import { ReactElement } from 'react';
 import Style from '../../styles/components/Pagination/Pagination.module.sass';
-import WSSR from './WSSR';
 import WCSR from './WCSR';
 interface Props {
    page: number;
@@ -17,21 +16,14 @@ export default function Pagination({
 }: Props): ReactElement {
    return (
       <>
-         {hrefToQuerry && !setPage ? (
-            <WSSR
-               dispatch={dispatch}
-               id={Style.Pagination}
-               page={page}
-               hrefToQuerry={hrefToQuerry}
-            ></WSSR>
-         ) : (
+         
             <WCSR
                id={Style.Pagination}
-               dispatch
+               dispatch={dispatch}
                page={page}
                setPage={setPage}
             ></WCSR>
-         )}
+         
       </>
    );
 }

@@ -72,10 +72,10 @@ html
     position: relative !important
     width: 100%
     overflow: hidden !important
-    *   
+    > * 
         overflow: hidden !important
         position: relative !important
-    &::after
+    > *.set::after
         z-index: 1
         width: 100% !important
         content: "" !important
@@ -88,7 +88,7 @@ html
         background: linear-gradient(to right,#dddddd,#ffffff 50%,#dddddd) !important
         animation: skeletonLoading 1.5s linear infinite 
         // animation: name duration timing-function delay iteration-count direction fill-mode
-    &::before
+    > *.set::before
         z-index: 1
         content: "" !important
         top: 0

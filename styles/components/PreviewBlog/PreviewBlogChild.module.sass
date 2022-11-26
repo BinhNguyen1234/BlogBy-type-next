@@ -10,7 +10,9 @@
     display: flex
     flex-direction: column
     aspect-ratio: 5/4.5
+    align-items: center
     .WindowBar
+        width: 100%
         height: 1.5rem
         backgroundd-color: gray
         border-bottom: 1px solid black
@@ -42,6 +44,7 @@
             width: 100%
             aspect-ratio: 16/9
     .title
+        width: calc( 100% - 1rem )
         font-family: Gravity
         font-weight: 600
         font-size: 2rem
@@ -50,14 +53,13 @@
         overflow: hidden
         max-height: 2em
         margin: 2px 
-        padding: 0 0.5rem
     .content
+        width: calc( 100% - 1rem )
         font-size: 15px
         max-height: 3em
         overflow: hidden
         text-overflow: ellipsis
         margin: 2px 
-        padding: 0 0.5rem
         span
             &:first-child
                 float: left
@@ -70,9 +72,9 @@
                 white-space: pre-wrap
                 
     .date
+        width: calc( 100% - 1rem )
         font-size: 12px
         margin: 0
-        padding: 0 0.5rem
     // &:hover img
     //     width: 105%
         

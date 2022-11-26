@@ -36,17 +36,17 @@ const ReactQuill = dynamic(
       loading: () => {
          return (
             <div
-               className="spinner-border"
-               style={{
-                  width: '3rem',
-                  height: '3rem',
-                  position: 'relative',
-                  left: '50% ',
-                  transition: 'transformY: -50%',
-                  alignSelf: 'center',
-               }}
+               className="--skeleton"
+               style={{ width: '100%', height: '100vh', alignSelf: 'center' }}
                role="status"
-            ></div>
+            >
+               <div style={{width: "100%", height: "20%"}} className='set'></div>
+               <div style={{width: "100%", height: "20%"}} className='set'></div>
+               <div style={{width: "100%", height: "20%"}} className='set'></div>
+               <div style={{width: "100%", height: "20%"}} className='set'></div>
+               <div style={{width: "100%", height: "20%"}} className='set'></div>
+            </div>
+            
          );
       },
    }

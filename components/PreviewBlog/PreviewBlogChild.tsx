@@ -30,7 +30,7 @@ export default function PreviewBlogChild({
                <div></div>
                <div></div>
             </div>
-            <div className={Style.img_container}>
+            <div className={Style.img_container + " set"}>
                <img
                   onError={({ currentTarget }) => {
                      currentTarget.onerror = null;
@@ -42,7 +42,7 @@ export default function PreviewBlogChild({
                   }`}
                ></img>
             </div>
-            <div className={Style.title}>
+            <div className={Style.title + " set"}>
                {[
                   <span key={2}>{children?.data.title[0]}</span>,
                   <span key={1} style={{ color: '#905cf9' }}>
@@ -51,7 +51,7 @@ export default function PreviewBlogChild({
                   children?.data.title[2],
                ]}
             </div>
-            <div className={Style.content}>
+            <div className={Style.content + " set"}>
                {[
                   <span key={2}>
                      {[
@@ -77,7 +77,7 @@ export default function PreviewBlogChild({
                   <span key={3}>{children?.data.contentString[2]}</span>,
                ]}
             </div>
-            <div className={Style.date}>{`${
+            <div className={Style.date+ " set"}>{`${
                children?.data.date || '01/01/1991'
             }`}</div>
          </div>
