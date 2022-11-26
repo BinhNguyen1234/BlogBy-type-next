@@ -59,7 +59,7 @@ export default function InforBlog({
                   </div>
                </a>
             </Link>
-            <div className="set">{data.date}</div>
+            <div style={{color: "rgb(106,76,67)"}} className="set">{data.date}</div>
          </div>
       </>
    );
