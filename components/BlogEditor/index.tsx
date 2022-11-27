@@ -48,13 +48,17 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
    const sendNewPost = useCallback(async () => {
       dispatch(handleSendPostBtn({ type: 'WAITTING' }));
       const editor = contentEditorRef.current?.getEditor();
-      if((titleEditorRef.current?.value as string).length < 1){
+      if (
+         (titleEditorRef.current?.value as string).length < 1 ||
+         (editor?.getLength() as number) <= 1
+      ) {
          dispatch(
             handleSendPostBtn({
                type: 'FAILED',
-               message: `${400}: ${"Title require"}`,
-            }))
-         return null
+               message: `${400}: ${'Title and content are require'}`,
+            })
+         );
+         return null;
       }
       return APIwAuth.callAPI({
          method: 'post',
@@ -62,7 +66,7 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
          data: {
             title: titleEditorRef.current?.value,
             content: editor?.getContents().ops,
-            contentString: refState.current.contentString,
+            contentString: editor?.getText(),
             imgThumbnail: refState.current.imgThumbnail,
          },
       })

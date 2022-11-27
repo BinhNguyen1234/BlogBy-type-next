@@ -10,7 +10,7 @@ import SearchBar from '../../components/SearchBar';
 import LargeContentLayout from '../../layout/LargeContentLayout';
 
 /////
-let filter = {fields: ['title', 'content']}
+let filter = { fields: ['title', 'content'] };
 const defaultData = [
    {
       title: 'this is simulate title number 1',
@@ -220,7 +220,11 @@ function reducer(state: InitialStateType, action: any) {
             })(),
          };
       case 'Sent':
-         return { ...state, page: action.payload.page, isLoading: true };
+         return {
+            ...state,
+            page: action.payload ? action.payload.page : state.page,
+            isLoading: true,
+         };
       case 'Filter':
          return {
             ...state,
@@ -292,12 +296,42 @@ function Page(): ReactElement | null {
       filter: 'title',
       page: null,
    });
-   useEffect(() => {
-      
-      if (state.page != null)  {
+   const submitHanlder = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (state.page == 1) {
+         dispatch({ type: 'Sent' });
          axios({
             method: 'get',
-            url: `api/v1/blog/getblog?page=${typeof state.page =="string" ? 1 : state.page}`,
+            url: `api/v1/blog/getblog?page=${
+               typeof state.page == 'string' ? 1 : state.page
+            }&key=${state.keyFilter}&filter=${state.filter}`,
+         })
+            .then((res) => {
+               let data = res.data.map((object: any) => {
+                  return {
+                     ...object,
+                     date: new Date(object.date).toLocaleDateString([
+                        'ban',
+                        'id',
+                     ]),
+                  };
+               });
+               dispatch({ type: 'Done', payload: { posts: data } });
+            })
+            .catch((e) => {
+               console.log(e);
+            });
+      } else {
+         dispatch({ type: 'Sent', payload: { page: 1 } });
+      }
+   };
+   useEffect(() => {
+      if (state.page != null) {
+         axios({
+            method: 'get',
+            url: `api/v1/blog/getblog?page=${
+               typeof state.page == 'string' ? 1 : state.page
+            }&key=${state.keyFilter}&filter=${state.filter}`,
          })
             .then((res) => {
                let data = res.data;
@@ -308,14 +342,14 @@ function Page(): ReactElement | null {
             });
       } else {
          const query = window.location.search;
-         const param = new URLSearchParams(query)
-         let page = param.get('page')
+         const param = new URLSearchParams(query);
+         let page = param.get('page');
          dispatch({
             type: 'Sent',
             payload: {
-               page: typeof page =="string" ? 1 : page
+               page: typeof page == 'string' ? 1 : page,
             },
-         })
+         });
       }
    }, [state.page]);
    return (
@@ -323,6 +357,11 @@ function Page(): ReactElement | null {
          <MainContentLayout>
             <LargeContentLayout>
                <SearchBar
+                  onSubmit={submitHanlder}
+                  stateCheck={state.filter}
+                  href={`api/v1/blog/getblog?page=${
+                     typeof state.page == 'string' ? 1 : state.page
+                  }&key=${state.keyFilter}&filter=${state.filter}`}
                   dispatch={dispatch}
                   filter={filter}
                ></SearchBar>

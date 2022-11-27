@@ -16,14 +16,12 @@ export default function Pagination({
 }: Props): ReactElement {
    return (
       <>
-         
-            <WCSR
-               id={Style.Pagination}
-               dispatch={dispatch}
-               page={page}
-               setPage={setPage}
-            ></WCSR>
-         
+         <WCSR
+            id={Style.Pagination}
+            dispatch={dispatch}
+            page={page}
+            setPage={setPage}
+         ></WCSR>
       </>
    );
 }

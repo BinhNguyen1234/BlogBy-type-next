@@ -1,5 +1,4 @@
-
-import { ReactElement, useEffect, memo } from 'react';
+import { ReactElement, useEffect, memo, FormEventHandler } from 'react';
 import Style from '../../styles/components/SearchBar/SearchBar.module.sass';
 import APIAuth from '../../ulitlity/callApiWAuth';
 interface Props {
@@ -10,45 +9,22 @@ interface Props {
    };
    href?: string;
    stateCheck?: string;
+   onSubmit: FormEventHandler<HTMLFormElement>;
 }
 export default memo(function SearchBar({
    href,
    filter,
    dispatch,
    stateCheck,
+   onSubmit,
 }: Props): ReactElement {
    useEffect(() => {
       require('bootstrap/dist/js/bootstrap.bundle.min.js');
    }, []);
-   const API = new APIAuth()
+   const API = new APIAuth();
    return (
       <>
-         <form
-            onSubmit={(e) => {
-               e.preventDefault();
-               dispatch({ type: 'Sent' });
-               API.callAPI({
-                  method: 'get',
-                  url: href as string,
-               })
-                  .then((res) => {
-                     let data = res.data.map((object: any) => {
-                        return {
-                           ...object,
-                           date: new Date(object.date).toLocaleDateString([
-                              'ban',
-                              'id',
-                           ]),
-                        };
-                     });
-                     dispatch({ type: 'Done', payload: { posts: data } });
-                  })
-                  .catch((e) => {
-                     console.log(e);
-                  });
-            }}
-            id={Style.SearchBar}
-         >
+         <form onSubmit={onSubmit} id={Style.SearchBar}>
             <input
                onInput={(e) => {
                   const target = e.target as HTMLInputElement;
@@ -131,4 +107,4 @@ export default memo(function SearchBar({
          </form>
       </>
    );
-})
+});

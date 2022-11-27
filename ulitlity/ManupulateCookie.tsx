@@ -12,15 +12,8 @@ export function getCookie(name: string) {
 
 export function deleteCookie(name: string) {
    try {
-      let Cookies: string[] = document.cookie.split('; ');
-      let Cookie: string[] = Cookies.filter((valueName) => {
-         return valueName.match(`${name}=`) != null;
-      });
-      const cookieAfterDelete = document.cookie.replace(
-         `${Cookie}`,
-         `${name}=; expires=${new Date().toUTCString()}; path=/;`
-      );
-      document.cookie = cookieAfterDelete;
+      document.cookie =
+         name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
    } catch (e) {
       return null;
    }

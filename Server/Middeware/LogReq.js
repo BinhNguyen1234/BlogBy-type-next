@@ -21,8 +21,8 @@ function logReq(req, res, next) {
       logger.write(`-----------$End----------\n`);
       logger.write(`\n`);
       logger.write(`\n`);
-      logger.end();;
+      logger.end();
    }
-   next()
+   next();
 }
 module.exports = logReq;

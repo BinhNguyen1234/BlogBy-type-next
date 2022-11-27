@@ -1,10 +1,21 @@
-import { ReactElement, useEffect } from 'react';
+import { ReactElement, useEffect, useRef } from 'react';
 import Style from '../../styles/components/EditBlog/ModifyBtn.module.sass';
 import Link from 'next/link';
-export default function ModifyBtn({ url }: { url: string }): ReactElement {
+import APIAuth from '../../ulitlity/callApiWAuth';
+export default function ModifyBtn({
+   url,
+   setIsRemoved,
+   disabled,
+}: {
+   url: string;
+   setIsRemoved: any;
+   disabled: boolean;
+}): ReactElement {
    useEffect(() => {
       require('bootstrap/dist/js/bootstrap.bundle.min.js');
    }, []);
+   const buttonRef = useRef<HTMLButtonElement>(null);
+   let Api = new APIAuth();
    return (
       <>
          <div id={Style.ModifyBtn} className="btn-group">
@@ -14,6 +25,8 @@ export default function ModifyBtn({ url }: { url: string }): ReactElement {
                type="button"
                data-bs-toggle="dropdown"
                aria-expanded="false"
+               disabled={disabled}
+               ref={buttonRef}
             >
                Modify post
             </button>
@@ -31,9 +44,15 @@ export default function ModifyBtn({ url }: { url: string }): ReactElement {
                   </Link>
                </li>
                <li id={Style.RemoveBtn}>
-                  <a className="dropdown-item" href="#">
+                  <div
+                     onClick={() => {
+                        buttonRef.current?.click();
+                        setIsRemoved(true);
+                     }}
+                     className="dropdown-item btn-group"
+                  >
                      &#10007; Remove
-                  </a>
+                  </div>
                </li>
             </ul>
          </div>

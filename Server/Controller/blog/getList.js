@@ -2,11 +2,17 @@ const blog = require('../../Model/post');
 
 async function getList(req, res) {
    let page = req.query.page;
+   const key = req.query.key || '';
+   const filter = req.query.filter;
    try {
       let rawData = await blog
          .aggregate()
          .sort({ date: -1 })
-         .match({})
+         .match(
+            filter == 'title'
+               ? { title: new RegExp(`${key}`, 'gmui') }
+               : { contentString: new RegExp(`${key}`, 'gmui') }
+         )
          .project({
             title: 1,
             date: 1,

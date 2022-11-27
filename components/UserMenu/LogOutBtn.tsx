@@ -10,6 +10,7 @@ export default function LogOutBtn(): ReactElement {
          <div
             onClick={() => {
                deleteCookie('rf');
+               deleteCookie('acc');
                dispatch(LOGOUT(null));
                router.push('/');
             }}

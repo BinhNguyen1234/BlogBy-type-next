@@ -1,4 +1,10 @@
-import { ReactElement, useEffect, useReducer, useState } from 'react';
+import {
+   FormEventHandler,
+   ReactElement,
+   useEffect,
+   useReducer,
+   useState,
+} from 'react';
 import EditBlog from '../../../components/EditBlog';
 import LargeContentLayout from '../../../layout/LargeContentLayout';
 import SearchBar from '../../../components/SearchBar';
@@ -16,7 +22,7 @@ interface InitialStateType {
    filter: string;
    page: number;
 }
-let filter = {fields: ['title', 'content']}
+let filter = { fields: ['title', 'content'] };
 function reducer(state: InitialStateType, action: any) {
    switch (action.type) {
       case 'Done':
@@ -129,7 +135,11 @@ function reducer(state: InitialStateType, action: any) {
             })(),
          };
       case 'Sent':
-         return { ...state, page: action.payload? action.payload.page : state.page , isLoading: true };
+         return {
+            ...state,
+            page: action.payload ? action.payload.page : state.page,
+            isLoading: true,
+         };
       case 'Filter':
          return {
             ...state,
@@ -244,7 +254,36 @@ export default function EditBlogPage(): ReactElement {
          contentString: [[], [], 'this is simulate content'],
       },
    ];
+
    let Api = new APIAuth();
+   let submitHanlder = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (state.page == 1) {
+         
+         dispatch({ type: 'Sent' });
+         Api.callAPI({
+            method: 'get',
+            url: `/api/v1/user/editblog?page=${state.page}&key=${state.keyFilter}&filter=${state.filter}`,
+         })
+            .then((res) => {
+               let data = res.data.map((object: any) => {
+                  return {
+                     ...object,
+                     date: new Date(object.date).toLocaleDateString([
+                        'ban',
+                        'id',
+                     ]),
+                  };
+               });
+               dispatch({ type: 'Done', payload: { posts: data } });
+            })
+            .catch((e) => {
+               console.log(e);
+            });
+      } else {
+         dispatch({ type: 'Sent', payload: { page: 1 } });
+      }
+   };
    const isAuth = useSelector((state: RootStateType) => {
       return state.loginSliceReducers.isAuth;
    });
@@ -260,7 +299,7 @@ export default function EditBlogPage(): ReactElement {
    useEffect(() => {
       Api.callAPI({
          method: 'get',
-         url: `/api/v1/user/editblog?page=${state.page}&key=${state.keyFilter}`,
+         url: `/api/v1/user/editblog?page=${state.page}&key=${state.keyFilter}&filter=${state.filter}`,
       })
          .then((res) => {
             let data = res.data.map((object: any) => {
@@ -281,9 +320,10 @@ export default function EditBlogPage(): ReactElement {
             <LargeContentLayout>
                <SearchBar
                   stateCheck={state.filter}
-                  href={`/api/v1/user/editblog?page=${state.page}&key=${state.keyFilter}`}
+                  href={`/api/v1/user/editblog?page=${state.page}&key=${state.keyFilter}&filter=${state.filter}`}
                   dispatch={dispatch}
                   filter={filter}
+                  onSubmit={submitHanlder}
                ></SearchBar>
                <hr></hr>
                <EditBlog
