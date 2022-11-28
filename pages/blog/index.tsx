@@ -118,10 +118,10 @@ function reducer(state: InitialStateType, action: any) {
                if (state.filter == 'title') {
                   return action.payload.posts.reduce((pV: any, cV: any) => {
                      let positonSearchWordTitle = (cV.title as string).search(
-                        new RegExp(`${state.keyFilter}(.*)`, 'miu')
+                        new RegExp(`${state.keyFilter}(.*)`, 'gmius')
                      );
                      let headAndTrailTitle = (cV.title as string).split(
-                        new RegExp(`${state.keyFilter}(.*)`, 'miu'),
+                        new RegExp(`${state.keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.title.slice(
@@ -142,9 +142,9 @@ function reducer(state: InitialStateType, action: any) {
                   return action.payload.posts.reduce((pV: any, cV: any) => {
                      let positonSearchWordContent = (
                         cV.contentString as string
-                     ).search(new RegExp(`${state.keyFilter}(.*)`, 'miu'));
+                     ).search(new RegExp(`${state.keyFilter}(.*)`, 'gmius'));
                      let headAndContent = (cV.contentString as string).split(
-                        new RegExp(`${state.keyFilter}(.*)`, 'miu'),
+                        new RegExp(`${state.keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.contentString.slice(
@@ -173,10 +173,10 @@ function reducer(state: InitialStateType, action: any) {
                if (action.payload.filter == 'title') {
                   return state.data.reduce((pV: any, cV) => {
                      let positonSearchWordTitle = (cV.title as string).search(
-                        new RegExp(`${state.keyFilter}(.*)`, 'miu')
+                        new RegExp(`${state.keyFilter}(.*)`, 'gmius')
                      );
                      let headAndTrailTitle = (cV.title as string).split(
-                        new RegExp(`${state.keyFilter}(.*)`, 'miu'),
+                        new RegExp(`${state.keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.title.slice(
@@ -197,9 +197,9 @@ function reducer(state: InitialStateType, action: any) {
                   return state.data.reduce((pV: any, cV) => {
                      let positonSearchWordContent = (
                         cV.contentString as string
-                     ).search(new RegExp(`${state.keyFilter}(.*)`, 'miu'));
+                     ).search(new RegExp(`${state.keyFilter}(.*)`, 'gmius'));
                      let headAndContent = (cV.contentString as string).split(
-                        new RegExp(`${state.keyFilter}(.*)`, 'miu'),
+                        new RegExp(`${state.keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.contentString.slice(
@@ -233,10 +233,10 @@ function reducer(state: InitialStateType, action: any) {
                if (state.filter == 'title') {
                   return state.data.reduce((pV: any, cV) => {
                      let positonSearchWordTitle = (cV.title as string).search(
-                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu')
+                        new RegExp(`${action.payload.keyFilter}(.*)`, 'gmius')
                      );
                      let headAndTrailTitle = (cV.title as string).split(
-                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu'),
+                        new RegExp(`${action.payload.keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.title.slice(
@@ -258,10 +258,10 @@ function reducer(state: InitialStateType, action: any) {
                      let positonSearchWordContent = (
                         cV.contentString as string
                      ).search(
-                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu')
+                        new RegExp(`${action.payload.keyFilter}(.*)`, 'gmius')
                      );
                      let headAndContent = (cV.contentString as string).split(
-                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu'),
+                        new RegExp(`${action.payload.keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.contentString.slice(
@@ -359,9 +359,6 @@ function Page(): ReactElement | null {
                <SearchBar
                   onSubmit={submitHanlder}
                   stateCheck={state.filter}
-                  href={`api/v1/blog/getblog?page=${
-                     typeof state.page == 'string' ? 1 : state.page
-                  }&key=${state.keyFilter}&filter=${state.filter}`}
                   dispatch={dispatch}
                   filter={filter}
                ></SearchBar>

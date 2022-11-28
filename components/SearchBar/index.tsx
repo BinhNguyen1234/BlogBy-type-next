@@ -7,12 +7,10 @@ interface Props {
       title?: string;
       fields: Array<string>;
    };
-   href?: string;
    stateCheck?: string;
    onSubmit: FormEventHandler<HTMLFormElement>;
 }
 export default memo(function SearchBar({
-   href,
    filter,
    dispatch,
    stateCheck,
