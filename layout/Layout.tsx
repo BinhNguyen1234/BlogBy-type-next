@@ -4,6 +4,7 @@ import Content from './Content';
 import LoginContainer from '../components/Login/LoginContainer';
 import LoginModal from '../components/Login/LoginModal';
 import ProgressBar from './ProgressBar';
+import Modal from '../components/Modal';
 import { memo } from 'react';
 import React, { useRef, useCallback } from 'react';
 interface Props {
@@ -17,6 +18,7 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
    return (
       <>
          <ProgressBar></ProgressBar>
+         <Modal></Modal>
          <LoginModal refProp={loginModalRef}>
             <LoginContainer hideModal={handleModal}></LoginContainer>
          </LoginModal>

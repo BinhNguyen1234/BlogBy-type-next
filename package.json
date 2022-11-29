@@ -6,11 +6,11 @@
       "format": "prettier --write *",
       "dev": "node ./Server/index.js",
       "build": "next build",
-      "test": "next build --profile --debug && NODE_ENV=production PORT=81 node ./Server/index.js",
-      "product": "next build && NODE_ENV=production PORT=81 node ./Server/index.js",
-      "start": "NODE_ENV=production PORT=81 node ./Server/index.js",
+      "test": "next build --profile --debug && NODE_ENV=production PORT=80 node ./Server/index.js",
+      "product": "next build && NODE_ENV=production PORT=80 node ./Server/index.js",
+      "start": "NODE_ENV=production PORT=80 node ./Server/index.js",
       "lint": "next lint",
-      "production": "NODE_ENV=production pm2 start ./Server/index.js --name blogtee -- --port 81"
+      "production": "NODE_ENV=production pm2 start ./Server/index.js --name blogtee -- --port 80"
    },
    "dependencies": {
       "@reduxjs/toolkit": "^1.8.5",

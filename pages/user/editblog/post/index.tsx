@@ -11,7 +11,8 @@ export default withRouter(function EditPost({ router }): ReactElement {
       return state.loginSliceReducers.isAuth;
    });
    useLayoutEffect(() => {
-      axios({
+      if(router.isReady)
+      {axios({
          method: 'get',
          url: `/api/v1/blog?url=${router.query.url}`,
       })
@@ -20,8 +21,8 @@ export default withRouter(function EditPost({ router }): ReactElement {
          })
          .catch((e) => {
             console.log(e);
-         });
-   }, []);
+         });}
+   }, [router]);
    if (isAuth === true) {
       return (
          <>

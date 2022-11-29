@@ -34,10 +34,9 @@ interface Props {
    } | null;
 }
 export default function BlogEditor({ value, href }: Props): ReactElement {
-   console.log('blogeditor render', value ? true : false);
    const router = useRouter();
-   const [title, setTitle] = useState('title');
-   const [contentString, setContentString] = useState();
+   const [title, setTitle] = useState();
+   const [contentString, setContentString] = useState('content');
    const [imgThumbnail, setUrl] = useState(value?.imgThumbnail || null);
    const refState = useRef({ contentString, imgThumbnail });
    refState.current = { contentString, imgThumbnail };
@@ -88,7 +87,7 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
             );
          });
    }, []);
-
+   
    useLayoutEffect(() => {
       titleEditorRef.current?.addEventListener(
          'input',
@@ -117,7 +116,11 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
                {{
                   data: {
                      title: [, , title || value?.title || 'title'],
-                     contentString: [, , contentString || 'content'],
+                     contentString: [
+                        ,
+                        ,
+                        contentString == '' ? 'content' : contentString,
+                     ],
                      imgThumbnail: imgThumbnail || value?.imgThumbnail,
                      date: new Date().toLocaleDateString(['ban', 'id']),
                   },

@@ -259,7 +259,6 @@ export default function EditBlogPage(): ReactElement {
    let submitHanlder = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (state.page == 1) {
-         
          dispatch({ type: 'Sent' });
          Api.callAPI({
             method: 'get',

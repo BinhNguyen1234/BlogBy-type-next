@@ -28,6 +28,7 @@ export default function BlogChild({
                disabled={isRemoved}
                setIsRemoved={setIsRemoved}
                url={data.url}
+               title={data.title}
             ></ModifyBtn>
          </li>
       </>

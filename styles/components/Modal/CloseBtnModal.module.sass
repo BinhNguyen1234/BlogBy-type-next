@@ -1,0 +1,26 @@
+#CloseBtnModal
+    font-size: 12px
+    width: 3em
+    height: 3em
+    ratio: 1/1
+    position: absolute
+    padding: 0 !important
+    z-index: 55
+    right: 7px
+    top: 7px
+    transition: transform linear 0.2s
+    &:hover
+        transform: Rotate(360deg)
+        > div
+            background-color: red
+              
+    > div
+        position: absolute
+        width: 100%
+        height: 2px
+        background-color: black
+        transition: transform 0.3s linear
+        &:nth-child(1)
+            transform: Rotate(45deg)
+        &:nth-child(2)
+            transform: Rotate(-45deg)
