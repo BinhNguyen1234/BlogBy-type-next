@@ -22,8 +22,9 @@ export default function WCSR({
                   }`}
                   onClick={() => {
                      window.scrollTo(0, 0);
+                    
                      window.history.pushState(
-                        'page',
+                        null,
                         'page',
                         `${window.location.pathname}?page=${page - 1}`
                      );

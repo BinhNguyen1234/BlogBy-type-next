@@ -19,7 +19,6 @@ export default function PreviewBlogChild({
    style,
    className,
 }: Props): ReactElement {
-   console.log(children)
    return (
       <>
          <div

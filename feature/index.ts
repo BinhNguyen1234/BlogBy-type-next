@@ -12,7 +12,7 @@ const allReducers = combineReducers({
    UISendPostBtn,
    UISubmitBtn,
    readMode,
-   ModalControl
+   ModalControl,
 });
 
 const store = () => {

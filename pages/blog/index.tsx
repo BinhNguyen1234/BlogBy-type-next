@@ -296,6 +296,7 @@ function Page(): ReactElement | null {
       filter: 'title',
       page: null,
    });
+   console.log(state.page, 'page');
    const submitHanlder = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (state.page == 1) {
@@ -335,6 +336,7 @@ function Page(): ReactElement | null {
          })
             .then((res) => {
                let data = res.data;
+              
                dispatch({ type: 'Done', payload: { posts: data } });
             })
             .catch((e) => {
@@ -343,11 +345,12 @@ function Page(): ReactElement | null {
       } else {
          const query = window.location.search;
          const param = new URLSearchParams(query);
-         let page = param.get('page');
+         let page = parseInt(param.get('page') as string);
+         console.log(page);
          dispatch({
             type: 'Sent',
             payload: {
-               page: typeof page == 'string' ? 1 : page,
+               page: typeof page ? page : 1,
             },
          });
       }

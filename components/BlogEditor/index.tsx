@@ -87,7 +87,7 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
             );
          });
    }, []);
-   
+
    useLayoutEffect(() => {
       titleEditorRef.current?.addEventListener(
          'input',

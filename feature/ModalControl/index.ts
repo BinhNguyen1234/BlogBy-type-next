@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 interface ModalControlStateType {
    title: string;
    content: string;
-   action?:  any;
+   action?: any;
    hidden: boolean;
 }
 const initialState: ModalControlStateType = {

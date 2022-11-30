@@ -10,7 +10,7 @@ export default function ListBlog({ data, isLoading }: Props): ReactElement {
    return (
       <>
          <ul id={Style.ListBlog}>
-            {data?.map(
+            {(data as Array<DataType>).length>0 ?data?.map(
                ({ url, title, date, contentString }, index): ReactElement => {
                   return (
                      <>
@@ -23,7 +23,7 @@ export default function ListBlog({ data, isLoading }: Props): ReactElement {
                      </>
                   );
                }
-            )}
+            ):<div> Không tìm thấy bài viết</div>}
          </ul>
       </>
    );
