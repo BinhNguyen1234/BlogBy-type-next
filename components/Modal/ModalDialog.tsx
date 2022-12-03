@@ -6,7 +6,7 @@ import { RootStateType } from '../../feature';
 import { useDispatch } from 'react-redux';
 import { closeModal } from '../../feature/ModalControl';
 export default function ModalDialog(): ReactElement {
-   const dispatch = useDispatch()
+   const dispatch = useDispatch();
    const state = useSelector((state: RootStateType) => {
       return state.ModalControl;
    });
@@ -26,8 +26,7 @@ export default function ModalDialog(): ReactElement {
             <button
                style={{ width: '15%' }}
                onClick={(e) => {
-                  state.action?state.action():dispatch(closeModal(null))
-                  
+                  state.action ? state.action() : dispatch(closeModal(null));
                }}
                type="button"
                className="btn btn-primary"

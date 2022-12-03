@@ -7,19 +7,19 @@ import Layout from '../layout/Layout';
 import { useEffect } from 'react';
 import { LOGIN } from '../feature/login';
 import jwt from 'jsonwebtoken';
+import { useRouter } from 'next/router';
 import { getCookie } from '../ulitlity/ManupulateCookie';
 function MyApp({ Component, pageProps }) {
-   // const dispatch = useDispatch();
-   // useEffect(() => {
-   //    console.log(Component, "Props")
-   //    const cookie = getCookie('rf');
-   //    if (cookie) {
-   //       const { username } = jwt.decode(getCookie('rf'));
-   //       if (username) {
-   //       }
-   //       dispatch(LOGIN(username));
-   //    }
-   // }, []);
+   const dispatch = useDispatch();
+   useEffect(() => {
+      const cookie = getCookie('rf');
+      if (cookie) {
+         const { username } = jwt.decode(getCookie('rf'));
+         if (username) {
+         }
+         dispatch(LOGIN(username));
+      }
+   }, []);
 
    return (
       <Layout>

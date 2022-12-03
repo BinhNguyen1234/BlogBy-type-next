@@ -17,7 +17,6 @@ import { useRouter } from 'next/router';
 //      }}
 //  );
 function Home(/*{ data }: Propstype*/) {
-
    return (
       <>
          <div

@@ -14,13 +14,13 @@ import axios from 'axios';
 import APIAuth from '../../../ulitlity/callApiWAuth';
 import { DataType } from '../../../components/EditBlog';
 import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 interface InitialStateType {
    data: Array<DataType>;
    isLoading: boolean;
    displayedData: Array<DataType>;
    keyFilter: string;
    filter: string;
-   page: number;
 }
 let filter = { fields: ['title', 'content'] };
 function reducer(state: InitialStateType, action: any) {
@@ -137,7 +137,6 @@ function reducer(state: InitialStateType, action: any) {
       case 'Sent':
          return {
             ...state,
-            page: action.payload ? action.payload.page : state.page,
             isLoading: true,
          };
       case 'Filter':
@@ -254,34 +253,14 @@ export default function EditBlogPage(): ReactElement {
          contentString: [[], [], 'this is simulate content'],
       },
    ];
-
+   const router = useRouter()
    let Api = new APIAuth();
    let submitHanlder = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      if (state.page == 1) {
-         dispatch({ type: 'Sent' });
-         Api.callAPI({
-            method: 'get',
-            url: `/api/v1/user/editblog?page=${state.page}&key=${state.keyFilter}&filter=${state.filter}`,
-         })
-            .then((res) => {
-               let data = res.data.map((object: any) => {
-                  return {
-                     ...object,
-                     date: new Date(object.date).toLocaleDateString([
-                        'ban',
-                        'id',
-                     ]),
-                  };
-               });
-               dispatch({ type: 'Done', payload: { posts: data } });
-            })
-            .catch((e) => {
-               console.log(e);
-            });
-      } else {
-         dispatch({ type: 'Sent', payload: { page: 1 } });
-      }
+      dispatch({ type: 'Sent' });
+      router.push(`/user/editblog?page=${
+               parseInt(router.query.page as string) > 1 ? 1 : router.query.page
+            }&key=${state.keyFilter}&filter=${state.filter}`)
    };
    const isAuth = useSelector((state: RootStateType) => {
       return state.loginSliceReducers.isAuth;
@@ -292,13 +271,13 @@ export default function EditBlogPage(): ReactElement {
       displayedData: defaultData,
       keyFilter: '',
       filter: 'title',
-      page: 1,
    });
 
    useEffect(() => {
-      Api.callAPI({
+      if(router.isReady)
+    {  Api.callAPI({
          method: 'get',
-         url: `/api/v1/user/editblog?page=${state.page}&key=${state.keyFilter}&filter=${state.filter}`,
+         url: `/api/v1/user/editblog?page=${router.query.page||1}&key=${state.keyFilter}&filter=${state.filter}`,
       })
          .then((res) => {
             let data = res.data.map((object: any) => {
@@ -310,9 +289,9 @@ export default function EditBlogPage(): ReactElement {
             dispatch({ type: 'Done', payload: { posts: data } });
          })
          .catch((e) => {
-            console.log(e);
-         });
-   }, [state.page]);
+            dispatch({ type: 'Done', payload: { posts: [] } });
+         })};
+   }, [router]);
    if (isAuth === true) {
       return (
          <>
@@ -328,7 +307,7 @@ export default function EditBlogPage(): ReactElement {
                   isLoading={state.isLoading}
                   displayedData={state.displayedData}
                ></EditBlog>
-               <Pagination page={state.page} setPage={dispatch}></Pagination>
+               <Pagination page={parseInt(router.query.page as string)||1} hrefToQuerry={`/user/editblog?page=`}></Pagination>
             </LargeContentLayout>
          </>
       );

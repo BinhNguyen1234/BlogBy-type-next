@@ -44,7 +44,12 @@ class APIAuth {
             if (e.response.status !== 401) {
                return Promise.reject(e);
             } else if (!getCookie('rf')) {
-               this.dispatch(showModal({title: "Please Login Again", content: "Your token expired"}))
+               this.dispatch(
+                  showModal({
+                     title: 'Please Login Again',
+                     content: 'Your token expired',
+                  })
+               );
                this.dispatch(RELOGIN(null));
                return Promise.reject(e);
             } else {
@@ -63,9 +68,15 @@ class APIAuth {
                      });
                   })
                   .catch((e) => {
-                     this.dispatch(showModal({title: "Please Login Again", content: "Phiên đăng nhập đã hết hạn",action: null}))
+                     this.dispatch(
+                        showModal({
+                           title: 'Please Login Again',
+                           content: 'Phiên đăng nhập đã hết hạn',
+                           action: null,
+                        })
+                     );
                      this.dispatch(RELOGIN(null));
-                     
+
                      return Promise.reject(e);
                   });
             }

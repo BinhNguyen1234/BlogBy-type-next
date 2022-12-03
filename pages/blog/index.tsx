@@ -1,7 +1,7 @@
 import { ReactElement, useReducer, useEffect, useState } from 'react';
 import { RENDERED, RESET } from '../../feature/handleProgressBar';
 import MainContentLayout from '../../layout/MainContentLayout';
-import { withRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 import PreviewBlogContainer from '../../components/PreviewBlog/PreviewBlogContainer';
 import Pagination from '../../components/Pagination';
@@ -105,7 +105,6 @@ interface InitialStateType {
    displayedData: Array<DataType>;
    keyFilter: string;
    filter: string;
-   page: string;
 }
 
 function reducer(state: InitialStateType, action: any) {
@@ -222,7 +221,6 @@ function reducer(state: InitialStateType, action: any) {
       case 'Sent':
          return {
             ...state,
-            page: action.payload ? action.payload.page : state.page,
             isLoading: true,
          };
       case 'Filter':
@@ -294,67 +292,59 @@ function Page(): ReactElement | null {
       displayedData: defaultData,
       keyFilter: '',
       filter: 'title',
-      page: null,
    });
-   console.log(state.page, 'page');
+   console.log(state,"state")
+   const router = useRouter();
    const submitHanlder = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      if (state.page == 1) {
-         dispatch({ type: 'Sent' });
-         axios({
-            method: 'get',
-            url: `api/v1/blog/getblog?page=${
-               typeof state.page == 'string' ? 1 : state.page
-            }&key=${state.keyFilter}&filter=${state.filter}`,
-         })
-            .then((res) => {
-               let data = res.data.map((object: any) => {
-                  return {
-                     ...object,
-                     date: new Date(object.date).toLocaleDateString([
-                        'ban',
-                        'id',
-                     ]),
-                  };
-               });
-               dispatch({ type: 'Done', payload: { posts: data } });
-            })
-            .catch((e) => {
-               console.log(e);
-            });
-      } else {
-         dispatch({ type: 'Sent', payload: { page: 1 } });
-      }
+
+      dispatch({ type: 'Sent' });
+      router.push(`/blog?page=${
+               parseInt(router.query.page as string) > 1 ? 1 : router.query.page
+            }&key=${state.keyFilter}&filter=${state.filter}`)
+      // axios({
+      //    method: 'get',
+      //    url: `api/v1/blog/getblog?page=${
+      //       typeof router.query.page == 'string' ? 1 : router.query.page
+      //    }&key=${state.keyFilter}&filter=${state.filter}`,
+      // })
+      //    .then((res) => {
+      //       let data = res.data.map((object: any) => {
+      //          return {
+      //             ...object,
+      //             date: new Date(object.date).toLocaleDateString(['ban', 'id']),
+      //          };
+      //       });
+      //       dispatch({ type: 'Done', payload: { posts: data } });
+      //    })
+      //    .catch((e) => {
+      //       dispatch({ type: 'Done', payload: { posts: [] } });
+      //    });
    };
    useEffect(() => {
-      if (state.page != null) {
+      const handleRouterChange = (url : string,{shallow} : any)=>{
+         dispatch({ type: 'Sent'});
+      }
+      router.events.on("routeChangeStart",handleRouterChange);
+      if (router.isReady) {
          axios({
             method: 'get',
-            url: `api/v1/blog/getblog?page=${
-               typeof state.page == 'string' ? 1 : state.page
-            }&key=${state.keyFilter}&filter=${state.filter}`,
+            url: `api/v1/blog/getblog?page=${router.query.page || 1}&key=${
+               router.query.key||state.keyFilter
+            }&filter=${router.query.filter||state.filter}`,
          })
             .then((res) => {
                let data = res.data;
-              
                dispatch({ type: 'Done', payload: { posts: data } });
             })
             .catch((e) => {
-               console.log(e);
+               dispatch({ type: 'Done', payload: { posts: [] } });
             });
-      } else {
-         const query = window.location.search;
-         const param = new URLSearchParams(query);
-         let page = parseInt(param.get('page') as string);
-         console.log(page);
-         dispatch({
-            type: 'Sent',
-            payload: {
-               page: typeof page ? page : 1,
-            },
-         });
       }
-   }, [state.page]);
+      return ()=>{
+         router.events.off("routeChangeStart",handleRouterChange);
+      }
+   }, [router]);
    return (
       <>
          <MainContentLayout>
@@ -372,8 +362,8 @@ function Page(): ReactElement | null {
                {state.displayedData}
             </PreviewBlogContainer>
             <Pagination
-               setPage={dispatch}
-               page={parseInt(state.page)}
+               hrefToQuerry={'/blog?page='}
+               page={parseInt(router.query.page as string)||1}
             ></Pagination>
          </MainContentLayout>
       </>
