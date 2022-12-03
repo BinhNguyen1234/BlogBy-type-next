@@ -297,6 +297,7 @@ export default function EditBlogPage(): ReactElement {
          <>
             <LargeContentLayout>
                <SearchBar
+                  defaultValue={state.keyFilter}
                   stateCheck={state.filter}
                   dispatch={dispatch}
                   filter={filter}
@@ -307,7 +308,7 @@ export default function EditBlogPage(): ReactElement {
                   isLoading={state.isLoading}
                   displayedData={state.displayedData}
                ></EditBlog>
-               <Pagination page={parseInt(router.query.page as string)||1} hrefToQuerry={`/user/editblog?page=`}></Pagination>
+               <Pagination page={router.query.page? parseInt(router.query.page as string):1} hrefToQuerry={`/user/editblog?page=`}></Pagination>
             </LargeContentLayout>
          </>
       );

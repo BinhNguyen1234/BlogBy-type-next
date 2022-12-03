@@ -1,6 +1,5 @@
 import { ReactElement, useEffect, memo, FormEventHandler } from 'react';
 import Style from '../../styles/components/SearchBar/SearchBar.module.sass';
-import APIAuth from '../../ulitlity/callApiWAuth';
 interface Props {
    dispatch?: any;
    filter?: {
@@ -9,21 +8,23 @@ interface Props {
    };
    stateCheck?: string;
    onSubmit: FormEventHandler<HTMLFormElement>;
+   defaultValue?: string
 }
-export default memo(function SearchBar({
+export default function SearchBar({
    filter,
    dispatch,
    stateCheck,
+   defaultValue,
    onSubmit,
 }: Props): ReactElement {
    useEffect(() => {
       require('bootstrap/dist/js/bootstrap.bundle.min.js');
    }, []);
-   const API = new APIAuth();
    return (
       <>
          <form onSubmit={onSubmit} id={Style.SearchBar}>
             <input
+               defaultValue={defaultValue}
                onInput={(e) => {
                   const target = e.target as HTMLInputElement;
                   dispatch({
@@ -105,4 +106,4 @@ export default memo(function SearchBar({
          </form>
       </>
    );
-});
+};

@@ -1,11 +1,10 @@
-import { ReactElement, useReducer, useEffect, useState } from 'react';
+import { ReactElement, useReducer, useEffect } from 'react';
 import { RENDERED, RESET } from '../../feature/handleProgressBar';
 import MainContentLayout from '../../layout/MainContentLayout';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import PreviewBlogContainer from '../../components/PreviewBlog/PreviewBlogContainer';
 import Pagination from '../../components/Pagination';
-import { useDispatch } from 'react-redux';
 import SearchBar from '../../components/SearchBar';
 import LargeContentLayout from '../../layout/LargeContentLayout';
 
@@ -110,22 +109,26 @@ interface InitialStateType {
 function reducer(state: InitialStateType, action: any) {
    switch (action.type) {
       case 'Done':
+         const filter = action.payload.filter || state.filter
+         const keyFilter = action.payload.keyFilter || state.keyFilter
          return {
-            ...state,
+            filter,
+            keyFilter,
+            isLoading: false,
             data: action.payload.posts,
             displayedData: (() => {
-               if (state.filter == 'title') {
+               if (filter == 'title') {
                   return action.payload.posts.reduce((pV: any, cV: any) => {
                      let positonSearchWordTitle = (cV.title as string).search(
-                        new RegExp(`${state.keyFilter}(.*)`, 'gmius')
+                        new RegExp(`${keyFilter}(.*)`, 'gmius')
                      );
                      let headAndTrailTitle = (cV.title as string).split(
-                        new RegExp(`${state.keyFilter}(.*)`, 'gmius'),
+                        new RegExp(`${keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.title.slice(
                         positonSearchWordTitle,
-                        positonSearchWordTitle + state.keyFilter.length
+                        positonSearchWordTitle + keyFilter.length
                      );
                      headAndTrailTitle.splice(1, 0, body as string);
                      if (positonSearchWordTitle >= 0) {
@@ -137,18 +140,18 @@ function reducer(state: InitialStateType, action: any) {
                      }
                      return pV;
                   }, []);
-               } else if (state.filter == 'content') {
+               } else if (filter == 'content') {
                   return action.payload.posts.reduce((pV: any, cV: any) => {
                      let positonSearchWordContent = (
                         cV.contentString as string
-                     ).search(new RegExp(`${state.keyFilter}(.*)`, 'gmius'));
+                     ).search(new RegExp(`${keyFilter}(.*)`, 'gmius'));
                      let headAndContent = (cV.contentString as string).split(
-                        new RegExp(`${state.keyFilter}(.*)`, 'gmius'),
+                        new RegExp(`${keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.contentString.slice(
                         positonSearchWordContent,
-                        positonSearchWordContent + state.keyFilter.length
+                        positonSearchWordContent + keyFilter.length
                      );
                      headAndContent.splice(1, 0, body as string);
                      if (positonSearchWordContent >= 0) {
@@ -162,7 +165,7 @@ function reducer(state: InitialStateType, action: any) {
                   }, []);
                }
             })(),
-            isLoading: false,
+            
          };
       case 'Checked':
          return {
@@ -293,8 +296,8 @@ function Page(): ReactElement | null {
       keyFilter: '',
       filter: 'title',
    });
-   console.log(state,"state")
    const router = useRouter();
+   
    const submitHanlder = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
@@ -327,6 +330,8 @@ function Page(): ReactElement | null {
       }
       router.events.on("routeChangeStart",handleRouterChange);
       if (router.isReady) {
+         const filter = router.query.filter
+         const keyFilter = router.query.key
          axios({
             method: 'get',
             url: `api/v1/blog/getblog?page=${router.query.page || 1}&key=${
@@ -335,10 +340,10 @@ function Page(): ReactElement | null {
          })
             .then((res) => {
                let data = res.data;
-               dispatch({ type: 'Done', payload: { posts: data } });
+               dispatch({ type: 'Done', payload: { keyFilter,filter,posts: data } });
             })
             .catch((e) => {
-               dispatch({ type: 'Done', payload: { posts: [] } });
+               dispatch({ type: 'Done', payload: { keyFilter,filter,posts: [] } });
             });
       }
       return ()=>{
@@ -350,6 +355,7 @@ function Page(): ReactElement | null {
          <MainContentLayout>
             <LargeContentLayout>
                <SearchBar
+                  defaultValue={state.keyFilter}
                   onSubmit={submitHanlder}
                   stateCheck={state.filter}
                   dispatch={dispatch}
