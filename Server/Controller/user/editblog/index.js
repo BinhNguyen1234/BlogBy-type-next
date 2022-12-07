@@ -23,7 +23,7 @@ async function GetBlogList(req, res) {
          })
          .catch((e) => {
             res.status(400).send('Not accept');
-            throw e
+            throw e;
          });
       res.status(299).send(ListBlog['_post']);
    } catch (e) {

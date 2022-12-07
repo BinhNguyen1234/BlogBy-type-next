@@ -253,14 +253,16 @@ export default function EditBlogPage(): ReactElement {
          contentString: [[], [], 'this is simulate content'],
       },
    ];
-   const router = useRouter()
+   const router = useRouter();
    let Api = new APIAuth();
    let submitHanlder = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       dispatch({ type: 'Sent' });
-      router.push(`/user/editblog?page=${
-               parseInt(router.query.page as string) > 1 ? 1 : router.query.page
-            }&key=${state.keyFilter}&filter=${state.filter}`)
+      router.push(
+         `/user/editblog?page=${
+            parseInt(router.query.page as string) > 1 ? 1 : router.query.page
+         }&key=${state.keyFilter}&filter=${state.filter}`
+      );
    };
    const isAuth = useSelector((state: RootStateType) => {
       return state.loginSliceReducers.isAuth;
@@ -274,23 +276,29 @@ export default function EditBlogPage(): ReactElement {
    });
 
    useEffect(() => {
-      if(router.isReady)
-    {  Api.callAPI({
-         method: 'get',
-         url: `/api/v1/user/editblog?page=${router.query.page||1}&key=${state.keyFilter}&filter=${state.filter}`,
-      })
-         .then((res) => {
-            let data = res.data.map((object: any) => {
-               return {
-                  ...object,
-                  date: new Date(object.date).toLocaleDateString(['ban', 'id']),
-               };
-            });
-            dispatch({ type: 'Done', payload: { posts: data } });
+      if (router.isReady) {
+         Api.callAPI({
+            method: 'get',
+            url: `/api/v1/user/editblog?page=${router.query.page || 1}&key=${
+               state.keyFilter
+            }&filter=${state.filter}`,
          })
-         .catch((e) => {
-            dispatch({ type: 'Done', payload: { posts: [] } });
-         })};
+            .then((res) => {
+               let data = res.data.map((object: any) => {
+                  return {
+                     ...object,
+                     date: new Date(object.date).toLocaleDateString([
+                        'ban',
+                        'id',
+                     ]),
+                  };
+               });
+               dispatch({ type: 'Done', payload: { posts: data } });
+            })
+            .catch((e) => {
+               dispatch({ type: 'Done', payload: { posts: [] } });
+            });
+      }
    }, [router]);
    if (isAuth === true) {
       return (
@@ -308,7 +316,14 @@ export default function EditBlogPage(): ReactElement {
                   isLoading={state.isLoading}
                   displayedData={state.displayedData}
                ></EditBlog>
-               <Pagination page={router.query.page? parseInt(router.query.page as string):1} hrefToQuerry={`/user/editblog?page=`}></Pagination>
+               <Pagination
+                  page={
+                     router.query.page
+                        ? parseInt(router.query.page as string)
+                        : 1
+                  }
+                  hrefToQuerry={`/user/editblog?page=`}
+               ></Pagination>
             </LargeContentLayout>
          </>
       );

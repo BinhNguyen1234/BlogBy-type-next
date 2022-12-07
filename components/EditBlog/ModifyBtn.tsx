@@ -3,7 +3,7 @@ import Style from '../../styles/components/EditBlog/ModifyBtn.module.sass';
 import Link from 'next/link';
 import APIAuth from '../../ulitlity/callApiWAuth';
 import { useDispatch } from 'react-redux';
-import { showModal } from '../../feature/ModalControl';
+import { showModal, closeModal } from '../../feature/ModalControl';
 export default function ModifyBtn({
    url,
    setIsRemoved,
@@ -28,7 +28,8 @@ export default function ModifyBtn({
          data: { url: url },
       })
          .then((response) => {
-            console.log(response.data);
+            setIsRemoved(true);
+            dispatch(closeModal(null));
          })
          .catch((e) => {
             console.log;
@@ -70,6 +71,7 @@ export default function ModifyBtn({
                               title: 'Bạn muốn xoá bài?',
                               content: title,
                               action: handleRemovePost,
+                              nameAction: 'Ok',
                            })
                         );
                      }}

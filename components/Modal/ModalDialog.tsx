@@ -4,7 +4,7 @@ import CloseBtn from './CloseBtn';
 import { useSelector } from 'react-redux';
 import { RootStateType } from '../../feature';
 import { useDispatch } from 'react-redux';
-import { closeModal } from '../../feature/ModalControl';
+import { closeModal, processModal } from '../../feature/ModalControl';
 export default function ModalDialog(): ReactElement {
    const dispatch = useDispatch();
    const state = useSelector((state: RootStateType) => {
@@ -26,12 +26,14 @@ export default function ModalDialog(): ReactElement {
             <button
                style={{ width: '15%' }}
                onClick={(e) => {
+                  dispatch(processModal(null));
                   state.action ? state.action() : dispatch(closeModal(null));
                }}
                type="button"
-               className="btn btn-primary"
+               disabled={state.status == 'btn-warning'}
+               className={`btn ${state.status}`}
             >
-               Ok
+               {state.nameAction}
             </button>
          </div>
       </>

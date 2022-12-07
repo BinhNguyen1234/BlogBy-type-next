@@ -8,7 +8,7 @@ interface Props {
    };
    stateCheck?: string;
    onSubmit: FormEventHandler<HTMLFormElement>;
-   defaultValue?: string
+   defaultValue?: string;
 }
 export default function SearchBar({
    filter,
@@ -106,4 +106,4 @@ export default function SearchBar({
          </form>
       </>
    );
-};
+}

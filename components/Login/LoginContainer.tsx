@@ -85,12 +85,14 @@ const LoginForm: React.FC<Props> = ({ hideModal }: Props) => {
                <form action="/login/auth" id="loginfeature" method="post">
                   <label>Username</label>
                   <input
+                     required
                      form="loginfeature"
                      name="username"
                      placeholder="Enter Username"
                   ></input>
                   <label>Password</label>
                   <input
+                     required
                      form="loginfeature"
                      name="password"
                      placeholder="Enter password"

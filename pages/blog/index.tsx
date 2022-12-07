@@ -109,8 +109,8 @@ interface InitialStateType {
 function reducer(state: InitialStateType, action: any) {
    switch (action.type) {
       case 'Done':
-         const filter = action.payload.filter || state.filter
-         const keyFilter = action.payload.keyFilter || state.keyFilter
+         const filter = action.payload.filter || state.filter;
+         const keyFilter = action.payload.keyFilter || state.keyFilter;
          return {
             filter,
             keyFilter,
@@ -165,7 +165,6 @@ function reducer(state: InitialStateType, action: any) {
                   }, []);
                }
             })(),
-            
          };
       case 'Checked':
          return {
@@ -297,14 +296,16 @@ function Page(): ReactElement | null {
       filter: 'title',
    });
    const router = useRouter();
-   
+
    const submitHanlder = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
       dispatch({ type: 'Sent' });
-      router.push(`/blog?page=${
-               parseInt(router.query.page as string) > 1 ? 1 : router.query.page
-            }&key=${state.keyFilter}&filter=${state.filter}`)
+      router.push(
+         `/blog?page=${
+            parseInt(router.query.page as string) > 1 ? 1 : router.query.page
+         }&key=${state.keyFilter}&filter=${state.filter}`
+      );
       // axios({
       //    method: 'get',
       //    url: `api/v1/blog/getblog?page=${
@@ -325,30 +326,36 @@ function Page(): ReactElement | null {
       //    });
    };
    useEffect(() => {
-      const handleRouterChange = (url : string,{shallow} : any)=>{
-         dispatch({ type: 'Sent'});
-      }
-      router.events.on("routeChangeStart",handleRouterChange);
+      const handleRouterChange = (url: string, { shallow }: any) => {
+         dispatch({ type: 'Sent' });
+      };
+      router.events.on('routeChangeStart', handleRouterChange);
       if (router.isReady) {
-         const filter = router.query.filter
-         const keyFilter = router.query.key
+         const filter = router.query.filter;
+         const keyFilter = router.query.key;
          axios({
             method: 'get',
             url: `api/v1/blog/getblog?page=${router.query.page || 1}&key=${
-               router.query.key||state.keyFilter
-            }&filter=${router.query.filter||state.filter}`,
+               router.query.key || state.keyFilter
+            }&filter=${router.query.filter || state.filter}`,
          })
             .then((res) => {
                let data = res.data;
-               dispatch({ type: 'Done', payload: { keyFilter,filter,posts: data } });
+               dispatch({
+                  type: 'Done',
+                  payload: { keyFilter, filter, posts: data },
+               });
             })
             .catch((e) => {
-               dispatch({ type: 'Done', payload: { keyFilter,filter,posts: [] } });
+               dispatch({
+                  type: 'Done',
+                  payload: { keyFilter, filter, posts: [] },
+               });
             });
       }
-      return ()=>{
-         router.events.off("routeChangeStart",handleRouterChange);
-      }
+      return () => {
+         router.events.off('routeChangeStart', handleRouterChange);
+      };
    }, [router]);
    return (
       <>
@@ -369,7 +376,7 @@ function Page(): ReactElement | null {
             </PreviewBlogContainer>
             <Pagination
                hrefToQuerry={'/blog?page='}
-               page={parseInt(router.query.page as string)||1}
+               page={parseInt(router.query.page as string) || 1}
             ></Pagination>
          </MainContentLayout>
       </>

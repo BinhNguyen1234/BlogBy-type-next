@@ -17,9 +17,9 @@ export default function WCSR({
       <>
          <nav id={id} aria-label="Page navigation example">
             <ul className="pagination">
-               <li >
+               <li>
                   <Link href={`${hrefToQuerry}${page - 1}`}>
-                     <a 
+                     <a
                         className={`page-item page-link ${
                            page === 1 ? 'disabled' : null
                         }`}
@@ -31,7 +31,7 @@ export default function WCSR({
                {page === 1 ? (
                   ''
                ) : (
-                  <li >
+                  <li>
                      <Link href={`${hrefToQuerry}${page - 1}`}>
                         <a className="page-item page-link">{page - 1}</a>
                      </Link>
@@ -43,12 +43,12 @@ export default function WCSR({
                >
                   {page}
                </li>
-               <li >
+               <li>
                   <Link href={`${hrefToQuerry}${page + 1}`}>
                      <a className="page-item page-link">{page + 1}</a>
                   </Link>
                </li>
-               <li >
+               <li>
                   <Link href={`${hrefToQuerry}${page + 1}`}>
                      <a className="page-item page-link">Next</a>
                   </Link>
