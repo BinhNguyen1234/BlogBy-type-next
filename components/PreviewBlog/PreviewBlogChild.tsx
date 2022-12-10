@@ -1,6 +1,7 @@
+import dynamic from 'next/dynamic';
 import { CSSProperties, ReactElement, useEffect, useRef } from 'react';
 import Style from '../../styles/components/PreviewBlog/PreviewBlogChild.module.sass';
-
+const Image = dynamic(()=>import("../PreviewBlog/ImageSSR"),{ssr:false})
 interface Props {
    alt?: string;
    children?:
@@ -31,16 +32,12 @@ export default function PreviewBlogChild({
                <div></div>
             </div>
             <div className={Style.img_container + ' set'}>
-               <img
-                  onError={({ currentTarget }) => {
-                     currentTarget.onerror = null;
-                     currentTarget.src = '/external/404-not-found-error.jpeg';
-                  }}
+               <Image
                   src={`${
                      children?.data.imgThumbnail ||
                      '/external/404-not-found-error.jpeg'
                   }`}
-               ></img>
+               ></Image>
             </div>
             <div className={Style.title + ' set'}>
                {[

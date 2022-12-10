@@ -3,11 +3,11 @@ import Layout80 from '../layout/Layout80';
 import IntroBlog from '../components/IntroBlog';
 import LastestPost from '../components/LastestPost';
 import SliderPost from '../components/LastestPost/SliderPost';
-const Post = require("../Server/Model/post")
+const Post = require('../Server/Model/post');
 interface ReturnServerSide {
-   data: any
+   data: any;
 }
-export async function getServerSideProps(context:any){
+export async function getServerSideProps(context: any) {
    //  let lastestPost = await Post.find({}, {
    //    title: 1,
    //    date: 1,
@@ -16,14 +16,31 @@ export async function getServerSideProps(context:any){
    //    contentString: 1,
    //    _id: 0,
    // }).limit(8)
-   let data = await Post.aggregate().match({}).project({"title":1,"date":1, "imgThumbnail":1,"url": 1,"contentString":1, "_id": 0 }).limit(8)
-       return {props:{
-       data: data.map((object:any)=>{return {...object,contentString:[,,object.contentString],title: [object.title,,], date: object.date.toLocaleDateString(['ban', 'id'])}})
-       }}
- 
-     
+   let data = await Post.aggregate()
+      .match({})
+      .project({
+         title: 1,
+         date: 1,
+         imgThumbnail: 1,
+         url: 1,
+         contentString: 1,
+         _id: 0,
+      })
+      .limit(8);
+   return {
+      props: {
+         data: data.map((object: any) => {
+            return {
+               ...object,
+               contentString: [, , object.contentString],
+               title: [object.title, ,],
+               date: object.date.toLocaleDateString(['ban', 'id']),
+            };
+         }),
+      },
+   };
 }
-function Home({data}:ReturnServerSide) {
+function Home({ data }: ReturnServerSide) {
    return (
       <>
          <Layout80>
@@ -33,7 +50,6 @@ function Home({data}:ReturnServerSide) {
             <SliderPost data={data}></SliderPost>
             <hr></hr>
          </Layout80>
-         
       </>
    );
 }
