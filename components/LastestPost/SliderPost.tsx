@@ -13,7 +13,7 @@ export default function SliderPost(): ReactElement {
    return (
       <><div >
          <Swiper
-            
+            speed={1200}
             spaceBetween={30}
             breakpoints={{1400:{slidesPerView: 3},768:{slidesPerView: 2},576:{slidesPerView: 1}}}
     
@@ -24,6 +24,7 @@ export default function SliderPost(): ReactElement {
             pagination={{
                clickable: true,
             }}
+            
             navigation={true}
             modules={[ Autoplay,Pagination, Navigation]}
             className="mySwiper"
