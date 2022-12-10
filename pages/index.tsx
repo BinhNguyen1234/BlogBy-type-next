@@ -1,12 +1,19 @@
 import React from 'react';
-import MainContentLayout from '../layout/MainContentLayout';
+import Layout80 from '../layout/Layout80';
 import IntroBlog from '../components/IntroBlog';
+import LastestPost from '../components/LastestPost';
+import SliderPost from '../components/LastestPost/SliderPost';
 function Home() {
    return (
       <>
-         <MainContentLayout>
+         <Layout80>
             <IntroBlog></IntroBlog>
-         </MainContentLayout>
+            <hr></hr>
+            <LastestPost></LastestPost>
+            <SliderPost></SliderPost>
+            <hr></hr>
+         </Layout80>
+         
       </>
    );
 }

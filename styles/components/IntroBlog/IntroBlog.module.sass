@@ -1,11 +1,18 @@
-
+@import "../../ultilities/devices"
 #IntroBlog
-    width: 80%
+    width: 100%
     font-size: 8rem
     font-family: Gravity
     line-height: 0.7em
-    margin-left: 1em
-    height: 80vh
+    height: 70vh
     display: flex
     align-items: center
- 
+    color: #6a4c43
+@media only screen and (max-width: $medium)
+    #IntroBlog
+        font-size: 6rem
+        height: 50vh
+@media only screen and (max-width: $small)
+    #IntroBlog
+        font-size: 5rem
+        height: 50vh
