@@ -1,4 +1,4 @@
-import { CSSProperties, ReactElement } from 'react';
+import { CSSProperties, ReactElement, useEffect, useRef } from 'react';
 import Style from '../../styles/components/PreviewBlog/PreviewBlogChild.module.sass';
 
 interface Props {

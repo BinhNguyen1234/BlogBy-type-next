@@ -5,8 +5,8 @@ export default function LastestPost(): ReactElement {
    return (
       <>
          <div id={Style.Header}>
-            <div style={{ fontSize: '2.5rem' }}>Lastest post</div>
-            <div style={{ fontSize: '1.5rem' }}>See all posts&rarr;</div>
+            <div style={{ fontSize: '2.5em' }}>Lastest post</div>
+            <div style={{ fontSize: '1.5em' }}>See all posts&rarr;</div>
          </div>
       </>
    );

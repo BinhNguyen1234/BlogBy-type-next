@@ -9,16 +9,16 @@ import 'swiper/css/navigation';
 import "swiper/css/autoplay"
 import { Autoplay, Pagination, Navigation } from 'swiper';
 import { ReactElement } from 'react';
-export default function SliderPost(): ReactElement {
+export default function SliderPost({data}:any): ReactElement {
    return (
       <><div >
          <Swiper
-            speed={1200}
-            spaceBetween={30}
-            breakpoints={{1400:{slidesPerView: 3},768:{slidesPerView: 2},576:{slidesPerView: 1}}}
+            speed={800}
+            spaceBetween={10}
+            breakpoints={{1400:{slidesPerView: 2},768:{slidesPerView: 1}}}
     
             autoplay={{
-                delay: 2500,
+                delay: 2000,
                disableOnInteraction: false,
             }}
             pagination={{
@@ -26,18 +26,12 @@ export default function SliderPost(): ReactElement {
             }}
             
             navigation={true}
-            modules={[ Autoplay,Pagination, Navigation]}
+            modules={[Pagination, Navigation]}
             className="mySwiper"
          >
-            <SwiperSlide style={{display:"flex","justifyContent":"center","alignItems":"center"}}><PreviewBlogChild></PreviewBlogChild></SwiperSlide>
-            <SwiperSlide style={{display:"flex","justifyContent":"center","alignItems":"center"}}><PreviewBlogChild></PreviewBlogChild></SwiperSlide>
-            <SwiperSlide style={{display:"flex","justifyContent":"center","alignItems":"center"}}><PreviewBlogChild></PreviewBlogChild></SwiperSlide>
-            <SwiperSlide style={{display:"flex","justifyContent":"center","alignItems":"center"}}><PreviewBlogChild></PreviewBlogChild></SwiperSlide>
-            <SwiperSlide style={{display:"flex","justifyContent":"center","alignItems":"center"}}><PreviewBlogChild></PreviewBlogChild></SwiperSlide>
-            <SwiperSlide style={{display:"flex","justifyContent":"center","alignItems":"center"}}><PreviewBlogChild></PreviewBlogChild></SwiperSlide>
-            <SwiperSlide style={{display:"flex","justifyContent":"center","alignItems":"center"}}><PreviewBlogChild></PreviewBlogChild></SwiperSlide>
-            <SwiperSlide style={{display:"flex","justifyContent":"center","alignItems":"center"}}><PreviewBlogChild></PreviewBlogChild></SwiperSlide>
-            <SwiperSlide style={{display:"flex","justifyContent":"center","alignItems":"center"}}><PreviewBlogChild></PreviewBlogChild></SwiperSlide>
+            {data.map((post:any,index:number)=>{return <SwiperSlide key={index} style={{display:"flex","justifyContent":"center","alignItems":"center"}}><PreviewBlogChild>{{data:post}}</PreviewBlogChild></SwiperSlide>})}
+            
+            
          </Swiper>
          </div>
       </>
