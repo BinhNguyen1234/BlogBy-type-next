@@ -25,6 +25,7 @@ export default function SliderPost({ data }: any): ReactElement {
                   disableOnInteraction: false,
                }}
                pagination={{
+                  dynamicBullets: true,
                   clickable: true,
                }}
                navigation={true}

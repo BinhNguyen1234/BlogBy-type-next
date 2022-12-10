@@ -21,7 +21,7 @@ export default function SearchBar({
       require('bootstrap/dist/js/bootstrap.bundle.min.js');
    }, []);
    return (
-      <>
+
          <form onSubmit={onSubmit} id={Style.SearchBar}>
             <input
                defaultValue={defaultValue}
@@ -54,7 +54,7 @@ export default function SearchBar({
                      {filter.title ? <hr></hr> : null}
                      {filter.fields.map((field, index): ReactElement => {
                         return (
-                           <>
+   
                               <li
                                  key={index}
                                  style={{
@@ -93,7 +93,7 @@ export default function SearchBar({
                                     </label>
                                  </label>
                               </li>
-                           </>
+                    
                         );
                      })}
                   </ul>
@@ -104,6 +104,6 @@ export default function SearchBar({
                <span>Find</span>
             </button>
          </form>
-      </>
+
    );
 }

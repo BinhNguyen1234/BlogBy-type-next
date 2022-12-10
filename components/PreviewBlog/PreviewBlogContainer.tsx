@@ -21,10 +21,10 @@ export default function PreviewBlogContainer({
          <ul id={Style.PreviewBlogContainer}>
             {children ? (
                children.length > 0 ? (
-                  children.map((data: any) => {
+                  children.map((data: any,index) => {
                      return (
-                        <>
-                           <Link key={data.url} href={`/blog/${data.url}`}>
+
+                           <Link key={index} href={`/blog/${data.url}`}>
                               <a
                                  className={Style.Wrapper}
                                  onClick={setProgressBarSEND}
@@ -34,7 +34,7 @@ export default function PreviewBlogContainer({
                                  </PreviewBlogChild>
                               </a>
                            </Link>
-                        </>
+                        
                      );
                   })
                ) : (
