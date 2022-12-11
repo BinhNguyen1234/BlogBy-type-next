@@ -16,7 +16,7 @@ export default function SliderPost({ data }: any): ReactElement {
       <>
          <div>
             <Swiper
-               speed={800}
+               speed={900}
                spaceBetween={10}
                breakpoints={{
                   

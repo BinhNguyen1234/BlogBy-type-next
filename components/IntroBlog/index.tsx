@@ -4,7 +4,7 @@ export default function IntroBlog(): ReactElement {
    return (
       <>
          <div id={Style.IntroBlog}>
-            <div>Welcome to our blog content</div>
+            <div></div>
          </div>
       </>
    );
