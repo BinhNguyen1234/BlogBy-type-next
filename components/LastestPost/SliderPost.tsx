@@ -19,8 +19,7 @@ export default function SliderPost({ data }: any): ReactElement {
                speed={900}
                spaceBetween={10}
                breakpoints={{
-                  
-                  768: { slidesPerView: 2 },
+                  769: { slidesPerView: 2 },
                }}
                autoplay={{
                   delay: 2000,
