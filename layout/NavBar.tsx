@@ -11,7 +11,6 @@ interface Props {
 }
 
 const NavBar: React.FC<Props> = ({ showModal }) => {
-   const dispatch = useDispatch();
 
    const thisRef = useRef<HTMLElement>(null);
    const opacityElement = useRef<HTMLDivElement>(null);
