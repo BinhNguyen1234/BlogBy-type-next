@@ -43,8 +43,9 @@ export async function getServerSideProps(context: any) {
 function Home({ data }: ReturnServerSide) {
    return (
       <>
+         <IntroBlog></IntroBlog>
          <Layout80>
-            <IntroBlog></IntroBlog>
+            
             <hr></hr>
             <LastestPost></LastestPost>
             <SliderPost data={data}></SliderPost>

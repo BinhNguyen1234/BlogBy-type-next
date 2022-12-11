@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import PreviewBlogChild from '../PreviewBlog/PreviewBlogChild';
 import '../../styles/Swiper.module.sass';
+import Link from 'next/link';
 // Import Swiper styles
 import 'swiper/css';
 
@@ -9,6 +10,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import { Autoplay, Pagination, Navigation } from 'swiper';
 import { ReactElement } from 'react';
+import { initial } from 'lodash';
 export default function SliderPost({ data }: any): ReactElement {
    return (
       <>
@@ -17,8 +19,8 @@ export default function SliderPost({ data }: any): ReactElement {
                speed={800}
                spaceBetween={10}
                breakpoints={{
-                  1400: { slidesPerView: 2 },
-                  768: { slidesPerView: 1 },
+                  
+                  768: { slidesPerView: 2 },
                }}
                autoplay={{
                   delay: 2000,
@@ -42,7 +44,7 @@ export default function SliderPost({ data }: any): ReactElement {
                            alignItems: 'center',
                         }}
                      >
-                        <PreviewBlogChild>{{ data: post }}</PreviewBlogChild>
+                        <Link href={`blog/${post.url}`}><a style={{textDecoration: "none", color: "initial"}}><PreviewBlogChild>{{ data: post }}</PreviewBlogChild></a></Link>
                      </SwiperSlide>
                   );
                })}
