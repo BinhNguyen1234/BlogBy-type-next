@@ -30,7 +30,7 @@ export default function SliderPost({ data }: any): ReactElement {
                   clickable: true,
                }}
                navigation={true}
-               modules={[Autoplay,Pagination, Navigation]}
+               modules={[Autoplay, Pagination, Navigation]}
                className="mySwiper"
             >
                {data.map((post: any, index: number) => {
@@ -43,7 +43,18 @@ export default function SliderPost({ data }: any): ReactElement {
                            alignItems: 'center',
                         }}
                      >
-                        <Link href={`blog/${post.url}`}><a style={{textDecoration: "none", color: "initial"}}><PreviewBlogChild>{{ data: post }}</PreviewBlogChild></a></Link>
+                        <Link href={`blog/${post.url}`}>
+                           <a
+                              style={{
+                                 textDecoration: 'none',
+                                 color: 'initial',
+                              }}
+                           >
+                              <PreviewBlogChild>
+                                 {{ data: post }}
+                              </PreviewBlogChild>
+                           </a>
+                        </Link>
                      </SwiperSlide>
                   );
                })}

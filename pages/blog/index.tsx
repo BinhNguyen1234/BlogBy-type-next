@@ -1,5 +1,4 @@
 import { ReactElement, useReducer, useEffect } from 'react';
-import { RENDERED, RESET } from '../../feature/handleProgressBar';
 import MainContentLayout from '../../layout/MainContentLayout';
 import { useRouter } from 'next/router';
 import axios from 'axios';
@@ -7,7 +6,6 @@ import PreviewBlogContainer from '../../components/PreviewBlog/PreviewBlogContai
 import Pagination from '../../components/Pagination';
 import SearchBar from '../../components/SearchBar';
 import LargeContentLayout from '../../layout/LargeContentLayout';
-
 /////
 let filter = { fields: ['title', 'content'] };
 const defaultData = [
@@ -69,6 +67,7 @@ const defaultData = [
    },
 ];
 import { DataType } from '../../components/EditBlog';
+import { useDispatch } from 'react-redux';
 // export async function getServerSideProps({ req }: any) {
 //    let params = req.query.page;
 
@@ -288,6 +287,7 @@ function reducer(state: InitialStateType, action: any) {
    }
 }
 function Page(): ReactElement | null {
+   
    const [state, dispatch] = useReducer(reducer, {
       data: defaultData,
       isLoading: true,
@@ -306,24 +306,6 @@ function Page(): ReactElement | null {
             parseInt(router.query.page as string) > 1 ? 1 : router.query.page
          }&key=${state.keyFilter}&filter=${state.filter}`
       );
-      // axios({
-      //    method: 'get',
-      //    url: `api/v1/blog/getblog?page=${
-      //       typeof router.query.page == 'string' ? 1 : router.query.page
-      //    }&key=${state.keyFilter}&filter=${state.filter}`,
-      // })
-      //    .then((res) => {
-      //       let data = res.data.map((object: any) => {
-      //          return {
-      //             ...object,
-      //             date: new Date(object.date).toLocaleDateString(['ban', 'id']),
-      //          };
-      //       });
-      //       dispatch({ type: 'Done', payload: { posts: data } });
-      //    })
-      //    .catch((e) => {
-      //       dispatch({ type: 'Done', payload: { posts: [] } });
-      //    });
    };
    useEffect(() => {
       const handleRouterChange = (url: string, { shallow }: any) => {
@@ -331,6 +313,7 @@ function Page(): ReactElement | null {
       };
       router.events.on('routeChangeStart', handleRouterChange);
       if (router.isReady) {
+         
          const filter = router.query.filter;
          const keyFilter = router.query.key;
          axios({
@@ -341,10 +324,12 @@ function Page(): ReactElement | null {
          })
             .then((res) => {
                let data = res.data;
+               
                dispatch({
                   type: 'Done',
                   payload: { keyFilter, filter, posts: data },
                });
+               
             })
             .catch((e) => {
                dispatch({

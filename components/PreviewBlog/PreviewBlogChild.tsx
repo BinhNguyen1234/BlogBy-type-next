@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import { CSSProperties, ReactElement, useEffect, useRef } from 'react';
 import Style from '../../styles/components/PreviewBlog/PreviewBlogChild.module.sass';
-const Image = dynamic(()=>import("../PreviewBlog/ImageSSR"),{ssr:false})
+const Image = dynamic(() => import('../PreviewBlog/ImageSSR'), { ssr: false });
 interface Props {
    alt?: string;
    children?:

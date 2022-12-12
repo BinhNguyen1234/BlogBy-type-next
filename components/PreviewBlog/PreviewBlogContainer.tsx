@@ -21,20 +21,18 @@ export default function PreviewBlogContainer({
          <ul id={Style.PreviewBlogContainer}>
             {children ? (
                children.length > 0 ? (
-                  children.map((data: any,index) => {
+                  children.map((data: any, index) => {
                      return (
-
-                           <Link key={index} href={`/blog/${data.url}`}>
-                              <a
-                                 className={Style.Wrapper}
-                                 onClick={setProgressBarSEND}
-                              >
-                                 <PreviewBlogChild className={className}>
-                                    {{ data }}
-                                 </PreviewBlogChild>
-                              </a>
-                           </Link>
-                        
+                        <Link key={index} href={`/blog/${data.url}`}>
+                           <a
+                              className={Style.Wrapper}
+                              onClick={setProgressBarSEND}
+                           >
+                              <PreviewBlogChild className={className}>
+                                 {{ data }}
+                              </PreviewBlogChild>
+                           </a>
+                        </Link>
                      );
                   })
                ) : (

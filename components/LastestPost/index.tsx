@@ -6,7 +6,11 @@ export default function LastestPost(): ReactElement {
       <>
          <div id={Style.Header}>
             <div style={{ fontSize: '2.5em' }}>Lastest post</div>
-            <Link href={"blog?page=1"}><a style={{ fontSize: '1.5em',textDecoration:"none" }}>See all posts&rarr;</a></Link>
+            <Link href={'blog?page=1'}>
+               <a style={{ fontSize: '1.5em', textDecoration: 'none' }}>
+                  See all posts&rarr;
+               </a>
+            </Link>
          </div>
       </>
    );

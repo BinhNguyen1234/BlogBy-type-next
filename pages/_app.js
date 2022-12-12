@@ -3,11 +3,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { wrapper } from '../feature';
 import 'react-quill/dist/quill.snow.css';
 import { useDispatch } from 'react-redux';
-import Layout from '../layout/Layout';
+import Layout from '../layout';
 import { useEffect } from 'react';
 import { LOGIN } from '../feature/login';
 import jwt from 'jsonwebtoken';
-import { useRouter } from 'next/router';
 import { getCookie } from '../ulitlity/ManupulateCookie';
 function MyApp({ Component, pageProps }) {
    const dispatch = useDispatch();

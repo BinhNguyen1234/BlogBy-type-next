@@ -45,7 +45,6 @@ function Home({ data }: ReturnServerSide) {
       <>
          <IntroBlog></IntroBlog>
          <Layout80>
-            
             <hr></hr>
             <LastestPost></LastestPost>
             <SliderPost data={data}></SliderPost>
