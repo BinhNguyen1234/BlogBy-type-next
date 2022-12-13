@@ -6,8 +6,12 @@ const Footer: React.FC = () => {
 
    return (
       <>
-         <div ref={thisRef} id={style.Footer}>
-            {}
+     
+      <div id={style.FooterWrapper}>
+            <div ref={thisRef} id={style.Footer}>
+              test
+            </div>
+            
          </div>
       </>
    );

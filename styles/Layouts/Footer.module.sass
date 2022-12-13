@@ -1,11 +1,25 @@
-@import "../ultilities/color"
+@import "../ultilities/devices"
 
 
 #Footer
-    position: absolute
-    bottom: 0
-    height: 45vh
+  
+    height: 100%
+    width: 100%
+    background-image: url(../../public/image/footer3.png)
+    background-size: 100% 100%
+    background-position: center bottom
+    display: flex
+    justify-content: center
+#FooterWrapper
     width: 100vw
-    background-image: url(../../public/image/footer1.png)
-    background-size: 100% 160%
-    background-position: center center
+    height: 90vh 
+    background-color: rgb(248,235,219)
+    position: relative
+
+@media screen and (max-width: $small) 
+    #FooterWrapper
+        height: 30vh
+@media screen and (max-width: $medium) 
+    #FooterWrapper
+        height: 35vh 
+    

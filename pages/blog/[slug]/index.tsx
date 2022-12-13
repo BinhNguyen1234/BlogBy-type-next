@@ -81,6 +81,7 @@ export default function Post({
             <h2 style={{ color: 'rgb(106,76,67)' }}>{title}</h2>
             <DecodeDelta readOnly={true}>{content}</DecodeDelta>
          </LargeContentLayout>
+         <hr></hr>
       </>
    );
 }
