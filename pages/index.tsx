@@ -8,14 +8,6 @@ interface ReturnServerSide {
    data: any;
 }
 export async function getServerSideProps(context: any) {
-   //  let lastestPost = await Post.find({}, {
-   //    title: 1,
-   //    date: 1,
-   //    imgThumbnail: 1,
-   //    url: 1,
-   //    contentString: 1,
-   //    _id: 0,
-   // }).limit(8)
    let data = await Post.aggregate()
       .match({})
       .project({
@@ -26,7 +18,8 @@ export async function getServerSideProps(context: any) {
          contentString: 1,
          _id: 0,
       })
-      .limit(5);
+      .sort({date: -1})
+      .limit(6);
    return {
       props: {
          data: data.map((object: any) => {
