@@ -26,7 +26,7 @@ export async function getServerSideProps(context: any) {
          contentString: 1,
          _id: 0,
       })
-      .limit(8);
+      .limit(5);
    return {
       props: {
          data: data.map((object: any) => {
