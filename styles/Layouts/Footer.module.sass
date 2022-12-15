@@ -15,8 +15,12 @@
     justify-content: center
     flex-direction: column
     > div
-        height: 50%
-        
+        &:first-child
+            height: 60%
+    svg
+        height: 100px
+        width: 100px
+    
                 
 
 #FooterContent
@@ -24,6 +28,10 @@
     justify-content: space-between
     color: rgb(255,244,223)
     > div
+        &:last-child
+            display: flex
+            align-items: center
+            justify-content: center
         > div
             font-size: 2rem
         > form
@@ -36,10 +44,16 @@
                     width: fit-content
     > *
         margin-bottom: 10px
+@media screen and (max-width: $mlarge) 
+    #FooterWrapper
+        height: 60vh 
+
 @media screen and (max-width: $medium)
     #FooterContent
         flex-direction: column
         > div
+            &:first-child
+                height: 35%
             > div
                 font-size: 1rem
             > form
@@ -47,14 +61,20 @@
                 input
                     margin-bottom: 0.4em
                     &[type="submit"]
-                    padding: 0.1em
+                        padding: 0 0.3em
         > *
             margin-bottom: 0.4em
+        svg
+            width: 70px
+            height: 70px
     #FooterWrapper
         height: 40vh 
     
 @media screen and (max-width: $small) 
-    #FooterWrapper
-        height: 40vh
+    #Footer
+        svg
+            width: 50px
+            height: 50px
+    
         
                 
