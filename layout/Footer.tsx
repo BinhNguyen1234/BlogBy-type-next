@@ -70,18 +70,18 @@ const Footer: React.FC = () => {
                         >
                            <g
                               fill="none"
-                              fill-rule="nonzero"
+                              fillRule="nonzero"
                               stroke="none"
-                              stroke-width="1"
-                              stroke-linecap="butt"
-                              stroke-linejoin="miter"
-                              stroke-miterlimit="10"
-                              stroke-dasharray=""
-                              stroke-dashoffset="0"
-                              font-family="none"
-                              font-weight="none"
-                              font-size="none"
-                              text-anchor="none"
+                              strokeWidth="1"
+                              strokeLinecap="butt"
+                              strokeLinejoin="miter"
+                              strokeMiterlimit="10"
+                              strokeDasharray=""
+                              strokeDashoffset="0"
+                              fontFamily="none"
+                              fontWeight="none"
+                              fontSize="none"
+                              textAnchor="none"
                               style={{ mixBlendMode: 'normal' }}
                            >
                               <g transform="scale(2.56,2.56)">
@@ -126,18 +126,18 @@ const Footer: React.FC = () => {
                         >
                            <g
                               fill="none"
-                              fill-rule="nonzero"
+                              fillRule="nonzero"
                               stroke="none"
-                              stroke-width="1"
-                              stroke-linecap="butt"
-                              stroke-linejoin="miter"
-                              stroke-miterlimit="10"
-                              stroke-dasharray=""
-                              stroke-dashoffset="0"
-                              font-family="none"
-                              font-weight="none"
-                              font-size="none"
-                              text-anchor="none"
+                              strokeWidth="1"
+                              strokeLinecap="butt"
+                              strokeLinejoin="miter"
+                              strokeMiterlimit="10"
+                              strokeDasharray=""
+                              strokeDashoffset="0"
+                              fontFamily="none"
+                              fontWeight="none"
+                              fontSize="none"
+                              textAnchor="none"
                               style={{ mixBlendMode: 'normal' }}
                            >
                               <g transform="scale(2.56,2.56)">
@@ -194,18 +194,18 @@ const Footer: React.FC = () => {
                            <g transform="translate(32,32) scale(0.75,0.75)">
                               <g
                                  fill="none"
-                                 fill-rule="nonzero"
+                                 fillRule="nonzero"
                                  stroke="none"
-                                 stroke-width="1"
-                                 stroke-linecap="butt"
-                                 stroke-linejoin="miter"
-                                 stroke-miterlimit="10"
-                                 stroke-dasharray=""
-                                 stroke-dashoffset="0"
-                                 font-family="none"
-                                 font-weight="none"
-                                 font-size="none"
-                                 text-anchor="none"
+                                 strokeWidth="1"
+                                 strokeLinecap="butt"
+                                 strokeLinejoin="miter"
+                                 strokeMiterlimit="10"
+                                 strokeDasharray=""
+                                 strokeDashoffset="0"
+                                 fontFamily="none"
+                                 fontWeight="none"
+                                 fontSize="none"
+                                 textAnchor="none"
                                  style={{"mixBlendMode": "normal"}}
                               >
                                  <g transform="scale(5.33333,5.33333)">
