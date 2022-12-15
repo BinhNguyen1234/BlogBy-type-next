@@ -48,4 +48,4 @@ const handleProgressBar = createSlice({
 });
 export default handleProgressBar.reducer;
 export const { SEND, ACEPT, RENDERED } = handleProgressBar.actions;
-export  { RESET };
+export { RESET };

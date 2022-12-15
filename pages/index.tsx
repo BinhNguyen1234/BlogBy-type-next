@@ -18,7 +18,7 @@ export async function getServerSideProps(context: any) {
          contentString: 1,
          _id: 0,
       })
-      .sort({date: -1})
+      .sort({ date: -1 })
       .limit(6);
    return {
       props: {

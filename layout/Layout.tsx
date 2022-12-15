@@ -5,16 +5,16 @@ import Content from './Content';
 import LoginContainer from '../components/Login/LoginContainer';
 import LoginModal from '../components/Login/LoginModal';
 import { memo } from 'react';
-export default memo( function Layout({
+export default memo(function Layout({
    children,
 }: {
-   children: ReactElement | ReactElement[] |Array<JSX.Element>;
+   children: ReactElement | ReactElement[] | Array<JSX.Element>;
 }): ReactElement {
    const loginModalRef = useRef<HTMLDivElement | null>(null);
    const handleModal = (action: string): void => {
       loginModalRef.current?.setAttribute('style', `display: ${action}`);
    };
-   console.log("MainLayout render")
+   console.log('MainLayout render');
    return (
       <>
          <LoginModal refProp={loginModalRef}>
@@ -25,4 +25,4 @@ export default memo( function Layout({
          <Footer></Footer>
       </>
    );
-})
+});

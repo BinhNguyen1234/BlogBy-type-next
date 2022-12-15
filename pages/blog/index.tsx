@@ -287,7 +287,6 @@ function reducer(state: InitialStateType, action: any) {
    }
 }
 function Page(): ReactElement | null {
-   
    const [state, dispatch] = useReducer(reducer, {
       data: defaultData,
       isLoading: true,
@@ -313,7 +312,6 @@ function Page(): ReactElement | null {
       };
       router.events.on('routeChangeStart', handleRouterChange);
       if (router.isReady) {
-         
          const filter = router.query.filter;
          const keyFilter = router.query.key;
          axios({
@@ -324,12 +322,11 @@ function Page(): ReactElement | null {
          })
             .then((res) => {
                let data = res.data;
-               
+
                dispatch({
                   type: 'Done',
                   payload: { keyFilter, filter, posts: data },
                });
-               
             })
             .catch((e) => {
                dispatch({

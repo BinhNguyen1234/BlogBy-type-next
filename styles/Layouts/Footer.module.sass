@@ -1,8 +1,11 @@
 @import "../ultilities/devices"
 
-
+#FooterWrapper
+    width: 100vw
+    height: 90vh 
+    background-color: rgb(248,235,219)
+    position: relative
 #Footer
-  
     height: 100%
     width: 100%
     background-image: url(../../public/image/footer3.png)
@@ -10,16 +13,48 @@
     background-position: center bottom
     display: flex
     justify-content: center
-#FooterWrapper
-    width: 100vw
-    height: 90vh 
-    background-color: rgb(248,235,219)
-    position: relative
+    flex-direction: column
+    > div
+        height: 50%
+        
+                
 
+#FooterContent
+    display: flex
+    justify-content: space-between
+    color: rgb(255,244,223)
+    > div
+        > div
+            font-size: 2rem
+        > form
+            display: flex
+            flex-direction: column
+            input
+                
+                margin-bottom: 10px
+                &[type="submit"]
+                    width: fit-content
+    > *
+        margin-bottom: 10px
+@media screen and (max-width: $medium)
+    #FooterContent
+        flex-direction: column
+        > div
+            > div
+                font-size: 1rem
+            > form
+                padding: 0.2em
+                input
+                    margin-bottom: 0.4em
+                    &[type="submit"]
+                    padding: 0.1em
+        > *
+            margin-bottom: 0.4em
+    #FooterWrapper
+        height: 40vh 
+    
 @media screen and (max-width: $small) 
     #FooterWrapper
-        height: 30vh
-@media screen and (max-width: $medium) 
-    #FooterWrapper
-        height: 35vh 
-    
+        height: 40vh
+        
+                

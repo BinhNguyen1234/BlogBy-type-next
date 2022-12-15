@@ -38,12 +38,10 @@ const NavBar: React.FC<Props> = ({ showModal }) => {
                   backgroundColor: 'rgba(0,0,0,0.7)',
                }}
             ></div>
-            
             <ToggleBtn
                refProp={refToggleBtn}
                onClick={handleUiToggleBtn}
             ></ToggleBtn>{' '}
-            
             {/*use in mode non-lap-pc*/}
             <ToggleContainer refProp={refToggleMenu}>
                <ToggleMenu showModal={showModal}></ToggleMenu>
