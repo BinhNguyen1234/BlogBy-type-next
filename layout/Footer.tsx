@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
                            viewBox="0 0 100 100"
                         >
                            <path
-                              fill="#6693c1"
+                              fill="#6694c1"
                               d="M71,82H29c-6.075,0-11-4.925-11-11V29c0-6.075,4.925-11,11-11h42c6.075,0,11,4.925,11,11v42	C82,77.075,77.075,82,71,82z"
                            ></path>
                            <path
@@ -189,7 +189,7 @@ const Footer: React.FC = () => {
                            y="0px"
    
                            viewBox="0,0,256,256"
-                           style={{ fill: '#000000;' }}
+                           style={{ fill: '#000000' }}
                         >
                            <g transform="translate(32,32) scale(0.75,0.75)">
                               <g
@@ -232,7 +232,7 @@ const Footer: React.FC = () => {
                      </div>
                   </div>
                   <hr></hr>
-                  <div>copyrihgt</div>
+                  <div>©2022 copyright. All rights reserved.</div>
                </Layout80>
             </div>
          </div>

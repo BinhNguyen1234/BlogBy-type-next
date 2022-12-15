@@ -5,6 +5,8 @@
     height: 90vh 
     background-color: rgb(248,235,219)
     position: relative
+    hr
+        margin: 0.5em
 #Footer
     height: 100%
     width: 100%
@@ -16,10 +18,10 @@
     flex-direction: column
     > div
         &:first-child
-            height: 60%
+            flex-basis: 60%
     svg
-        height: 100px
-        width: 100px
+        width: 20%
+        aspect-ratio: 1/1
     
                 
 
@@ -27,7 +29,10 @@
     display: flex
     justify-content: space-between
     color: rgb(255,244,223)
+    
     > div
+        flex-basis: 40%
+        margin-bottom: 10px
         &:last-child
             display: flex
             align-items: center
@@ -38,9 +43,10 @@
             display: flex
             flex-direction: column
             input
-                
+                padding: 0.5em
                 margin-bottom: 10px
                 &[type="submit"]
+                    
                     width: fit-content
     > *
         margin-bottom: 10px
@@ -53,28 +59,27 @@
         flex-direction: column
         > div
             &:first-child
-                height: 35%
+                flex-basis: 60%
             > div
                 font-size: 1rem
             > form
                 padding: 0.2em
                 input
+                    padding: 0
                     margin-bottom: 0.4em
                     &[type="submit"]
                         padding: 0 0.3em
         > *
             margin-bottom: 0.4em
-        svg
-            width: 70px
-            height: 70px
+       
     #FooterWrapper
-        height: 40vh 
+        height: 50vh 
     
-@media screen and (max-width: $small) 
+@media screen and (max-width: $small)
+    #FooterWrapper
+        height: 50vh 
     #Footer
-        svg
-            width: 50px
-            height: 50px
+        
     
         
                 
