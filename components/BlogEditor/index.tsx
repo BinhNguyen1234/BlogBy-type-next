@@ -1,5 +1,4 @@
 import {
-   memo,
    ReactElement,
    useRef,
    useCallback,
@@ -34,6 +33,7 @@ interface Props {
    } | null;
 }
 export default function BlogEditor({ value, href }: Props): ReactElement {
+   console.log("blogeditor render")
    const router = useRouter();
    const [title, setTitle] = useState();
    const [contentString, setContentString] = useState('content');
