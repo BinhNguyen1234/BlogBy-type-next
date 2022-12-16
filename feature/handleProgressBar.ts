@@ -5,7 +5,7 @@ const RESET = createAsyncThunk<number>('RESET', async () => {
       try {
          setTimeout(() => {
             resolve(0);
-         }, 500);
+         }, 700);
       } catch (e) {
          reject(e);
       }

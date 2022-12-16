@@ -1,5 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import PreviewBlogChild from '../PreviewBlog/PreviewBlogChild';
+import { useDispatch } from 'react-redux';
+import { SEND } from '../../feature/handleProgressBar';
 import '../../styles/Swiper.module.sass';
 import Link from 'next/link';
 // Import Swiper styles
@@ -12,6 +14,10 @@ import { Autoplay, Pagination, Navigation } from 'swiper';
 import { ReactElement } from 'react';
 import { initial } from 'lodash';
 export default function SliderPost({ data }: any): ReactElement {
+   const dispatch = useDispatch();
+   const setProgressBarSEND = () => {
+      dispatch(SEND(null));
+   };
    return (
       <>
          <div>
@@ -44,7 +50,8 @@ export default function SliderPost({ data }: any): ReactElement {
                         }}
                      >
                         <Link href={`blog/${post.url}`}>
-                           <a
+                           <a 
+                              onClick={setProgressBarSEND}
                               style={{
                                  textDecoration: 'none',
                                  color: 'initial',

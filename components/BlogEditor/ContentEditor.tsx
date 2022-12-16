@@ -80,11 +80,11 @@ const ContentEditor = forwardRef(function useWrapContentEditor(
    let toolbarOptions = useRef([
       ['bold', 'italic', 'underline'],
       ['link', 'image'],
-      [{ size: ['normal', 'large', 'huge'] }],
+      [{ size: [ false, 'large', 'huge'] }],
       [{ color: [] }, { background: [] }],
       [{ font: [] }],
       [{ align: [] }],
-      [{ header: [2, 3, 4, 5, 6, false] }],
+      [{ header: [2, 3, 4, 5, 6] }],
       ['clean'],
    ]);
 
