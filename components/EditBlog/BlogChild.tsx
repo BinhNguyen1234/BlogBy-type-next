@@ -31,6 +31,7 @@ export default function BlogChild({
                title={data.title}
             ></ModifyBtn>
          </li>
+         <hr></hr>
       </>
    );
 }

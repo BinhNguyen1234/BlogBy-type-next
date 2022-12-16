@@ -17,14 +17,14 @@ export default function ListBlog({ data, isLoading }: Props): ReactElement {
                      index
                   ): ReactElement => {
                      return (
-                        <>
+                        
                            <BlogChild
                               key={index}
                               isLoading={isLoading}
                               data={{ title, date, url, contentString }}
                            ></BlogChild>
-                           <hr></hr>
-                        </>
+                          
+                        
                      );
                   }
                )
