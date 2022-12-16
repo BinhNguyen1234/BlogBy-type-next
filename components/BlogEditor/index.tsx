@@ -109,6 +109,7 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
                setDefaultPreviewUrl={setUrl}
                ref={contentEditorRef}
             ></ContentEditor>
+            </form>
             <PostThumbnailSelect onChange={setUrl}></PostThumbnailSelect>
             <PreviewBlogChild
                style={{ justifySelf: 'flex-start', margin: '2rem 0 0 0' }}
@@ -127,7 +128,7 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
                }}
             </PreviewBlogChild>
             <SendBlogBtn onClick={sendNewPost}></SendBlogBtn>
-         </form>
+         
       </>
    );
 }
