@@ -49,7 +49,7 @@ function Home({ data }: ReturnServerSide) {
             ></meta>
             <meta
                property="og:image"
-               content={`http://103.161.172.66/external/.jpg`}
+               content={`http://103.161.172.66/external/tee.jpg`}
             ></meta>
             <meta property="og:title" content="Blog của Tee | Hành trình tâm linh | Thiền | Chiêm nghiệm về cuộc sống "></meta>
             <title>Tee Blog</title>
