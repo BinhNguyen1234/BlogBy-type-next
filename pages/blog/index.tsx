@@ -1,6 +1,7 @@
 import { ReactElement, useReducer, useEffect } from 'react';
 import MainContentLayout from '../../layout/MainContentLayout';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import axios from 'axios';
 import PreviewBlogContainer from '../../components/PreviewBlog/PreviewBlogContainer';
 import Pagination from '../../components/Pagination';
@@ -341,6 +342,23 @@ function Page(): ReactElement | null {
    }, [router]);
    return (
       <>
+         <Head>
+            <meta property="og:locale" content="vi_VN"></meta>
+            <meta property="og:type" content="website"></meta>
+            <meta property="og:image:alt" content={`Tee Blog`}></meta>
+            <meta property="og:url" content={`http://103.161.172.66`}></meta>
+            <meta name="description" content={`LOVE - LIGHT - FREEDOM`}></meta>
+            <meta
+               property="og:description"
+               content={`LOVE - LIGHT - FREEDOM`}
+            ></meta>
+            <meta
+               property="og:image"
+               content={`http://103.161.172.66/external/tee.jpg`}
+            ></meta>
+            <meta property="og:title" content="Blog của Tee | Hành trình tâm linh | Thiền | Chiêm nghiệm về cuộc sống "></meta>
+            <title>Tee Blog</title>
+         </Head>
          <MainContentLayout>
             <LargeContentLayout>
                <SearchBar

@@ -32,6 +32,7 @@ const Footer: React.FC = () => {
                      </div>
 
                      <div>
+                        <button style={{padding: "0",border: "0"}}>
                         <svg
                            id={style.GitHub}
                            xmlns="http://www.w3.org/2000/svg"
@@ -68,6 +69,8 @@ const Footer: React.FC = () => {
                               d="M71,83H29c-6.617,0-12-5.383-12-12V29c0-6.617,5.383-12,12-12h42c6.617,0,12,5.383,12,12v42	C83,77.617,77.617,83,71,83z M29,19c-5.514,0-10,4.486-10,10v42c0,5.514,4.486,10,10,10h42c5.514,0,10-4.486,10-10V29	c0-5.514-4.486-10-10-10H29z"
                            ></path>
                         </svg>
+                        </button>
+                        <button style={{padding: "0",border: "0"}}>
                         <svg
                            id={style.Facebook}
                            xmlns="http://www.w3.org/2000/svg"
@@ -124,6 +127,8 @@ const Footer: React.FC = () => {
                               </g>
                            </g>
                         </svg>
+                        </button>
+                        <button style={{padding: "0",border: "0"}}>
                         <svg
                            id={style.Zalo}
                            xmlns="http://www.w3.org/2000/svg"
@@ -190,6 +195,8 @@ const Footer: React.FC = () => {
                               </g>
                            </g>
                         </svg>{' '}
+                        </button>
+                        <button style={{padding: "0",border: "0"}}>
                         <svg
                            id={style.Call}
                            xmlns="http://www.w3.org/2000/svg"
@@ -236,6 +243,7 @@ const Footer: React.FC = () => {
                               </g>
                            </g>
                         </svg>
+                        </button>
                      </div>
                   </div>
                   <hr></hr>

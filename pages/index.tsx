@@ -4,6 +4,7 @@ import Layout80 from '../layout/Layout80';
 import IntroBlog from '../components/IntroBlog';
 import LastestPost from '../components/LastestPost';
 import SliderPost from '../components/LastestPost/SliderPost';
+import AboutMeSection from '../components/AboutMeSection';
 const Post = require('../Server/Model/post');
 interface ReturnServerSide {
    data: any;
@@ -59,6 +60,8 @@ function Home({ data }: ReturnServerSide) {
             <hr></hr>
             <LastestPost></LastestPost>
             <SliderPost data={data}></SliderPost>
+            <hr></hr>
+            <AboutMeSection></AboutMeSection>
             <hr></hr>
          </Layout80>
       </>

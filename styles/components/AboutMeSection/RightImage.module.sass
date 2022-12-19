@@ -1,0 +1,24 @@
+
+@import "../../ultilities/devices"
+#RightImage
+    display: flex
+    justify-content: flex-end
+    > div
+        background-color: white
+        padding: 10px
+        box-shadow: 5px 5px 10px black
+        width: 70%
+        aspect-ratio: 1/1.3
+    img
+        object-fit: cover
+        width: 100%
+        height: 100%
+        
+
+@media screen and (max-width: $medium) 
+    #RightImage
+        width: 100%
+        > div
+            width: 100%
+            aspect-ratio: 1/1
+       

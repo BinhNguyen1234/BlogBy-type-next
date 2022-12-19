@@ -1,0 +1,24 @@
+@import "../../ultilities/devices"
+@import "../../ultilities/color"
+#LeftContent
+    color: $fontColorBlog
+    display: flex
+    flex-direction: column
+    justify-content: center
+    > div
+        &:first-child
+            font-size: 3em
+    > button
+        width: fit-content
+    *
+        overflow-wrap: break-word
+        margin-bottom: 20px
+        line-height: 2em
+@media screen and (max-width: $medium) 
+    #LeftContent
+        > div
+            &:first-child
+                font-size: 2em
+        *
+            line-height: 2em
+            margin-bottom: 15px
