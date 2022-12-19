@@ -49,9 +49,9 @@ function Home({ data }: ReturnServerSide) {
             ></meta>
             <meta
                property="og:image"
-               content={`http://103.161.172.66/external/upload-name-1671459695907-641779674.png`}
+               content={`http://103.161.172.66/external/.jpg`}
             ></meta>
-            <meta property="og:title" content={`Blog của tee`}></meta>
+            <meta property="og:title" content="Blog của Tee | Hành trình tâm linh | Thiền | Chiêm nghiệm về cuộc sống "></meta>
             <title>Tee Blog</title>
          </Head>
          <IntroBlog></IntroBlog>
