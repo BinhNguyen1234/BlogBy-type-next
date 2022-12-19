@@ -33,7 +33,7 @@ interface Props {
    } | null;
 }
 export default function BlogEditor({ value, href }: Props): ReactElement {
-   console.log("blogeditor render")
+   console.log('blogeditor render');
    const router = useRouter();
    const [title, setTitle] = useState();
    const [contentString, setContentString] = useState('content');
@@ -109,26 +109,25 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
                setDefaultPreviewUrl={setUrl}
                ref={contentEditorRef}
             ></ContentEditor>
-            </form>
-            <PostThumbnailSelect onChange={setUrl}></PostThumbnailSelect>
-            <PreviewBlogChild
-               style={{ justifySelf: 'flex-start', margin: '2rem 0 0 0' }}
-            >
-               {{
-                  data: {
-                     title: [, , title || value?.title || 'title'],
-                     contentString: [
-                        ,
-                        ,
-                        contentString == '' ? 'content' : contentString,
-                     ],
-                     imgThumbnail: imgThumbnail || value?.imgThumbnail,
-                     date: new Date().toLocaleDateString(['ban', 'id']),
-                  },
-               }}
-            </PreviewBlogChild>
-            <SendBlogBtn onClick={sendNewPost}></SendBlogBtn>
-         
+         </form>
+         <PostThumbnailSelect onChange={setUrl}></PostThumbnailSelect>
+         <PreviewBlogChild
+            style={{ justifySelf: 'flex-start', margin: '2rem 0 0 0' }}
+         >
+            {{
+               data: {
+                  title: [, , title || value?.title || 'title'],
+                  contentString: [
+                     ,
+                     ,
+                     contentString == '' ? 'content' : contentString,
+                  ],
+                  imgThumbnail: imgThumbnail || value?.imgThumbnail,
+                  date: new Date().toLocaleDateString(['ban', 'id']),
+               },
+            }}
+         </PreviewBlogChild>
+         <SendBlogBtn onClick={sendNewPost}></SendBlogBtn>
       </>
    );
 }

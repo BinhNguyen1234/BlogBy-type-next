@@ -49,8 +49,8 @@ export default function SliderPost({ data }: any): ReactElement {
                         }}
                      >
                         <Link href={`blog/${post.url}`}>
-                           <a 
-                              onClick={setProgressBarSEND} 
+                           <a
+                              onClick={setProgressBarSEND}
                               style={{
                                  textDecoration: 'none',
                                  color: 'initial',

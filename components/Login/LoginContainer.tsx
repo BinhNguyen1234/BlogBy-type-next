@@ -25,51 +25,53 @@ const LoginForm: React.FC<Props> = ({ hideModal }: Props) => {
    });
    const stateBtn = useSelector((state: RootStateType) => {
       return state.UISubmitBtn;
-   })
-   const sendRequesLogin = useCallback(async (e: any) => {
-      e.preventDefault();
-      dispatch(handleUI({ type: 'SEND' }));
-      if (stateBtn.status != 'Try Again')
-      {
-         const UserInfo: UserInfoType = {
-         username: e.target[0].value,
-         password: sha256(e.target[1].value as string),
-      };
-      console.log(UserInfo)
-      await axios
-         .post('/api/v1/login/auth', UserInfo, {
-            method: 'POST',
-            headers: {
-               'Content-Type': 'application/json',
-            },
-            auth: UserInfo,
-         })
-
-         .then((response) => {
-            if (response.status === 201) {
-               dispatch(
-                  LOGINWITHTK({
-                     username: UserInfo.username,
-                     token: response.data.token,
-                  })
-               );
-               dispatch(handleUI({ type: 'SUCCESS' }));
-               hideModal('none');
-            }
-         })
-         .catch((err) => {
-            console.log(err);
-            dispatch(
-               handleUI({
-                  type: 'FAILED',
-                  message: `${err.response.status}: ${err.response.data}`,
+   });
+   const sendRequesLogin = useCallback(
+      async (e: any) => {
+         e.preventDefault();
+         dispatch(handleUI({ type: 'SEND' }));
+         if (stateBtn.status != 'Try Again') {
+            const UserInfo: UserInfoType = {
+               username: e.target[0].value,
+               password: sha256(e.target[1].value as string),
+            };
+            console.log(UserInfo);
+            await axios
+               .post('/api/v1/login/auth', UserInfo, {
+                  method: 'POST',
+                  headers: {
+                     'Content-Type': 'application/json',
+                  },
+                  auth: UserInfo,
                })
-            );
-         })}
-         else {
-                  dispatch(handleUI({ type: 'SUCCESS' }));
-               };
-   }, [stateBtn]);
+
+               .then((response) => {
+                  if (response.status === 201) {
+                     dispatch(
+                        LOGINWITHTK({
+                           username: UserInfo.username,
+                           token: response.data.token,
+                        })
+                     );
+                     dispatch(handleUI({ type: 'SUCCESS' }));
+                     hideModal('none');
+                  }
+               })
+               .catch((err) => {
+                  console.log(err);
+                  dispatch(
+                     handleUI({
+                        type: 'FAILED',
+                        message: `${err.response.status}: ${err.response.data}`,
+                     })
+                  );
+               });
+         } else {
+            dispatch(handleUI({ type: 'SUCCESS' }));
+         }
+      },
+      [stateBtn]
+   );
    return (
       <>
          <div
@@ -89,7 +91,12 @@ const LoginForm: React.FC<Props> = ({ hideModal }: Props) => {
             </div>
             <div id={style.LoginForm}>
                <div>Hello Buddy</div>
-               <form action="/login/auth" onSubmit={sendRequesLogin} id="loginfeature" method="post">
+               <form
+                  action="/login/auth"
+                  onSubmit={sendRequesLogin}
+                  id="loginfeature"
+                  method="post"
+               >
                   <label htmlFor="username">Username</label>
                   <input
                      pattern="^[\x00-\x7F]*$"

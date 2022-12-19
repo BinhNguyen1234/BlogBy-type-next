@@ -2,7 +2,7 @@ import { ReactElement, useRef } from 'react';
 import Style from '../../styles/components/BlogEditor/PostThumbnailSelect.module.sass';
 import APIAuth from '../../ulitlity/callApiWAuth';
 import { getCookie } from '../../ulitlity/ManupulateCookie';
-export default  function PostThumbnailSelect({
+export default function PostThumbnailSelect({
    onChange,
 }: {
    onChange: any;
@@ -30,10 +30,7 @@ export default  function PostThumbnailSelect({
    return (
       <>
          <form ref={formRef} id={Style.PostThumbnailSelect}>
-            <label
-               className="btn btn-primary"
-               htmlFor="inputThumbail"
-            >
+            <label className="btn btn-primary" htmlFor="inputThumbail">
                Chose image for thumbnail
             </label>
             <input

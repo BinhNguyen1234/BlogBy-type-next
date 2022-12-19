@@ -12,9 +12,17 @@ const Footer: React.FC = () => {
                <Layout80>
                   <div id={style.FooterContent}>
                      <div>
-                        <label htmlFor="emailSubcribe">Subscribe to my newsletter here *</label>
+                        <label htmlFor="emailSubcribe">
+                           Subscribe to my newsletter here *
+                        </label>
                         <form>
-                           <input required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" id="emailSubcribe" type="email" placeholder="Enter your email"></input>
+                           <input
+                              required
+                              pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                              id="emailSubcribe"
+                              type="email"
+                              placeholder="Enter your email"
+                           ></input>
                            <input
                               className="btn btn-light"
                               type="submit"
@@ -187,7 +195,6 @@ const Footer: React.FC = () => {
                            xmlns="http://www.w3.org/2000/svg"
                            x="0px"
                            y="0px"
-   
                            viewBox="0,0,256,256"
                            style={{ fill: '#000000' }}
                         >
@@ -206,7 +213,7 @@ const Footer: React.FC = () => {
                                  fontWeight="none"
                                  fontSize="none"
                                  textAnchor="none"
-                                 style={{"mixBlendMode": "normal"}}
+                                 style={{ mixBlendMode: 'normal' }}
                               >
                                  <g transform="scale(5.33333,5.33333)">
                                     <path

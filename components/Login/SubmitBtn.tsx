@@ -1,6 +1,6 @@
 import React from 'react';
 import style from '../../styles/components/Login/SubmitBtn.module.sass';
-import { useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootStateType } from '../../feature';
 import { memo } from 'react';
 
