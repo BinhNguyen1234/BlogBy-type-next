@@ -35,7 +35,10 @@ export async function getServerSideProps(context: any) {
    };
 }
 function Home({ data }: ReturnServerSide) {
-   <Head>
+   
+   return (
+      <>
+      <Head>
    <meta property="og:locale" content="vi_VN"></meta>
    <meta property="og:type" content="website"></meta>
    <meta property="og:image:alt" content={`Tee Blog`}></meta>
@@ -52,8 +55,6 @@ function Home({ data }: ReturnServerSide) {
    <meta property="og:title" content={`Blog của tee`}></meta>
    <title>Tee Blog</title>
 </Head>
-   return (
-      <>
          <IntroBlog></IntroBlog>
          <Layout80>
             <hr></hr>
