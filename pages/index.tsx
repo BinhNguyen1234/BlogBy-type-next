@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import Layout80 from '../layout/Layout80';
 import IntroBlog from '../components/IntroBlog';
 import LastestPost from '../components/LastestPost';
@@ -34,6 +35,23 @@ export async function getServerSideProps(context: any) {
    };
 }
 function Home({ data }: ReturnServerSide) {
+   <Head>
+   <meta property="og:locale" content="vi_VN"></meta>
+   <meta property="og:type" content="website"></meta>
+   <meta property="og:image:alt" content={`Tee Blog`}></meta>
+   <meta
+      property="og:url"
+      content={`http://103.161.172.66`}
+   ></meta>
+   <meta name="description" content={`LOVE - LIGHT - FREEDOM`}></meta>
+   <meta property="og:description" content={`LOVE - LIGHT - FREEDOM`}></meta>
+   <meta
+      property="og:image"
+      content={`http://103.161.172.66/external/upload-name-1671459695907-641779674.png`}
+   ></meta>
+   <meta property="og:title" content={`Blog của tee`}></meta>
+   <title>Tee Blog</title>
+</Head>
    return (
       <>
          <IntroBlog></IntroBlog>
