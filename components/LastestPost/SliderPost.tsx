@@ -12,7 +12,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import { Autoplay, Pagination, Navigation } from 'swiper';
 import { ReactElement } from 'react';
-import { initial } from 'lodash';
 export default function SliderPost({ data }: any): ReactElement {
    const dispatch = useDispatch();
    const setProgressBarSEND = () => {
@@ -51,7 +50,7 @@ export default function SliderPost({ data }: any): ReactElement {
                      >
                         <Link href={`blog/${post.url}`}>
                            <a 
-                              onClick={setProgressBarSEND}
+                              onClick={setProgressBarSEND} 
                               style={{
                                  textDecoration: 'none',
                                  color: 'initial',

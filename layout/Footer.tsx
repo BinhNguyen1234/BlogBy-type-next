@@ -12,9 +12,9 @@ const Footer: React.FC = () => {
                <Layout80>
                   <div id={style.FooterContent}>
                      <div>
-                        <div>Subscribe to my newsletter here *</div>
+                        <label htmlFor="emailSubcribe">Subscribe to my newsletter here *</label>
                         <form>
-                           <input type="email"></input>
+                           <input required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" id="emailSubcribe" type="email" placeholder="Enter your email"></input>
                            <input
                               className="btn btn-light"
                               type="submit"

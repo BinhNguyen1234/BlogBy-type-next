@@ -49,6 +49,16 @@
                 box-shadow:0 0 15px 4px rgba(0,0,0,0.06)
                 &:last-of-type
                     margin-bottom: 0px
+                &:placeholder-shown
+                    border-left: 5px !important
+                &:valid
+                    border-left: 5px solid green
+                &:invalid
+                    border-left: 5px solid red
+                    ~ button
+                        cursor: not-allowed
+                        pointer-events: none
+                        filter: opacity(50%)
             p
                 width: 100%
                 font-size: 1em
