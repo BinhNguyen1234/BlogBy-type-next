@@ -7,7 +7,7 @@ export default function Custom404(): ReactElement {
          <div id={Style.Error404}>
             <div>
                <div>Something wrong</div>
-               <div>OOPS! We can't find your pages</div>
+               <div>OOPS! Your page not found</div>
                <Link href="/">
                   <button type="button" className="btn btn-primary">
                      Go Back

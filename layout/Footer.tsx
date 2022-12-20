@@ -143,7 +143,7 @@ const Footer: React.FC = () => {
                            role="a"
                            data-bs-toggle="popover"
                            data-bs-trigger="focus"
-                           data-bs-title="My Phone Number"
+                           data-bs-title="My Zalo Contact"
                            data-bs-content='<a stlye="display: inline-block, width: 100%, text-align: justify" href="https://zalo.me/0938939330">https://zalo.me</a>'
                            style={{ padding: '0', border: '0' }}
                         >
