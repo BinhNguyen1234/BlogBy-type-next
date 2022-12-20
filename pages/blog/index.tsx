@@ -299,12 +299,14 @@ function Page(): ReactElement | null {
 
    const submitHanlder = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-
+      const page = isNaN(parseInt(router.query.page as string))
+         ? 1
+         : parseInt(router.query.page as string);
       dispatch({ type: 'Sent' });
       router.push(
-         `/blog?page=${
-            parseInt(router.query.page as string) > 1 ? 1 : router.query.page
-         }&key=${state.keyFilter}&filter=${state.filter}`
+         `/blog?page=${page > 1 ? 1 : page}&key=${state.keyFilter}&filter=${
+            state.filter
+         }`
       );
    };
    useEffect(() => {
@@ -315,9 +317,12 @@ function Page(): ReactElement | null {
       if (router.isReady) {
          const filter = router.query.filter;
          const keyFilter = router.query.key;
+         const page = isNaN(parseInt(router.query.page as string))
+            ? 1
+            : parseInt(router.query.page as string);
          axios({
             method: 'get',
-            url: `api/v1/blog/getblog?page=${router.query.page || 1}&key=${
+            url: `api/v1/blog/getblog?page=${page || 1}&key=${
                router.query.key || state.keyFilter
             }&filter=${router.query.filter || state.filter}`,
          })

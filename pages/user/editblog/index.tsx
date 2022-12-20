@@ -258,10 +258,14 @@ export default function EditBlogPage(): ReactElement {
    let submitHanlder = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       dispatch({ type: 'Sent' });
+
+      const page = isNaN(parseInt(router.query.page as string))
+         ? 1
+         : parseInt(router.query.page as string);
       router.push(
-         `/user/editblog?page=${
-            parseInt(router.query.page as string) > 1 ? 1 : router.query.page
-         }&key=${state.keyFilter}&filter=${state.filter}`
+         `/user/editblog?page=${page > 1 ? 1 : page}&key=${
+            state.keyFilter
+         }&filter=${state.filter}`
       );
    };
    const isAuth = useSelector((state: RootStateType) => {
@@ -277,9 +281,12 @@ export default function EditBlogPage(): ReactElement {
 
    useEffect(() => {
       if (router.isReady) {
+         const page = isNaN(parseInt(router.query.page as string))
+            ? 1
+            : parseInt(router.query.page as string);
          Api.callAPI({
             method: 'get',
-            url: `/api/v1/user/editblog?page=${router.query.page || 1}&key=${
+            url: `/api/v1/user/editblog?page=${page || 1}&key=${
                state.keyFilter
             }&filter=${state.filter}`,
          })

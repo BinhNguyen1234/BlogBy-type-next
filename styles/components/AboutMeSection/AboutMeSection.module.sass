@@ -10,7 +10,11 @@
     #Container
         padding: 0
         flex-direction: column-reverse
+        align-items: center
         > div
-            width: 100%
-
-
+            margin-top: 1em
+            width: 80%
+@media screen and (max-width: $small) 
+    #Container
+        > div
+            width: 95%

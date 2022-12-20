@@ -99,6 +99,7 @@ const LoginForm: React.FC<Props> = ({ hideModal }: Props) => {
                >
                   <label htmlFor="username">Username</label>
                   <input
+                     minLength={5}
                      pattern="^[\x00-\x7F]*$"
                      id="username"
                      required
@@ -108,6 +109,7 @@ const LoginForm: React.FC<Props> = ({ hideModal }: Props) => {
                   ></input>
                   <label htmlFor="password">Password</label>
                   <input
+                     minLength={8}
                      id="password"
                      required
                      form="loginfeature"

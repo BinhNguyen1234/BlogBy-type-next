@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, memo, FormEventHandler } from 'react';
+import { ReactElement, useEffect, FormEventHandler } from 'react';
 import Style from '../../styles/components/SearchBar/SearchBar.module.sass';
 interface Props {
    dispatch?: any;

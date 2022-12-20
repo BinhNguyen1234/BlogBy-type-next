@@ -20,7 +20,11 @@ const NavBar: React.FC<Props> = ({ showModal }) => {
       refToggleMenu.current?.classList.toggle('hideMenu');
       opacityElement.current?.classList.toggle('displayBlock');
    };
-
+   const hanldeToogleMenu = (event: React.MouseEvent) => {
+      refToggleMenu.current?.classList.toggle('hideMenu');
+      refToggleBtn.current?.classList.toggle('handleMenuButton');
+      opacityElement.current?.classList.remove('displayBlock');
+   };
    return (
       <>
          <nav ref={thisRef} id={style.MyNavBar}>
@@ -32,8 +36,8 @@ const NavBar: React.FC<Props> = ({ showModal }) => {
                onClick={handleUiToggleBtn}
                style={{
                   position: 'fixed',
-                  width: '100%',
-                  height: '100%',
+                  width: '100vw',
+                  height: '100vh',
                   display: 'none',
                   backgroundColor: 'rgba(0,0,0,0.7)',
                }}
@@ -44,7 +48,10 @@ const NavBar: React.FC<Props> = ({ showModal }) => {
             ></ToggleBtn>{' '}
             {/*use in mode non-lap-pc*/}
             <ToggleContainer refProp={refToggleMenu}>
-               <ToggleMenu showModal={showModal}></ToggleMenu>
+               <ToggleMenu
+                  onClick={hanldeToogleMenu}
+                  showModal={showModal}
+               ></ToggleMenu>
             </ToggleContainer>
          </nav>
          <div id={style.FakeNav} className={style.NavStyle}>

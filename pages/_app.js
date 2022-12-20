@@ -8,7 +8,6 @@ import { useEffect } from 'react';
 import { LOGIN } from '../feature/login';
 import jwt from 'jsonwebtoken';
 import { getCookie } from '../ulitlity/ManupulateCookie';
-import Head from 'next/head';
 function MyApp({ Component, pageProps }) {
    const dispatch = useDispatch();
    useEffect(() => {
@@ -19,6 +18,17 @@ function MyApp({ Component, pageProps }) {
          }
          dispatch(LOGIN(username));
       }
+
+      const bootstrap = require('bootstrap');
+      const popoverTriggerList = document.querySelectorAll(
+         '[data-bs-toggle="popover"]'
+      );
+      const popoverList = [...popoverTriggerList].map(
+         (popoverTriggerEl) =>
+            new bootstrap.Popover(popoverTriggerEl, {
+               html: true,
+            })
+      );
    }, []);
 
    return (

@@ -1,0 +1,31 @@
+@import "./ultilities/devices"
+@import "./ultilities/color"
+
+#Error404
+    padding: 2em
+    display: flex
+    > div
+        color: $fontColorBlog
+        width: 50%
+        &:first-child
+            > div 
+                &:first-child
+                    font-size: 3em
+            flex-direction: column
+            display: flex
+            justify-content: center
+            
+    button
+        width: fit-content  
+@media screen and (max-width: $medium) 
+    #Error404
+        flex-direction: column-reverse
+        align-items: center
+        > div
+            width: 80%
+            &:first-child
+                > div 
+                    &:first-child
+                        font-size: 2em
+          
+
