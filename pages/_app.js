@@ -14,6 +14,7 @@ function MyApp({ Component, pageProps }) {
    useEffect(() => {
       const cookie = getCookie('rf');
       if (cookie) {
+         console.log()
          const { username } = jwt.decode(getCookie('rf'));
          if (username) {
          }
@@ -34,6 +35,7 @@ function MyApp({ Component, pageProps }) {
 
    return (
       <>
+      
          <Layout>
             <Component {...pageProps} />
          </Layout>
