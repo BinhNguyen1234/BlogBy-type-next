@@ -29,7 +29,7 @@ const NavBar: React.FC<Props> = ({ showModal }) => {
       <>
          <nav ref={thisRef} id={style.MyNavBar}>
             <div className={style.NavStyle} id={style.MyNavBrand}>
-               <Link href="/">Tee's blog</Link>
+               <Link href="/">Tee's Blog</Link>
             </div>
             <div
                ref={opacityElement}
