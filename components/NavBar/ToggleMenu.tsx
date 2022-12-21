@@ -8,11 +8,12 @@ import { RootStateType } from '../../feature';
 import { memo } from 'react';
 
 interface Props {
+   onClick: React.MouseEventHandler;
    showModal: Function;
    children?: string;
 }
 
-const MenuToggle: React.FC<Props> = ({ showModal, children }) => {
+const MenuToggle: React.FC<Props> = ({ showModal, onClick }) => {
    const router = useRouter();
 
    const loginSlice = useSelector((state: RootStateType) => {
@@ -26,7 +27,9 @@ const MenuToggle: React.FC<Props> = ({ showModal, children }) => {
                   router.pathname.search(/\Wblog/gim) != -1 ? style.active : ''
                }
             >
-               <Link href="/blog?page=1">Blog</Link>
+               <Link href="/blog?page=1">
+                  <a onClick={onClick}>Blog</a>
+               </Link>
             </li>
             <li
                className={
@@ -35,7 +38,9 @@ const MenuToggle: React.FC<Props> = ({ showModal, children }) => {
                      : ''
                }
             >
-               <Link href="/aboutme">About Me</Link>
+               <Link href="/aboutme">
+                  <a onClick={onClick}>About Me</a>
+               </Link>
             </li>
             <li
                className={
@@ -51,7 +56,7 @@ const MenuToggle: React.FC<Props> = ({ showModal, children }) => {
                      Login
                   </div>
                ) : (
-                  <Link href="/user">{'Hi, ' + loginSlice.infoUser}</Link>
+                  <Link href="/user">{loginSlice.infoUser}</Link>
                )}
             </li>
          </ul>

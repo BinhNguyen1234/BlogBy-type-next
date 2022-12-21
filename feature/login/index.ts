@@ -50,10 +50,12 @@ const loginSlice = createSlice({
          return { ...state, infoUser: 'Login' };
       },
    },
-   extraReducers: (builder) => {
-      builder.addCase(HYDRATE, (state, action) => {
-         return { ...state, ...action };
-      });
+   extraReducers: {
+      [HYDRATE]: (state, action) => {
+         return {
+            ...action.payload.Login,
+         };
+      },
    },
 });
 

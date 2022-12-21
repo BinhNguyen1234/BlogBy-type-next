@@ -32,18 +32,6 @@ class App {
             app.use(logReq);
             app.use(bodyParser.json({ limit: '50mb' }));
             app.use(bodyParser.urlencoded({ extended: true }));
-            app.use(
-               session({
-                  secret: 'secret',
-                  saveUninitialized: true,
-                  resave: true,
-                  store: MongoStore.create({
-                     client: Database.connection.getClient(),
-                     dbName: 'Blog',
-                  }),
-               }),
-               passport.session()
-            );
             app.use(passport.initialize());
             app.use('/api', api);
 

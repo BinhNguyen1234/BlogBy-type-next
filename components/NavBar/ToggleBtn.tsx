@@ -9,10 +9,12 @@ interface Props {
 const ToggleBtn: React.FC<Props> = ({ onClick, refProp }: Props) => {
    return (
       <>
-         <div ref={refProp} onClick={onClick} id={style.ToggleBtn}>
-            <span></span>
-            <span></span>
-            <span></span>
+         <div id={style.Wrapper}>
+            <div ref={refProp} onClick={onClick} id={style.ToggleBtn}>
+               <span></span>
+               <span></span>
+               <span></span>
+            </div>
          </div>
       </>
    );

@@ -41,11 +41,26 @@ const ReactQuill = dynamic(
                style={{ width: '100%', height: '100vh', alignSelf: 'center' }}
                role="status"
             >
-               <div style={{width: "100%", height: "20%"}} className='set'></div>
-               <div style={{width: "100%", height: "20%"}} className='set'></div>
-               <div style={{width: "100%", height: "20%"}} className='set'></div>
-               <div style={{width: "100%", height: "20%"}} className='set'></div>
-               <div style={{width: "100%", height: "20%"}} className='set'></div>
+               <div
+                  style={{ width: '100%', height: '20%' }}
+                  className="set"
+               ></div>
+               <div
+                  style={{ width: '100%', height: '20%' }}
+                  className="set"
+               ></div>
+               <div
+                  style={{ width: '100%', height: '20%' }}
+                  className="set"
+               ></div>
+               <div
+                  style={{ width: '100%', height: '20%' }}
+                  className="set"
+               ></div>
+               <div
+                  style={{ width: '100%', height: '20%' }}
+                  className="set"
+               ></div>
             </div>
          );
       },
@@ -65,11 +80,11 @@ const ContentEditor = forwardRef(function useWrapContentEditor(
    let toolbarOptions = useRef([
       ['bold', 'italic', 'underline'],
       ['link', 'image'],
-      [{ size: ['normal', 'large', 'huge'] }],
+      [{ size: [false, 'large', 'huge'] }],
       [{ color: [] }, { background: [] }],
       [{ font: [] }],
       [{ align: [] }],
-      [{ header: [2, 3, 4, 5, 6, false] }],
+      [{ header: [2, 3, 4, 5, 6] }],
       ['clean'],
    ]);
 

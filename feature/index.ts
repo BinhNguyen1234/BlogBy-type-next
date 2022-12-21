@@ -5,12 +5,14 @@ import UISendPostBtn from './login/UISendPostBtn';
 import handleProgessbar from '../feature/handleProgressBar';
 import readMode from './readMode';
 import { createWrapper } from 'next-redux-wrapper';
+import ModalControl from './ModalControl';
 const allReducers = combineReducers({
    handleProgessbar,
    loginSliceReducers,
    UISendPostBtn,
    UISubmitBtn,
    readMode,
+   ModalControl,
 });
 
 const store = () => {

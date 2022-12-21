@@ -1,5 +1,4 @@
 import {
-   memo,
    ReactElement,
    useRef,
    useCallback,
@@ -34,10 +33,10 @@ interface Props {
    } | null;
 }
 export default function BlogEditor({ value, href }: Props): ReactElement {
-   console.log('blogeditor render', value ? true : false);
+   console.log('blogeditor render');
    const router = useRouter();
-   const [title, setTitle] = useState('title');
-   const [contentString, setContentString] = useState();
+   const [title, setTitle] = useState();
+   const [contentString, setContentString] = useState('content');
    const [imgThumbnail, setUrl] = useState(value?.imgThumbnail || null);
    const refState = useRef({ contentString, imgThumbnail });
    refState.current = { contentString, imgThumbnail };
@@ -48,13 +47,25 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
    const sendNewPost = useCallback(async () => {
       dispatch(handleSendPostBtn({ type: 'WAITTING' }));
       const editor = contentEditorRef.current?.getEditor();
+      if (
+         (titleEditorRef.current?.value as string).length < 1 ||
+         (editor?.getLength() as number) <= 1
+      ) {
+         dispatch(
+            handleSendPostBtn({
+               type: 'FAILED',
+               message: `${400}: ${'Title and content are require'}`,
+            })
+         );
+         return null;
+      }
       return APIwAuth.callAPI({
          method: 'post',
          url: href,
          data: {
             title: titleEditorRef.current?.value,
             content: editor?.getContents().ops,
-            contentString: refState.current.contentString,
+            contentString: editor?.getText(),
             imgThumbnail: refState.current.imgThumbnail,
          },
       })
@@ -98,21 +109,25 @@ export default function BlogEditor({ value, href }: Props): ReactElement {
                setDefaultPreviewUrl={setUrl}
                ref={contentEditorRef}
             ></ContentEditor>
-            <PostThumbnailSelect onChange={setUrl}></PostThumbnailSelect>
-            <PreviewBlogChild
-               style={{ justifySelf: 'flex-start', margin: '2rem 0 0 0' }}
-            >
-               {{
-                  data: {
-                     title: [, , title || value?.title || 'title'],
-                     contentString: [, , contentString || 'content'],
-                     imgThumbnail: imgThumbnail || value?.imgThumbnail,
-                     date: new Date().toLocaleDateString(['ban', 'id']),
-                  },
-               }}
-            </PreviewBlogChild>
-            <SendBlogBtn onClick={sendNewPost}></SendBlogBtn>
          </form>
+         <PostThumbnailSelect onChange={setUrl}></PostThumbnailSelect>
+         <PreviewBlogChild
+            style={{ justifySelf: 'flex-start', margin: '2rem 0 0 0' }}
+         >
+            {{
+               data: {
+                  title: [, , title || value?.title || 'title'],
+                  contentString: [
+                     ,
+                     ,
+                     contentString == '' ? 'content' : contentString,
+                  ],
+                  imgThumbnail: imgThumbnail || value?.imgThumbnail,
+                  date: new Date().toLocaleDateString(['ban', 'id']),
+               },
+            }}
+         </PreviewBlogChild>
+         <SendBlogBtn onClick={sendNewPost}></SendBlogBtn>
       </>
    );
 }

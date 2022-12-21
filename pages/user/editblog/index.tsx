@@ -1,4 +1,10 @@
-import { ReactElement, useEffect, useReducer, useState } from 'react';
+import {
+   FormEventHandler,
+   ReactElement,
+   useEffect,
+   useReducer,
+   useState,
+} from 'react';
 import EditBlog from '../../../components/EditBlog';
 import LargeContentLayout from '../../../layout/LargeContentLayout';
 import SearchBar from '../../../components/SearchBar';
@@ -8,15 +14,15 @@ import axios from 'axios';
 import APIAuth from '../../../ulitlity/callApiWAuth';
 import { DataType } from '../../../components/EditBlog';
 import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 interface InitialStateType {
    data: Array<DataType>;
    isLoading: boolean;
    displayedData: Array<DataType>;
    keyFilter: string;
    filter: string;
-   page: number;
 }
-
+let filter = { fields: ['title', 'content'] };
 function reducer(state: InitialStateType, action: any) {
    switch (action.type) {
       case 'Done':
@@ -27,10 +33,10 @@ function reducer(state: InitialStateType, action: any) {
                if (state.filter == 'title') {
                   return action.payload.posts.reduce((pV: any, cV: any) => {
                      let positonSearchWordTitle = (cV.title as string).search(
-                        new RegExp(`${state.keyFilter}(.*)`, 'miu')
+                        new RegExp(`${state.keyFilter}(.*)`, 'gmius')
                      );
                      let headAndTrailTitle = (cV.title as string).split(
-                        new RegExp(`${state.keyFilter}(.*)`, 'miu'),
+                        new RegExp(`${state.keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.title.slice(
@@ -51,9 +57,9 @@ function reducer(state: InitialStateType, action: any) {
                   return action.payload.posts.reduce((pV: any, cV: any) => {
                      let positonSearchWordContent = (
                         cV.contentString as string
-                     ).search(new RegExp(`${state.keyFilter}(.*)`, 'miu'));
+                     ).search(new RegExp(`${state.keyFilter}(.*)`, 'gmius'));
                      let headAndContent = (cV.contentString as string).split(
-                        new RegExp(`${state.keyFilter}(.*)`, 'miu'),
+                        new RegExp(`${state.keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.contentString.slice(
@@ -82,10 +88,10 @@ function reducer(state: InitialStateType, action: any) {
                if (action.payload.filter == 'title') {
                   return state.data.reduce((pV: any, cV) => {
                      let positonSearchWordTitle = (cV.title as string).search(
-                        new RegExp(`${state.keyFilter}(.*)`, 'miu')
+                        new RegExp(`${state.keyFilter}(.*)`, 'gmius')
                      );
                      let headAndTrailTitle = (cV.title as string).split(
-                        new RegExp(`${state.keyFilter}(.*)`, 'miu'),
+                        new RegExp(`${state.keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.title.slice(
@@ -106,9 +112,9 @@ function reducer(state: InitialStateType, action: any) {
                   return state.data.reduce((pV: any, cV) => {
                      let positonSearchWordContent = (
                         cV.contentString as string
-                     ).search(new RegExp(`${state.keyFilter}(.*)`, 'miu'));
+                     ).search(new RegExp(`${state.keyFilter}(.*)`, 'gmius'));
                      let headAndContent = (cV.contentString as string).split(
-                        new RegExp(`${state.keyFilter}(.*)`, 'miu'),
+                        new RegExp(`${state.keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.contentString.slice(
@@ -129,7 +135,10 @@ function reducer(state: InitialStateType, action: any) {
             })(),
          };
       case 'Sent':
-         return { ...state, page: action.payload.page, isLoading: true };
+         return {
+            ...state,
+            isLoading: true,
+         };
       case 'Filter':
          return {
             ...state,
@@ -138,10 +147,10 @@ function reducer(state: InitialStateType, action: any) {
                if (state.filter == 'title') {
                   return state.data.reduce((pV: any, cV) => {
                      let positonSearchWordTitle = (cV.title as string).search(
-                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu')
+                        new RegExp(`${action.payload.keyFilter}(.*)`, 'gmius')
                      );
                      let headAndTrailTitle = (cV.title as string).split(
-                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu'),
+                        new RegExp(`${action.payload.keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.title.slice(
@@ -163,10 +172,10 @@ function reducer(state: InitialStateType, action: any) {
                      let positonSearchWordContent = (
                         cV.contentString as string
                      ).search(
-                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu')
+                        new RegExp(`${action.payload.keyFilter}(.*)`, 'gmius')
                      );
                      let headAndContent = (cV.contentString as string).split(
-                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu'),
+                        new RegExp(`${action.payload.keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.contentString.slice(
@@ -244,7 +253,21 @@ export default function EditBlogPage(): ReactElement {
          contentString: [[], [], 'this is simulate content'],
       },
    ];
+   const router = useRouter();
    let Api = new APIAuth();
+   let submitHanlder = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      dispatch({ type: 'Sent' });
+
+      const page = isNaN(parseInt(router.query.page as string))
+         ? 1
+         : parseInt(router.query.page as string);
+      router.push(
+         `/user/editblog?page=${page > 1 ? 1 : page}&key=${
+            state.keyFilter
+         }&filter=${state.filter}`
+      );
+   };
    const isAuth = useSelector((state: RootStateType) => {
       return state.loginSliceReducers.isAuth;
    });
@@ -254,43 +277,60 @@ export default function EditBlogPage(): ReactElement {
       displayedData: defaultData,
       keyFilter: '',
       filter: 'title',
-      page: 1,
    });
 
    useEffect(() => {
-      Api.callAPI({
-         method: 'get',
-         url: `/api/v1/user/editblog?page=${state.page}&key=${state.keyFilter}`,
-      })
-         .then((res) => {
-            let data = res.data.map((object: any) => {
-               return {
-                  ...object,
-                  date: new Date(object.date).toLocaleDateString(['ban', 'id']),
-               };
-            });
-            dispatch({ type: 'Done', payload: { posts: data } });
+      if (router.isReady) {
+         const page = isNaN(parseInt(router.query.page as string))
+            ? 1
+            : parseInt(router.query.page as string);
+         Api.callAPI({
+            method: 'get',
+            url: `/api/v1/user/editblog?page=${page || 1}&key=${
+               state.keyFilter
+            }&filter=${state.filter}`,
          })
-         .catch((e) => {
-            console.log(e);
-         });
-   }, [state.page]);
+            .then((res) => {
+               let data = res.data.map((object: any) => {
+                  return {
+                     ...object,
+                     date: new Date(object.date).toLocaleDateString([
+                        'ban',
+                        'id',
+                     ]),
+                  };
+               });
+               dispatch({ type: 'Done', payload: { posts: data } });
+            })
+            .catch((e) => {
+               dispatch({ type: 'Done', payload: { posts: [] } });
+            });
+      }
+   }, [router]);
    if (isAuth === true) {
       return (
          <>
             <LargeContentLayout>
                <SearchBar
+                  defaultValue={state.keyFilter}
                   stateCheck={state.filter}
-                  href={`/api/v1/user/editblog?page=${state.page}&key=${state.keyFilter}`}
                   dispatch={dispatch}
-                  filter={{ fields: ['title', 'content'] }}
+                  filter={filter}
+                  onSubmit={submitHanlder}
                ></SearchBar>
                <hr></hr>
                <EditBlog
                   isLoading={state.isLoading}
                   displayedData={state.displayedData}
                ></EditBlog>
-               <Pagination page={state.page} setPage={dispatch}></Pagination>
+               <Pagination
+                  page={
+                     router.query.page
+                        ? parseInt(router.query.page as string)
+                        : 1
+                  }
+                  hrefToQuerry={`/user/editblog?page=`}
+               ></Pagination>
             </LargeContentLayout>
          </>
       );

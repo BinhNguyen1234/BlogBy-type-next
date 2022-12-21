@@ -1,15 +1,14 @@
-import { ReactElement, useReducer, useEffect, useState } from 'react';
-import { RENDERED, RESET } from '../../feature/handleProgressBar';
+import { ReactElement, useReducer, useEffect } from 'react';
 import MainContentLayout from '../../layout/MainContentLayout';
-import { withRouter } from 'next/router';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 import axios from 'axios';
 import PreviewBlogContainer from '../../components/PreviewBlog/PreviewBlogContainer';
 import Pagination from '../../components/Pagination';
-import { useDispatch } from 'react-redux';
 import SearchBar from '../../components/SearchBar';
 import LargeContentLayout from '../../layout/LargeContentLayout';
-
 /////
+let filter = { fields: ['title', 'content'] };
 const defaultData = [
    {
       title: 'this is simulate title number 1',
@@ -69,6 +68,7 @@ const defaultData = [
    },
 ];
 import { DataType } from '../../components/EditBlog';
+import { useDispatch } from 'react-redux';
 // export async function getServerSideProps({ req }: any) {
 //    let params = req.query.page;
 
@@ -104,28 +104,31 @@ interface InitialStateType {
    displayedData: Array<DataType>;
    keyFilter: string;
    filter: string;
-   page: string;
 }
 
 function reducer(state: InitialStateType, action: any) {
    switch (action.type) {
       case 'Done':
+         const filter = action.payload.filter || state.filter;
+         const keyFilter = action.payload.keyFilter || state.keyFilter;
          return {
-            ...state,
+            filter,
+            keyFilter,
+            isLoading: false,
             data: action.payload.posts,
             displayedData: (() => {
-               if (state.filter == 'title') {
+               if (filter == 'title') {
                   return action.payload.posts.reduce((pV: any, cV: any) => {
                      let positonSearchWordTitle = (cV.title as string).search(
-                        new RegExp(`${state.keyFilter}(.*)`, 'miu')
+                        new RegExp(`${keyFilter}(.*)`, 'gmius')
                      );
                      let headAndTrailTitle = (cV.title as string).split(
-                        new RegExp(`${state.keyFilter}(.*)`, 'miu'),
+                        new RegExp(`${keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.title.slice(
                         positonSearchWordTitle,
-                        positonSearchWordTitle + state.keyFilter.length
+                        positonSearchWordTitle + keyFilter.length
                      );
                      headAndTrailTitle.splice(1, 0, body as string);
                      if (positonSearchWordTitle >= 0) {
@@ -137,18 +140,18 @@ function reducer(state: InitialStateType, action: any) {
                      }
                      return pV;
                   }, []);
-               } else if (state.filter == 'content') {
+               } else if (filter == 'content') {
                   return action.payload.posts.reduce((pV: any, cV: any) => {
                      let positonSearchWordContent = (
                         cV.contentString as string
-                     ).search(new RegExp(`${state.keyFilter}(.*)`, 'miu'));
+                     ).search(new RegExp(`${keyFilter}(.*)`, 'gmius'));
                      let headAndContent = (cV.contentString as string).split(
-                        new RegExp(`${state.keyFilter}(.*)`, 'miu'),
+                        new RegExp(`${keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.contentString.slice(
                         positonSearchWordContent,
-                        positonSearchWordContent + state.keyFilter.length
+                        positonSearchWordContent + keyFilter.length
                      );
                      headAndContent.splice(1, 0, body as string);
                      if (positonSearchWordContent >= 0) {
@@ -162,7 +165,6 @@ function reducer(state: InitialStateType, action: any) {
                   }, []);
                }
             })(),
-            isLoading: false,
          };
       case 'Checked':
          return {
@@ -172,10 +174,10 @@ function reducer(state: InitialStateType, action: any) {
                if (action.payload.filter == 'title') {
                   return state.data.reduce((pV: any, cV) => {
                      let positonSearchWordTitle = (cV.title as string).search(
-                        new RegExp(`${state.keyFilter}(.*)`, 'miu')
+                        new RegExp(`${state.keyFilter}(.*)`, 'gmius')
                      );
                      let headAndTrailTitle = (cV.title as string).split(
-                        new RegExp(`${state.keyFilter}(.*)`, 'miu'),
+                        new RegExp(`${state.keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.title.slice(
@@ -196,9 +198,9 @@ function reducer(state: InitialStateType, action: any) {
                   return state.data.reduce((pV: any, cV) => {
                      let positonSearchWordContent = (
                         cV.contentString as string
-                     ).search(new RegExp(`${state.keyFilter}(.*)`, 'miu'));
+                     ).search(new RegExp(`${state.keyFilter}(.*)`, 'gmius'));
                      let headAndContent = (cV.contentString as string).split(
-                        new RegExp(`${state.keyFilter}(.*)`, 'miu'),
+                        new RegExp(`${state.keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.contentString.slice(
@@ -219,7 +221,10 @@ function reducer(state: InitialStateType, action: any) {
             })(),
          };
       case 'Sent':
-         return { ...state, page: action.payload.page, isLoading: true };
+         return {
+            ...state,
+            isLoading: true,
+         };
       case 'Filter':
          return {
             ...state,
@@ -228,10 +233,10 @@ function reducer(state: InitialStateType, action: any) {
                if (state.filter == 'title') {
                   return state.data.reduce((pV: any, cV) => {
                      let positonSearchWordTitle = (cV.title as string).search(
-                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu')
+                        new RegExp(`${action.payload.keyFilter}(.*)`, 'gmius')
                      );
                      let headAndTrailTitle = (cV.title as string).split(
-                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu'),
+                        new RegExp(`${action.payload.keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.title.slice(
@@ -253,10 +258,10 @@ function reducer(state: InitialStateType, action: any) {
                      let positonSearchWordContent = (
                         cV.contentString as string
                      ).search(
-                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu')
+                        new RegExp(`${action.payload.keyFilter}(.*)`, 'gmius')
                      );
                      let headAndContent = (cV.contentString as string).split(
-                        new RegExp(`${action.payload.keyFilter}(.*)`, 'miu'),
+                        new RegExp(`${action.payload.keyFilter}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.contentString.slice(
@@ -289,41 +294,88 @@ function Page(): ReactElement | null {
       displayedData: defaultData,
       keyFilter: '',
       filter: 'title',
-      page: null,
    });
+   const router = useRouter();
+
+   const submitHanlder = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const page = isNaN(parseInt(router.query.page as string))
+         ? 1
+         : parseInt(router.query.page as string);
+      dispatch({ type: 'Sent' });
+      router.push(
+         `/blog?page=${page > 1 ? 1 : page}&key=${state.keyFilter}&filter=${
+            state.filter
+         }`
+      );
+   };
    useEffect(() => {
-      
-      if (state.page != null)  {
+      const handleRouterChange = (url: string, { shallow }: any) => {
+         dispatch({ type: 'Sent' });
+      };
+      router.events.on('routeChangeStart', handleRouterChange);
+      if (router.isReady) {
+         const invalid = /[°"§%()\[\]{}=\\?´`'#<>|,;.:+_-]+/g;
+         const filter = router.query.filter;
+         const keyFilter = (router.query.key as string).replace(invalid,"");
+         const page = isNaN(parseInt(router.query.page as string))
+            ? 1
+            : parseInt(router.query.page as string);
          axios({
             method: 'get',
-            url: `api/v1/blog/getblog?page=${typeof state.page =="string" ? 1 : state.page}`,
+            url: `api/v1/blog/getblog?page=${page || 1}&key=${
+               router.query.key || state.keyFilter
+            }&filter=${router.query.filter || state.filter}`,
          })
             .then((res) => {
                let data = res.data;
-               dispatch({ type: 'Done', payload: { posts: data } });
+
+               dispatch({
+                  type: 'Done',
+                  payload: { keyFilter, filter, posts: data },
+               });
             })
             .catch((e) => {
-               console.log(e);
+               dispatch({
+                  type: 'Done',
+                  payload: { keyFilter, filter, posts: [] },
+               });
             });
-      } else {
-         const query = window.location.search;
-         const param = new URLSearchParams(query)
-         let page = param.get('page')
-         dispatch({
-            type: 'Sent',
-            payload: {
-               page: typeof page =="string" ? 1 : page
-            },
-         })
       }
-   }, [state.page]);
+      return () => {
+         router.events.off('routeChangeStart', handleRouterChange);
+      };
+   }, [router]);
    return (
       <>
+         <Head>
+            <meta property="og:locale" content="vi_VN"></meta>
+            <meta property="og:type" content="website"></meta>
+            <meta property="og:image:alt" content={`Tee Blog`}></meta>
+            <meta property="og:url" content={`http://103.161.172.66`}></meta>
+            <meta name="description" content={`LOVE - LIGHT - FREEDOM`}></meta>
+            <meta
+               property="og:description"
+               content={`LOVE - LIGHT - FREEDOM`}
+            ></meta>
+            <meta
+               property="og:image"
+               content={`http://103.161.172.66/external/tee.jpg`}
+            ></meta>
+            <meta
+               property="og:title"
+               content="Blog của Tee | Hành trình tâm linh | Thiền | Chiêm nghiệm về cuộc sống "
+            ></meta>
+            <title>Tee Blog</title>
+         </Head>
          <MainContentLayout>
             <LargeContentLayout>
                <SearchBar
+                  defaultValue={state.keyFilter}
+                  onSubmit={submitHanlder}
+                  stateCheck={state.filter}
                   dispatch={dispatch}
-                  filter={{ fields: ['title', 'content'] }}
+                  filter={filter}
                ></SearchBar>
             </LargeContentLayout>
             <PreviewBlogContainer
@@ -332,8 +384,8 @@ function Page(): ReactElement | null {
                {state.displayedData}
             </PreviewBlogContainer>
             <Pagination
-               setPage={dispatch}
-               page={parseInt(state.page)}
+               hrefToQuerry={'/blog?page='}
+               page={parseInt(router.query.page as string) || 1}
             ></Pagination>
          </MainContentLayout>
       </>

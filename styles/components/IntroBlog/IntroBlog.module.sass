@@ -1,0 +1,33 @@
+@import "../../ultilities/devices"
+#IntroBlog
+    width: 100%
+    font-size: 8rem
+    font-family: Gravity
+    line-height: 0.7em
+    height: 70vh
+    display: flex
+    align-items: center
+    justify-content: center
+    background-image: url("../../../public/image/pixel.webp") 
+    background-size: 100% 100%
+    background-position: center center
+    background-repeat: no-repeat
+    color: white
+    // >div
+    //     letter-spacing: -5px
+    //     width: 90%
+    //     word-spacing: -5px
+    //     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000
+@media only screen and (max-width: $mlarge)
+    #IntroBlog
+        height: 30vh
+@media only screen and (max-width: $medium)
+    #IntroBlog
+        height: 35vh
+        background-size: cover
+        font-size: 5rem
+@media only screen and (max-width: $small)
+    #IntroBlog
+        background-size: cover
+        font-size: 4rem
+        height: 30vh

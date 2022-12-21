@@ -20,10 +20,10 @@ export default function PreviewBlogContainer({
       <>
          <ul id={Style.PreviewBlogContainer}>
             {children ? (
-               children.map((data: any) => {
-                  return (
-                     <>
-                        <Link key={data.url} href={`/blog/${data.url}`}>
+               children.length > 0 ? (
+                  children.map((data: any, index) => {
+                     return (
+                        <Link key={index} href={`/blog/${data.url}`}>
                            <a
                               className={Style.Wrapper}
                               onClick={setProgressBarSEND}
@@ -33,9 +33,20 @@ export default function PreviewBlogContainer({
                               </PreviewBlogChild>
                            </a>
                         </Link>
-                     </>
-                  );
-               })
+                     );
+                  })
+               ) : (
+                  <div
+                     style={{
+                        width: '100%',
+                        fontSize: '1.5em',
+                        textAlign: 'center',
+                        color: 'rgb(106, 76, 67)',
+                     }}
+                  >
+                     Không tìm thấy bài viết
+                  </div>
+               )
             ) : (
                <PreviewBlogChild className={className}>{}</PreviewBlogChild>
             )}

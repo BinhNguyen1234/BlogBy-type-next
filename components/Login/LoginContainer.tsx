@@ -5,7 +5,7 @@ import Image from 'next/image';
 import thienImg from '../../public/image/thien.png';
 import shadow from '../../public/image/shadow.png';
 import LoginCloseModalBtn from './LoginCloseModalBtn';
-import React, { useCallback, memo } from 'react';
+import React, { useCallback, memo, FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOGINWITHTK } from '../../feature/login';
 import { handleUI } from '../../feature/login/UISubmitBtn';
@@ -23,46 +23,55 @@ const LoginForm: React.FC<Props> = ({ hideModal }: Props) => {
    const message = useSelector((state: RootStateType) => {
       return state.UISubmitBtn.message;
    });
-   const sendRequesLogin = useCallback((e: React.MouseEvent) => {
-      dispatch(handleUI({ type: 'SEND' }));
-      e.preventDefault();
-      const form = document.getElementById('loginfeature');
-      const formData = new FormData(form as HTMLFormElement | undefined);
-      const UserInfo: UserInfoType = {
-         username: formData.get('username'),
-         password: sha256(formData.get('password') as string),
-      };
-      axios
-         .post('/api/v2/login', UserInfo, {
-            method: 'POST',
-            headers: {
-               'Content-Type': 'application/json',
-            },
-            auth: UserInfo,
-         })
-
-         .then((response) => {
-            if (response.status === 201) {
-               dispatch(
-                  LOGINWITHTK({
-                     username: UserInfo.username,
-                     token: response.data.token,
-                  })
-               );
-               dispatch(handleUI({ type: 'SUCCESS' }));
-               hideModal('none');
-            }
-         })
-         .catch((err) => {
-            console.log(err);
-            dispatch(
-               handleUI({
-                  type: 'FAILED',
-                  message: `${err.response.status}: ${err.response.data}`,
+   const stateBtn = useSelector((state: RootStateType) => {
+      return state.UISubmitBtn;
+   });
+   const sendRequesLogin = useCallback(
+      async (e: any) => {
+         e.preventDefault();
+         dispatch(handleUI({ type: 'SEND' }));
+         if (stateBtn.status != 'Try Again') {
+            const UserInfo: UserInfoType = {
+               username: e.target[0].value,
+               password: sha256(e.target[1].value as string),
+            };
+            console.log(UserInfo);
+            await axios
+               .post('/api/v1/login/auth', UserInfo, {
+                  method: 'POST',
+                  headers: {
+                     'Content-Type': 'application/json',
+                  },
+                  auth: UserInfo,
                })
-            );
-         });
-   }, []);
+
+               .then((response) => {
+                  if (response.status === 201) {
+                     dispatch(
+                        LOGINWITHTK({
+                           username: UserInfo.username,
+                           token: response.data.token,
+                        })
+                     );
+                     dispatch(handleUI({ type: 'SUCCESS' }));
+                     hideModal('none');
+                  }
+               })
+               .catch((err) => {
+                  console.log(err);
+                  dispatch(
+                     handleUI({
+                        type: 'FAILED',
+                        message: `${err.response.status}: ${err.response.data}`,
+                     })
+                  );
+               });
+         } else {
+            dispatch(handleUI({ type: 'SUCCESS' }));
+         }
+      },
+      [stateBtn]
+   );
    return (
       <>
          <div
@@ -82,22 +91,34 @@ const LoginForm: React.FC<Props> = ({ hideModal }: Props) => {
             </div>
             <div id={style.LoginForm}>
                <div>Hello Buddy</div>
-               <form action="/login/auth" id="loginfeature" method="post">
-                  <label>Username</label>
+               <form
+                  action="/login/auth"
+                  onSubmit={sendRequesLogin}
+                  id="loginfeature"
+                  method="post"
+               >
+                  <label htmlFor="username">Username</label>
                   <input
+                     minLength={5}
+                     pattern="^[\x00-\x7F]*$"
+                     id="username"
+                     required
                      form="loginfeature"
                      name="username"
                      placeholder="Enter Username"
                   ></input>
-                  <label>Password</label>
+                  <label htmlFor="password">Password</label>
                   <input
+                     minLength={8}
+                     id="password"
+                     required
                      form="loginfeature"
                      name="password"
                      placeholder="Enter password"
                      type="password"
                   ></input>
                   <p id={style.message}>{message}</p>
-                  <SubmitBtn onClick={sendRequesLogin}></SubmitBtn>
+                  <SubmitBtn></SubmitBtn>
                </form>
             </div>
          </div>

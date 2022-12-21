@@ -32,7 +32,7 @@ async function loginController(req, res) {
                   .send('OK'); // expire after 4h;
             } else {
                console.log(`password verify failed`);
-               res.status(401).send('Wrong username adn password');
+               res.status(401).send('Wrong username and password');
             }
          })
          .catch((err) => {

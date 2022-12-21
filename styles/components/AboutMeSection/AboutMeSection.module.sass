@@ -1,0 +1,20 @@
+@import "../../ultilities/devices"
+#Container
+    padding: 0 50px
+    display: flex
+    justify-content: center
+    > div
+        width: 50%
+       
+@media screen and (max-width: $medium) 
+    #Container
+        padding: 0
+        flex-direction: column-reverse
+        align-items: center
+        > div
+            margin-top: 1em
+            width: 80%
+@media screen and (max-width: $small) 
+    #Container
+        > div
+            width: 95%

@@ -1,12 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { resolveHref } from 'next/dist/shared/lib/router/router';
 
 const RESET = createAsyncThunk<number>('RESET', async () => {
    return await new Promise((resolve, reject) => {
       try {
          setTimeout(() => {
             resolve(0);
-         }, 500);
+         }, 700);
       } catch (e) {
          reject(e);
       }

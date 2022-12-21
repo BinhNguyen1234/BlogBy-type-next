@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import InforBlog from './InforBlog';
 import ModifyBtn from './ModifyBtn';
 import Style from '../../styles/components/EditBlog/BlogChild.module.sass';
@@ -16,12 +16,22 @@ export default function BlogChild({
    data,
    isLoading,
 }: InforType): ReactElement {
+   const [isRemoved, setIsRemoved] = useState(false);
    return (
       <>
-         <li className={Style.BlogChild}>
+         <li
+            style={{ opacity: isRemoved ? '0.2' : '1' }}
+            className={Style.BlogChild}
+         >
             <InforBlog isLoading={isLoading} data={data}></InforBlog>
-            <ModifyBtn url={data.url}></ModifyBtn>
+            <ModifyBtn
+               disabled={isRemoved}
+               setIsRemoved={setIsRemoved}
+               url={data.url}
+               title={data.title}
+            ></ModifyBtn>
          </li>
+         <hr></hr>
       </>
    );
 }

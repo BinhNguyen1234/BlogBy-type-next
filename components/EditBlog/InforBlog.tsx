@@ -6,15 +6,14 @@ export default function InforBlog({
    data,
    isLoading,
 }: InforType): ReactElement {
-   
    return (
       <>
          <div className={isLoading ? '--skeleton' : ''}>
             <Link href={`editblog/post?url=${data.url}`}>
-               <a style={{ textDecorationLine: 'none', marginBottom: "4px"}}>
+               <a style={{ textDecorationLine: 'none', marginBottom: '4px' }}>
                   <div
-                     style={{ width: '100%',marginBottom: "4px" }}
-                     className={Style.InforBlogTitle + " set"}
+                     style={{ width: '100%', marginBottom: '4px' }}
+                     className={Style.InforBlogTitle + ' set'}
                   >
                      {[
                         data.title[0],
@@ -28,8 +27,8 @@ export default function InforBlog({
                      ]}
                   </div>
                   <div
-                     style={{ width: '100%',marginBottom: "4px" }}
-                     className={Style.InforBlogContent +" set"}
+                     style={{ width: '100%', marginBottom: '4px' }}
+                     className={Style.InforBlogContent + ' set'}
                   >
                      {[
                         <span key={2}>
@@ -59,7 +58,9 @@ export default function InforBlog({
                   </div>
                </a>
             </Link>
-            <div className="set">{data.date}</div>
+            <div style={{ color: 'rgb(106,76,67)' }} className="set">
+               {data.date}
+            </div>
          </div>
       </>
    );

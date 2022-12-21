@@ -2,6 +2,8 @@ import axios from 'axios';
 import { getCookie, deleteCookie } from '../ulitlity/ManupulateCookie';
 import { useDispatch } from 'react-redux';
 import { RELOGIN } from '../feature/login';
+import { showModal } from '../feature/ModalControl';
+import { Cookies } from 'next/dist/server/web/spec-extension/cookies';
 interface constructorType {
    method: string;
    url: string;
@@ -40,14 +42,17 @@ class APIAuth {
          },
          (e) => {
             if (e.response.status !== 401) {
-               console.log(1);
                return Promise.reject(e);
             } else if (!getCookie('rf')) {
-               console.log(2);
+               this.dispatch(
+                  showModal({
+                     title: 'Please Login Again',
+                     content: 'Your token expired',
+                  })
+               );
                this.dispatch(RELOGIN(null));
                return Promise.reject(e);
             } else {
-               console.log(3);
                return instance({
                   ...config,
                   data: null,
@@ -63,7 +68,15 @@ class APIAuth {
                      });
                   })
                   .catch((e) => {
+                     this.dispatch(
+                        showModal({
+                           title: 'Please Login Again',
+                           content: 'Phiên đăng nhập đã hết hạn',
+                           action: null,
+                        })
+                     );
                      this.dispatch(RELOGIN(null));
+
                      return Promise.reject(e);
                   });
             }

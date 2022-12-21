@@ -1,43 +1,40 @@
 import { ReactElement } from 'react';
-
+import Link from 'next/link';
 interface Props {
    page: number;
    id: string;
    setPage: any;
    dispatch?: any;
+   hrefToQuerry: string;
 }
 export default function WCSR({
    page,
    id,
-   setPage,
+   hrefToQuerry,
    dispatch,
 }: Props): ReactElement {
    return (
       <>
          <nav id={id} aria-label="Page navigation example">
             <ul className="pagination">
-               <li
-                  className={`page-item page-link ${
-                     page === 1 ? 'disabled' : null
-                  }`}
-                  onClick={() => {
-                     window.scrollTo(0,0)
-                     window.history.pushState("page","page",`${window.location.pathname}?page=${page-1}`)
-                     setPage({ type: 'Sent', payload: { page: page - 1 } });
-                  }}
-               >
-                  Previous
+               <li>
+                  <Link href={`${hrefToQuerry}${page - 1}`}>
+                     <a
+                        className={`page-item page-link ${
+                           page === 1 ? 'disabled' : null
+                        }`}
+                     >
+                        Previous
+                     </a>
+                  </Link>
                </li>
-               {page === 1 ? null : (
-                  <li
-                     className="page-item page-link"
-                     onClick={() => {
-                        window.scrollTo(0,0)
-                        window.history.pushState("page","page",`${window.location.pathname}?page=${page-1}`)
-                        setPage({ type: 'Sent', payload: { page: page - 1 } });
-                     }}
-                  >
-                     {page - 1}
+               {page === 1 ? (
+                  ''
+               ) : (
+                  <li>
+                     <Link href={`${hrefToQuerry}${page - 1}`}>
+                        <a className="page-item page-link">{page - 1}</a>
+                     </Link>
                   </li>
                )}
                <li
@@ -46,25 +43,15 @@ export default function WCSR({
                >
                   {page}
                </li>
-               <li
-                  className="page-item page-link"
-                  onClick={() => {
-                     window.scrollTo(0,0)
-                     window.history.pushState("page","page",`${window.location.pathname}?page=${page+1}`)
-                     setPage({ type: 'Sent', payload: { page: page + 1 } });
-                  }}
-               >
-                  {page + 1}
+               <li>
+                  <Link href={`${hrefToQuerry}${page + 1}`}>
+                     <a className="page-item page-link">{page + 1}</a>
+                  </Link>
                </li>
-               <li
-                  className="page-item page-link"
-                  onClick={() => {
-                     window.scrollTo(0,0)
-                     window.history.pushState("page","page",`${window.location.pathname}?page=${page+1}`)
-                     setPage({ type: 'Sent', payload: { page: page + 1 } });
-                  }}
-               >
-                  Next
+               <li>
+                  <Link href={`${hrefToQuerry}${page + 1}`}>
+                     <a className="page-item page-link">Next</a>
+                  </Link>
                </li>
             </ul>
          </nav>

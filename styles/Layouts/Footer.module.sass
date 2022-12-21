@@ -1,7 +1,102 @@
-@import "../ultilities/color"
+@import "../ultilities/devices"
 
-
-#Footer
-    height: 23vh
+#FooterWrapper
     width: 100vw
-    background-image: $themse
+    height: 90vh 
+    background-color: rgb(248,235,219)
+    position: relative
+    hr
+        margin: 0.5em
+#Footer
+    height: 100%
+    width: 100%
+    background-image: url(../../public/image/footer3.png)
+    background-size: 100% 100%
+    background-position: center bottom
+    display: flex
+    justify-content: center
+    flex-direction: column
+    > div
+        &:first-child
+            flex-basis: 60%
+    a
+        cursor: pointer
+        width: 20%
+        background-color: initial
+        svg
+            width: 100%
+            aspect-ratio: 1/1
+        &:hover
+            transform: rotate(15deg) scale(1.2)
+          
+    
+                
+
+#FooterContent
+    display: flex
+    justify-content: space-between
+    color: rgb(255,244,223)
+    
+    > div
+        flex-basis: 40%
+        margin-bottom: 10px
+        &:last-child
+            display: flex
+            align-items: center
+            justify-content: center
+        > div
+            font-size: 2rem
+        > form
+            display: flex
+            flex-direction: column
+            input
+                &:first-child:valid
+                    border-left: 8px solid green
+                &:first-child:invalid
+                    border-left: 8px solid red
+                    ~ input
+                        filter: opacity(60%)
+                        pointer-events: none
+                &:placeholder-shown
+                    border-left: 0px !important
+               
+                padding: 0.5em
+                margin-bottom: 10px
+                border: 0
+                &[type="submit"]
+                    width: fit-content
+    > *
+        margin-bottom: 10px
+@media screen and (max-width: $mlarge) 
+    #FooterWrapper
+        height: 60vh 
+
+@media screen and (max-width: $medium)
+    #FooterContent
+        flex-direction: column
+        > div
+            &:first-child
+                flex-basis: 60%
+            > div
+                font-size: 1rem
+            > form
+                padding: 0.2em
+                input
+                    padding: 0
+                    margin-bottom: 0.4em
+                    &[type="submit"]
+                        padding: 0 0.3em
+        > *
+            margin-bottom: 0.4em
+       
+    #FooterWrapper
+        height: 65vh 
+    
+@media screen and (max-width: $small)
+    #FooterWrapper
+        height: 50vh 
+    #Footer
+        
+    
+        
+                

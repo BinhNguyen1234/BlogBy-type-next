@@ -3,7 +3,7 @@ import Style from '../../styles/components/Pagination/Pagination.module.sass';
 import WCSR from './WCSR';
 interface Props {
    page: number;
-   hrefToQuerry?: string;
+   hrefToQuerry: string;
    setPage?: any;
    dispatch?: any;
 }
@@ -16,14 +16,13 @@ export default function Pagination({
 }: Props): ReactElement {
    return (
       <>
-         
-            <WCSR
-               id={Style.Pagination}
-               dispatch={dispatch}
-               page={page}
-               setPage={setPage}
-            ></WCSR>
-         
+         <WCSR
+            hrefToQuerry={hrefToQuerry}
+            id={Style.Pagination}
+            dispatch={dispatch}
+            page={page}
+            setPage={setPage}
+         ></WCSR>
       </>
    );
 }

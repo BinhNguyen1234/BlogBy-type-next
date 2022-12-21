@@ -30,12 +30,7 @@ export default function PostThumbnailSelect({
    return (
       <>
          <form ref={formRef} id={Style.PostThumbnailSelect}>
-            <label
-               className="btn btn-primary"
-               role="button"
-               data-bs-toggle="button"
-               htmlFor="inputThumbail"
-            >
+            <label className="btn btn-primary" htmlFor="inputThumbail">
                Chose image for thumbnail
             </label>
             <input

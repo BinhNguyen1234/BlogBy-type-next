@@ -11,8 +11,6 @@ interface Props {
 }
 
 const NavBar: React.FC<Props> = ({ showModal }) => {
-   const dispatch = useDispatch();
-
    const thisRef = useRef<HTMLElement>(null);
    const opacityElement = useRef<HTMLDivElement>(null);
    const refToggleMenu = useRef<HTMLDivElement>(null);
@@ -22,22 +20,26 @@ const NavBar: React.FC<Props> = ({ showModal }) => {
       refToggleMenu.current?.classList.toggle('hideMenu');
       opacityElement.current?.classList.toggle('displayBlock');
    };
-
+   const hanldeToogleMenu = (event: React.MouseEvent) => {
+      refToggleMenu.current?.classList.toggle('hideMenu');
+      refToggleBtn.current?.classList.toggle('handleMenuButton');
+      opacityElement.current?.classList.remove('displayBlock');
+   };
    return (
       <>
          <nav ref={thisRef} id={style.MyNavBar}>
             <div className={style.NavStyle} id={style.MyNavBrand}>
-               <Link href="/">Tee's blog</Link>
+               <Link href="/">Tee's Blog</Link>
             </div>
             <div
                ref={opacityElement}
                onClick={handleUiToggleBtn}
                style={{
                   position: 'fixed',
-                  width: '100%',
-                  height: '100%',
+                  width: '100vw',
+                  height: '100vh',
                   display: 'none',
-                  backgroundColor: 'rgba(0,0,0,0.5)',
+                  backgroundColor: 'rgba(0,0,0,0.7)',
                }}
             ></div>
             <ToggleBtn
@@ -46,7 +48,10 @@ const NavBar: React.FC<Props> = ({ showModal }) => {
             ></ToggleBtn>{' '}
             {/*use in mode non-lap-pc*/}
             <ToggleContainer refProp={refToggleMenu}>
-               <ToggleMenu showModal={showModal}></ToggleMenu>
+               <ToggleMenu
+                  onClick={hanldeToogleMenu}
+                  showModal={showModal}
+               ></ToggleMenu>
             </ToggleContainer>
          </nav>
          <div id={style.FakeNav} className={style.NavStyle}>

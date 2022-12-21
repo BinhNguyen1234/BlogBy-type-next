@@ -1,4 +1,4 @@
 const Auth = require('express').Router();
-const loginHandler = require('../../../../Controller/login/loginHandler');
-Auth.post('/', loginHandler());
+const loginController = require('../../../../Controller/login/loginController');
+Auth.post('/', loginController);
 module.exports = Auth;

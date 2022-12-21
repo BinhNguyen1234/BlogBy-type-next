@@ -8,10 +8,8 @@ interface Props {
 }
 
 export default function BackPostBtn({ children }: Props): ReactElement {
-   const dispatch = useDispatch();
    const router: any = useRouter();
    const handleBackward = function () {
-      dispatch(SEND(null));
       if (window && router.components['/blog']) {
          router.back();
       } else {
