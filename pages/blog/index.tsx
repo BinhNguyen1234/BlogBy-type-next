@@ -315,8 +315,9 @@ function Page(): ReactElement | null {
       };
       router.events.on('routeChangeStart', handleRouterChange);
       if (router.isReady) {
+         const invalid = /[°"§%()\[\]{}=\\?´`'#<>|,;.:+_-]+/g;
          const filter = router.query.filter;
-         const keyFilter = router.query.key;
+         const keyFilter = (router.query.key as string).replace(invalid,"");
          const page = isNaN(parseInt(router.query.page as string))
             ? 1
             : parseInt(router.query.page as string);

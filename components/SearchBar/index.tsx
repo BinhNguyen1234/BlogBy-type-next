@@ -26,9 +26,10 @@ export default function SearchBar({
             defaultValue={defaultValue}
             onInput={(e) => {
                const target = e.target as HTMLInputElement;
+               const invalid = /[°"§%()\[\]{}=\\?´`'#<>|,;.:+_-]+/g;
                dispatch({
                   type: 'Filter',
-                  payload: { keyFilter: target.value },
+                  payload: { keyFilter: target.value.replace(invalid, "") },
                });
             }}
             type="text"
