@@ -2,7 +2,9 @@ const blog = require('../../Model/post');
 
 async function getList(req, res) {
    let page = req.query.page;
-   const key = req.query.key || '';
+   const invalid = /[°"§%()\[\]{}=\\?´`'#<>|,;.:+_-]+/g;
+   const key = req.query.key.replace(invalid,"") || '';
+
    const filter = req.query.filter;
    try {
       let rawData = await blog

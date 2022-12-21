@@ -14,7 +14,6 @@ export default memo(function Layout({
    const handleModal = (action: string): void => {
       loginModalRef.current?.setAttribute('style', `display: ${action}`);
    };
-   console.log('MainLayout render');
    return (
       <>
          <LoginModal refProp={loginModalRef}>

@@ -119,16 +119,18 @@ function reducer(state: InitialStateType, action: any) {
             displayedData: (() => {
                if (filter == 'title') {
                   return action.payload.posts.reduce((pV: any, cV: any) => {
+                     const invalid = /[°"§%()\[\]{}=\\?´`'#<>|,;.:+_-]+/g;
+                     const key = keyFilter.replace(invalid,"")
                      let positonSearchWordTitle = (cV.title as string).search(
-                        new RegExp(`${keyFilter}(.*)`, 'gmius')
+                        new RegExp(`${key}(.*)`, 'gmius')
                      );
                      let headAndTrailTitle = (cV.title as string).split(
-                        new RegExp(`${keyFilter}(.*)`, 'gmius'),
+                        new RegExp(`${key}(.*)`, 'gmius'),
                         2
                      );
                      let body = cV.title.slice(
                         positonSearchWordTitle,
-                        positonSearchWordTitle + keyFilter.length
+                        positonSearchWordTitle + key.length
                      );
                      headAndTrailTitle.splice(1, 0, body as string);
                      if (positonSearchWordTitle >= 0) {
@@ -315,9 +317,8 @@ function Page(): ReactElement | null {
       };
       router.events.on('routeChangeStart', handleRouterChange);
       if (router.isReady) {
-         const invalid = /[°"§%()\[\]{}=\\?´`'#<>|,;.:+_-]+/g;
          const filter = router.query.filter;
-         const keyFilter = (router.query.key as string).replace(invalid,"");
+         const keyFilter = router.query.key;
          const page = isNaN(parseInt(router.query.page as string))
             ? 1
             : parseInt(router.query.page as string);
