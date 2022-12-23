@@ -21,16 +21,16 @@ function MyApp({ Component, pageProps }) {
          dispatch(LOGIN(username));
       }
 
-      // const bootstrap = require('bootstrap');
-      // const popoverTriggerList = document.querySelectorAll(
-      //    '[data-bs-toggle="popover"]'
-      // );
-      // const popoverList = [...popoverTriggerList].map(
-      //    (popoverTriggerEl) =>
-      //       new bootstrap.Popover(popoverTriggerEl, {
-      //          html: true,
-      //       })
-      // );
+      const bootstrap = require('bootstrap/dist/js/bootstrap.bundle.min.js')
+      const popoverTriggerList = document.querySelectorAll(
+         '[data-bs-toggle="popover"]'
+      );
+      const popoverList = [...popoverTriggerList].map(
+         (popoverTriggerEl) =>
+            new bootstrap.Popover(popoverTriggerEl, {
+               html: true,
+            })
+      );
    }, []);
 
    return (

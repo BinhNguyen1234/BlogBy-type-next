@@ -17,9 +17,9 @@ export default function SearchBar({
    defaultValue,
    onSubmit,
 }: Props): ReactElement {
-   useEffect(() => {
-      require('bootstrap/dist/js/bootstrap.bundle.min.js');
-   }, []);
+   // useEffect(() => {
+   //    require('bootstrap/dist/js/bootstrap.bundle.min.js');
+   // }, []);
    return (
       <form onSubmit={onSubmit} id={Style.SearchBar}>
          <input

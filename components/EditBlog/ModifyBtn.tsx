@@ -16,9 +16,9 @@ export default function ModifyBtn({
    title: string | string[];
 }): ReactElement {
    const dispatch = useDispatch();
-   useEffect(() => {
-      require('bootstrap/dist/js/bootstrap.bundle.min.js');
-   }, []);
+   // useEffect(() => {
+   //    require('bootstrap/dist/js/bootstrap.bundle.min.js');
+   // }, []);
    const Api = new APIAuth();
    function handleRemovePost() {
       console.log('invoked');
