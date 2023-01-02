@@ -19,6 +19,7 @@ class App {
             const app = express();
             app.listen(port, () => {
                console.log('server running sucess at port ' + port);
+               console.log('Env ' + process.env.NODE_ENV);
 
                console.log(
                   `Address for access from external device ${
