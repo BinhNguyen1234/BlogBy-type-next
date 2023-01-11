@@ -10,7 +10,7 @@
       "product": "next build && NODE_ENV=production PORT=80 node ./Server/index.js",
       "start": "NODE_ENV=production PORT=80 node ./Server/index.js",
       "lint": "next lint",
-      "production": "sudo NODE_ENV=production pm2 start ./Server/index.js --name blogtee -- --port 2000"
+      "production": "NODE_ENV=production pm2 start ./Server/index.js --name blogtee -- --port 2000"
    },
    "dependencies": {
       "@reduxjs/toolkit": "^1.8.5",
